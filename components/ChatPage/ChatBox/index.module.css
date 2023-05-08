@@ -1,0 +1,48 @@
+.header {
+    height: 100px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--light-grey);
+}
+
+.headerInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profilePicture {
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.headerActionIcons {
+    display: flex;
+    gap: 20px;
+    font-size: 24px;
+    color: var(--grey);
+}
+
+.chatBox {
+    overflow-y: auto;
+    height: calc(100vh - 102px);
+}
+
+.messageDate {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #324544;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.messageBlock {
+    padding: 0 50px;
+}
+
+/* .chatBox div {
+    height: 1000px;
+} */

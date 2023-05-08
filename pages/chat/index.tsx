@@ -1,7 +1,10 @@
+import ChatPage from "@/components/ChatPage";
 import React from "react";
 
 const Chat = () => {
-  return <div className="page-heading">chat box</div>;
+  return (
+    <ChatPage />
+  )
 };
 
 export default Chat;

@@ -1,0 +1,19 @@
+.profileInfo {
+    display: flex;
+    gap: 20px;
+}
+
+.profilePicture {
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.profileInfoText {
+    margin-top: -25px;
+    display: flex;align-items: center;
+    gap: 35px;
+}
+
+.messages {
+    padding-left: 100px;
+}
