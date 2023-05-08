@@ -25,7 +25,7 @@ const Sidebar = ({ children }: any) => {
             </Link>
           </div>
           <div className={styles.itemDiv}>
-            <Link href="/">
+            <Link href="/dashboard">
               <RiDashboardLine className={styles.icon} />
             </Link>
           </div>
