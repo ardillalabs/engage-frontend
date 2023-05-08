@@ -1,0 +1,47 @@
+.mainDiv {
+  margin: 0;
+  padding: 0;
+}
+.headerDiv {
+  display: flex;
+  padding: 25px 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+.leftDiv {
+  display: flex;
+}
+.rightDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dateDiv {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555555;
+  line-height: 20px;
+  font-style: normal;
+  padding-right: 20px;
+}
+.buttonDiv {
+  padding-right: 20px;
+}
+.buttonDiv button {
+  border: 0;
+  width: 230px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 20px;
+  font-style: normal;
+  border-radius: 20px;
+  background: #de001b;
+}
+.iconDiv {
+  width: 32px;
+  height: 26px;
+  color: #b7b7b7;
+  padding-right: 20px;
+}

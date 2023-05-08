@@ -1,0 +1,37 @@
+.sidebarDiv {
+  display: flex;
+  height: 100vh;
+  position: fixed;
+  width: 5rem; /* 80px */
+  flex-direction: column;
+  padding: 25px 15px; /* 16px */
+  background-color: #324544;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.itemsDiv {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.itemLogoDiv {
+  padding-bottom: 50px;
+}
+.itemDiv {
+  padding-bottom: 25px;
+}
+.iconDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon {
+  font-size: 25px;
+  color: #ffffff;
+}
+.childrenDiv {
+  width: 100%;
+  margin-left: 7rem;
+}
