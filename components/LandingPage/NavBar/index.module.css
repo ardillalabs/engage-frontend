@@ -1,0 +1,105 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+ 
+}
+.componentDiv {
+    width: 100%;
+    
+    /* max-width: 1320px; */
+}
+.upperDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #324544;
+    padding: 25px;
+    padding: 30px 90px;
+    height: 30px;
+}
+.calmDiv {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    color: #FFFFFF;
+}
+.buttonDiv button {
+    border: 0;
+    width: 230px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 20px;
+    background: #de001b;
+  }
+  .lowerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #7EFAEF;
+    padding: 25px;
+    padding: 30px 60px;
+    /* height: 30px; */
+}
+.leftDiv {
+    display: flex;
+    align-items: center;
+}
+.navItems {
+    display: flex;
+}
+.navItem {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #4B4B4B;
+    margin: 0px 30px;
+    cursor: pointer;
+}
+.telNumber {
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+.callIcon {
+    padding: 0px 30px;
+}
+.rightDiv {
+    display: flex;
+    align-items: center;
+}
+.notificationDiv {
+    display: flex;
+}
+.icon {
+    color: #324544;
+    width: 30px;
+    height: 30px;
+    padding: 0px 30px;
+}
+.loginButtonDiv button{
+    border: 0;
+    width: 115px;
+    height: 42px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FCFCFC;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 20px;
+    background: #324544;
+    margin-right: 30px;
+}
