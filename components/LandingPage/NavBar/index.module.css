@@ -39,6 +39,7 @@
     font-style: normal;
     border-radius: 20px;
     background: #de001b;
+    
   }
   .lowerDiv {
     display: flex;
@@ -90,16 +91,17 @@
     height: 30px;
     padding: 0px 30px;
 }
-.loginButtonDiv button{
+.loginButtonDiv button {
     border: 0;
     width: 115px;
     height: 42px;
+    cursor: pointer;
     font-size: 18px;
     font-weight: 700;
     color: #FCFCFC;
     line-height: 20px;
     font-style: normal;
+    margin-right: 30px;
     border-radius: 20px;
     background: #324544;
-    margin-right: 30px;
 }

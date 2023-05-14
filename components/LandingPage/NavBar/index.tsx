@@ -67,7 +67,9 @@ const NavBar = () => {
                     <MdOutlineNotifications className={styles.icon} />
                 </div>
                 <div className={styles.loginButtonDiv}>
-                    <button>Login</button>
+                    <Link href="/login">
+                        <button>Login</button>
+                    </Link>
                 </div>
             </div>
             
