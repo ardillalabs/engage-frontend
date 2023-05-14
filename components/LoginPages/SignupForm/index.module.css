@@ -19,10 +19,16 @@
 .headerDiv {
     font-size: 40px;
     font-weight: 500;
-    color: #324544;
     line-height: 49px;
+    text-align: center;
     font-style: normal;
     padding-bottom: 50px;
+}
+.headerDiv h2 {
+    color: #324544;
+}
+.headerDiv p {
+    color: #000000;
 }
 .inputDiv {
     width: 100%;
@@ -38,18 +44,8 @@
     height: 40px;
     margin-top: 10px;
 }
-.forgotPassword {
-    display: flex;
-    font-size: 14px;
-    font-weight: 600;
-    color: #B2B2B2;
-    line-height: 17px;
-    font-style: normal;
-    padding-top: 10px;
-    justify-content: flex-end;
-}
 .buttonDiv button{
-    width: 88px;
+    width: 117px;
     height: 40px;
     font-size: 16px;
     color: #324544;
@@ -68,13 +64,8 @@
     color: #B2B2B2;
 }
 .bottomDiv p span{
-    font-style: normal;
-    font-weight: 600;
     font-size: 14px;
-    line-height: 17px;
+    font-weight: 600;
     color: #324544;
-}
-.imageDiv {
-    display: flex;
-    justify-content: flex-end;
+    line-height: 17px;
 }

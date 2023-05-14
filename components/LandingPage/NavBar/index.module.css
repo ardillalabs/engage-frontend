@@ -9,8 +9,6 @@
 }
 .componentDiv {
     width: 100%;
-    
-    /* max-width: 1320px; */
 }
 .upperDiv {
     display: flex;
@@ -41,7 +39,7 @@
     background: #de001b;
     
   }
-  .lowerDiv {
+.lowerDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;

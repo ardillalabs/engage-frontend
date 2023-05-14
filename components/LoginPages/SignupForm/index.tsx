@@ -1,14 +1,22 @@
 import React from 'react'
 import styles from "./index.module.css";
-import Image from 'next/image';
 import Link from 'next/link';
 
-const LoginForm = () => {
+const SignupForm = () => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <div className={styles.headerDiv}>
-          Login
+           <h2>Let{"'"}s Get Started!</h2> 
+           <p>Tell us a little about your self.</p>
+        </div>
+        <div className={styles.inputDiv}>
+          <div>Full Name</div>
+          <input type="text" className={styles.input} />
+        </div>
+        <div className={styles.inputDiv}>
+          <div>User Name</div>
+          <input type="text" className={styles.input} />
         </div>
         <div className={styles.inputDiv}>
           <div>Email</div>
@@ -17,25 +25,16 @@ const LoginForm = () => {
         <div className={styles.inputDiv}>
           <div>Password</div>
           <input type="password" className={styles.input} />
-          <div className={styles.forgotPassword}>forgot password</div>
         </div>
        
         <div className={styles.buttonDiv}>
-          <button>Login</button>
+          <button>Continue</button>
         </div>
         <div className={styles.bottomDiv}>
           <p>
-            Don{"'"}t have an account? <Link href="/sign-up"> Sign up here</Link>
+            Already have an account ? <Link href="/login"> Login</Link>
           </p>
           <p>By clicking “Sign up” you agree to our <span> terms and conditions</span>  & <span>privacy policy</span> </p>
-        </div>
-        <div className={styles.imageDiv}>
-          <Image
-            src="/login_image.png"
-            alt="login image"
-            width={310}
-            height={280}
-          />
         </div>
         
       </div>
@@ -43,4 +42,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignupForm
