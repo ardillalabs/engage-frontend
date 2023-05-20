@@ -19,7 +19,7 @@ import Head from 'next/head';
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className="bg-color min-h-screen">
-          <Header />
+          <Header subTopic="Welcome to Engage" />
           <LoginForm />
         </main>
       </>

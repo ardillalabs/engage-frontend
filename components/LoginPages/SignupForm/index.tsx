@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from "./index.module.css";
 import Link from 'next/link';
+import SignUpSteps from '../SignUpSteps';
 
 const SignupForm = () => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
+        <SignUpSteps step="1" />
         <div className={styles.headerDiv}>
            <h2>Let{"'"}s Get Started!</h2> 
            <p>Tell us a little about your self.</p>
@@ -28,7 +30,9 @@ const SignupForm = () => {
         </div>
        
         <div className={styles.buttonDiv}>
-          <button>Continue</button>
+          <Link href='/support-group'>
+            <button>Continue</button>
+          </Link>
         </div>
         <div className={styles.bottomDiv}>
           <p>

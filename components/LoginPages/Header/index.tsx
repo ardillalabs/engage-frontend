@@ -3,7 +3,11 @@ import styles from "./index.module.css";
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Header = () => {
+interface prop {
+  subTopic: string
+}
+
+const Header = ({subTopic}: prop) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
@@ -18,7 +22,7 @@ const Header = () => {
         </Link>
         </div>
         <div className={styles.lowerDiv}>
-          Welcome to  ENGAGE
+          {subTopic}
         </div>
       </div>
     </div>

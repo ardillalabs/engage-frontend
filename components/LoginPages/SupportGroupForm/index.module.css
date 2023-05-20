@@ -1,0 +1,28 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    top: 236px;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+.componentDiv {
+    width: 70%;
+    max-width: 1440px;
+    border-radius: 10px;
+    margin-bottom: 125px;
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    padding: 45px 90px 125px 90px;
+}
+.contentDiv {
+    display: flex;
+}
+.leftDiv {
+    width: 70%;
+    padding-right: 35px;
+}
+.rightDiv {
+    width: 30%;
+}
