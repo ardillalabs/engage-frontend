@@ -2,6 +2,8 @@
 :root {
   --light-grey: #F5F5F5;
   --grey: #A6A6A6;
+  --black: #324544;
+  --white: #FDFDFD;
 }
 
 .bg-color {

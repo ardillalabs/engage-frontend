@@ -2,7 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.mainDiv:hover {
+    background-color: aliceblue;
+}
+
+.active {
+    background-color: aliceblue;
 }
 
 .contactPreview {
@@ -16,7 +28,19 @@
     object-fit: cover;
 }
 
+.contactPreviewText {
+    /* 350px should be adjusted for mobile navbar change */
+    max-width: calc(100vw - 350px);
+}
+
+.contactPreviewText div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .contactRight {
+    width: max-content;
     display: flex;
     gap: 5px;
     flex-direction: column;
@@ -30,4 +54,10 @@
     border-radius: 100%;
     background-color: #EC2323;
     color: white;
+}
+
+@media (min-width: 1100px) {
+    .contactPreviewText {
+        max-width: 200px;
+    }
 }

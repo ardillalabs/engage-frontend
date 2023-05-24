@@ -1,10 +1,10 @@
 import styles from "./index.module.css";
 
-const Message = () => {
+const Message = ({reversed}: any) => {
     return (
-        <div className={styles.mainDiv}>
+        <div className={ !reversed ? styles.mainDiv : styles.mainDivReversed }>
             <div className="body-font">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis, harum sint? Optio blanditiis officia possimus voluptates cumque corrupti earum perspiciatis!
+                lorem ipsum doler imet
             </div>
         </div>
     )

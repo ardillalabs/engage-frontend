@@ -1,10 +1,10 @@
 .mainDiv {
-    border-right: 2px solid var(--light-grey);
+    flex: 1;
 }
 
 .header {
     height: 100px;
-    padding: 0 50px;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,6 +31,46 @@
 
 .chatList {
     height: calc(100vh - 162px);
-    padding: 30px 50px;
+    padding: 30px 20px;
     overflow-y: auto;
+}
+
+.searchBarDiv,
+.searchBarDivHidden{
+    /* transform: scaleY(0); */
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: var(--light-grey);
+    padding: 0 20px;
+    height: 40px;
+    border-radius: 100px;
+    transition: .5s ease;
+}
+
+.searchBarDivHidden {
+    transform: scaleY(0);
+    height: 0;
+    opacity: 0;
+}
+
+.searchBar {
+    flex: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.userSearchResults {
+    border-bottom: 2px solid var(--light-grey);
+}
+
+@media (min-width: 1100px) {
+    .mainDiv {
+        /* flex: 0; */
+        border-right: 2px solid var(--light-grey);
+        max-width: 450px;
+        width: 450px;
+    }
 }
