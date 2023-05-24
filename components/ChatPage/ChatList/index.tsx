@@ -1,5 +1,4 @@
 import { CiSearch } from "react-icons/ci";
-import { VscEdit } from "react-icons/vsc";
 import { GrClose } from "react-icons/gr";
 import styles from "./index.module.css";
 import ContactCard from "../ContactCard";
@@ -7,7 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const ChatList = () => {
-    const [displaySearch, setDisplaySearch] = useState(true);
+    const [displaySearch, setDisplaySearch] = useState(false);
 
     return (
         <div className={styles.mainDiv}>
