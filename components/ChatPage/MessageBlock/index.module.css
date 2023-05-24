@@ -1,6 +1,15 @@
-.profileInfo {
+.mainDiv {
+    padding-bottom: 30px;
+}
+
+.profileInfo,
+.profileInfoReversed {
     display: flex;
     gap: 20px;
+}
+
+.profileInfoReversed {
+    flex-direction: row-reverse;
 }
 
 .profilePicture {
@@ -14,6 +23,23 @@
     gap: 35px;
 }
 
+.timeReversed {
+    padding-right: 100px;
+}
+
+.messagesContainer,
+.messagesContainerReversed {
+    display: flex;
+}
+
+.messagesContainerReversed {
+    flex-direction: row-reverse;
+}
+
 .messages {
     padding-left: 100px;
+}
+
+.messagesReversed {
+    padding-right: 100px;
 }

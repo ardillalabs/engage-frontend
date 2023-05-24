@@ -1,20 +1,26 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "./index.module.css";
 
-const ContactCard = () => {
+const ContactCard = ({path}: any) => {
+    const router = useRouter();
+
     return (
-        <div className={styles.mainDiv}>
+        <div 
+            className={router.query.chatID === path ? `${styles.mainDiv} ${styles.active}` : styles.mainDiv} 
+            onClick={() => router.push(`/chat/${path}`)} 
+        >
             <div className={styles.contactPreview}>
                 <Image
-                    src="/placeholder.jpg"
+                    src="https://source.unsplash.com/_7LbC5J-jw4"
                     alt="Profile Picture"
                     className={styles.profilePicture}
                     width={60}
                     height={60}
                 />
-                <div>
+                <div className={styles.contactPreviewText}>
                     <div className="body-heading">Denneal Perera</div>
-                    <div className="body-font">Hi, what are you doing now</div>
+                    <div className="body-font">Hi, what are you doing now ejkshfuehd djkahde hjesd</div>
                 </div>
             </div>
             <div className={styles.contactRight}>

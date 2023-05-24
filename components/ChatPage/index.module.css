@@ -1,4 +1,17 @@
 .mainDiv {
-    display: grid;
-    grid-template-columns: 40% 60%;
+    display: flex;
+    background-color: #FDFDFD;
+}
+
+.hideComponent {
+    display: none;
+}
+
+@media (min-width: 1100px) {
+    .hideComponent {
+        display: flex;
+    }
+    .emptyChatDiv {
+        flex: 1;
+    }
 }
