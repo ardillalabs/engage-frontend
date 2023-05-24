@@ -1,6 +1,12 @@
+.mainDiv {
+    position: relative;
+    flex: 1;
+    height: 100dvh;
+}
+
 .header {
     height: 100px;
-    padding: 0 50px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,6 +17,17 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.backBtn {
+    font-size: 30px;
+    color: #8F8F8F;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.backBtn:hover {
+    color: #324544;
 }
 
 .profilePicture {
@@ -27,7 +44,20 @@
 
 .chatBox {
     overflow-y: auto;
-    height: calc(100vh - 102px);
+    height: calc(100vh - 222px);
+    margin: 5px 0;
+}
+
+.chatBox::-webkit-scrollbar {
+    width: 10px;
+}
+.chatBox::-webkit-scrollbar-track {
+    background-color: rgb(226, 225, 225);
+    border-radius: 10px;
+}
+.chatBox::-webkit-scrollbar-thumb {
+    background-color: var(--grey);
+    border-radius: 10px;
 }
 
 .messageDate {
@@ -40,9 +70,71 @@
 }
 
 .messageBlock {
-    padding: 0 50px;
+    padding: 0 40px;
 }
 
-/* .chatBox div {
+.messageFormDiv {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 60px;
+}
+
+.messageForm {
+    height: 50px;
+    margin: 0 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 80px 0 30px;
+    border-radius: 100px;
+    background-color: var(--light-grey);
+    position: relative;
+    font-size: 20px;
+    color: #8F8F8F;
+}
+
+.messageInput {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+.sendBtn {
+    position: absolute;
+    right: 0;
+    outline: none;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 22px;
+    height: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sendIcon {
+    margin-left: 4px;
+}
+
+@media (min-width: 1100px) {
+    .backBtn {
+        display: none;
+    }
+}
+
+/* Test Code */
+.messageBlock {
     height: 1000px;
-} */
+}

@@ -1,3 +1,24 @@
+.mainDiv,
+.mainDivReversed {
+    padding: 15px 30px;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: 10px 0;
+}
+
 .mainDiv {
-    padding: 10px 0;
+    background-color: var(--light-grey);
+}
+
+.mainDiv div {
+    color: var(--black);
+}
+
+.mainDivReversed {
+    background-color: var(--black);
+    columns: var(--light-grey);
+}
+
+.mainDivReversed div {
+    color: var(--light-grey);
 }
