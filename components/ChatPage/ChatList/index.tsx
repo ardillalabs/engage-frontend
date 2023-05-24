@@ -7,23 +7,19 @@ import { useState } from "react";
 import Link from "next/link";
 
 const ChatList = () => {
-    const [displaySearch, setDisplaySearch] = useState(false);
+    const [displaySearch, setDisplaySearch] = useState(true);
 
     return (
         <div className={styles.mainDiv}>
             <div className={styles.header}>
-                <span className="page-heading">Chatbox</span>
-                <div className={styles.headerIcons}>
-                    <div className={styles.headerIcon}>
-                        <CiSearch onClick={ () => setDisplaySearch(!displaySearch) } />
-                    </div>
-                </div>
-            </div>
-            <div className={styles.chatList}>
+                
+                <span className={ !displaySearch ? styles.headerText : styles.headerTextHidden }>Chatbox</span>
 
-                {/* Search bar with Search items --design-not-finalized */}
-                {/* <div className={styles.userSearch}>
+                <div className={ displaySearch ? styles.userSearch : styles.userSearchHidden }>
                     <div className={displaySearch ? styles.searchBarDiv : styles.searchBarDivHidden}>
+                        <div className={styles.headerIcon}>
+                            <CiSearch />
+                        </div>
                         <input 
                             type="text" 
                             placeholder="Search for users" 
@@ -33,11 +29,14 @@ const ChatList = () => {
                         <GrClose onClick={ () => setDisplaySearch(false) } />
                     </div>
 
-                    <div className={styles.userSearchResults}>
-                        <ContactCard />
-                    </div>
-                </div> */}
+                </div>
 
+
+                <div className={ !displaySearch ? styles.headerIcon : styles.headerIconHidden }>
+                    <CiSearch onClick={ () => setDisplaySearch(!displaySearch) } />
+                </div>
+            </div>
+            <div className={styles.chatList}>
                 <ContactCard path="JohnDoe" />
                 <ContactCard path="AliceCane" />
             </div>
