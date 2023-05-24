@@ -3,6 +3,7 @@
 }
 
 .header {
+    position: relative;
     height: 100px;
     padding: 0 40px;
     display: flex;
@@ -11,12 +12,29 @@
     border-bottom: 2px solid var(--light-grey);
 }
 
+.headerText,
+.headerTextHidden {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: #324544;
+    transition: 1s ease;
+}
+
+.headerTextHidden {
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
 .headerIcons {
     display: flex;
     gap: 10px;
 }
 
-.headerIcon {
+.headerIcon,
+.headerIconHidden {
     background-color: var(--light-grey);
     color: var(--grey);
     font-size: 18px;
@@ -27,6 +45,17 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: .5s ease;
+}
+
+.headerIconHidden {
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.headerIcon:hover {
+    background-color: rgb(234, 234, 234);
 }
 
 .chatList {
@@ -35,10 +64,19 @@
     overflow-y: auto;
 }
 
+.userSearch {
+    flex: 1;
+}
+
+.userSearchHidden {
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
 .searchBarDiv,
 .searchBarDivHidden{
-    /* transform: scaleY(0); */
-    width: 100%;
+    max-width: 100%;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -46,13 +84,13 @@
     padding: 0 20px;
     height: 40px;
     border-radius: 100px;
-    transition: .5s ease;
+    transition: 1s ease;
 }
 
 .searchBarDivHidden {
-    transform: scaleY(0);
-    height: 0;
     opacity: 0;
+    visibility: hidden;
+    width: 0;
 }
 
 .searchBar {
