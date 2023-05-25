@@ -9,7 +9,7 @@ import { TbChartPieFilled } from "react-icons/tb";
 import { AiFillMessage } from "react-icons/ai";
 import { IoLogOut } from "react-icons/io5";
 
-const Sidebar = ({ children }: any) => {
+const Sidebar = () => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
@@ -32,11 +32,11 @@ const Sidebar = ({ children }: any) => {
             onMouseOver={() => setPageSelectArrow(false)} 
             onMouseLeave={() => setPageSelectArrow(true)}
           >
-            <Link href="/" className={styles.link}>
+            <Link href="/dashboard" className={styles.link}>
               <MdSpaceDashboard className={styles.icon} />
             </Link>
             <AiFillCaretLeft 
-              className={ routePath !== "/" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+              className={ routePath !== "/dashboard" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
             />
           </div>
           <div className={styles.itemDiv} 
@@ -82,7 +82,7 @@ const Sidebar = ({ children }: any) => {
         
       </div>
 
-      <main className={styles.childrenDiv}>{children}</main>
+      
     </div>
   );
 };

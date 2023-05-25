@@ -14,7 +14,7 @@ const MessageBlock = ({ children, reversed }: any) => {
                 />
                 <div className={styles.profileInfoText}>
                     { !reversed && <div className="body-heading">Denneal Perera</div> }
-                    <div className={ !reversed ? "body-font" : `body-font ${styles.timeReversed}` }>5.36 a.m</div>
+                    <div className={ !reversed ? styles.time : styles.timeReversed }>5.36 a.m</div>
                 </div>
             </div>
             <div className={ !reversed ? styles.messagesContainer : styles.messagesContainerReversed }>

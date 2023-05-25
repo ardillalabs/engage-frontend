@@ -5,7 +5,7 @@
 .header {
     position: relative;
     height: 100px;
-    padding: 0 40px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,7 +60,7 @@
 
 .chatList {
     height: calc(100vh - 162px);
-    padding: 30px 20px;
+    padding: 30px 10px;
     overflow-y: auto;
 }
 
@@ -70,7 +70,7 @@
 
 .userSearchHidden {
     opacity: 0;
-    width: 0;
+    transform: translateX(0);
     visibility: hidden;
 }
 
@@ -88,8 +88,13 @@
 }
 
 .searchBarDivHidden {
+    /* display: none; */
     opacity: 0;
     visibility: hidden;
+    width: 0;
+}
+
+.searchBarDivHidden .searchBar {
     width: 0;
 }
 
@@ -98,6 +103,7 @@
     outline: none;
     border: none;
     background-color: transparent;
+    transition: .5s ease;
 }
 
 .userSearchResults {
@@ -110,5 +116,21 @@
         border-right: 2px solid var(--light-grey);
         max-width: 450px;
         width: 450px;
+    }
+}
+@media (min-width: 400px) {
+    .header {
+        padding: 0 30px;
+    }
+    .chatList {
+        padding: 30px 20px;
+    }
+}
+@media (min-width: 1000px) {
+    .header {
+        padding: 0 40px;
+    }
+    .chatList {
+        padding: 30px 30px;
     }
 }
