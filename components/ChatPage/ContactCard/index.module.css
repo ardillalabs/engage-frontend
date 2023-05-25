@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 10px;
     margin: 10px 0;
     border-radius: 10px;
     cursor: pointer;
@@ -30,7 +30,7 @@
 
 .contactPreviewText {
     /* 350px should be adjusted for mobile navbar change */
-    max-width: calc(100vw - 350px);
+    max-width: calc(100vw - 220px);
 }
 
 .contactPreviewText div {
@@ -56,6 +56,11 @@
     color: white;
 }
 
+@media (min-width: 600px) {
+    .contactPreviewText {
+        max-width: calc(100vw - 350px);
+    }
+}
 @media (min-width: 1100px) {
     .contactPreviewText {
         max-width: 200px;

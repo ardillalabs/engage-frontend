@@ -1,0 +1,24 @@
+.layoutView {
+    display: none;
+}
+
+.layoutViewMobile {
+    display: block;
+}
+
+.childrenDiv {
+    max-width: 100%;
+}
+
+@media (min-width: 1000px) {
+    .layoutView {
+        display: block;
+    }
+    .layoutViewMobile {
+        display: none;
+    }
+    .childrenDiv {
+        max-width: 100%;
+        margin-left: 6rem;
+    }
+}

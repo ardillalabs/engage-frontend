@@ -62,8 +62,6 @@ const ChatBox  = () => {
                     <BiMicrophone />
                     <input type="text" placeholder="Type a message" className={styles.messageInput} />
                     <ImAttachment />
-                    <HiOutlineCamera />
-                    <BsEmojiLaughing />
                     <button type="submit" className={styles.sendBtn}>
                         <IoSend className={styles.sendIcon} />
                     </button>

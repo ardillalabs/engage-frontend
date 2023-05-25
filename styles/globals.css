@@ -1,25 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
+
 :root {
   /* Colors */
   --light-grey: #F5F5F5;
   --grey: #A6A6A6;
+  --border-grey: #E7E7E7;
   --black: #324544;
   --white: #FDFDFD;
 
   /* Fonts */
-  --heading-1: 44px 600;
-  --heading-2: 40px 500;
-  --heading-3: 32px 600;
-  --heading-4: 32px 500;
-  --heading-5: 30px 500;
-  --heading-6: 24px 500;
-  --body-1: 20px 500;
-  --body-2: 18px 600;
-  --body-3: 18px 400;
-  --body-4: 16px 600;
-  --body-5: 16px 400;
-  --body-6: 12px 500;
-  --body-7: 12px 400;
-  --btn-text: 16px 700;
+  --heading-1: 600 44px 'Montserrat';
+  --heading-2: 500 40px 'Montserrat';
+  --heading-3: 600 32px 'Montserrat';
+  --heading-4: 500 32px 'Montserrat';
+  --heading-5: 500 30px 'Montserrat';
+  --heading-6: 500 24px 'Montserrat';
+  --body-1: 500 20px 'Montserrat';
+  --body-2: 600 18px 'Montserrat';
+  --body-3: 400 18px 'Montserrat';
+  --body-4: 600 16px 'Montserrat';
+  --body-5: 400 16px 'Montserrat';
+  --body-6: 500 12px 'Montserrat';
+  --body-7: 400 12px 'Montserrat';
+  --btn-text: 700 14px 'Montserrat';
+  --btn-text-mobile: 700 12px 'Montserrat';
 
 
 }
