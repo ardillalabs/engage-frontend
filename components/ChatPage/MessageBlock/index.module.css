@@ -1,5 +1,6 @@
 .mainDiv {
     padding-bottom: 30px;
+    position: relative;
 }
 
 .profileInfo,
@@ -22,9 +23,28 @@
     display: flex;align-items: center;
     gap: 35px;
 }
-
+.time,
 .timeReversed {
-    padding-right: 100px;
+    font: 400 14px 'Montserrat';
+    color: #8F8F8F;
+    width: max-content;
+    position: absolute;
+}
+.time {
+    right: 0;
+}
+.timeReversed {
+    left: 0;
+}
+
+@media (min-width: 600px) {
+    .timeReversed,
+    .time {
+        position: static;
+    }
+    .timeReversed {
+        padding-right: 100px;
+    }
 }
 
 .messagesContainer,
@@ -37,9 +57,19 @@
 }
 
 .messages {
-    padding-left: 100px;
+    padding-left: 50px;
 }
 
 .messagesReversed {
-    padding-right: 100px;
+    padding-right: 50px;
+}
+
+@media (min-width: 600px) {
+    .messages {
+        padding-left: 100px;
+    }
+    
+    .messagesReversed {
+        padding-right: 100px;
+    }
 }

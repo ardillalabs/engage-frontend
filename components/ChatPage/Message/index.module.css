@@ -16,7 +16,7 @@
 
 .mainDivReversed {
     background-color: var(--black);
-    columns: var(--light-grey);
+    color: var(--light-grey);
 }
 
 .mainDivReversed div {
