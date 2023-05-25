@@ -26,17 +26,7 @@ export default function App({ Component, pageProps }: Props) {
     <Layout>
       <main className={montserrat.className}>
         <Component {...pageProps} />
-        {/* <Layout Component={Component} pageProps={pageProps} /> */}
       </main>
     </Layout>
   );
 }
-
-// Layout: any (should be defined)
-// const Layout: any = ({ Component, pageProps }: AppPropsWithLayout) => {
-//   if (Component.getLayout) {
-//     return Component.getLayout(<Component {...pageProps} />);
-//   } else {
-//     return <Component {...pageProps} />;
-//   }
-// };
