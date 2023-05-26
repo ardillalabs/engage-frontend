@@ -13,7 +13,7 @@
     border-bottom: 2px solid var(--light-grey);
 }
 
-@media (min-width: 400px) {
+@media (min-width: 600px) {
     .header {
         padding: 0 30px;
     }
@@ -100,7 +100,7 @@
     padding: 0 20px;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 600px) {
     .messageBlock {
         padding: 0 30px;
     }
