@@ -4,10 +4,16 @@
 
 .layoutViewMobile {
     display: block;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
 }
 
 .childrenDiv {
-    max-width: 100%;
+    background-color: #F5F5F5;
+    width: 100%;
+    margin-top: 140px;
+    display: inline-block; 
 }
 
 @media (min-width: 1000px) {
@@ -18,6 +24,9 @@
         display: none;
     }
     .childrenDiv {
+        margin-top: 0;
+        width: auto;
+        display: block;
         max-width: 100%;
         margin-left: 6rem;
     }
