@@ -61,7 +61,7 @@
         max-width: calc(100vw - 350px);
     }
 }
-@media (min-width: 1100px) {
+@media (min-width: 992px) {
     .contactPreviewText {
         max-width: 200px;
     }
