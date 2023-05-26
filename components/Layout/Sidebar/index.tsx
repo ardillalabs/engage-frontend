@@ -36,7 +36,7 @@ const Sidebar = () => {
               <MdSpaceDashboard className={styles.icon} />
             </Link>
             <AiFillCaretLeft 
-              className={ routePath !== "/dashboard" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+              className={ !routePath.includes("/dashboard") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
             />
           </div>
           <div className={styles.itemDiv} 
@@ -47,18 +47,18 @@ const Sidebar = () => {
               <AiFillHome className={styles.icon} />
             </Link>
             <AiFillCaretLeft 
-              className={ routePath !== "/home" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+              className={ !routePath.includes("/home") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
             />
           </div>
           <div className={styles.itemDiv} 
             onMouseOver={() => setPageSelectArrow(false)} 
             onMouseLeave={() => setPageSelectArrow(true)}
           >
-            <Link href="/analytics" className={styles.link}>
+            <Link href="/report" className={styles.link}>
               <TbChartPieFilled className={styles.icon} />
             </Link>
             <AiFillCaretLeft 
-              className={ routePath !== "/analytics" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+              className={ !routePath.includes("/report") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
             />
           </div>
           <div className={styles.itemDiv} 
@@ -69,7 +69,7 @@ const Sidebar = () => {
               <AiFillMessage className={styles.icon} />
             </Link>
             <AiFillCaretLeft 
-              className={ routePath !== "/chat" ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+              className={ !routePath.includes("/chat") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
             />
           </div>
         </div>
