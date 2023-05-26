@@ -8,11 +8,6 @@ import MessageBlock from "../MessageBlock";
 // react-icons
 import { FaVideo } from "react-icons/fa";
 import { IoCall } from "react-icons/io5";
-import { IoSend } from "react-icons/io5";
-import { BiMicrophone } from "react-icons/bi";
-import { ImAttachment } from "react-icons/im";
-import { HiOutlineCamera } from "react-icons/hi";
-import { BsEmojiLaughing } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
 import ChatInput from "../ChatInput";
