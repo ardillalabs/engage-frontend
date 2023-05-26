@@ -1,7 +1,13 @@
 .mainDiv {
     position: relative;
     flex: 1;
-    height: 100dvh;
+    height: calc(100dvh - 140px);
+}
+
+@media (min-width: 1000px) {
+    .mainDiv {
+        height: 100dvh;
+    }
 }
 
 .header {
@@ -62,8 +68,14 @@
 
 .chatBox {
     overflow-y: auto;
-    height: calc(100vh - 222px);
+    height: calc(100vh - 370px);
     margin: 5px 0;
+}
+
+@media (min-width: 1000px) {
+    .chatBox {
+        height: calc(100vh - 222px);
+    }
 }
 
 .chatBox::-webkit-scrollbar {
