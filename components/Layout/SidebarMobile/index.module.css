@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 600px) {
     .mainDiv {
         padding: 15px 30px;;
     }
