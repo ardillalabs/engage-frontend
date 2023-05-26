@@ -15,6 +15,7 @@ import { HiOutlineCamera } from "react-icons/hi";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
+import ChatInput from "../ChatInput";
 
 const ChatBox  = () => {
     const router = useRouter();
@@ -57,16 +58,7 @@ const ChatBox  = () => {
                     </MessageBlock>
                 </div>
             </div>
-            <div className={styles.messageFormDiv}>
-                <form className={styles.messageForm}>
-                    <BiMicrophone />
-                    <input type="text" placeholder="Type a message" className={styles.messageInput} />
-                    <ImAttachment />
-                    <button type="submit" className={styles.sendBtn}>
-                        <IoSend className={styles.sendIcon} />
-                    </button>
-                </form>
-            </div>
+            <ChatInput />
         </div>
     )
 }
