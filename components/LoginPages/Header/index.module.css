@@ -25,3 +25,16 @@
     font-style: normal;
     justify-content: center;
 }
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 20px;
+    }
+
+    .upperDiv {
+        padding-bottom: 10px;
+    }
+
+    .lowerDiv {
+        font-size: 20px;
+    }
+}

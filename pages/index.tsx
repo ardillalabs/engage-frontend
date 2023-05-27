@@ -6,7 +6,7 @@ import Steps from "@/components/LandingPage/Steps";
 import WhoWeAre from "@/components/LandingPage/WhoWeAre";
 import WhatWeCanDo from "@/components/LandingPage/WhatWeCanDo";
 import Community from "@/components/LandingPage/Community";
-import Service from "@/components/LandingPage/Service";
+import OurPhylosophy from "@/components/LandingPage/OurPhylosophy";
 import ClientSays from "@/components/LandingPage/ClientsSays";
 import Footer from "@/components/LandingPage/Footer";
   // Props type
@@ -30,7 +30,7 @@ export default function Home() {
         <WhoWeAre />
         <WhatWeCanDo />
         <Community />
-        <Service />
+        <OurPhylosophy />
         <ClientSays />
         <Footer />
       </main>

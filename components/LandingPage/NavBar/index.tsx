@@ -1,44 +1,43 @@
 import React from 'react'
+import Link from "next/link";
+import Image from "next/image";
 import styles from "./index.module.css";
-import { IoMdCall } from 'react-icons/io';
-import { MdOutlineNotifications } from "react-icons/md";
-import Link from 'next/link';
-import Image from 'next/image';
+import { IoMdCall } from "react-icons/io";
 
 interface InavItem {
-    name: string;
-    id: string
+  name: string;
+  id: string;
 }
 
 const navItems: InavItem[] = [
-    {
-        name: "Home",
-        id: "home",
-    },
-    {
-        name: "About",
-        id: "about",
-    },
-    {
-        name: "Service",
-        id: "service",
-    },
-    {
-        name: "Reviews",
-        id: "reviews",
-    },
-    {
-        name: "Contact",
-        id: "contact",
-    },
-]
+  {
+    name: "Home",
+    id: "home",
+  },
+  {
+    name: "About",
+    id: "about",
+  },
+  {
+    name: "Service",
+    id: "service",
+  },
+  {
+    name: "Reviews",
+    id: "reviews",
+  },
+  {
+    name: "Contact",
+    id: "contact",
+  },
+];
 
 const NavBar = () => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <div className={styles.upperDiv}>
-        <div className={styles.itemLogoDiv}>
+          <div className={styles.itemLogoDiv}>
             <Link href="/">
               <Image
                 src="/white_logo_color1_background.png"
@@ -48,35 +47,36 @@ const NavBar = () => {
               />
             </Link>
           </div>
-            <div className={styles.calmDiv}>Find your calm</div>
-            <div className={styles.buttonDiv}>
-                <button>Need a help Quickly</button>
-            </div>
+          <div className={styles.calmDiv}>
+            Connect, Support, Thrive Together
+          </div>
+          <div></div>
         </div>
         <div className={styles.lowerDiv}>
-            <div className={styles.leftDiv}>
-                <div className={styles.navItems}>
-                    {navItems.map((navItem, index) => (
-                        <div key={index} className={styles.navItem}>{ navItem.name }</div>
-                    ))}
+          <div className={styles.leftDiv}>
+            <div className={styles.navItems}>
+              {navItems.map((navItem, index) => (
+                <div key={index} className={styles.navItem}>
+                  {navItem.name}
                 </div>
-                <div className={styles.telNumber}>| <IoMdCall className={styles.callIcon} />(555) 555-1234</div>
+              ))}
             </div>
-            <div className={styles.rightDiv}>
-                <div className={styles.notificationDiv}>
-                    <MdOutlineNotifications className={styles.icon} />
-                </div>
-                <div className={styles.loginButtonDiv}>
-                    <Link href="/login">
-                        <button>Login</button>
-                    </Link>
-                </div>
+            <div className={styles.telNumber}>
+              | <IoMdCall className={styles.callIcon} />
+              (555) 555-1234
             </div>
-            
+          </div>
+          <div className={styles.rightDiv}>
+            <div className={styles.loginButtonDiv}>
+              <Link href="/login">
+                <button>Login</button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default NavBar

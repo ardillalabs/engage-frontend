@@ -9,31 +9,21 @@
 }
 
 .componentDiv {
-    width: 35%;
+    width: 550px;
     max-width: 1440px;
     border-radius: 10px;
     margin-bottom: 125px;
     background: #FFFFFF;
-    padding: 125px 60px 50px 60px;
+    padding: 100px 60px 50px 60px;
     border: 1px solid #DADADA;
 }
 
 .heading {
-    font-size: 40px;
-    font-weight: 500;
-    color: #324544;
-    line-height: 49px;
-    font-style: normal;
     padding-bottom: 20px;
 }
 
 .subHeading {
-    font-size: 16px;
-    font-weight: 400;
     color: #000000;
-    line-height: 20px;
-    text-align: center;
-    font-style: normal;
     padding-bottom: 70px;
 }
 
@@ -48,7 +38,7 @@
 }
 
 .input {
-    width: 100%;
+    width: 98%;
     height: 40px;
     margin-top: 10px;
 }
@@ -62,6 +52,7 @@
     line-height: 20px;
     font-style: normal;
     border-radius: 20px;
+    margin-bottom: 40px;
     background: #FFFFFF;
     border: 1px solid #324544;
 }
@@ -72,14 +63,11 @@
     font-weight: 600;
     line-height: 17px;
     font-style: normal;
+    margin-bottom: 15px;
 }
 
 .bottomDiv p span {
-    font-size: 14px;
-    font-weight: 600;
     color: #324544;
-    line-height: 17px;
-    font-style: normal;
 }
 
 .imageDiv {
@@ -87,4 +75,52 @@
     padding-top: 20px;
     align-items: flex-end;
     justify-content: flex-end;
+}
+@media (max-width: 1024px) {
+    .componentDiv {
+        width: 500px;
+        padding: 100px 50px 50px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        width: 60%;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainDiv {
+        top: 160px;
+    }
+
+    .componentDiv {
+        width: 100%;
+        border-radius: 0;
+        padding: 35px 50px;
+    }
+
+    .subHeading {
+        text-align: left;
+        color: #000000;
+        padding-bottom: 60px;
+    }
+
+    .inputDiv {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+
+    .input {
+        height: 50px;
+        margin-top: 6px;
+    }
+
+    .imageDiv {
+        display: none;
+    }
+
+    .buttonDiv button {
+        margin-bottom: 50px;
+    }
 }

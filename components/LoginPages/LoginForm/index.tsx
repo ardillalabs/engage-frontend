@@ -1,15 +1,13 @@
 import React from 'react'
+import Link from "next/link";
+import Image from "next/image";
 import styles from "./index.module.css";
-import Image from 'next/image';
-import Link from 'next/link';
 
 const LoginForm = () => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-        <div className={styles.headerDiv}>
-          Login
-        </div>
+        <h2>Login</h2>
         <div className={styles.inputDiv}>
           <div>Email</div>
           <input type="text" className={styles.input} />
@@ -17,17 +15,23 @@ const LoginForm = () => {
         <div className={styles.inputDiv}>
           <div>Password</div>
           <input type="password" className={styles.input} />
-          <div className={styles.forgotPassword}><Link href="/forgot-password"> forgot password</Link></div>
+          <div className={styles.forgotPassword}>
+            <Link href="/forgot-password"> forgot password</Link>
+          </div>
         </div>
-       
+
         <div className={styles.buttonDiv}>
           <button>Login</button>
         </div>
         <div className={styles.bottomDiv}>
           <p>
-            Don{"'"}t have an account? <Link href="/sign-up"> Sign up here</Link>
+            Don{"'"}t have an account?{" "}
+            <Link href="/sign-up"> Sign up here</Link>
           </p>
-          <p>By clicking “Sign up” you agree to our <span> terms and conditions</span>  & <span>privacy policy</span> </p>
+          <p>
+            By clicking “Sign up” you agree to our{" "}
+            <span> terms and conditions</span> & <span>privacy policy</span>{" "}
+          </p>
         </div>
         <div className={styles.imageDiv}>
           <Image
@@ -37,10 +41,9 @@ const LoginForm = () => {
             height={280}
           />
         </div>
-        
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginForm

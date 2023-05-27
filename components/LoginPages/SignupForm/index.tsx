@@ -1,6 +1,6 @@
 import React from 'react'
+import Link from "next/link";
 import styles from "./index.module.css";
-import Link from 'next/link';
 import SignUpSteps from '../SignUpSteps';
 
 const SignupForm = () => {
