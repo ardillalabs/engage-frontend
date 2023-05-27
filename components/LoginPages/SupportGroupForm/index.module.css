@@ -16,13 +16,21 @@
     border: 1px solid #DADADA;
     padding: 45px 90px 125px 90px;
 }
-.contentDiv {
-    display: flex;
+.sectionDiv {
+    width: 100%;
+    margin-bottom: 30px;
 }
-.leftDiv {
-    width: 70%;
-    padding-right: 35px;
+.descriptionBoxDiv {
+    padding: 40px;
+    background: #FFFFFF;
+    border: 0.923974px solid #DADADA;
+    border-radius: 9.23974px;
+    margin: 40px 0;
 }
-.rightDiv {
-    width: 30%;
+.descHeaderDiv {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #324544;
 }

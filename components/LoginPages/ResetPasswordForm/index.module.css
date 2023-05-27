@@ -9,28 +9,28 @@
 }
 
 .componentDiv {
-    width: 35%;
+    width: 30%;
     max-width: 1440px;
     border-radius: 10px;
+    padding: 125px 90px;
     margin-bottom: 125px;
     background: #FFFFFF;
-    padding: 125px 60px 50px 60px;
     border: 1px solid #DADADA;
 }
 
-.heading {
+.headerDiv {
     font-size: 40px;
     font-weight: 500;
     color: #324544;
     line-height: 49px;
     font-style: normal;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 
 .subHeading {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
-    color: #000000;
+    color: #BDBDBD;
     line-height: 20px;
     text-align: center;
     font-style: normal;
@@ -53,8 +53,19 @@
     margin-top: 10px;
 }
 
+.forgotPassword {
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    color: #B2B2B2;
+    line-height: 17px;
+    font-style: normal;
+    padding-top: 10px;
+    justify-content: flex-end;
+}
+
 .buttonDiv button {
-    width: 130px;
+    width: 230px;
     height: 40px;
     font-size: 16px;
     color: #324544;
@@ -67,24 +78,22 @@
 }
 
 .bottomDiv p {
-    font-size: 14px;
-    color: #B2B2B2;
-    font-weight: 600;
-    line-height: 17px;
     font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #B2B2B2;
 }
 
 .bottomDiv p span {
-    font-size: 14px;
-    font-weight: 600;
-    color: #324544;
-    line-height: 17px;
     font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #324544;
 }
 
 .imageDiv {
     display: flex;
-    padding-top: 20px;
-    align-items: flex-end;
     justify-content: flex-end;
 }

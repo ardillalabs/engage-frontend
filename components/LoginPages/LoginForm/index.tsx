@@ -17,7 +17,7 @@ const LoginForm = () => {
         <div className={styles.inputDiv}>
           <div>Password</div>
           <input type="password" className={styles.input} />
-          <div className={styles.forgotPassword}>forgot password</div>
+          <div className={styles.forgotPassword}><Link href="/forgot-password"> forgot password</Link></div>
         </div>
        
         <div className={styles.buttonDiv}>

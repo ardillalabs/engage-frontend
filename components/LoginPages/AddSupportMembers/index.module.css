@@ -1,0 +1,10 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+}
+
+.componentDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
