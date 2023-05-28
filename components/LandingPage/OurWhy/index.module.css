@@ -7,19 +7,26 @@
 }
 .componentDiv {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1440px;
     padding: 100px 60px;
+    display: flex;
 }
-.heading {
+.leftDiv {
+    width: 50%;
+    padding-right: 20px;
+}
+
+.rightDiv {
+    width: 50%;
+   
+}
+.header {
+    padding-bottom: 40px;
     font-weight: 600;
-    text-align: center;
-    padding-bottom: 30px;
 }
 .paragraph {
-    color: #003F5E;;
-    text-align: center;
-    font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
+    color: #003F5E;
 }

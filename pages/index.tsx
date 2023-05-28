@@ -2,19 +2,17 @@ import Head from "next/head";
 import type { Page } from "../tsc-types/next";
 import NavBar from "@/components/LandingPage/NavBar";
 import Payment from "@/components/LandingPage/Payment";
-import Steps from "@/components/LandingPage/Steps";
-import WhoWeAre from "@/components/LandingPage/WhoWeAre";
-import WhatWeCanDo from "@/components/LandingPage/WhatWeCanDo";
-import Community from "@/components/LandingPage/Community";
+import EngageSolutions from "@/components/LandingPage/EngageSolutions";
+import OurWhy from "@/components/LandingPage/OurWhy";
+import OurApproach from "@/components/LandingPage/OurApproach";
 import OurPhylosophy from "@/components/LandingPage/OurPhylosophy";
 import ClientSays from "@/components/LandingPage/ClientsSays";
 import Footer from "@/components/LandingPage/Footer";
-  // Props type
-  type Props = {
-    Component: Page;
-  };
+// Props type
+type Props = {
+  Component: Page;
+};
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -26,11 +24,10 @@ export default function Home() {
       <main className="bg-color min-h-screen">
         <NavBar />
         <Payment />
-        <Steps />
-        <WhoWeAre />
-        <WhatWeCanDo />
-        <Community />
+        <EngageSolutions />
         <OurPhylosophy />
+        <OurApproach />
+        <OurWhy />
         <ClientSays />
         <Footer />
       </main>

@@ -36,7 +36,7 @@ const Payment = () => {
           <PaymentCard plan={monthlyPlan} />
           <PaymentCard plan={yearlyPlan} />
         </div>
-        <div className={styles.images}>
+        {/* <div className={styles.images}>
           <div className={styles.imageOneDiv}>
             <Image
               src="/home-page-image-one.png"
@@ -55,7 +55,7 @@ const Payment = () => {
               objectFit="contain"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,0 +1,20 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+}
+.componentDiv {
+    width: 315px;
+}
+.imageDiv {
+    padding-bottom: 65px;
+}
+.step {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px; 
+    color: #324544;
+    padding-bottom: 20px;
+}
+.descriptionDiv p {
+    color: #324544;
+}
