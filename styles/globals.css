@@ -28,6 +28,16 @@
 
 }
 
+.body-1 {
+  font: var(--body-1);
+}
+.body-2 {
+  font: var(--body-2);
+}
+.body-4 {
+  font: var(--body-4);
+}
+
 h1 {
   font: var(--heading-1);
 }
@@ -45,6 +55,7 @@ h5 {
 }
 h6 {
   font: var(--heading-6);
+  margin: 0;
 }
 
 .bg-color {
