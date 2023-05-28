@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Sidebar from "@/components/Sidebar";
-import type { Page } from "../tsc-stypes/next";
+import type { Page } from "../tsc-types/next";
 
 import { Montserrat } from "next/font/google";
 

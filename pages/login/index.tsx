@@ -1,6 +1,6 @@
 
 import React from 'react'
-import type { Page } from "../../tsc-stypes/next";
+import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import LoginForm from '@/components/LoginPages/LoginForm';
 import Head from 'next/head';

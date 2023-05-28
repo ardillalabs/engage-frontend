@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Head from 'next/head';
-import type { Page } from "../../tsc-stypes/next";
+import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import SupportGroupForm from '@/components/LoginPages/SupportGroupForm';
   // Props type
