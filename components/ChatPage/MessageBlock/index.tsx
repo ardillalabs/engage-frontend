@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./index.module.css";
 
-const MessageBlock = ({reversed}: any) => {
+const MessageBlock = ({reversed, messageTime}: any) => {
     return (
         <div className={styles.mainDiv}>
             <div className={ !reversed ? styles.profileInfo : styles.profileInfoReversed }>
@@ -14,14 +14,10 @@ const MessageBlock = ({reversed}: any) => {
                 />
                 <div className={styles.profileInfoText}>
                     { !reversed && <div className="body-heading">Denneal Perera</div> }
-                    <div className={ !reversed ? styles.time : styles.timeReversed }>5.36 a.m</div>
+                    <div className={ !reversed ? styles.time : styles.timeReversed }>{messageTime}</div>
                 </div>
             </div>
 
-            {/* <div className={ !reversed ? styles.messagesContainer : styles.messagesContainerReversed }>
-                <div className={ !reversed ? styles.messages : styles.messagesReversed }>
-                </div>
-            </div> */}
         </div>
     )
 }

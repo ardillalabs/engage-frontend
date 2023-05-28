@@ -10,14 +10,16 @@ const useDate = () => {
     const weekday = weekdayNames[date.getDay()];
     const month = monthNames[date.getMonth()];
     const year = date.getFullYear();
+    const dateString = date.toDateString();
 
     return useMemo(() => ({
+        dateString,
         day,
         dayWithSyntax,
         weekday,
         month,
         year
-    }),[day, dayWithSyntax, weekday, month, year]);
+    }),[dateString,day, dayWithSyntax, weekday, month, year]);
 }
 
 export default useDate;
