@@ -1,3 +1,83 @@
 .mainDiv {
-    height: 1000px;
+    max-width: 100%;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
 }
+
+@media (min-width: 600px) {
+    .mainDiv {
+        padding: 30px 30px;
+        flex-direction: row;
+    }
+}
+@media (min-width: 992px) {
+    .mainDiv {
+        padding: 30px 40px;
+    }
+}
+
+.dashboardTop {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.welcomeText {
+    margin: 0;
+}
+
+.dashboardTopMenus {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.dashboardTopMenu {
+    max-width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232142B6FF' stroke-width='5' stroke-dasharray='6%2c 13' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dashboardTopMenuGreen {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%2351FF96FF' stroke-width='5' stroke-dasharray='6%2c 13' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+.dashboardTopMenuGreen .menuImageDiv {
+    background-color: #E2FFEE;
+}
+
+.menuImageDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #C2D0FF;
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.dashboardSupportSystemDiv {
+    padding: 50px 30px;
+}
+
+.supportSystemText {
+    font: var(--body-2);
+    color: #666363;
+}
+
+.rightDiv {
+    width: 100%;
+}
+
+.dashboardInfo {
+    padding: 40px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
