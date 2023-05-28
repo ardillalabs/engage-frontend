@@ -16,23 +16,10 @@ import ChatInput from "../ChatInput";
 import { db } from "@/firebase/config";
 import { DocumentData, collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import AllMessages from "../AllMessages";
 
 const ChatBox  = () => {
     const router = useRouter();
-
-    const [messages, setMessages] = useState<DocumentData>([]);
-
-    // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-    const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
-    const chatID = "1X0ttXRbAcoLCHZC07X1";
-    
-    useEffect(() => {
-        // const colRef = collection(db, "chatMessages", chatID, "messages");
-        const colRef = query(collection(db, "chatMessages", chatID, "messages"), orderBy("messageTime"));
-        onSnapshot(colRef, (snapshot) => {
-            setMessages(snapshot.docs);
-        });
-    }, []);
     
     return (
         <div className={styles.mainDiv}>
@@ -57,27 +44,7 @@ const ChatBox  = () => {
                 </div>
             </div>
             <div className={styles.chatBox}>
-                
-                <div className={styles.messageBlock}>
-                    {messages.map((message:any, i:any) => {
-                        let messageData = message.data();
-                        let arrayPos = i - 1;
-                        let startPos = i === 0 ? true : false;
-                        let reversed = messageData.senderID === userID ? true : false;
-                        let messageBlock = i !== 0 && messages[arrayPos].data().senderID !== messageData.senderID ? true : false;
-
-                        return (
-                            <>
-                                {startPos && <MessageBlock key={i} reversed={reversed} />}
-                                {messageBlock && <MessageBlock key={i} reversed={reversed} />}
-                                <Message message={messageData.message} reversed={reversed} />
-
-                            </>
-                        )
-                    })}
-
-                </div>
-                <div className={styles.messageDate}>Today, 15 May</div>
+                <AllMessages />
             </div>
             <ChatInput />
         </div>
