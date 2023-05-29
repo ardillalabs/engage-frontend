@@ -6,7 +6,7 @@ import EngageSolutions from "@/components/LandingPage/EngageSolutions";
 import OurWhy from "@/components/LandingPage/OurWhy";
 import OurApproach from "@/components/LandingPage/OurApproach";
 import OurPhylosophy from "@/components/LandingPage/OurPhylosophy";
-import ClientSays from "@/components/LandingPage/ClientsSays";
+import EngageForFree from "@/components/LandingPage/EngageForFree";
 import Footer from "@/components/LandingPage/Footer";
 // Props type
 type Props = {
@@ -28,7 +28,7 @@ export default function Home() {
         <OurPhylosophy />
         <OurApproach />
         <OurWhy />
-        <ClientSays />
+        <EngageForFree />
         <Footer />
       </main>
     </>

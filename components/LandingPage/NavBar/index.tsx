@@ -40,7 +40,7 @@ const NavBar = () => {
           <div className={styles.itemLogoDiv}>
             <Link href="/">
               <Image
-                src="/white_logo_color1_background.png"
+                src="/customcolor_logo_customcolor_background.png"
                 alt="logo"
                 width={75}
                 height={45}
