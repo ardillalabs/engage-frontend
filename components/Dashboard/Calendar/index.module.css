@@ -1,0 +1,46 @@
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.topDiv {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.chevronIcon {
+    cursor: pointer;
+}
+
+.bottomDiv {
+    /* background-color: antiquewhite; */
+    display: flex;
+    gap: 10px;
+}
+
+.dateDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    border: 3px solid #F4F4F4;
+}
+
+.dayText {
+    font-size: 9px;
+    font-weight: 600;
+    color: black;
+}
+
+.weekdayText {
+    font-size: 9px;
+    font-weight: 400;
+    color: #B0B0B0;
+
+}
