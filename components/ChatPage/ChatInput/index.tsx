@@ -10,11 +10,11 @@ import { db } from '@/firebase/config';
 
 const ChatInput = () => {
 
-    // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-    // const rec_userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+    const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
+    const rec_userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
 
-    const rec_userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-    const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+    // const rec_userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
+    // const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
 
     const chatID = "1X0ttXRbAcoLCHZC07X1";
     
