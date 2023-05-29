@@ -13,6 +13,9 @@ const AllMessages = () => {
     // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
     const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
     const chatID = "1X0ttXRbAcoLCHZC07X1";
+
+    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
     
     useEffect(() => {
         // const colRef = collection(db, "chatMessages", chatID, "messages");
@@ -32,7 +35,9 @@ const AllMessages = () => {
                 let reversed = messageData.senderID === userID ? true : false;
                 let messageBlock = i !== 0 && messages[arrayPos].data().senderID !== messageData.senderID ? true : false;
                 let showDate = i !== 0 && messages[arrayPos].data().messageTime.toDate().toDateString() !== messageDateConverted.toDateString() ? true : false;
-                let messageDate = dateString === messageDateConverted.toDateString() ? `Today, ${day} ${month}` : `${messageDateConverted.getDay()} ${messageDateConverted.getMonth()} ${messageDateConverted.getyear()}`;
+                let messageDate = dateString === messageDateConverted.toDateString() ? `Today, ${day} ${month}` : `${messageDateConverted.getDate() + 1} ${monthNames[messageDateConverted.getMonth()]} ${messageDateConverted.getFullYear()}`;
+                console.log(messageDateConverted);
+                console.log(messageDateConverted.getYear());
                 let messageTime = messageDateConverted.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
                 // console.log(messageData.messageTime.toDate().toDateString());
                 // console.log(messageDateConverted.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }));
