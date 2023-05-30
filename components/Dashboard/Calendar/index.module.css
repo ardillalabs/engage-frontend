@@ -17,14 +17,27 @@
 .bottomDiv {
     /* background-color: antiquewhite; */
     display: flex;
-    gap: 10px;
+    align-items: center;
+    width: 450px;
+    height: 80px;
+    overflow-x: hidden;
+    position: relative;
+    /* background-color: #B0B0B0; */
+}
+
+.dateDivContainer {
+    transition: .5s ease;
+    display: flex;
+    position: absolute;
 }
 
 .dateDiv {
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 60px;
+    width: 55px;
+    min-width: 55px;
     height: 70px;
     align-items: center;
     justify-content: center;
