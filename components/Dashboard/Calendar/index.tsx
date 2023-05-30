@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./index.module.css";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const Calendar = () => {
 
+  interface dateArray {
+    day: number,
+    weekday: string
+  }
+
   const date = new Date();
   const weekdayNames: any = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const reversedWeekdayNames = weekdayNames.toReversed();
-
-  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   
   const day = date.getDate();
   const weekday = weekdayNames[date.getDay()];
@@ -17,88 +20,113 @@ const Calendar = () => {
   
   const forwardDate = new Date();
   const backwardDate = new Date();
-  const [newDateList, setNewDateList]: any = useState([
-    {
-      day: forwardDate.getDate() - 3,
-      weekday:  weekdayNames[forwardDate.getDay() - 3]
-    },
-    {
-      day: forwardDate.getDate() - 2,
-      weekday:  reversedWeekdayNames[forwardDate.getDay() - 1]
-    },
-    {
-      day: forwardDate.getDate() - 1,
-      weekday:  reversedWeekdayNames[forwardDate.getDay() + 5]
-    },
-    {
-      day: forwardDate.getDate(),
-      weekday:  weekdayNames[forwardDate.getDay()]
-    },
-    {
-      day: forwardDate.getDate() + 1,
-      weekday:  weekdayNames[forwardDate.getDay() + 1]
-    },
-    {
-      day: forwardDate.getDate() + 2,
-      weekday:  weekdayNames[forwardDate.getDay() + 2]
-    }
-  ]);
+
+  const dateList: dateArray[] = [];
 
   const generateBackwardDateList = () => {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 3; i++) {
       backwardDate.setDate(backwardDate.getDate() - 1);
-      setNewDateList([
+      dateList.unshift(
         {
           day: backwardDate.getDate(),
           weekday:  weekdayNames[backwardDate.getDay()]
-        },
-        ...newDateList
-      ]);
+        }
+      );
     }
   }
 
   const generateForwardDateList = () => {
-    for (let i = 0; i < 6; i++) {
-      setNewDateList([
-        ...newDateList,
+    for (let i = 0; i < 3; i++) {
+      dateList.push(
         {
           day: forwardDate.getDate(),
           weekday:  weekdayNames[forwardDate.getDay()]
         }
-      ]);
+      );
       forwardDate.setDate(forwardDate.getDate() + 1);
     }
   }
 
-  const generateDateList = () => {
-    generateBackwardDateList();
-    generateForwardDateList();
+  generateForwardDateList();
+  generateBackwardDateList();
+
+  const [newDateList, setNewDateList] = useState(dateList);
+
+  const addToNewDataListBack = () => {
+    backwardDate.setDate(newDateList[0].day);
+    for (let i = 0; i < 6; i++) {
+      backwardDate.setDate(backwardDate.getDate() - 1);
+      let date = backwardDate.getDate();
+      let weekday = backwardDate.getDay();
+      setNewDateList(prevState => [
+        {
+          day: date,
+          weekday:  weekdayNames[weekday]
+        },
+        ...prevState
+      ]);
+    };
   }
 
-  console.log(forwardDate.getDay() - 1);
+  const addToNewDataListFront = () => {
+    forwardDate.setDate(newDateList.slice(-1)[0].day);
+    for (let i = 0; i < 6; i++) {
+      forwardDate.setDate(forwardDate.getDate() + 1);
+      let date = forwardDate.getDate();
+      let weekday = forwardDate.getDay();
+      setNewDateList(prevState => [
+        ...prevState,
+        {
+          day: date,
+          weekday:  weekdayNames[weekday]
+        }
+      ]);
+    };
+  }
 
-  // generateDateList(); // Getting initial date values  
-  
+  const [scrollValue, setScrollValue] = useState<number>(0);
+
+  const backwardIconClicked = () => {
+    if (scrollValue === 0) {
+      addToNewDataListBack();
+    } else {
+      setScrollValue(scrollValue + 1);
+    }
+  }
+  const forwardIconClicked = () => {
+    addToNewDataListFront();
+    setScrollValue(scrollValue - 1);
+  }
+
+  console.log(newDateList);
+
   return (
     <div className={styles.mainDiv}>
         <div className={styles.topDiv}>
             <BsChevronLeft 
               className={styles.chevronIcon}
-              onClick={ () => generateBackwardDateList() } 
+              onClick={ () => backwardIconClicked() } 
             />
             <span>May 2023</span>
             <BsChevronRight 
               className={styles.chevronIcon}
-              onClick={ () => generateForwardDateList() } 
+              onClick={ () => forwardIconClicked() } 
             />
         </div>
         <div className={styles.bottomDiv}>
+          <div 
+            className={styles.dateDivContainer}
+            style={{transform: `translateX(${scrollValue * 450}px)`}}
+          >
             {newDateList.map((dayObject: any, i: number) => (
               <div key={i} className={styles.dateDiv}>
                 <span className={styles.weekdayText}>{dayObject.weekday}</span>
                 <span className={styles.dayText}>{dayObject.day}</span>
               </div>
             ))}
+
+          </div>
+          
         </div>
     </div>
   )
