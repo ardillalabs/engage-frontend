@@ -92,10 +92,12 @@ const Calendar = () => {
     } else {
       setScrollValue(scrollValue + 1);
     }
+    console.log(scrollValue);
   }
   const forwardIconClicked = () => {
     addToNewDataListFront();
     setScrollValue(scrollValue - 1);
+    console.log(scrollValue);
   }
 
   console.log(newDateList);
