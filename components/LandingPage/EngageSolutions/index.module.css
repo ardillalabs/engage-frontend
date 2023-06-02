@@ -16,7 +16,14 @@
     justify-content: center
 }
 .stepsDiv {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .stepsDiv {
+        grid-template-columns: 1fr;
+        row-gap: 50px;
+    }
 }

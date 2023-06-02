@@ -3,6 +3,22 @@
     padding: 0;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+.halfImageOneDiv {
+    position: absolute;
+    right: 0;
+    top: 250px;
+    z-index: 0;
+    width: 16%;
+    height: 60%;
+}
+.halfImageTwoDiv {
+    position: absolute;
+    left: 0;
+    top: 300px;
+    width: 16%;
+    height: 60%
 }
 .componentDiv {
     max-width: 1440px;
@@ -38,9 +54,31 @@
    position: absolute;
    top: 100px;
    right: 0;
+
 }
 .imageTwoDiv {
     position: absolute;
     top: 340px;
     left: 0;
+
+}
+
+@media (max-width: 1024px) {
+    .halfImageOneDiv {
+       display: none;
+    }
+    .halfImageTwoDiv {
+        display: none;
+    }
+    .componentDiv {
+        max-width: 1440px;
+        width: 100%;
+        padding: 60px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cardsDiv {
+        flex-direction: column;
+    }
 }

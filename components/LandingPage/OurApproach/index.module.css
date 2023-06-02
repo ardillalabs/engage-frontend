@@ -12,7 +12,7 @@
     display: flex;
 }
 .leftDiv {
-    width: 30%;
+    width: 40%;
     padding-right: 20px;
 }
 .header {
@@ -26,27 +26,23 @@
     color: #003F5E;
 }
 .rightDiv {
-    width: 70%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .cardsDiv {
-    display: flex;
-    width: 95%;
-    /* height: 100%; */
-    justify-content: space-around;
-    align-items: center;
-    background: #FFFFFF;
-    box-shadow: 0px 22px 40px rgba(50, 69, 68, 0.06);
-    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 50px;
+
 }
 .cardDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px;
 }
 .imageDiv {
     background: #F1F1F1;
@@ -65,4 +61,37 @@
     text-align: center;
     color: #919191;
     word-wrap: break-word;
+}
+
+@media (max-width: 1300px) {
+    .leftDiv {
+        width: 50%;
+    }
+    .rightDiv {
+        width: 50%;
+    }
+    .imageDiv {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    } 
+}
+@media (max-width: 1024px) {
+    .cardsDiv {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 50px;
+    }
+}
+@media (max-width: 768px) {
+    .componentDiv {
+        flex-direction: column;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 50px 0;
+    }
+    .rightDiv {
+        width: 100%;
+    }
 }

@@ -27,6 +27,36 @@ const yearlyPlan: IpaymentPlan = {
 const Payment = () => {
   return (
     <div className={styles.mainDiv}>
+      <div className={styles.halfImageOneDiv}>
+        <Image
+          src="/home_page_two.png"
+          alt=""
+          fill
+          style={{
+            backgroundImage: `url(/home_page_two.png)`,
+            width: "100%",
+            height: "100%",
+            borderTopLeftRadius: "50%" /* 100px of height + 10px of border */,
+            borderBottomLeftRadius: "50%",
+          }}
+          // objectFit="cover"
+        />
+      </div>
+      <div className={styles.halfImageTwoDiv}>
+        <Image
+          src="/home_page_one.png"
+          alt=""
+          fill
+          style={{
+            backgroundImage: `url(/home_page_one.png)`,
+            width: "100%",
+            height: "100%",
+            borderTopRightRadius: "50%" /* 100px of height + 10px of border */,
+            borderBottomRightRadius: "50%",
+          }}
+        />
+      </div>
+
       <div className={styles.componentDiv}>
         <div className={styles.headerDiv}>
           Proactive positive support when you need it most

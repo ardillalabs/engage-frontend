@@ -15,8 +15,8 @@ const Step = ({ stepDetails }: prop) => {
           <Image
             src={stepDetails.imageSrc}
             alt={stepDetails.alt}
-            width={135}
-            height={135}
+            width={83}
+            height={83}
           />
         </div>
         <div className={styles.descriptionDiv}>

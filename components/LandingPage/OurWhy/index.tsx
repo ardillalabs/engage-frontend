@@ -7,7 +7,13 @@ const OurWhy = () => {
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <div className={styles.leftDiv}>
-          <Image src="/our_why.png" alt="our why" width={570} height={380} />
+          <Image
+            src="/our_why.png"
+            alt="our why"
+            width={570}
+            height={380}
+            style={{ width: "100%", objectFit: "contain" }}
+          />
         </div>
         <div className={styles.rightDiv}>
           <h2 className={styles.header}>Our WHY</h2>

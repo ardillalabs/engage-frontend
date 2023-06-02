@@ -3,7 +3,7 @@
     margin: 0;
 }
 .componentDiv {
-    width: 315px;
+    width: 100%;
 }
 .imageDiv {
     padding-bottom: 65px;
@@ -17,4 +17,9 @@
 }
 .descriptionDiv p {
     color: #324544;
+}
+@media (max-width: 768px) {
+    .componentDiv {
+        text-align: center;
+    }
 }

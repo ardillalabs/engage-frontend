@@ -30,3 +30,18 @@
     line-height: 29px;
     color: #003F5E;
 }
+
+@media (max-width: 768px) {
+    .componentDiv {
+        flex-direction: column-reverse;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 50px 0;
+    }
+    
+    .rightDiv {
+        width: 100%;
+       
+    }
+}

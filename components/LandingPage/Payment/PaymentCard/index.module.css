@@ -74,3 +74,15 @@
     line-height: 20px;
     color: #324544;
 }
+
+@media (max-width: 1200px) {
+    .componentDiv {
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        margin: 10px 0px;
+    }
+}
