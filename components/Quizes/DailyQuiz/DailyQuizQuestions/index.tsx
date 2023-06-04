@@ -1,49 +1,75 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from "./index.module.css";
 import Link from 'next/link';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import SubHeader from '../../SubHeader';
+import { Quiz } from '@/tsc-types/Quiz';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { RootState } from "../../../../store";
+import { getQuestionList, quizMarksSubmit } from "../../../../actions/Quiz";
 
-const quiz = {
-    totalQuestions: 2,
-    questions: [
-        {
-            questionNumber: 1,
-            question:
-                'Thinking about yourself, on average, to what extent have you felt this way during the past few hours?',
-            questionWord: 'Positive Activation',
-            options: [
-                { id: 0, text: 'Not at all', score: 1 },
-                { id: 1, text: 'Slightly', score: 2 },
-                { id: 2, text: 'Moderately', score: 3 },
-                { id: 3, text: 'Considerably', score: 4 },
-                { id: 4, text: 'A great deal', score: 5 }],
-            type: 'MCQs'
-        },
-        {
-            questionNumber: 2,
-            question:
-                'Thinking about yourself, on average, to what extent have you felt this way during the past few hours?',
-            questionWord: 'Negative Activation',
-            options: [
-                { id: 0, text: 'Not at all', score: 5 },
-                { id: 1, text: 'Slightly', score: 4 },
-                { id: 2, text: 'Moderately', score: 3 },
-                { id: 3, text: 'Considerably', score: 2 },
-                { id: 4, text: 'A great deal', score: 1 }],
-            type: 'MCQs'
-        }
-    ],
+// const quiz = {
+//     totalQuestions: 2,
+//     questions: [
+//         {
+//             questionNumber: 1,
+//             question:
+//                 'Thinking about yourself, on average, to what extent have you felt this way during the past few hours?',
+//             questionWord: 'Positive Activation',
+//             options: [
+//                 { id: 0, text: 'Not at all', score: 1 },
+//                 { id: 1, text: 'Slightly', score: 2 },
+//                 { id: 2, text: 'Moderately', score: 3 },
+//                 { id: 3, text: 'Considerably', score: 4 },
+//                 { id: 4, text: 'A great deal', score: 5 }],
+//             type: 'MCQs'
+//         },
+//         {
+//             questionNumber: 2,
+//             question:
+//                 'Thinking about yourself, on average, to what extent have you felt this way during the past few hours?',
+//             questionWord: 'Negative Activation',
+//             options: [
+//                 { id: 0, text: 'Not at all', score: 5 },
+//                 { id: 1, text: 'Slightly', score: 4 },
+//                 { id: 2, text: 'Moderately', score: 3 },
+//                 { id: 3, text: 'Considerably', score: 2 },
+//                 { id: 4, text: 'A great deal', score: 1 }],
+//             type: 'MCQs'
+//         }
+//     ],
+// }
+
+interface Props {
+    getQuestionList: (quizId: number) => any;
+    quiz: Quiz;
+    quizMarksSubmit: (quizId: number, userId: number, marks: number) => any;
 }
 
-const DailyQuizQuestions = () => {
-    const [activeQuestion, setActiveQuestion] = useState(0)
-    const [selectedAnswer, setSelectedAnswer] = useState('')
-    const [activeStep, setActiveStep] = useState(0)
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(-1)
-    const [showStart, setStart] = useState(true)
-    const [showQuiz, setShowQuiz] = useState(false)
+const DailyQuizQuestions = ({
+    getQuestionList,
+    quiz: { questionList },
+    quizMarksSubmit
+}: Props) => {
+    const [activeQuestion, setActiveQuestion] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState(false);
+    const [activeStep, setActiveStep] = useState(0);
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(-1);
+    const [showQuiz, setShowQuiz] = useState(false);
+    const [showStart, setStart] = useState(true);
+    const [score, setScore] = useState(0);
+    const [result, setResult] = useState(0);
+
+    useEffect(() => {
+        getQuestionList(2);
+    }, [getQuestionList]);
+
+    useEffect(() => {
+        console.log(questionList);
+    });
+
 
     const showDailyQuestions = () => {
         setStart(false)
@@ -51,24 +77,35 @@ const DailyQuizQuestions = () => {
     }
 
     const onClickNext = () => {
-        if (activeStep < questions.length - 1) {
-            setActiveQuestion((prev) => prev + 1)
-            setActiveStep((prev) => prev + 1)
-            console.log(activeStep, questions.length)
+        setSelectedAnswerIndex(-1);
+        console.log("score", score);
+        console.log(result);
+        setResult((prevResult) => prevResult + score); // Add the current score to the result
+        if (activeStep < questionList.length - 1) {
+            setActiveQuestion((prev) => prev + 1);
+            setActiveStep((prev) => prev + 1);
+            console.log(activeStep, questionList.length);
+        } else {
+            setShowQuiz(false);
+            setResult((prevResult) => prevResult + score); // Add the current score to the final result
+            console.log("Quiz is finished");
+            const finalScore = result + score
+            console.log("Final Result:", result + score, finalScore); // Log the final result
+            quizMarksSubmit(2, 1, finalScore)
         }
-        else {
-            setShowQuiz(false)
-            console.log('Quiz is finished')
-        }
-    }
-    if (showStart) {
-        console.log(showStart);
-        <SubHeader text="Let's establish your baseline mood for this week." />
-    }
+    };
 
-    console.log('index', selectedAnswerIndex)
-    const { questions } = quiz
-    const { questionNumber, question, questionWord, options } = questions[activeQuestion]
+    const onAnswerSelected = (score: any, id: number) => {
+        setSelectedAnswerIndex(id);
+        setSelectedAnswer(true);
+        setScore(score);
+        console.log(score, result);
+    };
+
+
+    // console.log('index', selectedAnswerIndex)
+    // const { questions } = quiz
+    // const { questionNumber, question, questionWord, options } = questions[activeQuestion]
     return (
         <div className={styles.mainDiv}>
             <>
@@ -78,7 +115,7 @@ const DailyQuizQuestions = () => {
                 {[...Array(2)].map((_, index) => (
                     <div
                         key={index}
-                        className={questionNumber === index + 1 ? styles.activeQuestion : styles.inactiveQuestion}
+                        className={activeQuestion === index ? styles.activeQuestion : styles.inactiveQuestion}
                     ></div>
                 ))}
             </div>
@@ -99,16 +136,35 @@ const DailyQuizQuestions = () => {
                     {showQuiz ? (
                         <section>
                             <div className={styles.componentDiv}>
-                                <div className={styles.quetionText}>{question}</div>
-                                <div className={styles.questionWord}><button disabled>{questionNumber}. {questionWord}</button></div>
+                                <div className={styles.quetionText}>{questionList[activeQuestion]?.description}</div>
+                                <div className={styles.questionWord}><button disabled>
+                                    {activeQuestion + 1}.{questionList[activeQuestion]?.keyword}
+                                </button></div>
                                 <ul>
-                                    {options.map((option) => (
-                                        <li key={option.id}>
-                                            {option.text}
-                                        </li>
-                                    ))}
+                                    <li onClick={() => onAnswerSelected(questionList[activeQuestion]?.option1_score, 0)} className={
+                                        selectedAnswerIndex === 0
+                                            ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                                            : styles.selectedAnswer}>{questionList[activeQuestion]?.option1}</li>
+                                    <li onClick={() => onAnswerSelected(questionList[activeQuestion].option2_score, 1)} className={
+                                        selectedAnswerIndex === 1
+                                            ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                                            : styles.selectedAnswer}>{questionList[activeQuestion]?.option2}</li>
+                                    <li onClick={() => onAnswerSelected(questionList[activeQuestion].option3_score, 2)} className={
+                                        selectedAnswerIndex === 2
+                                            ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                                            : styles.selectedAnswer}>{questionList[activeQuestion]?.option3}</li>
+                                    <li onClick={() => onAnswerSelected(questionList[activeQuestion].option4_score, 3)} className={
+                                        selectedAnswerIndex === 3
+                                            ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                                            : styles.selectedAnswer}>{questionList[activeQuestion]?.option4}</li>
+                                    <li onClick={() => onAnswerSelected(questionList[activeQuestion].option5_score, 4)} className={
+                                        selectedAnswerIndex === 4
+                                            ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                                            : styles.selectedAnswer}>{questionList[activeQuestion]?.option5}</li>
                                 </ul>
-                                <button className={styles.nextButton} onClick={onClickNext}>Next</button>
+                                <button className={selectedAnswer ? styles.nextButton : styles.nextButtonDisabled} onClick={onClickNext}>
+                                    Next
+                                </button>
                             </div>
                         </section>
                     ) :
@@ -138,4 +194,16 @@ const DailyQuizQuestions = () => {
     )
 }
 
-export default DailyQuizQuestions
+// export default DailyQuizQuestions
+DailyQuizQuestions.propTypes = {
+    getQuestionList: PropTypes.func.isRequired,
+    quizMarksSubmit: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state: RootState) => ({
+    quiz: state.quiz,
+});
+
+export default connect(mapStateToProps, {
+    getQuestionList, quizMarksSubmit
+})(DailyQuizQuestions);
