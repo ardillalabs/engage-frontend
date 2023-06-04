@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./index.module.css";
 import Image from "next/image";
+import styles from "./index.module.css";
 
 const OurWhy = () => {
   return (
@@ -13,6 +13,7 @@ const OurWhy = () => {
             width={570}
             height={380}
             style={{ width: "100%", objectFit: "contain" }}
+            className={styles.imageDiv}
           />
         </div>
         <div className={styles.rightDiv}>

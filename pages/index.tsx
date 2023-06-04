@@ -1,13 +1,13 @@
 import Head from "next/head";
 import type { Page } from "../tsc-types/next";
 import NavBar from "@/components/LandingPage/NavBar";
-import Payment from "@/components/LandingPage/Payment";
-import EngageSolutions from "@/components/LandingPage/EngageSolutions";
 import OurWhy from "@/components/LandingPage/OurWhy";
+import Footer from "@/components/LandingPage/Footer";
+import Payment from "@/components/LandingPage/Payment";
 import OurApproach from "@/components/LandingPage/OurApproach";
 import OurPhylosophy from "@/components/LandingPage/OurPhylosophy";
 import EngageForFree from "@/components/LandingPage/EngageForFree";
-import Footer from "@/components/LandingPage/Footer";
+import EngageSolutions from "@/components/LandingPage/EngageSolutions";
 // Props type
 type Props = {
   Component: Page;

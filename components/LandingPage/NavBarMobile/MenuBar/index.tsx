@@ -1,7 +1,6 @@
+import React from "react";
 import Link from "next/link";
 import styles from "./index.module.css";
-import React, { useEffect, useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 interface Props {
   setMenuBarState: any;

@@ -9,6 +9,7 @@
     }
     .nav {
       display: flex;
+      align-items: center;
       height: 20px;
       padding: 20px 20px;
       background: #E9FDFB;
@@ -18,7 +19,6 @@
       display: flex;
       align-items: center;
       color: #000000;
-  
       justify-content: space-between;
     }
     .leftDiv {
@@ -29,15 +29,16 @@
     }
     .hamburgerDiv {
       display: flex;
-      padding: 15px;
+      padding: 0 15px 0 0;
     }
     .hamburgerIcon {
-        width: 25px;
-        height: 25px;
+      width: 25px;
+      height: 25px;
       cursor: pointer;
       transition: opacity 0.5s;
     }
     .closeIcon {
+      display: flex;
         width: 25px;
         height: 25px;
       cursor: pointer;
@@ -45,10 +46,10 @@
     .menuBarHide {
       left: 0;
       opacity: 0;
-      top: 180px;
+      top: 130px;
       width: 100%;
       z-index: -1;
-      padding: 0 40px;
+      padding: 0 0px;
       visibility: hidden;
       position: absolute;
       transform: translateY(-3em);

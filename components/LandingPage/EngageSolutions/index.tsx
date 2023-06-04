@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./index.module.css";
 import Step from "./Step";
+import styles from "./index.module.css";
 import { IstepDetails } from "../../../tsc-types/stepTypes";
 
 const stepOne: IstepDetails = {

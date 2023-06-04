@@ -1,9 +1,9 @@
 
 import React from 'react'
+import Head from "next/head";
 import type { Page } from "../../tsc-types/next";
-import Header from '@/components/LoginPages/Header';
-import LoginForm from '@/components/LoginPages/LoginForm';
-import Head from 'next/head';
+import Header from "@/components/LoginPages/Header";
+import LoginForm from "@/components/LoginPages/LoginForm";
   // Props type
   type Props = {
     Component: Page;

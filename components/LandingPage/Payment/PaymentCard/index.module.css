@@ -63,7 +63,6 @@
     align-items: center;
 }
 .signupButtonDiv button{
-  
     width: 149px;
     height: 40px;
     background: #FFFFFF;
@@ -83,7 +82,7 @@
 
 @media (max-width: 768px) {
     .componentDiv {
-        margin: 10px 50px;
+        margin: 10px 0px;
     }
     .cardHeader {
         font-size: 20px;
@@ -101,6 +100,6 @@
 }
 @media (max-width: 576px) {
     .componentDiv {
-        margin: 10px 20px;
+        margin: 10px 0px;
     }
 }

@@ -7,9 +7,9 @@
 }
 .componentDiv {
     width: 100%;
+    display: flex;
     max-width: 1440px;
     padding: 100px 60px;
-    display: flex;
 }
 .leftDiv {
     width: 50%;
@@ -21,14 +21,14 @@
    
 }
 .header {
-    padding-bottom: 40px;
     font-weight: 600;
+    padding-bottom: 40px;
 }
 .paragraph {
-    font-weight: 400;
     font-size: 24px;
-    line-height: 29px;
+    font-weight: 400;
     color: #003F5E;
+    line-height: 29px;
 }
 
 @media (max-width: 1024px) {
@@ -44,7 +44,7 @@
     }
     .leftDiv {
         width: 100%;
-        padding: 50px 0;
+        padding: 50px 0 0 0;
     }
     .imageDiv {
         width: 385px;

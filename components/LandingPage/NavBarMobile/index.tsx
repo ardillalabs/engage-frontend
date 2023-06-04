@@ -1,14 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import MenuBar from "./MenuBar";
 import styles from "./index.module.css";
-import React, { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { BsSun, BsMoon } from "react-icons/bs";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
-
-import OutsideClickHandler from "react-outside-click-handler";
 
 const NavBarMobile = () => {
   const [menuBarState, setMenuBarState] = useState<boolean>();
@@ -42,7 +37,9 @@ const NavBarMobile = () => {
             <div className={styles.menuDiv}>Menu</div>
           </div>
           <div className={styles.rightDiv}>
-            <div className={styles.loginDiv}>Login</div>
+            <div className={styles.loginDiv}>
+              <Link href="/login">Login</Link>
+            </div>
           </div>
         </div>
       </nav>

@@ -7,59 +7,59 @@
 }
 .componentDiv {
     width: 100%;
+    display: flex;
     max-width: 1440px;
     padding: 100px 60px;
-    display: flex;
 }
 .leftDiv {
     width: 40%;
     padding-right: 20px;
 }
 .header {
-    padding-bottom: 40px;
     font-weight: 600;
+    padding-bottom: 40px;
 }
 .paragraph {
-    font-weight: 400;
     font-size: 24px;
-    line-height: 29px;
+    font-weight: 400;
     color: #003F5E;
+    line-height: 29px;
 }
 .rightDiv {
     width: 60%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 .cardsDiv {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 
 }
 .cardDiv {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 .imageDiv {
-    background: #F1F1F1;
-    border-radius: 50%;
     width: 130px;
     height: 130px;
     display: flex;
+    border-radius: 50%;
     align-items: center;
-    justify-content: center;
     margin-bottom: 35px;
+    background: #F1F1F1;
+    justify-content: center;
 }
 .nameDiv {
-    font-weight: 600;
     font-size: 16px;
+    font-weight: 600;
+    color: #919191;
     line-height: 20px;
     text-align: center;
-    color: #919191;
     word-wrap: break-word;
 }
 
@@ -82,8 +82,8 @@
     }
     .cardsDiv {
         display: grid;
-        grid-template-columns: 1fr 1fr;
         row-gap: 50px;
+        grid-template-columns: 1fr 1fr;
     }
 }
 @media (max-width: 768px) {
@@ -96,9 +96,9 @@
         padding: 0 0 50px 0;
     }
     .header {
-        padding-bottom: 25px;
         font-weight: 600;
         text-align: center;
+        padding-bottom: 25px;
     }
     .paragraph {
         font-size: 14px;
