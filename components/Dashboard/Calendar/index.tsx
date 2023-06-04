@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from "./index.module.css";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import useDate from '@/hooks/useDate';
+import { dateArray } from '@/tsc-types/calendarTypes';
 
 const Calendar = () => {
 
-  interface dateArray {
-    day: number,
-    weekday: string,
-    monthNum: number,
-    month: string,
-    year: number
-  }
-
   const { year, month, day } = useDate();
-  const weekdayNames: any = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+  const weekdayNames: Array<string> = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const monthNames: Array<string> = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   
   const forwardDate = new Date();
   const backwardDate = new Date();
@@ -145,7 +138,7 @@ const Calendar = () => {
               className={styles.chevronIcon}
               onClick={ () => backwardIconClicked() } 
             />
-            <span>{monthYear}</span>
+            <span className={styles.monthYear}>{monthYear}</span>
             <BsChevronRight 
               className={styles.chevronIcon}
               onClick={ () => forwardIconClicked() } 
@@ -156,7 +149,7 @@ const Calendar = () => {
             className={styles.dateDivContainer}
             style={{transform: `translateX(${scrollValue * 450}px)`}}
           >
-            {newDateList.map((dayObject: any, i: number) => (
+            {newDateList.map((dayObject: dateArray, i: number) => (
               <div key={i} className={dayObject.day !== day ? styles.dateDiv : styles.dateDivToday}>
                 <span className={styles.weekdayText}>{dayObject.weekday}</span>
                 <span className={styles.dayText}>{dayObject.day}</span>

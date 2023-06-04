@@ -21,9 +21,21 @@
 
 .memberTreeDiv {
     position: relative;
-    width: 600px;
+    width: 100%;
     height: 600px;
+    --image-translate: 130px;
+}
 
+@media (min-width: 600px) {
+    .memberTreeDiv {
+        --image-translate: 180px;
+    }
+}
+@media (min-width: 1200px) {
+    .memberTreeDiv {
+        width: 500px;
+        height: 500px;
+    }
 }
 
 .imageContainer,
@@ -34,8 +46,16 @@
     left: 50%;
     margin: -50px;
     border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+}
+
+@media (min-width: 600px) {
+    .imageContainer,
+    .userImageContainer {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 .userImageContainer {
@@ -81,28 +101,28 @@
 }
  
 .memberTreeDiv :nth-child(2) .imagePlaceholder {
-    transform: rotate(-90deg) translate(180px) rotate(90deg);
+    transform: rotate(-90deg) translate(var(--image-translate)) rotate(90deg);
 }
 .memberTreeDiv :nth-child(3) .imagePlaceholder {
-    transform: rotate(-45deg) translate(180px) rotate(45deg);
+    transform: rotate(-45deg) translate(var(--image-translate)) rotate(45deg);
 }
 .memberTreeDiv :nth-child(4) .imagePlaceholder {
-    transform: rotate(0deg) translate(180px) rotate(0deg);
+    transform: rotate(0deg) translate(var(--image-translate)) rotate(0deg);
 }
 .memberTreeDiv :nth-child(5) .imagePlaceholder {
-    transform: rotate(45deg) translate(180px) rotate(-45deg);
+    transform: rotate(45deg) translate(var(--image-translate)) rotate(-45deg);
 }
 .memberTreeDiv :nth-child(6) .imagePlaceholder {
-    transform: rotate(90deg) translate(180px) rotate(-90deg);
+    transform: rotate(90deg) translate(var(--image-translate)) rotate(-90deg);
 }
 .memberTreeDiv :nth-child(7) .imagePlaceholder {
-    transform: rotate(135deg) translate(180px) rotate(-135deg);
+    transform: rotate(135deg) translate(var(--image-translate)) rotate(-135deg);
 }
 .memberTreeDiv :nth-child(8) .imagePlaceholder {
-    transform: rotate(180deg) translate(180px) rotate(-180deg);
+    transform: rotate(180deg) translate(var(--image-translate)) rotate(-180deg);
 }
 .memberTreeDiv :nth-child(9) .imagePlaceholder {
-    transform: rotate(225deg) translate(180px) rotate(-225deg);
+    transform: rotate(225deg) translate(var(--image-translate)) rotate(-225deg);
 }
 
 .imagePlaceholder div {
@@ -121,11 +141,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -2px -50px;
+    margin: -10px -60px;
     width: 100px;
     height: 4px;
     z-index: 2;
     background-color: #BFBFBF;
+}
+
+@media (min-width: 600px) {
+    .line {
+        margin: -2px -50px;
+    }
 }
 
 .linesDiv :nth-child(1) {
