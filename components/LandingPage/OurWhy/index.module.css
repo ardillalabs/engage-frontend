@@ -31,17 +31,38 @@
     color: #003F5E;
 }
 
+@media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
+}
+
 @media (max-width: 768px) {
     .componentDiv {
+        padding: 30px 50px;
         flex-direction: column-reverse;
     }
     .leftDiv {
         width: 100%;
         padding: 50px 0;
     }
-    
+    .imageDiv {
+        width: 385px;
+        height: 257px;
+    }
     .rightDiv {
         width: 100%;
-       
+    }
+    .header {
+        padding-bottom: 22px;
+    }
+    .paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 30px 20px;
     }
 }

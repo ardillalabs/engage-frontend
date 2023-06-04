@@ -22,4 +22,17 @@
     .componentDiv {
         text-align: center;
     }
+    .imageDiv {
+        padding-bottom: 25px;
+    }
+    .step {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px; 
+        padding-bottom: 15px;
+    }
+    .descriptionDiv p {
+        color: #324544;
+        text-align: center;
+    }
 }

@@ -83,6 +83,24 @@
 
 @media (max-width: 768px) {
     .componentDiv {
-        margin: 10px 0px;
+        margin: 10px 50px;
+    }
+    .cardHeader {
+        font-size: 20px;
+        line-height: 26px;
+        color: #FFFFFF;
+    }
+    .conditionList li{
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .priceDiv {
+        font-size: 20px;
+        line-height: 26px;
+    }
+}
+@media (max-width: 576px) {
+    .componentDiv {
+        margin: 10px 20px;
     }
 }

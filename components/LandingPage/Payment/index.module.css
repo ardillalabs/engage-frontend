@@ -71,14 +71,30 @@
         display: none;
     }
     .componentDiv {
-        max-width: 1440px;
-        width: 100%;
         padding: 60px 60px;
     }
 }
 
 @media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+    }
+    .headerDiv {
+        font-size: 22px;
+        line-height: 27px;
+    }
+    .paragraph {
+        font-size: 16px;
+        line-height: 20px;
+        padding-bottom: 30px;
+    }
     .cardsDiv {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 20px;
     }
 }

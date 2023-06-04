@@ -77,6 +77,9 @@
     } 
 }
 @media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
     .cardsDiv {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -85,11 +88,39 @@
 }
 @media (max-width: 768px) {
     .componentDiv {
+        padding: 30px 50px;
         flex-direction: column;
     }
     .leftDiv {
         width: 100%;
-        padding: 50px 0;
+        padding: 0 0 50px 0;
+    }
+    .header {
+        padding-bottom: 25px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .rightDiv {
+        width: 100%;
+    }
+    .imageDiv {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 15px;
+    } 
+}
+
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 0 0 50px 0;
     }
     .rightDiv {
         width: 100%;

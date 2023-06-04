@@ -25,3 +25,33 @@
 .rightDiv {
     width: 50%;
 }
+
+@media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+        flex-direction: column;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 40px 0;
+        text-align: center;
+    }
+    .rightDiv {
+        width: 100%;
+    }
+}
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+    .header {
+        font-size: 22px;
+        line-height: 27px;
+    }
+}

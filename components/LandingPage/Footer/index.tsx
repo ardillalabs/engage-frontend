@@ -17,6 +17,7 @@ const Footer = () => {
                 alt="logo"
                 width={150}
                 height={90}
+                className={styles.logo}
               />
             </Link>
           </div>

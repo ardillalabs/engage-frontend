@@ -45,3 +45,30 @@
     color: #1C99D7;
     margin: 10px;
 }
+@media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
+}
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+    }
+    .logo {
+        width: 70px;
+        height: 40px;
+    }
+    .list {
+        font-size: 7px;
+        line-height: 10px;
+        padding-bottom: 10px;
+    }
+    .socialDiv {
+        display: none;
+    }
+}
+@media (max-width:576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+}
