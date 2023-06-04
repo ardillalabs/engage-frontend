@@ -1,0 +1,68 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+.componentDiv {
+    width: 550px;
+    max-width: 1440px;
+    padding: 80px 60px;
+    margin-bottom: 125px;
+    background: #FFFFFF;
+}
+.bodyDiv{
+    text-align: center;
+    font-size: 18px;
+    color: #003F5E;
+    font-weight: 400;
+}
+.questionNoDiv{
+    justify-content: center;
+    display: flex;
+}
+.questionNoDiv button{
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border: 1px solid #324544;
+}
+.buttonDiv{
+    justify-content: center;
+    display: flex;
+}
+.buttonDiv button{
+    width: 260px;
+    height: 63px;
+    font-size: 26px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 32px;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border: 1px solid #324544;
+}
+@media (max-width: 576px) {
+    .bodyDiv{
+        font-size: 16px;
+    }
+    .componentDiv{
+        padding-top: 90px;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+    .componentDiv{
+        padding-top: 160px;
+    }
+}

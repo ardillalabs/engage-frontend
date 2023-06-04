@@ -3,7 +3,8 @@ import React from 'react'
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/Quizes/Header';
 import Head from 'next/head';
-import DailyQuizQuestions from '@/components/Quizes/DailyQuiz/DailyQuizQuestions';
+import DailyQuizStartForm from '@/components/Quizes/DailyQuiz/DailyQuizStartForm';
+import SubHeader from '@/components/Quizes/SubHeader';
   // Props type
   type Props = {
     Component: Page;
@@ -20,7 +21,8 @@ import DailyQuizQuestions from '@/components/Quizes/DailyQuiz/DailyQuizQuestions
         </Head>
         <main className="bg-color min-h-screen">
           <Header/>
-          <DailyQuizQuestions/>
+          <SubHeader text="Let's establish your baseline mood for this week."/>
+          <DailyQuizStartForm/>
         </main>
       </>
     );
