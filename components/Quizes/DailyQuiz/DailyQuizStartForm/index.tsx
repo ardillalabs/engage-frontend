@@ -12,10 +12,12 @@ const DailyQuizStartForm = () => {
             <button>2</button>
         </div>
         <div className={styles.buttonDiv}>
-          <Link href='/support-group'>
+          <Link href='/daily-quiz-form'>
             <button>Start Quiz</button>
           </Link>
         </div>
+        {/* <div className={styles.bottomDiv}>
+        </div> */}
       </div>
     </div>
   );
