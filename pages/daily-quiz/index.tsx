@@ -21,7 +21,7 @@ import SubHeader from '@/components/Quizes/SubHeader';
         </Head>
         <main className="bg-color min-h-screen">
           <Header/>
-          <SubHeader text="Let's establish your baseline mood for this week."/>
+          <SubHeader text="Let's establish your baseline mood for today."/>
           <DailyQuizStartForm/>
         </main>
       </>
