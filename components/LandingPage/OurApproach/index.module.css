@@ -1,0 +1,128 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+    display: flex;
+    max-width: 1440px;
+    padding: 100px 60px;
+}
+.leftDiv {
+    width: 40%;
+    padding-right: 20px;
+}
+.header {
+    font-weight: 600;
+    padding-bottom: 40px;
+}
+.paragraph {
+    font-size: 24px;
+    font-weight: 400;
+    color: #003F5E;
+    line-height: 29px;
+}
+.rightDiv {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cardsDiv {
+    display: grid;
+    column-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+.cardDiv {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.imageDiv {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    margin-bottom: 35px;
+    background: #F1F1F1;
+    justify-content: center;
+}
+.nameDiv {
+    font-size: 16px;
+    font-weight: 600;
+    color: #919191;
+    line-height: 20px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1300px) {
+    .leftDiv {
+        width: 50%;
+    }
+    .rightDiv {
+        width: 50%;
+    }
+    .imageDiv {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    } 
+}
+@media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
+    .cardsDiv {
+        display: grid;
+        row-gap: 50px;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+        flex-direction: column;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 0 0 50px 0;
+    }
+    .header {
+        font-weight: 600;
+        text-align: center;
+        padding-bottom: 25px;
+    }
+    .paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .rightDiv {
+        width: 100%;
+    }
+    .imageDiv {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 15px;
+    } 
+}
+
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+    .leftDiv {
+        width: 100%;
+        padding: 0 0 50px 0;
+    }
+    .rightDiv {
+        width: 100%;
+    }
+}

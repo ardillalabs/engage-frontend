@@ -1,0 +1,44 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+    max-width: 1200px;
+    padding: 100px 60px;
+}
+.heading {
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.paragraph {
+    color: #003F5E;;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+    }
+    .heading h2{
+        font-size: 22px;
+        line-height: 27px;
+        padding-bottom: 25px;
+    }
+    .paragraph {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+@media (max-width:576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+}

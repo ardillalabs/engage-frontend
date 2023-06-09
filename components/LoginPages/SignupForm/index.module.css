@@ -1,0 +1,117 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    top: 236px;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+.componentDiv {
+    width: 550px;
+    max-width: 1440px;
+    border-radius: 10px;
+    margin-bottom: 125px;
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    padding: 45px 90px 100px 90px;
+}
+.headerDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-style: normal;
+}
+.headerDiv h2 {
+    padding-bottom: 25px;
+    color: #324544;
+}
+.headerDiv p {
+    padding-bottom: 20px;
+    color: #000000;
+}
+.inputDiv {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    color: #201F1F;
+    line-height: 24px;
+    font-style: normal;
+    padding-bottom: 25px;
+}
+.input {
+    width: 98%;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #C3C3C3;
+}
+.buttonDiv button{
+    width: 117px;
+    height: 40px;
+    font-size: 16px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border: 1px solid #324544;
+}
+.bottomDiv p{
+    font-size: 14px;
+    font-weight: 600;
+    color: #B2B2B2;
+    line-height: 17px;
+    font-style: normal;
+        margin-bottom: 15px;
+}
+.bottomDiv p span {
+    color: #324544;
+}
+
+@media (max-width: 1024px) {
+    .componentDiv {
+        width: 500px;
+        padding: 45px 50px 100px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        width: 60%;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainDiv {
+        top: 160px;
+    }
+
+    .componentDiv {
+        width: 100%;
+        border-radius: 0;
+        padding: 35px 50px;
+    }
+
+    .headerDiv {
+        text-align: left;
+    }
+
+
+    .inputDiv {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+
+    .input {
+        height: 50px;
+        margin-top: 6px;
+    }
+
+    .buttonDiv button {
+        margin-bottom: 50px;
+    }
+}

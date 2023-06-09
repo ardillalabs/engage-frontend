@@ -1,0 +1,102 @@
+.mainDiv {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .mainDiv {
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      height: 20px;
+      padding: 20px 20px;
+      background: #E9FDFB;
+    }
+    .topBar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      color: #000000;
+      justify-content: space-between;
+    }
+    .leftDiv {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    .hamburgerDiv {
+      display: flex;
+      padding: 0 15px 0 0;
+    }
+    .hamburgerIcon {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      transition: opacity 0.5s;
+    }
+    .closeIcon {
+      display: flex;
+        width: 25px;
+        height: 25px;
+      cursor: pointer;
+    }
+    .menuBarHide {
+      left: 0;
+      opacity: 0;
+      top: 130px;
+      width: 100%;
+      z-index: -1;
+      padding: 0 0px;
+      visibility: hidden;
+      position: absolute;
+      transform: translateY(-3em);
+      background-color: #ffffff;
+      transition: all 1s ease 0s, visibility 0s linear 1s, z-index 0s linear 0.01s;
+      box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12),
+        0px 12px 42px -4px rgba(24, 39, 75, 0.12);
+    }
+    .menuBarVisible {
+      opacity: 1;
+      z-index: 1;
+      overflow-y: scroll;
+      overflow-y: scroll;
+      visibility: visible;
+      transform: translateY(0);
+      height: calc(100vh - 80px);
+      max-height: calc(100vh - 80px);
+      transition-delay: 0s, 0s, 0.3s;
+      scrollbar-color: #324544
+        var(--color-scrollbar-track);
+      scrollbar-width: thin;
+    }
+    .menuBarVisible::-webkit-scrollbar {
+      width: 5px;
+    }
+    .menuBarVisible::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background: var(--color-scrollbar-track);
+    }
+    .menuBarVisible::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: var(--primary-btn-background-color);
+    }
+    .menuBarVisible::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-btn-hover-background-color);
+    }
+    .rightDiv {
+        display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    .loginDiv {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        color: #324544;
+    }
+  }

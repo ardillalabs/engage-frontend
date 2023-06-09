@@ -1,0 +1,141 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    top: 236px;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+
+.componentDiv {
+    width: 550px;
+    max-width: 1440px;
+    border-radius: 10px;
+    padding: 100px 60px;
+    margin-bottom: 125px;
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+}
+
+.headerDiv {
+    font-size: 40px;
+    font-weight: 500;
+    color: #324544;
+    line-height: 49px;
+    font-style: normal;
+    padding-bottom: 40px;
+}
+.headerDiv h2 {
+    padding-bottom: 20px;
+}
+.subHeading {
+    font-size: 14px;
+    font-weight: 400;
+    color: #BDBDBD;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    padding-bottom: 70px;
+}
+
+.inputDiv {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    color: #201F1F;
+    line-height: 24px;
+    font-style: normal;
+    padding-bottom: 25px;
+}
+
+.input {
+    width: 98%;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.forgotPassword {
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    color: #B2B2B2;
+    line-height: 17px;
+    font-style: normal;
+    padding-top: 10px;
+    justify-content: flex-end;
+}
+
+.buttonDiv button {
+    width: 230px;
+    height: 40px;
+    font-size: 16px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    background: #FFFFFF;
+    border: 1px solid #324544;
+}
+
+.bottomDiv p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #B2B2B2;
+    line-height: 17px;
+    font-style: normal;
+        margin-bottom: 15px;
+}
+
+.bottomDiv p span {
+    color: #324544;
+}
+
+.imageDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+@media (max-width: 1024px) {
+    .componentDiv {
+        width: 500px;
+        padding: 100px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        width: 60%;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainDiv {
+        top: 160px;
+    }
+
+    .componentDiv {
+        width: 100%;
+        border-radius: 0;
+        padding: 35px 50px;
+    }
+
+    .inputDiv {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+
+    .input {
+        height: 50px;
+        margin-top: 6px;
+    }
+
+    .imageDiv {
+        display: none;
+    }
+
+    .buttonDiv button {
+        margin-bottom: 50px;
+    }
+}

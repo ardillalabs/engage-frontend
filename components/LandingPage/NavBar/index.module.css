@@ -1,0 +1,164 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+}
+.upperDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #324544;
+    padding: 25px;
+    padding: 30px 90px;
+    height: 30px;
+}
+.calmDiv {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+.emptyDiv {
+    display: flex;
+}
+.buttonDiv button {
+    border: 0;
+    width: 230px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 20px;
+    background: #de001b;
+    
+  }
+.lowerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #E9FDFB;
+    padding: 25px;
+    padding: 30px 60px;
+    /* height: 30px; */
+}
+.mobileLowerDiv {
+    display: none;
+}
+.leftDiv {
+    display: flex;
+    align-items: center;
+}
+.navItems {
+    display: flex;
+}
+.navItem {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #4B4B4B;
+    margin: 0px 30px;
+    cursor: pointer;
+}
+.telNumber {
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+.callIcon {
+    padding: 0px 30px;
+}
+.rightDiv {
+    display: flex;
+    align-items: center;
+}
+.notificationDiv {
+    display: flex;
+}
+.icon {
+    color: #324544;
+    width: 30px;
+    height: 30px;
+    padding: 0px 30px;
+}
+.loginButtonDiv button {
+    border: 0;
+    width: 115px;
+    height: 42px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FCFCFC;
+    line-height: 20px;
+    font-style: normal;
+    margin-right: 30px;
+    border-radius: 20px;
+    background: #324544;
+}
+
+@media (max-width: 1100px) {
+    .navItem {
+        font-size: 14px;
+        line-height: 13px;
+        margin: 0px 20px;
+    }
+    .icon {
+        padding: 0px 20px;
+    }
+    .callIcon {
+        padding: 0px 20px;
+    }
+    .telNumber {
+        font-size: 14px;
+        line-height: 13px;
+        color: #000000;
+    }
+}
+
+@media (max-width: 900px) {
+    .navItem {
+        margin: 0px 10px;
+    }
+    .icon {
+        padding: 0px 10px;
+    }
+    .callIcon {
+        padding: 0px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .upperDiv {
+        padding: 30px 50px;
+    }
+    .calmDiv {
+        font-size: 14px;
+    }
+    .emptyDiv {
+        display: none;
+    }
+    .lowerDiv {
+        display: none;
+    }
+    .mobileLowerDiv {
+        display: flex;
+    }
+}
+@media (max-width: 576px) {
+    .upperDiv {
+        padding: 20px;
+    }
+ 
+}

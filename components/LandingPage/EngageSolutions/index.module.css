@@ -1,0 +1,48 @@
+.mainDiv {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+    max-width: 1440px;
+    padding: 100px 60px;
+}
+.headerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.stepsDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+}
+
+@media (max-width: 1024px) {
+    .componentDiv {
+        padding: 60px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+    }
+    .headerDiv h2{
+        font-size: 22px;
+        line-height: 27px;
+        font-weight: 600;
+    }
+    .stepsDiv {
+        grid-template-columns: 1fr;
+        row-gap: 50px;
+    }
+}
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }  
+}

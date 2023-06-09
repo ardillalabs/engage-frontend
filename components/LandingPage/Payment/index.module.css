@@ -1,0 +1,88 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+.halfImageOneDiv {
+    right: 0;
+    top: 250px;
+    z-index: 0;
+    width: 16%;
+    height: 60%;
+    position: absolute;
+}
+.halfImageTwoDiv {
+    left: 0;
+    top: 300px;
+    width: 16%;
+    height: 60%;
+    position: absolute;
+}
+.componentDiv {
+    width: 100%;
+    max-width: 1440px;
+    padding: 60px 90px;
+}
+.headerDiv {
+    font-size: 44px;
+    font-weight: 600;
+    color: #324544;
+    line-height: 54px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.paragraph {
+    font-size: 24px;
+    font-weight: 500;
+    color: #324544;
+    line-height: 29px;
+    text-align: center;
+    font-style: normal;
+    padding-bottom: 70px;
+}
+.cardsDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.images {
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .halfImageOneDiv {
+       display: none;
+    }
+    .halfImageTwoDiv {
+        display: none;
+    }
+    .componentDiv {
+        padding: 60px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 50px;
+    }
+    .headerDiv {
+        font-size: 22px;
+        line-height: 27px;
+    }
+    .paragraph {
+        font-size: 16px;
+        line-height: 20px;
+        padding-bottom: 30px;
+    }
+    .cardsDiv {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .componentDiv {
+        padding: 30px 20px;
+    }
+}
