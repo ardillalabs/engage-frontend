@@ -1,31 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 :root {
   /* Colors */
-  --light-grey: #F5F5F5;
-  --grey: #A6A6A6;
-  --border-grey: #E7E7E7;
+  --light-grey: #f5f5f5;
+  --grey: #a6a6a6;
+  --border-grey: #e7e7e7;
   --black: #324544;
-  --white: #FDFDFD;
+  --white: #fdfdfd;
 
   /* Fonts */
-  --heading-1: 600 44px 'Montserrat';
-  --heading-2: 500 40px 'Montserrat';
-  --heading-3: 600 32px 'Montserrat';
-  --heading-4: 500 32px 'Montserrat';
-  --heading-5: 500 30px 'Montserrat';
-  --heading-6: 500 24px 'Montserrat';
-  --body-1: 500 20px 'Montserrat';
-  --body-2: 600 18px 'Montserrat';
-  --body-3: 400 18px 'Montserrat';
-  --body-4: 600 16px 'Montserrat';
-  --body-5: 400 16px 'Montserrat';
-  --body-6: 500 12px 'Montserrat';
-  --body-7: 400 12px 'Montserrat';
-  --btn-text: 700 14px 'Montserrat';
-  --btn-text-mobile: 700 12px 'Montserrat';
-
-
+  --heading-1: 600 44px "Montserrat";
+  --heading-2: 500 40px "Montserrat";
+  --heading-3: 600 32px "Montserrat";
+  --heading-4: 500 32px "Montserrat";
+  --heading-5: 500 30px "Montserrat";
+  --heading-6: 500 24px "Montserrat";
+  --body-1: 500 20px "Montserrat";
+  --body-2: 600 18px "Montserrat";
+  --body-3: 400 18px "Montserrat";
+  --body-4: 600 16px "Montserrat";
+  --body-5: 400 16px "Montserrat";
+  --body-6: 500 12px "Montserrat";
+  --body-7: 400 12px "Montserrat";
+  --btn-text: 700 14px "Montserrat";
+  --btn-text-mobile: 700 12px "Montserrat";
 }
 
 .body-1 {
@@ -46,6 +44,7 @@ h2 {
 }
 h3 {
   font: var(--heading-3);
+  margin: 0;
 }
 h4 {
   font: var(--heading-4);
@@ -87,7 +86,7 @@ h6 {
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  color: #8F8F8F;
+  color: #8f8f8f;
 }
 .flex {
   display: flex;
