@@ -1,0 +1,88 @@
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.topDiv {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.chevronIcon {
+    cursor: pointer;
+}
+
+.monthYear {
+    color: #858585C7;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* @keyframes animateMounting {
+    0% {
+       opacity: 0;
+    }
+   
+    100% {
+       opacity: 1;
+    }
+} */
+
+.bottomDiv {
+    display: flex;
+    align-items: center;
+    width: 450px;
+    height: 80px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.dateDivContainer {
+    /* transition: .5s ease; */
+    display: flex;
+    position: absolute;
+}
+
+.dateDiv,
+.dateDivToday {
+    margin: 0 7.6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 55px;
+    min-width: 55px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    border: 3px solid #F4F4F4;
+    background-color: #FFFFFF
+}
+
+.dateDivToday {
+    background-color: #324544;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 2.647491693496704px 2.647491693496704px 0px #7E7E7E40;
+}
+
+.dayText {
+    font-size: 9px;
+    font-weight: 600;
+    color: black;
+}
+
+.weekdayText {
+    font-size: 9px;
+    font-weight: 400;
+    color: #B0B0B0;
+
+}
+
+.dateDivToday .dayText,
+.dateDivToday .weekdayText {
+    color: #FFFFFF;
+}

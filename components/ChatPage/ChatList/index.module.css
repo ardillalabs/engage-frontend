@@ -1,0 +1,136 @@
+.mainDiv {
+    flex: 1;
+}
+
+.header {
+    position: relative;
+    height: 100px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--light-grey);
+}
+
+.headerText,
+.headerTextHidden {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: #324544;
+    transition: 1s ease;
+}
+
+.headerTextHidden {
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.headerIcons {
+    display: flex;
+    gap: 10px;
+}
+
+.headerIcon,
+.headerIconHidden {
+    background-color: var(--light-grey);
+    color: var(--grey);
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.headerIconHidden {
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.headerIcon:hover {
+    background-color: rgb(234, 234, 234);
+}
+
+.chatList {
+    height: calc(100vh - 162px);
+    padding: 30px 10px;
+    overflow-y: auto;
+}
+
+.userSearch {
+    flex: 1;
+}
+
+.userSearchHidden {
+    opacity: 0;
+    transform: translateX(0);
+    visibility: hidden;
+}
+
+.searchBarDiv,
+.searchBarDivHidden{
+    max-width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: var(--light-grey);
+    padding: 0 20px;
+    height: 40px;
+    border-radius: 100px;
+    transition: 1s ease;
+}
+
+.searchBarDivHidden {
+    /* display: none; */
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+}
+
+.searchBarDivHidden .searchBar {
+    width: 0;
+}
+
+.searchBar {
+    flex: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: .5s ease;
+}
+
+.userSearchResults {
+    border-bottom: 2px solid var(--light-grey);
+}
+
+@media (min-width: 992px) {
+    .mainDiv {
+        /* flex: 0; */
+        border-right: 2px solid var(--light-grey);
+        max-width: 450px;
+        width: 450px;
+    }
+}
+@media (min-width: 600px) {
+    .header {
+        padding: 0 30px;
+    }
+    .chatList {
+        padding: 30px 20px;
+    }
+}
+@media (min-width: 992px) {
+    .header {
+        padding: 0 40px;
+    }
+    .chatList {
+        padding: 30px 30px;
+    }
+}

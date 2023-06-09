@@ -1,0 +1,33 @@
+.layoutView {
+    display: none;
+}
+
+.layoutViewMobile {
+    display: block;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+}
+
+.childrenDiv {
+    background-color: white;
+    width: 100%;
+    margin-top: 140px;
+    display: inline-block; 
+}
+
+@media (min-width: 992px) {
+    .layoutView {
+        display: block;
+    }
+    .layoutViewMobile {
+        display: none;
+    }
+    .childrenDiv {
+        margin-top: 0;
+        width: auto;
+        display: block;
+        max-width: 100%;
+        margin-left: 6rem;
+    }
+}

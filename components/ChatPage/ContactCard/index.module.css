@@ -1,0 +1,68 @@
+.mainDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.mainDiv:hover {
+    background-color: aliceblue;
+}
+
+.active {
+    background-color: aliceblue;
+}
+
+.contactPreview {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profilePicture {
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.contactPreviewText {
+    /* 350px should be adjusted for mobile navbar change */
+    max-width: calc(100vw - 220px);
+}
+
+.contactPreviewText div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contactRight {
+    width: max-content;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.msgCounter {
+    width: fit-content;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 100%;
+    background-color: #EC2323;
+    color: white;
+}
+
+@media (min-width: 600px) {
+    .contactPreviewText {
+        max-width: calc(100vw - 350px);
+    }
+}
+@media (min-width: 992px) {
+    .contactPreviewText {
+        max-width: 200px;
+    }
+}

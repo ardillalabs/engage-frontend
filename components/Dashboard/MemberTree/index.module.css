@@ -1,0 +1,180 @@
+.mainDiv {
+    /* background-color: antiquewhite; */
+    width: 100%;
+    padding: 40px 0;
+}
+
+.addBtn {
+    border: none;
+    background-color: #2142B6;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font: var(--btn-text);
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.addBtn:hover {
+    background-color: #172c79;
+}
+
+.memberTreeDiv {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    --image-translate: 130px;
+}
+
+@media (min-width: 600px) {
+    .memberTreeDiv {
+        --image-translate: 180px;
+    }
+}
+@media (min-width: 1200px) {
+    .memberTreeDiv {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+.imageContainer,
+.userImageContainer {
+    z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+}
+
+@media (min-width: 600px) {
+    .imageContainer,
+    .userImageContainer {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.userImageContainer {
+    border: 2px solid #84C6FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-color: #F5F5F5;
+    border: 2px solid #D9D9D9;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.userImage {
+    width: 95%;
+    height: 95%;
+    border-radius: 100%;
+    object-fit: cover;
+    z-index: 4;
+}
+.image {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+    z-index: 4;
+}
+
+
+.memberTreeDiv :nth-child(1) .imagePlaceholder {
+    background-color: aqua;
+}
+ 
+.memberTreeDiv :nth-child(2) .imagePlaceholder {
+    transform: rotate(-90deg) translate(var(--image-translate)) rotate(90deg);
+}
+.memberTreeDiv :nth-child(3) .imagePlaceholder {
+    transform: rotate(-45deg) translate(var(--image-translate)) rotate(45deg);
+}
+.memberTreeDiv :nth-child(4) .imagePlaceholder {
+    transform: rotate(0deg) translate(var(--image-translate)) rotate(0deg);
+}
+.memberTreeDiv :nth-child(5) .imagePlaceholder {
+    transform: rotate(45deg) translate(var(--image-translate)) rotate(-45deg);
+}
+.memberTreeDiv :nth-child(6) .imagePlaceholder {
+    transform: rotate(90deg) translate(var(--image-translate)) rotate(-90deg);
+}
+.memberTreeDiv :nth-child(7) .imagePlaceholder {
+    transform: rotate(135deg) translate(var(--image-translate)) rotate(-135deg);
+}
+.memberTreeDiv :nth-child(8) .imagePlaceholder {
+    transform: rotate(180deg) translate(var(--image-translate)) rotate(-180deg);
+}
+.memberTreeDiv :nth-child(9) .imagePlaceholder {
+    transform: rotate(225deg) translate(var(--image-translate)) rotate(-225deg);
+}
+
+.imagePlaceholder div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    border: 2px solid #D9D9D9;
+    background-color: #FFFFFF;
+    color: #D9D9D9;
+}
+
+.line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -10px -60px;
+    width: 100px;
+    height: 4px;
+    z-index: 2;
+    background-color: #BFBFBF;
+}
+
+@media (min-width: 600px) {
+    .line {
+        margin: -2px -50px;
+    }
+}
+
+.linesDiv :nth-child(1) {
+    transform: rotate(-90deg) translate(90px);
+}
+.linesDiv :nth-child(2) {
+    transform: rotate(-45deg) translate(90px);
+}
+.linesDiv :nth-child(3) {
+    transform: rotate(0deg) translate(90px);
+}
+.linesDiv :nth-child(4) {
+    transform: rotate(45deg) translate(90px);
+}
+.linesDiv :nth-child(5) {
+    transform: rotate(90deg) translate(90px);
+}
+.linesDiv :nth-child(6) {
+    transform: rotate(135deg) translate(90px);
+}
+.linesDiv :nth-child(7) {
+    transform: rotate(180deg) translate(90px);
+}
+.linesDiv :nth-child(8) {
+    transform: rotate(225deg) translate(90px);
+}

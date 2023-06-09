@@ -1,0 +1,17 @@
+.mainDiv {
+    display: flex;
+    background-color: #FDFDFD;
+}
+
+.hideComponent {
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .hideComponent {
+        display: flex;
+    }
+    .emptyChatDiv {
+        flex: 1;
+    }
+}

@@ -1,0 +1,93 @@
+.mainDivContainer {
+    position: relative;
+}
+
+.mainDiv {
+    max-width: 100%;
+    background-color: #E9FDFB;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (min-width: 600px) {
+    .mainDiv {
+        padding: 15px 30px;;
+    }
+}
+
+.leftDiv {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.hamburgerIcon {
+    color: black;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.menuText {
+    font: var(--body-4);
+    color: black;
+}
+
+.alertBtn {
+    background-color: #DE001B;
+    color: var(--white);
+    font: var(--btn-text-mobile);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 80px;
+}
+
+.sidebarDiv,
+.sidebarDivHidden {
+    background-color: white;
+    z-index: 20;
+    position: fixed;
+    left: 0;
+    height: calc(100vh - 140px);
+    padding: 40px 20px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    box-shadow: 0px 22px 40px rgba(50, 69, 68, 0.29);
+    transition: .5s ease;
+}
+
+.sidebarDivHidden {
+    transform: translateX(-240px);
+}
+
+.profilePreview {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profilePicture {
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.profileName {
+    max-width: 100%;
+    font: 500 18px 'Montserrat';
+}
+
+.link {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    text-decoration: none;
+    font: 500 18px 'Montserrat';
+    color: var(--black);
+}
+.icon {
+    font-size: 28px;
+    color: var(--black);
+}
