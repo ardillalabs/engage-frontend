@@ -1,92 +1,93 @@
 .profileView {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .profilePictureDiv {
-    padding: 4px;
-    border-radius: 100%;
-    border: 3px solid #84C6FF;
-    display: flex;
-    position: relative;
-    cursor: pointer;
+  padding: 4px;
+  border-radius: 100%;
+  border: 3px solid #84c6ff;
+  display: flex;
+  position: relative;
+  cursor: pointer;
 }
 
 .profilePicture {
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
 .camIconDiv {
-    position: absolute;
-    background-color: #324544;
-    color: white;
-    height: 28px;
-    width: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    top: 80px;
-    right: 4px;
+  position: absolute;
+  background-color: #324544;
+  color: white;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  top: 80px;
+  right: 4px;
 }
 
 .imageChangeDiv,
 .imageChangeDivHidden {
-    position: absolute;
-    top: 130px;
-    padding: 30px 70px;
-    border-radius: 20px;
-    background-color: #324544;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    gap: 20px;
-    transition: .5s ease;
+  z-index: 20;
+  position: absolute;
+  top: 130px;
+  padding: 30px 70px;
+  border-radius: 20px;
+  background-color: #324544;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  gap: 20px;
+  transition: 0.5s ease;
 }
 
 .imageChangeDivHidden {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .imageChangeIconsDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
 }
 
 .imageChangeIcons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .imageChangeInput {
-    display: none;
+  display: none;
 }
 
 .imageChangeIconDiv {
-    height: 60px;
-    width: 60px;
-    border-radius: 100%;
-    border: 3px solid #1CE9DE;
-    background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .5s ease border;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  border: 3px solid #1ce9de;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease border;
 }
 
 .imageChangeIcons:hover .imageChangeIconDiv {
-    border: 3px solid #12948e;
+  border: 3px solid #12948e;
 }
