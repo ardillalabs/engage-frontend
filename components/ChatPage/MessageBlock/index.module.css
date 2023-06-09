@@ -1,5 +1,4 @@
 .mainDiv {
-    padding-bottom: 30px;
     position: relative;
 }
 
@@ -47,7 +46,7 @@
     }
 }
 
-.messagesContainer,
+/* .messagesContainer,
 .messagesContainerReversed {
     display: flex;
 }
@@ -72,4 +71,4 @@
     .messagesReversed {
         padding-right: 100px;
     }
-}
+} */

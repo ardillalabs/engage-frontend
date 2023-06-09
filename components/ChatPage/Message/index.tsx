@@ -1,10 +1,12 @@
 import styles from "./index.module.css";
 
-const Message = ({reversed}: any) => {
+const Message = ({reversed, message}: any) => {
     return (
-        <div className={ !reversed ? styles.mainDiv : styles.mainDivReversed }>
-            <div className="body-font">
-                lorem ipsum doler imet
+        <div className={ !reversed ? styles.mainDivContainer : styles.mainDivContainerReversed }>
+            <div className={ !reversed ? styles.mainDiv : styles.mainDivReversed }>
+                <div className="body-font">
+                    {message}
+                </div>
             </div>
         </div>
     )

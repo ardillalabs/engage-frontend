@@ -9,8 +9,13 @@ import { doc, setDoc, collection, addDoc, serverTimestamp, Firestore } from 'fir
 import { db } from '@/firebase/config';
 
 const ChatInput = () => {
+
     // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
+    // const rec_userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+
+    const rec_userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
     const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+
     const chatID = "1X0ttXRbAcoLCHZC07X1";
     
     // Update data to firestore
@@ -22,7 +27,9 @@ const ChatInput = () => {
             await addDoc(collection(db, "chatMessages", chatID, "messages"), {
                 message: message,
                 messageTime: serverTimestamp(),
-                sentBy: userID
+                senderID: userID,
+                recieverID: rec_userID,
+                mediaURL: null
             });
 
             console.log("Done");
