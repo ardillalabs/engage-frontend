@@ -12,9 +12,15 @@ import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
 import ChatInput from "../ChatInput";
 
+// firebase
+import { db } from "@/firebase/config";
+import { DocumentData, collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import AllMessages from "../AllMessages";
+
 const ChatBox  = () => {
     const router = useRouter();
-
+    
     return (
         <div className={styles.mainDiv}>
             <div className={styles.header}>
@@ -22,7 +28,7 @@ const ChatBox  = () => {
                     <FiChevronLeft 
                         className={styles.backBtn}
                         onClick={() => {router.push('/chat')}}
-                     />
+                    />
                     <Image
                         src="https://source.unsplash.com/_7LbC5J-jw4"
                         alt="Profile Picture"
@@ -38,20 +44,7 @@ const ChatBox  = () => {
                 </div>
             </div>
             <div className={styles.chatBox}>
-                <div className={styles.messageDate}>Today, 15 May</div>
-                <div className={styles.messageBlock}>
-                    <MessageBlock>
-                        <Message />
-                        <Message />
-                        <Message />
-                    </MessageBlock>
-
-                    <MessageBlock reversed={true}>
-                        <Message reversed={true} />
-                        <Message reversed={true} />
-                        <Message reversed={true} />
-                    </MessageBlock>
-                </div>
+                <AllMessages />
             </div>
             <ChatInput />
         </div>
