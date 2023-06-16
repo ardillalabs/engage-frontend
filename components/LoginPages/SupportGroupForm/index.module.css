@@ -1,36 +1,148 @@
 .mainDiv {
-    margin: 0;
-    padding: 0;
-    top: 236px;
-    width: 100%;
-    display: flex;
-    position: absolute;
-    justify-content: center;
+  margin: 0;
+  padding: 0;
+  top: 236px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
 }
 .componentDiv {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 125px;
+  background: #ffffff;
+  border: 1px solid #dadada;
+  padding: 45px 20px 125px 20px;
+}
+@media (min-width: 600px) {
+  .componentDiv {
     width: 70%;
-    max-width: 1440px;
-    border-radius: 10px;
-    margin-bottom: 125px;
-    background: #FFFFFF;
-    border: 1px solid #DADADA;
     padding: 45px 90px 125px 90px;
+    max-width: 1440px;
+  }
 }
 .sectionDiv {
-    width: 100%;
-    margin-bottom: 30px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 .descriptionBoxDiv {
-    padding: 40px;
-    background: #FFFFFF;
-    border: 0.923974px solid #DADADA;
-    border-radius: 9.23974px;
-    margin: 40px 0;
+  padding: 40px;
+  background: #ffffff;
+  border: 0.923974px solid #dadada;
+  border-radius: 9.23974px;
+  margin-top: 40px;
 }
 .descHeaderDiv {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #324544;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #324544;
+}
+
+.teamInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0 20px 0;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .teamInfo {
+    flex-direction: row;
+  }
+}
+
+.teamInfoHeader {
+  font: 500 18px "Montserrat";
+}
+
+.teamInfoText {
+  font: 400 18px "Montserrat";
+  color: #8f8f8f;
+}
+
+.teamSize,
+.teamShowcase {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.showcaseImages {
+  display: flex;
+  position: relative;
+}
+
+.showcaseImageWrapper {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 1px solid #84c6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.showcaseImages :nth-child(2) {
+  left: 20px;
+}
+.showcaseImages :nth-child(3) {
+  left: 40px;
+}
+.showcaseImages :nth-child(4) {
+  left: 60px;
+}
+.showcaseImages :nth-child(5) {
+  left: 80px;
+}
+.showcaseImages :nth-child(6) {
+  left: 100px;
+}
+.showcaseImages :nth-child(7) {
+  left: 120px;
+}
+.showcaseImages :nth-child(8) {
+  left: 140px;
+}
+
+.showcaseImage {
+  width: 94%;
+  height: 94%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.teamEmails {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.teamEmail {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-radius: 100px;
+  font: 400 12px "Montserrat";
+  color: #8f8f8f;
+}
+
+.submitBtn {
+  margin-top: 80px;
+  font: var(--btn-text);
+  border: 2px solid #324544;
+  border-radius: 100px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background: #324544;
+  color: #ffffff;
 }
