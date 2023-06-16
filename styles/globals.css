@@ -32,8 +32,14 @@
 .body-2 {
   font: var(--body-2);
 }
+.body-3 {
+  font: var(--body-3);
+}
 .body-4 {
   font: var(--body-4);
+}
+.body-6 {
+  font: var(--body-6);
 }
 
 h1 {
@@ -96,7 +102,7 @@ h6 {
 }
 body {
   margin: 0px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h2 {
@@ -105,9 +111,9 @@ h2 {
   font-size: 40px;
   font-weight: 500;
   color: #324544;
-  line-height: 49px;  
+  line-height: 49px;
   font-style: normal;
-    padding-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 h3 {
@@ -116,7 +122,7 @@ h3 {
   margin: 0;
   font-weight: 500;
   font-size: 32px;
-  line-height: 39px;  
+  line-height: 39px;
   color: #324544;
 }
 
@@ -127,7 +133,7 @@ p {
   line-height: 20px;
   padding: 0;
   margin: 0;
-  color: #8F8F8F;
+  color: #8f8f8f;
 }
 
 @media (max-width: 576px) {
