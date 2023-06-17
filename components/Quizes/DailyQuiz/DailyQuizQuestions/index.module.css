@@ -1,0 +1,306 @@
+.componentDiv {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 60px;
+}
+
+.stepsDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #F5FFFE;
+}
+
+.hideSteps>div {
+    display: none;
+}
+
+.activeQuestion {
+    width: 520px;
+    height: 6px;
+    margin: 6px;
+    display: flex;
+    background-color: #324544;
+    line-height: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.inactiveQuestion {
+    width: 520px;
+    height: 6px;
+    margin: 6px;
+    display: flex;
+    background-color: #D9D9D9;
+    line-height: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.quetionText {
+    font-size: 24px;
+    color: #003F5E;
+    font-weight: 500;
+}
+
+.questionWord {
+    color: #D9D9D9;
+}
+
+.questionWord button {
+    background-color: #324544;
+    color: #D9D9D9;
+    padding: 10px;
+    border-radius: 40px;
+    margin-top: 50px;
+    font-size: 24px;
+    width: 326px;
+}
+
+.componentDiv ul {
+    width: 540px;
+    margin-top: 20px;
+    margin-left: -40px;
+}
+
+.componentDiv ul li {
+    text-decoration: none;
+    list-style: none;
+    color: #324544;
+    font-size: 24px;
+    font-weight: 500;
+    background: #F9F9F9;
+    border-radius: 30px;
+    padding: 12px 76px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.componentDiv ul li:hover {
+    color: #eaeaea;
+    background: #324544;
+    cursor: pointer;
+}
+
+.nextButton {
+    width: 165px;
+    padding: 12px 50px;
+    background-color: #FFFFFF;
+    color: #324544;
+    border-radius: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 65px;
+    cursor: pointer;
+    border: 1px solid #324544;
+}
+
+.finishDiv {
+    background-color: #324544;
+    padding: 60px;
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+}
+.title {
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 75px;
+}
+.bodyText{
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+.finishButton{
+    text-align: center;
+    color: #324544;
+}
+.finishButton button{
+    width: 227px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 30px;
+    border: 1px solid #324544;
+    margin-top: 40px;
+}
+.wrapperDiv{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -10%;
+}
+.circleDiv{
+    background: #25282E;
+    border-radius: 50%;
+    width: 98px;
+    height: 98px;
+    color: #7EFAEF;
+    text-align: center;
+    z-index: 1;
+}
+.innerCircleDiv{
+    position:relative;
+    top: calc(30% - 10px); /* 50% - 3/4 of icon height */
+    font-size: 60px;
+}
+.bodyDiv{
+    text-align: center;
+    font-size: 18px;
+    color: #003F5E;
+    font-weight: 400;
+}
+.questionNoDiv{
+    justify-content: center;
+    display: flex;
+}
+.questionNoDiv button{
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 15px;
+    margin: 75px 10px;
+    background-color: #FCFCFC;
+    border: 1px solid #324544;
+}
+.buttonDiv{
+    justify-content: center;
+    display: flex;
+}
+.buttonDiv button{
+    width: 260px;
+    height: 63px;
+    font-size: 26px;
+    color: #324544;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: normal;
+    border-radius: 32px;
+    background: #FFFFFF;
+    border: 1px solid #324544;
+    cursor: pointer;
+}
+@media (max-width: 576px) {
+    .bodyDiv{
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+    .stepsDiv {
+        padding: 30px;
+    }
+    .activeQuestion {
+        width: 100px;
+        height: 2px;
+        margin: 2px;
+    }
+    .inactiveQuestion {
+        width: 100px;
+        height: 2px;
+    }
+    .quetionText {
+        font-size: 16px;
+        padding-top: 28px;
+    }
+    .componentDiv {
+        padding: 28px 54px;
+    }
+    .questionNoDiv button{
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        border-radius: 10px;
+        margin: 40px 5px;
+    }
+    .buttonDiv button{
+        width: 160px;
+        height: 50px;
+        font-size: 20px;
+        margin-top: 60px;
+    }
+    .questionWord button {
+        padding: 8px;
+        border-radius: 20px;
+        margin-top: 50px;
+        font-size: 14px;
+        width: 198px;
+    }
+    .componentDiv ul {
+        width: 90%;
+        margin-top: 15px;
+        margin-left: -40px;
+    }
+    .componentDiv ul li {
+        border-radius: 18px;
+        padding: 10px 46px;
+        margin-top: 15px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .nextButton {
+        width: 120px;
+        padding: 10px 42px;
+        border-radius: 21px;
+        font-size: 16px;
+        margin-top: 37px;
+    }
+    .finishDiv {
+        padding: 20px;
+        border-radius: 12px;
+        max-width: max-content;
+        height: 246px;
+    }
+    .title {
+        font-size: 18px;
+    }
+    .finishButton button{
+        margin-top: 24px;
+        width: 135px;
+        max-width: 80%;
+        padding: 9px 0px;
+        border-radius: 18px;
+        border: 0.595642px solid #324544;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .circleDiv{
+        width: 55px;
+        height: 55px;
+    }
+    .innerCircleDiv{
+        top: calc(36% - 10px); /* 50% - 3/4 of icon height */
+        font-size: 34px;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+    .activeQuestion {
+        width: 398px;
+        height: 5px;
+        margin: 5px;
+    }
+
+    .inactiveQuestion {
+        width: 398px;
+        height: 5px;
+    }
+
+    .componentDiv {
+        padding: 75px 112px;
+    }
+    .finishDiv {
+        padding: 40px;
+        width: 400px;
+        border-radius: 20px;
+    }
+}

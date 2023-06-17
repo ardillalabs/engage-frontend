@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import MemberTree from '../MemberTree';
 import UserProfile from '../UserProfile';
 import Calendar from '../Calendar';
+import Link from 'next/link';
 
 const DashboardBody = () => {
   return (
@@ -14,6 +15,7 @@ const DashboardBody = () => {
           <h3 className={styles.welcomeText}>Hello Anne!</h3>
           <span className="body-1">Let{"'"}s see your progress today</span>
           <div className={styles.dashboardTopMenus}>
+          <Link href="/daily-quiz">
             <div className={styles.dashboardTopMenu}>
               <div className={styles.menuImageDiv}>
                 <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +26,8 @@ const DashboardBody = () => {
               </div>
               <span className={styles.topMenuText}>Go to Daily Mood Quiz</span>
             </div>
+            </Link>
+            <Link href="/weekly-quiz">
             <div className={styles.dashboardTopMenu}>
               <div className={styles.menuImageDiv}>
               <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +38,7 @@ const DashboardBody = () => {
               </div>
               <span className={styles.topMenuText}>Go to Weekly Mood Quiz</span>
             </div>
+            </Link>
             <div className={`${styles.dashboardTopMenu} ${styles.dashboardTopMenuGreen}`}>
               <div className={styles.menuImageDiv}>
               <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
