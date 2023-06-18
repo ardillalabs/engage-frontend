@@ -8,7 +8,7 @@
 }
 .componentDiv {
     width: 100%;
-    padding: 50px;
+    padding: 40px;
     max-width: 1440px;
 }
 .upperDiv {
@@ -20,8 +20,8 @@
         height: 105px;
     }
     .logoImage {
-        width: 72px;
-        height: 42px;
+        width: 84px;
+        height: 50px;
     }
     .componentDiv {
         padding: 20px;
@@ -32,8 +32,8 @@
         height: 148px;
     }
     .logoImage{
-        width: 101px;
-        height: 60px;
+        width: 120px;
+        height: 70px;
     }
     .componentDiv {
         padding: 30px;
