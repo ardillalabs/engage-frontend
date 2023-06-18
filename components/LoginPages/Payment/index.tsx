@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
-=======
-import React from "react";
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
 import styles from "./index.module.css";
 import SignUpSteps from "../SignUpSteps";
 import { loadStripe } from "@stripe/stripe-js";
@@ -28,11 +24,8 @@ const PaymentForm = () => {
     },
   };
 
-<<<<<<< HEAD
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
-=======
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
@@ -47,11 +40,8 @@ const PaymentForm = () => {
                     type="radio"
                     name="credit-card"
                     className={styles.radioBtn}
-<<<<<<< HEAD
                     checked={paymentMethod === "credit-card" ? true : false}
                     onClick={() => setPaymentMethod("credit-card")}
-=======
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
                   />
                   Credit Card
                 </label>
@@ -60,11 +50,8 @@ const PaymentForm = () => {
                     type="radio"
                     name="paypal"
                     className={styles.radioBtn}
-<<<<<<< HEAD
                     checked={paymentMethod === "paypal" ? true : false}
                     onClick={() => setPaymentMethod("paypal")}
-=======
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
                   />
                   Paypal
                 </label>
@@ -94,7 +81,6 @@ const PaymentForm = () => {
               </div>
             </div>
             <Elements stripe={stripePromise}>
-<<<<<<< HEAD
               {/* Credit Card Payment */}
               <form
                 className={
@@ -103,9 +89,6 @@ const PaymentForm = () => {
                     : styles.creditCardFormHidden
                 }
               >
-=======
-              <form className={styles.creditCardForm}>
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
                 <label className={styles.fieldWrap}>
                   <span>Cardholder Name</span>
                   <input type="text" className={styles.inputField} />
@@ -130,7 +113,6 @@ const PaymentForm = () => {
                     </div>
                   </label>
                 </div>
-<<<<<<< HEAD
                 <button className={styles.purchaseBtn}>Purchase</button>
               </form>
 
@@ -144,18 +126,6 @@ const PaymentForm = () => {
               >
                 <div>Paypal</div>
               </form>
-=======
-                <label className={styles.checkboxWrap}>
-                  <input
-                    type="checkbox"
-                    name="save-details"
-                    className={styles.checkbox}
-                  />
-                  Save Details
-                </label>
-                <button className={styles.purchaseBtn}>Purchase</button>
-              </form>
->>>>>>> 880e4eaf1eb937dc3681e593cfa8d63e4e4de8ef
             </Elements>
           </div>
         </div>
