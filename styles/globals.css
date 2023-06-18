@@ -145,3 +145,7 @@ p {
     font-size: 14px;
   }
 }
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
