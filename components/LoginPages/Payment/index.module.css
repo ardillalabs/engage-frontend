@@ -1,0 +1,142 @@
+.mainDiv {
+  margin: 0;
+  padding: 0;
+  top: 236px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+}
+.componentDiv {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 125px;
+  background: #ffffff;
+  border: 1px solid #dadada;
+  padding: 45px 20px 125px 20px;
+}
+@media (min-width: 600px) {
+  .componentDiv {
+    width: 70%;
+    padding: 45px 90px 125px 90px;
+    max-width: 500px;
+  }
+}
+.sectionDiv {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.selectPayment {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selectPaymentTop {
+  display: flex;
+  gap: 30px;
+}
+
+.paymentMethod {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font: 500 18px "Montserrat";
+}
+
+.radioBtn {
+  appearance: none;
+  background-color: #ffffff;
+  margin: 0;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 100%;
+  border: 1px solid #324544;
+  transition: 0.5s ease;
+}
+
+.radioBtn:checked {
+  background-color: #324544;
+}
+
+.paymentLogoWrap {
+  display: flex;
+  gap: 10px;
+}
+
+.paymentTypeLogo {
+  height: 30px;
+  width: auto;
+}
+
+.creditCardForm {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font: 400 18px "Montserrat";
+}
+
+.inputField {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #dadada;
+  font: 500 16px "Montserrat";
+  max-width: 100%;
+  padding: 10px;
+}
+
+.halfFieldWrap {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .halfFieldWrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.checkboxWrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 500 15px "Montserrat";
+}
+
+.checkbox {
+  accent-color: #ffffff;
+}
+
+.stripeInputField {
+  border: 2px solid #dadada;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.purchaseBtn {
+  margin-top: 30px;
+  width: fit-content;
+  padding: 10px 20px;
+  font: var(--btn-text);
+  background-color: #ffffff;
+  border-radius: 100px;
+  border: 2px solid #324544;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.purchaseBtn:hover {
+  background-color: #324544;
+  color: #ffffff;
+}
