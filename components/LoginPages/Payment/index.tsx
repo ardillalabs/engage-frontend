@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./index.module.css";
 import SignUpSteps from "../SignUpSteps";
 import { loadStripe } from "@stripe/stripe-js";
@@ -24,6 +24,8 @@ const PaymentForm = () => {
     },
   };
 
+  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
@@ -38,6 +40,8 @@ const PaymentForm = () => {
                     type="radio"
                     name="credit-card"
                     className={styles.radioBtn}
+                    checked={paymentMethod === "credit-card" ? true : false}
+                    onClick={() => setPaymentMethod("credit-card")}
                   />
                   Credit Card
                 </label>
@@ -46,6 +50,8 @@ const PaymentForm = () => {
                     type="radio"
                     name="paypal"
                     className={styles.radioBtn}
+                    checked={paymentMethod === "paypal" ? true : false}
+                    onClick={() => setPaymentMethod("paypal")}
                   />
                   Paypal
                 </label>
@@ -75,7 +81,14 @@ const PaymentForm = () => {
               </div>
             </div>
             <Elements stripe={stripePromise}>
-              <form className={styles.creditCardForm}>
+              {/* Credit Card Payment */}
+              <form
+                className={
+                  paymentMethod === "credit-card"
+                    ? styles.creditCardForm
+                    : styles.creditCardFormHidden
+                }
+              >
                 <label className={styles.fieldWrap}>
                   <span>Cardholder Name</span>
                   <input type="text" className={styles.inputField} />
@@ -100,15 +113,18 @@ const PaymentForm = () => {
                     </div>
                   </label>
                 </div>
-                <label className={styles.checkboxWrap}>
-                  <input
-                    type="checkbox"
-                    name="save-details"
-                    className={styles.checkbox}
-                  />
-                  Save Details
-                </label>
                 <button className={styles.purchaseBtn}>Purchase</button>
+              </form>
+
+              {/* Paypal Payment */}
+              <form
+                className={
+                  paymentMethod === "paypal"
+                    ? styles.paypalForm
+                    : styles.paypalFormHidden
+                }
+              >
+                <div>Paypal</div>
               </form>
             </Elements>
           </div>

@@ -70,11 +70,23 @@
   width: auto;
 }
 
-.creditCardForm {
+.creditCardForm,
+.creditCardFormHidden,
+.paypalForm,
+.paypalFormHidden {
   padding: 40px 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: 0.5s ease;
+  transition-property: opacity;
+}
+
+.creditCardFormHidden,
+.paypalFormHidden {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
 }
 
 .fieldWrap {
@@ -105,17 +117,6 @@
   .halfFieldWrap {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.checkboxWrap {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font: 500 15px "Montserrat";
-}
-
-.checkbox {
-  accent-color: #ffffff;
 }
 
 .stripeInputField {
