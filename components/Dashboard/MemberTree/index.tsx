@@ -88,49 +88,57 @@ const MemberTree = ({
         </div>
 
         {/* Member add popup */}
-        <div className={popupDiv ? styles.popupDiv : styles.popupDivHidden}>
-          <div className={styles.popupHeader}>
-            <h6>Team Members</h6>
-            <div
-              className={styles.iconDiv}
-              onClick={() => {
-                setPopupDiv(false);
-              }}
-            >
-              <IoMdClose />
+        <div
+          className={
+            popupDiv ? styles.popupDivWrapper : styles.popupDivWrapperHidden
+          }
+        >
+          <div className={popupDiv ? styles.popupDiv : styles.popupDivHidden}>
+            <div className={styles.popupHeader}>
+              <h6>Team Members</h6>
+              <div
+                className={styles.iconDiv}
+                onClick={() => {
+                  setPopupDiv(false);
+                }}
+              >
+                <IoMdClose />
+              </div>
             </div>
-          </div>
-          <div className={styles.searchDiv}>
-            <input type="text" className={styles.searchBar} />
-            <button className={styles.inviteBtn}>Send Invite</button>
-          </div>
+            <div className={styles.searchDiv}>
+              <input type="text" className={styles.searchBar} />
+              <button className={styles.inviteBtn}>Send Invite</button>
+            </div>
 
-          <div className={styles.memberDiv}>
-            {teamMemberData.map(({ userID, userName, imageURL, email }, i) => {
-              return (
-                <div className={styles.member} key={userID}>
-                  <div className={styles.memberDetailsDiv}>
-                    <Image
-                      src={imageURL}
-                      height={60}
-                      width={60}
-                      alt="Profile Picture"
-                      className={styles.memberImage}
-                    />
-                    <div className={styles.memberDetails}>
-                      <span className="body-3">{userName}</span>
-                      <span className={styles.memberEmail}>{email}</span>
+            <div className={styles.memberDiv}>
+              {teamMemberData.map(
+                ({ userID, userName, imageURL, email }, i) => {
+                  return (
+                    <div className={styles.member} key={userID}>
+                      <div className={styles.memberDetailsDiv}>
+                        <Image
+                          src={imageURL}
+                          height={60}
+                          width={60}
+                          alt="Profile Picture"
+                          className={styles.memberImage}
+                        />
+                        <div className={styles.memberDetails}>
+                          <span className="body-3">{userName}</span>
+                          <span className={styles.memberEmail}>{email}</span>
+                        </div>
+                      </div>
+                      <div
+                        className={styles.iconDiv}
+                        onClick={() => handleRemove(i)}
+                      >
+                        <RiDeleteBin6Fill />
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    className={styles.iconDiv}
-                    onClick={() => handleRemove(i)}
-                  >
-                    <RiDeleteBin6Fill />
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                }
+              )}
+            </div>
           </div>
         </div>
       </div>
