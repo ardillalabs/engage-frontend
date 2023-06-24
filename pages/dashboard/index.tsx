@@ -1,5 +1,5 @@
+import Header from "@/components/Dashboard/Header";
 import Head from "next/head";
-import Header from "@/components/Header";
 import Link from "next/link";
 
 export default function Home() {
