@@ -12,9 +12,9 @@ const Header = () => {
           <Image
             src="/customcolor_logo_customcolor_background.png"
             alt="logo"
-            width={162}
-            height={95}
-            className= {styles.logoImage}
+            width={110}
+            height={65}
+            className='logoImage'
           />
         </Link>
         </div>

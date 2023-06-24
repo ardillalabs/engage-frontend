@@ -143,13 +143,11 @@ const quiz = {
 
 const WeeklyQuizQuestions = () => {
     const [activeQuestion, setActiveQuestion] = useState(0)
-    const [selectedAnswer, setSelectedAnswer] = useState(false)
+    const [selectedAnswer, setSelectedAnswer] = useState('')
     const [activeStep, setActiveStep] = useState(0)
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(-1)
     const [showQuiz, setShowQuiz] = useState(false)
     const [showStart, setStart] = useState(true)
-    const [score, setScore] = useState(0)
-    const [result, setResult] = useState(0)
 
     const showWeeklyQuestions = () => {
         setStart(false)
@@ -157,9 +155,6 @@ const WeeklyQuizQuestions = () => {
     }
 
     const onClickNext = () => {
-        console.log('score', score)
-        console.log(result)
-        setResult((prevResult) => prevResult + score); // Add the current score to the result
         if (activeStep < questions.length - 1) {
             setActiveQuestion((prev) => prev + 1)
             setActiveStep((prev) => prev + 1)
@@ -167,19 +162,9 @@ const WeeklyQuizQuestions = () => {
         }
         else {
             setShowQuiz(false)
-            setResult((prevResult) => prevResult + score); // Add the current score to the final result
-            console.log('Quiz is finished');
-            console.log('Final Result:', result + score); // Log the final result
+            console.log('Quiz is finished')
         }
     }
-
-    const onAnswerSelected = (score: any, id: any) => {
-        setSelectedAnswerIndex(id)
-        setSelectedAnswer(true)
-        setScore(score)
-        console.log(score, result)
-    }
-
     if (showStart) {
         console.log(showStart);
         <SubHeader text="Let's establish your baseline mood for this week." />
@@ -193,6 +178,18 @@ const WeeklyQuizQuestions = () => {
             <>
                 {showStart && <SubHeader text="Let's establish your baseline mood for this week." />}
             </>
+            {/* <div className={`${showQuiz ? styles.stepsDiv : styles.hideSteps}`}>
+                <div className={questionNumber === 1 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 2 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 3 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 4 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 5 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 6 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 7 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 8 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 9 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+                <div className={questionNumber === 10 ? styles.activeQuestion : styles.inactiveQuestion}></div>
+            </div> */}
             <div className={`${showQuiz ? styles.stepsDiv : styles.hideSteps}`}>
                 {[...Array(10)].map((_, index) => (
                     <div
@@ -205,6 +202,34 @@ const WeeklyQuizQuestions = () => {
             {showStart ? (
                 <div className={styles.componentDiv}>
                     <div className={styles.bodyDiv}>Please fill out this 10 question quiz to see where you are at!</div>
+                    {/* <div className={styles.questionNoDiv}>
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>8</button>
+                        <button>9</button>
+                        <button>10</button>
+                    </div>
+                    <div className={styles.questionNoDivMobile}>
+                        <div className={styles.topQuesNoDiv}>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button>5</button>
+                        </div>
+                        <div className={styles.bottomQuesNoDiv}>
+                            <button>6</button>
+                            <button>7</button>
+                            <button>8</button>
+                            <button>9</button>
+                            <button>10</button>
+                        </div>
+                    </div> */}
                     <div className={styles.questionNoDiv}>
                         {Array.from({ length: 10 }, (_, index) => (
                             <button key={index + 1}>{index + 1}</button>
@@ -234,10 +259,7 @@ const WeeklyQuizQuestions = () => {
                                 <div className={styles.questionWord}><button disabled>{questionNumber}. {questionWord}</button></div>
                                 <ul>
                                     {options.map((option) => (
-                                        <li
-                                            onClick={() => onAnswerSelected(option.score, option.id)}
-                                            key={option.id}
-                                            className={selectedAnswerIndex === option.id ? styles.selectedAnswer : ''}>
+                                        <li key={option.id}>
                                             {option.text}
                                         </li>
                                     ))}
