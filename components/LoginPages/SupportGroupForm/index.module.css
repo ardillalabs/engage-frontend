@@ -17,7 +17,7 @@
 }
 @media (min-width: 600px) {
   .componentDiv {
-    width: 40%;
+    width: 70%;
     padding: 45px 90px 125px 90px;
     max-width: 1440px;
   }
