@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 import PaymentCard from "../Payment/PaymentCard";
 import { IpaymentPlan } from "@/tsc-types/paymentTypes";
+import Image from "next/image";
 
 const EngageForFree = () => {
   const freePlan: IpaymentPlan = {
@@ -21,7 +22,14 @@ const EngageForFree = () => {
 
           <PaymentCard plan={freePlan} />
         </div>
-        <div className={styles.rightDiv}></div>
+        <div className={styles.rightDiv}>
+          <Image
+            src="/overview-angled-cropped.png"
+            alt="free screen shot"
+            fill
+            style={{ objectFit: "contain" }}
+          />
+        </div>
       </div>
     </div>
   );

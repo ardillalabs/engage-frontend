@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import PaymentCard from "./PaymentCard";
 import { IpaymentPlan } from "../../../tsc-types/paymentTypes";
+import Author from "./Author";
 
 const monthlyPlan: IpaymentPlan = {
   header: "Monthly",
@@ -66,6 +67,17 @@ const Payment = () => {
           <PaymentCard plan={monthlyPlan} />
           <PaymentCard plan={yearlyPlan} />
         </div>
+      </div>
+      <div className={styles.backgroundImageDiv}>
+        <Image
+          src="/overview-sbs.png"
+          alt="background image"
+          width={1024}
+          height={576}
+          style={{ maxWidth: "100%", height: "auto" }}
+          className={styles.image}
+        />
+        <Author />
       </div>
     </div>
   );

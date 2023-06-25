@@ -24,9 +24,15 @@ export default function Home() {
       <main className="bg-color min-h-screen">
         <NavBar />
         <Payment />
-        <EngageSolutions />
-        <OurPhylosophy />
-        <OurApproach />
+        <section id="solution">
+          <EngageSolutions />
+        </section>
+        <section id="about">
+          <OurPhylosophy />
+        </section>
+        <section id="service">
+          <OurApproach />
+        </section>
         <OurWhy />
         <EngageForFree />
         <Footer />

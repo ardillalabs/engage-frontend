@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./index.module.css";
@@ -13,23 +13,23 @@ interface InavItem {
 const navItems: InavItem[] = [
   {
     name: "Home",
-    id: "home",
+    id: "/",
   },
   {
     name: "About",
-    id: "about",
+    id: "#about",
   },
   {
     name: "Service",
-    id: "service",
+    id: "#service",
   },
   {
-    name: "Reviews",
-    id: "reviews",
+    name: "Solution",
+    id: "#solution",
   },
   {
     name: "Contact",
-    id: "contact",
+    id: "/",
   },
 ];
 
@@ -57,9 +57,9 @@ const NavBar = () => {
           <div className={styles.leftDiv}>
             <div className={styles.navItems}>
               {navItems.map((navItem, index) => (
-                <div key={index} className={styles.navItem}>
+                <Link key={index} className={styles.navItem} href={navItem.id}>
                   {navItem.name}
-                </div>
+                </Link>
               ))}
             </div>
             <div className={styles.telNumber}>
@@ -83,4 +83,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar
+export default NavBar;
