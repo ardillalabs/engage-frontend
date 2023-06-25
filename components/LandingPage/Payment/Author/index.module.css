@@ -1,11 +1,8 @@
 .mainDiv {
-  position: absolute;
-  top: 390px;
-  height: 548px;
   width: 100%;
-  background-color: rgba(50, 69, 68, 0.8);
   display: flex;
   justify-content: center;
+  background-color: rgba(50, 69, 68, 0.8);
 }
 .componentDiv {
   width: 100%;
@@ -31,4 +28,34 @@
   font-family: Montserrat;
   font-style: italic;
   font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .componentDiv {
+    padding: 60px 60px;
+  }
+  .authorDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .authorImage {
+    padding-right: 0;
+  }
+  .authorDescription {
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .componentDiv {
+    padding: 60px 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .componentDiv {
+    padding: 60px 20px;
+  }
 }

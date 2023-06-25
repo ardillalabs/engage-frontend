@@ -14,19 +14,19 @@ const MenuBar = ({ setMenuBarState }: Props) => {
     },
     {
       name: "About",
-      navigation: "/about",
+      navigation: "#about",
     },
     {
       name: "Service",
-      navigation: "/service",
+      navigation: "#service",
     },
     {
       name: "Solution",
-      navigation: "/solution",
+      navigation: "#solution",
     },
     {
       name: "Contact",
-      navigation: "/contact",
+      navigation: "/",
     },
   ];
   return (
@@ -40,9 +40,9 @@ const MenuBar = ({ setMenuBarState }: Props) => {
           }}
         >
           <div className={styles.menuBarList}>
-            <a href={navItem.navigation}>
+            <Link href={navItem.navigation}>
               <div className={styles.name}>{navItem.name}</div>
-            </a>
+            </Link>
           </div>
         </div>
       ))}

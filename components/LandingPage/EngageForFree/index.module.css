@@ -23,11 +23,9 @@
   color: #003f5e;
 }
 .rightDiv {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
   width: 50%;
-  height: 576px;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 1024px) {

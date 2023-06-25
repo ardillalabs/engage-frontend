@@ -25,9 +25,11 @@ const EngageForFree = () => {
         <div className={styles.rightDiv}>
           <Image
             src="/overview-angled-cropped.png"
-            alt="free screen shot"
-            fill
-            style={{ objectFit: "contain" }}
+            alt="free image"
+            width={570}
+            height={380}
+            style={{ width: "100%", objectFit: "contain" }}
+            className={styles.imageDiv}
           />
         </div>
       </div>

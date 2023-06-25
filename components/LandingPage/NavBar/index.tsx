@@ -51,7 +51,7 @@ const NavBar = () => {
           <div className={styles.calmDiv}>
             Connect, Support, Thrive Together
           </div>
-          {/* <div className={styles.emptyDiv}></div> */}
+          <div className={styles.emptyDiv}></div>
         </div>
         <div className={styles.lowerDiv}>
           <div className={styles.leftDiv}>

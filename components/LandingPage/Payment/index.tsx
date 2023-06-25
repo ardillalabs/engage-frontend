@@ -28,35 +28,30 @@ const yearlyPlan: IpaymentPlan = {
 const Payment = () => {
   return (
     <div className={styles.mainDiv}>
-      {/* <div className={styles.halfImageOneDiv}>
+      <div className={styles.halfImageOneDiv}>
         <Image
-          src="/home_page_two.png"
+          src="/teamwork-illustration-right.png"
           alt=""
-          fill
+          width={500}
+          height={500}
           style={{
-            backgroundImage: `url(/home_page_two.png)`,
             width: "100%",
             height: "100%",
-            borderTopLeftRadius: "50%",
-            borderBottomLeftRadius: "50%",
           }}
-          // objectFit="cover"
         />
       </div>
       <div className={styles.halfImageTwoDiv}>
         <Image
-          src="/home_page_one.png"
+          src="/teamwork-illustration.png"
           alt=""
-          fill
+          width={500}
+          height={500}
           style={{
-            backgroundImage: `url(/home_page_one.png)`,
             width: "100%",
             height: "100%",
-            borderTopRightRadius: "50%",
-            borderBottomRightRadius: "50%",
           }}
         />
-      </div> */}
+      </div>
 
       <div className={styles.componentDiv}>
         <div className={styles.headerDiv}>
@@ -69,15 +64,24 @@ const Payment = () => {
         </div>
       </div>
       <div className={styles.backgroundImageDiv}>
-        <Image
+        <img
+          src="/overview-sbs.png"
+          alt="screen shot"
+          width="70%"
+          height="70%"
+        />
+        {/* <Image
           src="/overview-sbs.png"
           alt="background image"
-          width={1024}
-          height={576}
-          style={{ maxWidth: "100%", height: "auto" }}
+          width={1920}
+          height={1080}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          // style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
           className={styles.image}
-        />
-        <Author />
+        /> */}
+        <div className={styles.author}>
+          <Author />
+        </div>
       </div>
     </div>
   );
