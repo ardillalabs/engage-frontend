@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import PaymentCard from "./PaymentCard";
 import { IpaymentPlan } from "../../../tsc-types/paymentTypes";
+import Author from "./Author";
 
 const monthlyPlan: IpaymentPlan = {
   header: "Monthly",
@@ -27,35 +28,30 @@ const yearlyPlan: IpaymentPlan = {
 const Payment = () => {
   return (
     <div className={styles.mainDiv}>
-      {/* <div className={styles.halfImageOneDiv}>
+      <div className={styles.halfImageOneDiv}>
         <Image
-          src="/home_page_two.png"
+          src="/teamwork-illustration-right.png"
           alt=""
-          fill
+          width={500}
+          height={500}
           style={{
-            backgroundImage: `url(/home_page_two.png)`,
             width: "100%",
             height: "100%",
-            borderTopLeftRadius: "50%",
-            borderBottomLeftRadius: "50%",
           }}
-          // objectFit="cover"
         />
       </div>
       <div className={styles.halfImageTwoDiv}>
         <Image
-          src="/home_page_one.png"
+          src="/teamwork-illustration.png"
           alt=""
-          fill
+          width={500}
+          height={500}
           style={{
-            backgroundImage: `url(/home_page_one.png)`,
             width: "100%",
             height: "100%",
-            borderTopRightRadius: "50%",
-            borderBottomRightRadius: "50%",
           }}
         />
-      </div> */}
+      </div>
 
       <div className={styles.componentDiv}>
         <div className={styles.headerDiv}>
@@ -65,6 +61,26 @@ const Payment = () => {
         <div className={styles.cardsDiv}>
           <PaymentCard plan={monthlyPlan} />
           <PaymentCard plan={yearlyPlan} />
+        </div>
+      </div>
+      <div className={styles.backgroundImageDiv}>
+        <img
+          src="/overview-sbs.png"
+          alt="screen shot"
+          width="70%"
+          height="70%"
+        />
+        {/* <Image
+          src="/overview-sbs.png"
+          alt="background image"
+          width={1920}
+          height={1080}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          // style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+          className={styles.image}
+        /> */}
+        <div className={styles.author}>
+          <Author />
         </div>
       </div>
     </div>

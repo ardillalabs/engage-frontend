@@ -1,0 +1,61 @@
+.mainDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(50, 69, 68);
+}
+.componentDiv {
+  width: 100%;
+  max-width: 1440px;
+  padding: 60px 90px;
+  display: flex;
+  align-items: center;
+}
+.authorDiv {
+  display: flex;
+  align-items: center;
+}
+.authorImage {
+  width: 30%;
+  border-radius: "5px";
+  overflow: "hidden";
+  padding-right: 100px;
+}
+.authorDescription {
+  width: 70%;
+  color: #fff;
+  font-size: 24px;
+  font-family: Montserrat;
+  font-style: italic;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .componentDiv {
+    padding: 60px 60px;
+  }
+  .authorDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .authorImage {
+    padding-right: 0;
+  }
+  .authorDescription {
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .componentDiv {
+    padding: 60px 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .componentDiv {
+    padding: 60px 20px;
+  }
+}
