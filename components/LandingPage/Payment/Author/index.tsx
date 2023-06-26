@@ -17,8 +17,8 @@ const Author = () => {
             />
           </div>
           <div className={styles.authorDescription}>
-            "The mortality impact of being socially disconnected is similar to
-            that caused by smoking up to 15 cigarettes a day."
+            &#34;The mortality impact of being socially disconnected is similar
+            to that caused by smoking up to 15 cigarettes a day&#34;
           </div>
         </div>
       </div>
