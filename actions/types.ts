@@ -173,3 +173,10 @@ export const SET_IS_FAILURE_MODEL_CLOSE = "SET_IS_FAILURE_MODEL_CLOSE";
 // Tost
 export const SET_TOAST_STATE: string = "SET_TOAST_STATE";
 // End of toast
+
+export const QUESTION_LIST_LOADING: string = "QUESTION_LIST_LOADING";
+export const QUESTION_LIST_SUCCESS: string = "QUESTION_LIST_SUCCESS";
+export const QUESTION_LIST_FAIL: string = "QUESTION_LIST_FAIL";
+
+export const SEND_QUIZ_MARKS_SUCCESS: string = "SEND_QUIZ_MARKS_SUCCESS";
+export const SEND_QUIZ_MARKS_FAIL: string = "SEND_QUIZ_MARKS_FAIL";
