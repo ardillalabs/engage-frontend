@@ -11,7 +11,9 @@
   padding: 100px 60px;
   display: block;
 }
-
+.freeDiv {
+  display: flex;
+}
 .leftDiv {
   width: 50%;
   padding-right: 20px;
@@ -38,6 +40,9 @@
 @media (max-width: 768px) {
   .componentDiv {
     padding: 30px 50px;
+    flex-direction: column;
+  }
+  .freeDiv {
     flex-direction: column;
   }
   .leftDiv {

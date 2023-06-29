@@ -18,7 +18,7 @@ const EngageForFree = () => {
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <h2 className={styles.header}>Try Engage for free</h2>
-        <div className="flex">
+        <div className={styles.freeDiv}>
           <div className={styles.leftDiv}>
             <PaymentCard plan={freePlan} />
           </div>
