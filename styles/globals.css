@@ -136,6 +136,11 @@ p {
   color: #8f8f8f;
 }
 
+html {
+  --scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
+}
+
 @media (max-width: 576px) {
   h2 {
     font-size: 24px;
