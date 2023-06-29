@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 1440px;
   padding: 100px 60px;
-  display: flex;
+  display: block;
 }
 
 .leftDiv {
@@ -21,6 +21,7 @@
   font-size: 40px;
   line-height: 49px;
   color: #003f5e;
+  text-align: center;
 }
 .rightDiv {
   width: 50%;
@@ -42,7 +43,6 @@
   .leftDiv {
     width: 100%;
     padding: 40px 0;
-    text-align: center;
   }
   .rightDiv {
     width: 100%;
