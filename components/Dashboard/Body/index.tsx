@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import MemberTree from "../MemberTree";
 import UserProfile from "../UserProfile";
 import Calendar from "../Calendar";
 import Link from "next/link";
+import useDate from "@/hooks/useDate";
+import { error } from "console";
 
 interface teamMemberArray {
   userID: string;
@@ -64,6 +66,29 @@ const DashboardBody = () => {
     },
   ]);
 
+  const { day, monthNum, year } = useDate();
+  const [dailyMessage, setDailyMessage] = useState("");
+
+  const dailyMessageFetch = async () => {
+    const res = await fetch(
+      `https://engage-backend-production.up.railway.app/api/daily_message/2023-06-26`
+    );
+    // const res = await fetch(
+    //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
+    // );
+    if (!res.ok) {
+      throw new Error("Failed to fetch daily message");
+    }
+
+    return res.json().then(({ daily_message }) => {
+      setDailyMessage(daily_message.description);
+    });
+  };
+
+  useEffect(() => {
+    dailyMessageFetch();
+  }, []);
+
   const changeTeamMemberData = (data: teamMemberArray[]) => {
     setTeamMemberData(data);
   };
@@ -74,7 +99,8 @@ const DashboardBody = () => {
         {/* Dashboard Top */}
         <div className={styles.dashboardTop}>
           <h3 className={styles.welcomeText}>Hello Anne!</h3>
-          <span className="body-1">Let{"'"}s see your progress today</span>
+          {/* <span className="body-1">Let{"'"}s see your progress today</span> */}
+          <span className="body-1">{dailyMessage}</span>
           <div className={styles.dashboardTopMenus}>
             <Link href="/daily-quiz">
               <div className={styles.dashboardTopMenu}>
