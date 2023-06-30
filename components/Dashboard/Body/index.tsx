@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
+=======
+import React, { useState } from "react";
+>>>>>>> 489d839d5064f3a2a41d0ba27fc9d05856c9d0de
 import styles from "./index.module.css";
 import MemberTree from "../MemberTree";
 import UserProfile from "../UserProfile";
 import Calendar from "../Calendar";
 import Link from "next/link";
+<<<<<<< HEAD
 import useDate from "@/hooks/useDate";
 import { error } from "console";
+=======
+>>>>>>> 489d839d5064f3a2a41d0ba27fc9d05856c9d0de
 
 interface teamMemberArray {
   userID: string;
@@ -66,6 +73,7 @@ const DashboardBody = () => {
     },
   ]);
 
+<<<<<<< HEAD
   const { day, monthNum, year } = useDate();
   const [dailyMessage, setDailyMessage] = useState("");
 
@@ -89,6 +97,8 @@ const DashboardBody = () => {
     dailyMessageFetch();
   }, []);
 
+=======
+>>>>>>> 489d839d5064f3a2a41d0ba27fc9d05856c9d0de
   const changeTeamMemberData = (data: teamMemberArray[]) => {
     setTeamMemberData(data);
   };

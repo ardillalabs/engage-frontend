@@ -1,4 +1,6 @@
+import store from "../store";
 import "@/styles/globals.css";
+import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import type { Page } from "../tsc-types/next";
 
@@ -19,12 +21,18 @@ type Props = AppProps & {
 
 export default function App({ Component, pageProps }: Props) {
   if (Component.getLayout) {
-    return Component.getLayout(<Component {...pageProps} />);
+    return Component.getLayout(
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    );
   }
   return (
     <Layout>
       <main className={montserrat.className}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </main>
     </Layout>
   );

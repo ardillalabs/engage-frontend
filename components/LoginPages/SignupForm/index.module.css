@@ -38,14 +38,26 @@
   color: #201f1f;
   line-height: 24px;
   font-style: normal;
-  padding-bottom: 25px;
 }
 .input {
   width: 98%;
   height: 40px;
+  font-size: 16px;
   margin-top: 10px;
+  padding: 0 10px;
   border-radius: 6px;
   border: 1px solid #c3c3c3;
+}
+.errorMessage {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: red;
+  font-stretch: 100;
+  min-height: 20px;
+  padding-bottom: 10px;
 }
 .buttonDiv button {
   width: 117px;
