@@ -97,6 +97,17 @@
     display: flex;
     justify-content: flex-end;
 }
+.errorMessage {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: red;
+    font-stretch: 100;
+    min-height: 20px;
+    padding-bottom: 10px;
+  }
 @media (max-width: 1024px) {
     .componentDiv {
         width: 500px;

@@ -36,6 +36,8 @@ import {
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAIL,
   SET_LOADING_SIGN_OUT,
+  GET_USER_PROFILE_DETAILS_SUCCESS,
+  GET_CURRENT_USER_PROFILE_DETAILS_FAIL
 } from "../../actions/types";
 
 const initialState: any = {
@@ -166,31 +168,15 @@ export default function (state = initialState, action: AnyAction) {
         isLoadingLogin: false,
         isLoggedIn: true,
         isLogedIn: true,
-        //---------
-        is_getuser_loading: false,
         //-----------------
-        apartment: payload.data.apartment,
-        city: payload.data.city,
-        country: payload.data.country,
         email: payload.data.email,
-        first_name: payload.data.first_name,
+        first_name: payload.data.full_name,
         id: payload.data.id,
         image_url: payload.data.image_url,
-        is_subscribed_telegram: payload.data.is_subscribed_telegram,
-        last_name: payload.data.last_name,
-        paypal_subscription_email: payload.data.paypal_subscription_email,
-        stripe_default_payment_method:
-          payload.data.stripe_default_payment_method,
-
-        membership: payload.data.membership,
         phone_number: payload.data.phone_number,
-        postal_code: payload.data.postal_code,
-        register_type: payload.data.register_type,
         role: payload.data.role,
         status: payload.data.status,
-        street: payload.data.street,
         username: payload.data.username,
-        is_verified: payload.data.is_verified,
       };
 
     case GET_CURRENT_USER_DETAILS_FAIL:
@@ -645,7 +631,24 @@ export default function (state = initialState, action: AnyAction) {
         resCode: null,
         statusText: null,
       };
+    
+    case GET_USER_PROFILE_DETAILS_SUCCESS:
+      return {
+        ...state,
+        email: payload.data.email,
+        full_name: payload.data.full_name,
+        phone_number: payload.data.phone_number,
+        username: payload.data.username
+      }
 
+      case GET_CURRENT_USER_PROFILE_DETAILS_FAIL:
+      return {
+        ...state,
+        email: null,
+        full_name: null,
+        phone_number: null,
+        username: null
+      }
     default:
       return state;
   }

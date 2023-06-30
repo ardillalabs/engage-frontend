@@ -38,6 +38,8 @@ import {
   SIGN_OUT_FAIL,
   SET_LOADING_SIGN_OUT,
   SET_TOAST_STATE,
+  GET_USER_PROFILE_DETAILS_SUCCESS,
+  GET_CURRENT_USER_PROFILE_DETAILS_FAIL
 } from "../types";
 import {
   CreateNewPasswordDetails,
@@ -45,11 +47,12 @@ import {
   UserInforUpdateDetails,
   UserSignInDetails,
   UserSignUpDetails,
+  UserProfileUpdateDetails,
 } from "../../tsc-types/Auth";
 
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
-const AUTH_BASE_URL = 'localhost:5001/auth/users'
+const AUTH_BASE_URL = 'http://localhost:5001/auth/users'
 
 // @desc        Sign up user
 // @api         auth/signup
@@ -158,11 +161,12 @@ export const getCurrentUserDetails =
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
-      withCredentials: true,
+      // withCredentials: true,
     };
 
     try {
-      const response = await axios.get(`${AUTH_BASE_URL}get-user`, config);
+      const response  = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
+      
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,
         payload: response,
@@ -207,6 +211,8 @@ export const signInSubmit =
         config
       );
 
+      console.log(response);
+      
       dispatch({
         type: LOGIN_SUCCESS,
         payload: response,
@@ -537,6 +543,7 @@ export const resendEmailVerification =
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
     dispatch({
       type: SET_UPDATE_PASSWORD_IS_LOADING,
     });
@@ -550,7 +557,7 @@ export const updatePassword =
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
-      withCredentials: true,
+      // withCredentials: true,
     };
 
     // Stringyfy Json Body
@@ -561,7 +568,7 @@ export const updatePassword =
 
     try {
       const response = await axios.put(
-        `${AUTH_BASE_URL}update-password`,
+        `${AUTH_BASE_URL}/update-password`,
         body,
         config
       );
@@ -1142,6 +1149,125 @@ export const signOut =
       } else {
         dispatch({
           type: SIGN_OUT_FAIL,
+          payload: err,
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
+      }
+    }
+  };
+
+  export const getProfileDetails =
+  (access_token: string) => async (dispatch: AppDispatch) => {
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      // withCredentials: true,
+    };
+
+    try {
+      const response  = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
+      
+      dispatch({
+        type: GET_USER_PROFILE_DETAILS_SUCCESS,
+        payload: response,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
+        payload: err,
+      });
+    }
+  };
+
+  export const updateUserDetailsSubmit =
+  (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
+  async (dispatch: AppDispatch) => {
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
+    dispatch({
+      type: SET_LOADING_UPDATE_USER_INFO,
+    });
+    dispatch({
+      type: CLEAR_AUTH_ERROR_MESSAGES,
+    });
+
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      // withCredentials: true,
+    };
+
+    const body = JSON.stringify({
+      full_name: userProfileUpdateDetails.full_name,
+      username: userProfileUpdateDetails.username,
+      phone_number: userProfileUpdateDetails.phone_number,
+    });
+
+    console.log('body', body);
+
+    try {
+      const response = await axios.put(
+        `${AUTH_BASE_URL}/update-user-info`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_USER_INFO_SUCCESS,
+        payload: response,
+      });
+
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "success",
+          title: "Success!",
+          description: `${response.data.message}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.message === "Network Error") {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
           payload: err,
         });
 

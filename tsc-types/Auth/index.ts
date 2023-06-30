@@ -34,3 +34,15 @@ export interface UserInforUpdateDetails {
   country: string;
   dp?: any;
 }
+
+export interface UserProfileUpdateDetails {
+  isUpdatedUserInfo: boolean;
+  full_name: string;
+  username: string;
+  phone_number: string;
+}
+
+export interface UpdatePasswordDetails {
+  currentPassword: string;
+  newPassword: string;
+}
