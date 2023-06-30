@@ -5,6 +5,7 @@ import UserProfile from "../UserProfile";
 import Calendar from "../Calendar";
 import Link from "next/link";
 import useDate from "@/hooks/useDate";
+import Barchart from "../Barchart";
 
 interface teamMemberArray {
   userID: string;
@@ -205,6 +206,7 @@ const DashboardBody = () => {
             <Calendar />
           </div>
         </div>
+        <Barchart />
       </div>
     </div>
   );
