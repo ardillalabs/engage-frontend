@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import MemberTree from "../MemberTree";
 import UserProfile from "../UserProfile";
 import Calendar from "../Calendar";
 import Link from "next/link";
+import useDate from "@/hooks/useDate";
 
 interface teamMemberArray {
   userID: string;
@@ -64,6 +65,45 @@ const DashboardBody = () => {
     },
   ]);
 
+  const { day, monthNum, year } = useDate();
+  const [dailyMessage, setDailyMessage] = useState("Loading...");
+  const [wellnessExcercise, setWellnessExcercise] = useState("Loading...");
+
+  const dailyMessageFetch = async () => {
+    const res = await fetch(
+      `https://engage-backend-production.up.railway.app/api/daily_message/2023-06-26`
+    );
+    // const res = await fetch(
+    //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
+    // );
+    if (!res.ok) {
+      throw new Error("Failed to fetch daily message");
+    }
+    return res.json().then(({ daily_message }) => {
+      setDailyMessage(daily_message.description);
+    });
+  };
+
+  const wellnessExcerciseFetch = async () => {
+    const res = await fetch(
+      `https://engage-backend-production.up.railway.app/api/daily_message/2023-06-26`
+    );
+    // const res = await fetch(
+    //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
+    // );
+    if (!res.ok) {
+      throw new Error("Failed to fetch daily message");
+    }
+    return res.json().then(({ daily_message }) => {
+      setWellnessExcercise(daily_message.description);
+    });
+  };
+
+  useEffect(() => {
+    dailyMessageFetch();
+    wellnessExcerciseFetch();
+  }, []);
+
   const changeTeamMemberData = (data: teamMemberArray[]) => {
     setTeamMemberData(data);
   };
@@ -74,7 +114,7 @@ const DashboardBody = () => {
         {/* Dashboard Top */}
         <div className={styles.dashboardTop}>
           <h3 className={styles.welcomeText}>Hello Anne!</h3>
-          <span className="body-1">Let{"'"}s see your progress today</span>
+          <span className="body-1">{dailyMessage}</span>
           <div className={styles.dashboardTopMenus}>
             <Link href="/daily-quiz">
               <div className={styles.dashboardTopMenu}>
@@ -134,32 +174,6 @@ const DashboardBody = () => {
                 </span>
               </div>
             </Link>
-
-            {/* <div
-              className={`${styles.dashboardTopMenu} ${styles.dashboardTopMenuGreen}`}
-            >
-              <div className={styles.menuImageDiv}>
-                <svg
-                  width="30"
-                  height="26"
-                  viewBox="0 0 30 26"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M28.7338 0.64C28.2389 0.2432 27.6333 0 26.972 0H3.19439C2.53308 0 1.92749 0.2432 1.43262 0.64L15.0832 15.3376L28.7338 0.64Z"
-                    fill="#51FF96"
-                  />
-                  <path
-                    d="M0.223633 3.86255V22.4002C0.223633 24.1602 1.56112 25.6002 3.19584 25.6002H26.9735C28.6082 25.6002 29.9457 24.1602 29.9457 22.4002V3.86255L15.0847 19.8626L0.223633 3.86255Z"
-                    fill="#51FF96"
-                  />
-                </svg>
-              </div>
-              <span className={styles.topMenuText}>
-                Daily Positivity Message
-              </span>
-            </div> */}
           </div>
         </div>
 
@@ -180,7 +194,7 @@ const DashboardBody = () => {
           <span className={styles.supportSystemText}>
             Today{"'"}s Wellness Exercise
           </span>
-          <span>Excercise for today</span>
+          <span>{wellnessExcercise}</span>
         </div>
       </div>
 

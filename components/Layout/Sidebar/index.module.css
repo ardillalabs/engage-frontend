@@ -47,7 +47,7 @@
   font-size: 35px;
   position: absolute;
   right: -44px;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 .itemDiv:hover .selectArrow,
 .selectArrowSelected {
@@ -60,10 +60,11 @@
   margin-bottom: 50px;
   padding: 8px 6px 8px 10px;
   border-radius: 8px;
+  border: 0;
   cursor: pointer;
-  transition: .5s ease;
+  transition: 0.5s ease;
+  background-color: transparent;
 }
 .logoutBtn:hover {
   background-color: #435b5a;
 }
-

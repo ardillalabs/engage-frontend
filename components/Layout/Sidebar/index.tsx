@@ -28,61 +28,67 @@ const Sidebar = () => {
               />
             </Link>
           </div>
-          <div className={styles.itemDiv} 
-            onMouseOver={() => setPageSelectArrow(false)} 
+          <div
+            className={styles.itemDiv}
+            onMouseOver={() => setPageSelectArrow(false)}
             onMouseLeave={() => setPageSelectArrow(true)}
           >
             <Link href="/dashboard" className={styles.link}>
               <MdSpaceDashboard className={styles.icon} />
             </Link>
-            <AiFillCaretLeft 
-              className={ !routePath.includes("/dashboard") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+            <AiFillCaretLeft
+              className={
+                !routePath.includes("/dashboard")
+                  ? styles.selectArrow
+                  : pageSelectArrow
+                  ? styles.selectArrowSelected
+                  : styles.selectArrow
+              }
             />
           </div>
-          <div className={styles.itemDiv} 
-            onMouseOver={() => setPageSelectArrow(false)} 
+          <div
+            className={styles.itemDiv}
+            onMouseOver={() => setPageSelectArrow(false)}
             onMouseLeave={() => setPageSelectArrow(true)}
           >
             <Link href="/home" className={styles.link}>
               <AiFillHome className={styles.icon} />
             </Link>
-            <AiFillCaretLeft 
-              className={ !routePath.includes("/home") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+            <AiFillCaretLeft
+              className={
+                !routePath.includes("/home")
+                  ? styles.selectArrow
+                  : pageSelectArrow
+                  ? styles.selectArrowSelected
+                  : styles.selectArrow
+              }
             />
           </div>
-          <div className={styles.itemDiv} 
-            onMouseOver={() => setPageSelectArrow(false)} 
-            onMouseLeave={() => setPageSelectArrow(true)}
-          >
-            <Link href="/report" className={styles.link}>
-              <TbChartPieFilled className={styles.icon} />
-            </Link>
-            <AiFillCaretLeft 
-              className={ !routePath.includes("/report") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
-            />
-          </div>
-          <div className={styles.itemDiv} 
-            onMouseOver={() => setPageSelectArrow(false)} 
+          <div
+            className={styles.itemDiv}
+            onMouseOver={() => setPageSelectArrow(false)}
             onMouseLeave={() => setPageSelectArrow(true)}
           >
             <Link href="/chat" className={styles.link}>
               <AiFillMessage className={styles.icon} />
             </Link>
-            <AiFillCaretLeft 
-              className={ !routePath.includes("/chat") ? styles.selectArrow : pageSelectArrow ? styles.selectArrowSelected : styles.selectArrow } 
+            <AiFillCaretLeft
+              className={
+                !routePath.includes("/chat")
+                  ? styles.selectArrow
+                  : pageSelectArrow
+                  ? styles.selectArrowSelected
+                  : styles.selectArrow
+              }
             />
           </div>
         </div>
 
-
         {/* Logout button */}
-        <div className={styles.logoutBtn}>
+        <button className={styles.logoutBtn}>
           <IoLogOut className={styles.icon} />
-        </div>
-        
+        </button>
       </div>
-
-      
     </div>
   );
 };
