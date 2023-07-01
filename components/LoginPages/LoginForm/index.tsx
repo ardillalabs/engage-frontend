@@ -132,7 +132,7 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
       router.push("/dashboard");
       myRef.current.Email = "";
       myRef.current.Passowrd = "";
-      setData({ Email: "", Password: "" });
+      setData({ Email: "", Password: ""});
     }
   }, [auth]);
 
