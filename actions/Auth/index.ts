@@ -48,7 +48,8 @@ import {
 } from "../../tsc-types/Auth";
 
 // Import environment variables
-const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
+// const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
+const AUTH_BASE_URL = 'localhost:5001/auth/users'
 
 // @desc        Sign up user
 // @api         auth/signup

@@ -61,6 +61,8 @@ const DailyQuizQuestions = ({
     const [showStart, setStart] = useState(true);
     const [score, setScore] = useState(0);
     const [result, setResult] = useState(0);
+    const [isData, setData] = useState(false)
+
 
     useEffect(() => {
         getQuestionList(2);
@@ -68,6 +70,9 @@ const DailyQuizQuestions = ({
 
     useEffect(() => {
         console.log(questionList);
+        if(questionList.length >0) {
+            setData(true)
+          }
     });
 
 
@@ -108,6 +113,15 @@ const DailyQuizQuestions = ({
     // const { questionNumber, question, questionWord, options } = questions[activeQuestion]
     return (
         <div className={styles.mainDiv}>
+            <div> {!isData ? ( <div> 
+        <div className={styles.componentDiv}>
+              <div
+                className={styles.initialDiv}>
+                <div className={styles.title}>Loading....</div>
+                <div className={styles.bodyText}>Thanks for waiting!</div>
+              </div>
+            </div>
+      </div>): (<>
             <>
                 {showStart && <SubHeader text="Let's establish your baseline mood for this day." />}
             </>
@@ -190,6 +204,9 @@ const DailyQuizQuestions = ({
                     }
                 </>
             }
+            </>
+      )}
+        </div>
         </div>
     )
 }
