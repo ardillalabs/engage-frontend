@@ -233,6 +233,15 @@
     display: none;
 }
 
+.initialDiv{
+    background-color: #324544;
+    padding: 60px;
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 120px;
+}
+
 @media (max-width: 576px) {
     .bodyDiv {
         font-size: 16px;
@@ -287,7 +296,7 @@
     }
 
     .questionWord button {
-        padding: 8px 3cm;
+        /* padding: 8px 3cm; */
         border-radius: 20px;
         margin-top: 50px;
         font-size: 14px;
@@ -348,6 +357,14 @@
         top: calc(36% - 10px);
         /* 50% - 3/4 of icon height */
         font-size: 34px;
+    }
+    .initialDiv{
+        background-color: #324544;
+        padding: 40px;
+        max-width: max-content;
+        height: 300px;
+        border-radius: 20px;
+        margin-top: 120px;
     }
 }
 
