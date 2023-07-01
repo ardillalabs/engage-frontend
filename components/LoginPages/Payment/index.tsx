@@ -10,6 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 import Image from "next/image";
+import Link from "next/link";
 
 const stripePromise = loadStripe(
   "pk_test_51NJZSpE4oQnZXS7iRgA3z5BdTUeJxOJg3mUpo88pJPAPGezh7QpUanl3UvztEfZ5eSndr6qzYcXTkx0HAmEd53af00C4OJOff2"
@@ -113,7 +114,12 @@ const PaymentForm = () => {
                     </div>
                   </label>
                 </div>
-                <button className={styles.purchaseBtn}>Purchase</button>
+                <div className={styles.btnsWrapper}>
+                  <button className={styles.purchaseBtn}>Purchase</button>
+                  <Link href={"/dashboard"} className={styles.trialLink}>
+                    Free Trial
+                  </Link>
+                </div>
               </form>
 
               {/* Paypal Payment */}

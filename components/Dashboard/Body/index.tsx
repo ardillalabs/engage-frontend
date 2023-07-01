@@ -70,34 +70,46 @@ const DashboardBody = () => {
   const [dailyMessage, setDailyMessage] = useState("Loading...");
   const [wellnessExcercise, setWellnessExcercise] = useState("Loading...");
 
+  console.log(`${year}-${monthNum}-${day}`);
+
   const dailyMessageFetch = async () => {
-    const res = await fetch(
-      `https://engage-backend-production.up.railway.app/api/daily_message/2023-06-26`
-    );
-    // const res = await fetch(
-    //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
-    // );
-    if (!res.ok) {
-      throw new Error("Failed to fetch daily message");
+    try {
+      // const res = await fetch(
+      //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
+      // );
+      const res = await fetch(
+        `http://localhost:5000/api/daily_message/${year}-${monthNum}-${day}`
+      );
+
+      if (res.ok) {
+        return res.json().then(({ daily_message }) => {
+          setDailyMessage(daily_message.description);
+        });
+      }
+    } catch (error) {
+      setDailyMessage("Have a good day!");
+      console.log("Failed to fetch daily message", error);
     }
-    return res.json().then(({ daily_message }) => {
-      setDailyMessage(daily_message.description);
-    });
   };
 
   const wellnessExcerciseFetch = async () => {
-    const res = await fetch(
-      `https://engage-backend-production.up.railway.app/api/daily_message/2023-06-26`
-    );
-    // const res = await fetch(
-    //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
-    // );
-    if (!res.ok) {
-      throw new Error("Failed to fetch daily message");
+    try {
+      // const res = await fetch(
+      //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
+      // );
+      const res = await fetch(
+        `http://localhost:5000/api/daily_message/${year}-${monthNum}-${day}`
+      );
+
+      if (res.ok) {
+        return res.json().then(({ daily_message }) => {
+          setWellnessExcercise(daily_message.description);
+        });
+      }
+    } catch (error) {
+      setWellnessExcercise("No excercises available");
+      console.log("Failed to fetch weekly excercise", error);
     }
-    return res.json().then(({ daily_message }) => {
-      setWellnessExcercise(daily_message.description);
-    });
   };
 
   useEffect(() => {

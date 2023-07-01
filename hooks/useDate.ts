@@ -26,12 +26,13 @@ const useDate = () => {
     "December",
   ];
 
-  const day = date.getDate();
+  const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
   const dayWithSyntax =
     day === 1 ? "1st" : day === 2 ? "2nd" : day === 3 ? "3rd" : `${day}th`;
   const weekday = weekdayNames[date.getDay()];
   const month = monthNames[date.getMonth()];
-  const monthNum = date.getMonth();
+  const monthNum =
+    date.getMonth() > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
   const year = date.getFullYear();
   const dateString = date.toDateString();
 
