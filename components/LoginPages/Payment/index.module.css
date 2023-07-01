@@ -125,8 +125,14 @@
   padding: 10px;
 }
 
-.purchaseBtn {
+.btnsWrapper {
   margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.purchaseBtn {
   width: fit-content;
   padding: 10px 20px;
   font: var(--btn-text);
@@ -140,4 +146,14 @@
 .purchaseBtn:hover {
   background-color: #324544;
   color: #ffffff;
+}
+
+.trialLink {
+  font: var(--btn-text);
+  text-decoration: underline !important;
+  transition: 0.5s ease;
+}
+
+.trialLink:hover {
+  color: #b2b2b2;
 }
