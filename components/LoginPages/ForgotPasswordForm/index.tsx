@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './index.module.css'
+import styles from './index.module.css';
 
 const ForgotPasswordFrom = () => {
   return (
@@ -14,18 +14,24 @@ const ForgotPasswordFrom = () => {
         </p>
         <div className={styles.inputDiv}>
           <div>Enter email</div>
-          <input type="text" className={styles.input} />
+          <input type='text' className={styles.input} />
         </div>
         <div className={styles.buttonDiv}>
           <button>Send Now</button>
         </div>
         <div className={styles.bottomDiv}>
-          <p>Did you remember your password? Try logging in</p>
+          <p>
+            Did you remember your password?{' '}
+            <Link href='/login'>
+              {' '}
+              <span> Login </span>
+            </Link>
+          </p>
         </div>
         <div className={styles.imageDiv}>
           <Image
-            src="/forgot-password.png"
-            alt="forgot password image"
+            src='/forgot-password.png'
+            alt='forgot password image'
             width={295}
             height={295}
           />
@@ -33,6 +39,6 @@ const ForgotPasswordFrom = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ForgotPasswordFrom
+export default ForgotPasswordFrom;

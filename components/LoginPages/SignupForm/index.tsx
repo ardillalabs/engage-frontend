@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import styles from "./index.module.css";
-import SignUpSteps from "../SignUpSteps";
+import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import styles from './index.module.css';
+import SignUpSteps from '../SignUpSteps';
 
 //cookies
-import { useCookies } from "react-cookie";
+import { useCookies } from 'react-cookie';
 
 // redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { RootState } from "../../../store";
-import { signUpSubmit } from "../../../actions/Auth";
-import { useRouter } from "next/router";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RootState } from '../../../store';
+import { signUpSubmit } from '../../../actions/Auth';
+import { useRouter } from 'next/router';
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
@@ -25,7 +25,7 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
   const router = useRouter();
 
   //Get cookies
-  const [cookies, setCookie] = useCookies(["access_token"]);
+  const [cookies, setCookie] = useCookies(['access_token']);
 
   // Input Fields
   const myRef = useRef<any>({});
@@ -40,18 +40,18 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
     Password: false,
   });
   const [isData, setData] = useState({
-    Name: "",
-    UserName: "",
-    PhoneNumber: "",
-    Email: "",
-    Password: "",
+    Name: '',
+    UserName: '',
+    PhoneNumber: '',
+    Email: '',
+    Password: '',
   });
   const [errors, setErrors] = useState({
-    Name: "",
-    UserName: "",
-    PhoneNumber: "",
-    Email: "",
-    Password: "",
+    Name: '',
+    UserName: '',
+    PhoneNumber: '',
+    Email: '',
+    Password: '',
   });
 
   const [isChecked, setIsChecked] = useState(false);
@@ -69,126 +69,126 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
 
   const functionNameError = () => {
     if (isClick.Name === false && !isData.Name) {
-      setErrors({ ...errors, Name: "" });
+      setErrors({ ...errors, Name: '' });
     }
   };
 
   const functionUserNameError = () => {
     if (isClick.UserName === false && !isData.UserName) {
-      setErrors({ ...errors, UserName: "" });
+      setErrors({ ...errors, UserName: '' });
     }
   };
 
   const functionPhoneNumberError = () => {
     if (isClick.PhoneNumber === false && !isData.PhoneNumber) {
-      setErrors({ ...errors, PhoneNumber: "" });
+      setErrors({ ...errors, PhoneNumber: '' });
     }
   };
 
   const functionEmailError = () => {
     if (isClick.Email === false && !isData.Email) {
-      setErrors({ ...errors, Email: "" });
+      setErrors({ ...errors, Email: '' });
     }
   };
 
   const functionPasswordError = () => {
     if (isClick.Password === false && !isData.Password) {
-      setErrors({ ...errors, Password: "" });
+      setErrors({ ...errors, Password: '' });
     }
   };
 
   useEffect(() => {
     if (isData.Name.length === 0) {
-      setErrors({ ...errors, Name: "" });
+      setErrors({ ...errors, Name: '' });
     }
   }, [isData.Name]);
 
   useEffect(() => {
     if (isData.UserName.length === 0) {
-      setErrors({ ...errors, UserName: "" });
+      setErrors({ ...errors, UserName: '' });
     }
   }, [isData.UserName]);
 
   useEffect(() => {
     if (isData.Email.length === 0) {
-      setErrors({ ...errors, Email: "" });
+      setErrors({ ...errors, Email: '' });
     }
   }, [isData.Email]);
 
   useEffect(() => {
     if (isData.Password.length === 0) {
-      setErrors({ ...errors, Password: "" });
+      setErrors({ ...errors, Password: '' });
     }
   }, [isData.Password]);
 
   const FunctionLoginSubmit = () => {
     const errors = {
-      Name: "",
-      UserName: "",
-      PhoneNumber: "",
-      Email: "",
-      Password: "",
+      Name: '',
+      UserName: '',
+      PhoneNumber: '',
+      Email: '',
+      Password: '',
     };
 
     if (!isData.Name) {
-      errors.Name = "The field is required";
+      errors.Name = 'The field is required';
     }
 
     if (isData.Name && isData.Name.length < 2) {
-      errors.Name = "Min length: 2";
+      errors.Name = 'Min length: 2';
     }
 
     if (!isData.UserName) {
-      errors.UserName = "The field is required";
+      errors.UserName = 'The field is required';
     }
 
     if (isData.Name && isData.Name.length < 2) {
-      errors.Name = "Min length: 2";
+      errors.Name = 'Min length: 2';
     }
 
     if (isData.Name && isData.Name.length < 2) {
-      errors.Name = "Min length: 2";
+      errors.Name = 'Min length: 2';
     }
 
     if (!isData.UserName) {
-      errors.UserName = "The field is required";
+      errors.UserName = 'The field is required';
     }
 
     if (isData.UserName && isData.UserName.length < 2) {
-      errors.UserName = "Min length: 2";
+      errors.UserName = 'Min length: 2';
     }
 
     if (isData.UserName && isData.UserName.length < 2) {
-      errors.UserName = "Min length: 2";
+      errors.UserName = 'Min length: 2';
     }
 
     if (isData.UserName && isData.UserName.length < 2) {
-      errors.UserName = "Min length: 2";
+      errors.UserName = 'Min length: 2';
     }
 
     if (!isData.PhoneNumber) {
-      errors.PhoneNumber = "The field is required";
+      errors.PhoneNumber = 'The field is required';
     } else if (
       isData.PhoneNumber.length > 13 ||
       isData.PhoneNumber.length < 8
     ) {
-      errors.PhoneNumber = "Phone number is invalid.";
+      errors.PhoneNumber = 'Phone number is invalid.';
     }
 
     if (!isData.Email) {
-      errors.Email = "The field is required";
+      errors.Email = 'The field is required';
     } else if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
     ) {
-      errors.Email = "Email is invalid.";
+      errors.Email = 'Email is invalid.';
     }
 
     if (!isData.Password) {
-      errors.Password = "The field is required";
+      errors.Password = 'The field is required';
     }
 
     if (isData.Password.length < 8) {
-      errors.Password = "Must be at least 8 characters";
+      errors.Password = 'Must be at least 8 characters';
     }
 
     if (!(errors.Name || errors.UserName || errors.Email || errors.Password)) {
@@ -205,18 +205,18 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
 
   useEffect(() => {
     if (auth.isSignedUp || auth.isLoggedIn) {
-      myRef.current.Name = "";
-      (myRef.current.UserName = ""), (myRef.current.Email = "");
-      myRef.current.Password = "";
+      myRef.current.Name = '';
+      (myRef.current.UserName = ''), (myRef.current.Email = '');
+      myRef.current.Password = '';
       setData({
-        Name: "",
-        UserName: "",
-        PhoneNumber: "",
-        Email: "",
-        Password: "",
+        Name: '',
+        UserName: '',
+        PhoneNumber: '',
+        Email: '',
+        Password: '',
       });
       setIsChecked(false);
-      router.push("/support-group");
+      router.push('/support-group');
     }
   }, [auth.isSignedUp, auth.isLoggedIn]);
 
@@ -224,24 +224,24 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
     if (
       auth.isSignedUp === false &&
       auth.signedUpMessage ===
-        "This email address is already in use. Please use a different email or sign in with your existing account."
+        'This email address is already in use. Please use a different email or sign in with your existing account.'
     ) {
       setErrors({
         ...errors,
         Email:
-          "This email address is already in use. Please use a different email or sign in with your existing account.",
+          'This email address is already in use. Please use a different email or sign in with your existing account.',
       });
     }
 
     if (
       auth.isSignedUp === false &&
       auth.signedUpMessage ===
-        "This username is already in use. Please use a different username or sign in with your existing account."
+        'This username is already in use. Please use a different username or sign in with your existing account.'
     ) {
       setErrors({
         ...errors,
         UserName:
-          "This username is already in use. Please use a different username or sign in with your existing account.",
+          'This username is already in use. Please use a different username or sign in with your existing account.',
       });
     }
   }, [auth.isSignedUp, auth.signedUpMessage]);
@@ -249,7 +249,7 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-        <SignUpSteps step="1" />
+        <SignUpSteps step='1' />
         <div className={styles.headerDiv}>
           <h2>Let{"'"}s Get Started!</h2>
           <p>Tell us a little about your self.</p>
@@ -257,9 +257,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Full Name</div>
           <input
-            type="text"
+            type='text'
             className={styles.input}
-            id="name"
+            id='name'
             value={isData.Name}
             autoFocus
             ref={(input) => (myRef.current.name = input)}
@@ -270,9 +270,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>User Name</div>
           <input
-            type="text"
+            type='text'
             className={styles.input}
-            id="username"
+            id='username'
             value={isData.UserName}
             autoFocus
             ref={(input) => (myRef.current.username = input)}
@@ -283,9 +283,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Phone Number</div>
           <input
-            type="text"
+            type='text'
             className={styles.input}
-            id="phonenumber"
+            id='phonenumber'
             value={isData.PhoneNumber}
             autoFocus
             ref={(input) => (myRef.current.phonenumber = input)}
@@ -296,9 +296,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Email</div>
           <input
-            type="text"
+            type='text'
             className={styles.input}
-            id="email"
+            id='email'
             value={isData.Email}
             autoFocus
             ref={(input) => (myRef.current.email = input)}
@@ -309,9 +309,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Password</div>
           <input
-            type="password"
+            type='password'
             className={styles.input}
-            id="Password"
+            id='Password'
             value={isData.Password}
             autoFocus
             ref={(input) => (myRef.current.Password = input)}
@@ -329,11 +329,15 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         </div> */}
         <div className={styles.bottomDiv}>
           <p>
-            Already have an account ? <Link href="/login"> Login</Link>
+            Already have an account ?{' '}
+            <Link href='/login'>
+              {' '}
+              <span> Login </span>
+            </Link>
           </p>
           <p>
-            By clicking “Sign up” you agree to our{" "}
-            <span> terms and conditions</span> & <span>privacy policy</span>{" "}
+            By clicking “Sign up” you agree to our{' '}
+            <span> terms and conditions</span> & <span>privacy policy</span>{' '}
           </p>
         </div>
       </div>

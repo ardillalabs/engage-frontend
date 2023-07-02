@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./index.module.css";
+import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './index.module.css';
 
 // redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { RootState } from "../../../store";
-import { signInSubmit } from "../../../actions/Auth";
-import { useRouter } from "next/router";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RootState } from '../../../store';
+import { signInSubmit } from '../../../actions/Auth';
+import { useRouter } from 'next/router';
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
@@ -29,10 +29,10 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
   const [isPasswordHide, setPasswordHide] = useState({
     HidePassword1: false,
   });
-  const [isData, setData] = useState({ Email: "", Password: "" });
+  const [isData, setData] = useState({ Email: '', Password: '' });
   const [errors, setErrors] = useState({
-    Email: "",
-    Password: "",
+    Email: '',
+    Password: '',
   });
 
   const handleChange = (values: any) => {
@@ -44,53 +44,53 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
 
   const functionEmailError = () => {
     if (isClick.isEmailClick === false && !isData.Email) {
-      setErrors({ ...errors, Email: "" });
+      setErrors({ ...errors, Email: '' });
     }
   };
 
   const functionPasswordError = () => {
     if (isClick.isPasswordClick === false && !isData.Password) {
-      setErrors({ ...errors, Password: "" });
+      setErrors({ ...errors, Password: '' });
     }
   };
 
   useEffect(() => {
     if (isData.Email.length === 0) {
-      setErrors({ ...errors, Email: "" });
+      setErrors({ ...errors, Email: '' });
     }
   }, [isData.Email]);
 
   useEffect(() => {
     if (isData.Password.length === 0) {
-      setErrors({ ...errors, Password: "" });
+      setErrors({ ...errors, Password: '' });
     }
   }, [isData.Password]);
 
   const FunctionLoginSubmit = () => {
     const errors = {
-      Email: "",
-      Password: "",
+      Email: '',
+      Password: '',
     };
 
     if (!isData.Email) {
-      errors.Email = "The field is required";
+      errors.Email = 'The field is required';
     } else if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
     ) {
-      errors.Email = "Email is invalid.";
+      errors.Email = 'Email is invalid.';
     }
 
     if (!isData.Password) {
-      errors.Password = "The field is required";
+      errors.Password = 'The field is required';
     }
     if (isData.Password && isData.Password.length < 8) {
-      errors.Password = "Min length: 8";
+      errors.Password = 'Min length: 8';
     }
     if (isData.Password && isData.Password.length < 8) {
-      errors.Password = "Min length: 8";
+      errors.Password = 'Min length: 8';
     }
     if (isData.Password && isData.Password.length < 8) {
-      errors.Password = "Min length: 8";
+      errors.Password = 'Min length: 8';
     }
 
     if (!(errors.Email || errors.Password)) {
@@ -107,33 +107,33 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
     if (
       auth.isLoggedIn === false &&
       auth.loggedInMessage ===
-        "The email you entered does not belong to any registered user."
+        'The email you entered does not belong to any registered user.'
     ) {
       setErrors({
         ...errors,
-        Email: "The email you entered does not belong to any registered user.",
+        Email: 'The email you entered does not belong to any registered user.',
       });
     }
     if (
       auth.isLoggedIn === false &&
       auth.loggedInMessage ===
-        "Incorrect password. Please try again with the correct password."
+        'Incorrect password. Please try again with the correct password.'
     ) {
       setErrors({
         ...errors,
         Password:
-          "Incorrect password. Please try again with the correct password.",
+          'Incorrect password. Please try again with the correct password.',
       });
     }
   }, [auth.isLoggedIn, auth.loggedInMessage]);
 
-  console.log(auth.isLoggedIn)
+  console.log(auth.isLoggedIn);
   useEffect(() => {
     if (auth.isLoggedIn) {
-      router.push("/dashboard");
-      myRef.current.Email = "";
-      myRef.current.Passowrd = "";
-      setData({ Email: "", Password: ""});
+      router.push('/dashboard');
+      myRef.current.Email = '';
+      myRef.current.Passowrd = '';
+      setData({ Email: '', Password: '' });
     }
   }, [auth]);
 
@@ -150,9 +150,9 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
                 isEmailClick: true,
               })
             }
-            type="text"
+            type='text'
             className={styles.input}
-            id="email"
+            id='email'
             value={isData.Email}
             autoFocus
             ref={(input) => (myRef.current.email = input)}
@@ -171,8 +171,8 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
               })
             }
             className={styles.input}
-            type={isPasswordHide.HidePassword1 ? "text" : "password"}
-            id="Password"
+            type={isPasswordHide.HidePassword1 ? 'text' : 'password'}
+            id='Password'
             value={isData.Password}
             autoFocus
             ref={(input) => (myRef.current.Password = input)}
@@ -180,7 +180,10 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
           />
           <div className={styles.errorMessage}>{errors.Password}</div>
           <div className={styles.forgotPassword}>
-            <Link href="/forgot-password"> forgot password</Link>
+            <Link href='/forgot-password'>
+              {' '}
+              <span>Forgot Password </span>
+            </Link>
           </div>
         </div>
 
@@ -198,27 +201,30 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
               {(auth.loggedInMessage &&
                 !auth.isLoggedIn &&
                 auth.loggedInMessage !==
-                  "Incorrect password. Please try again with the correct password.") ||
-              "The email you entered does not belong to any registered user."
+                  'Incorrect password. Please try again with the correct password.') ||
+              'The email you entered does not belong to any registered user.'
                 ? auth.signedUpMessage
-                : ""}
+                : ''}
             </div>
           </>
         )}
         <div className={styles.bottomDiv}>
           <p>
-            Don{"'"}t have an account?{" "}
-            <Link href="/sign-up"> Sign up here</Link>
+            Don{"'"}t have an account?{' '}
+            <Link href='/sign-up'>
+              {' '}
+              <span> Sign up here </span>
+            </Link>
           </p>
           <p>
-            By clicking “Sign up” you agree to our{" "}
-            <span> terms and conditions</span> & <span>privacy policy</span>{" "}
+            By clicking “Sign up” you agree to our{' '}
+            <span> terms and conditions</span> & <span>privacy policy</span>{' '}
           </p>
         </div>
         <div className={styles.imageDiv}>
           <Image
-            src="/login_image.png"
-            alt="login image"
+            src='/login_image.png'
+            alt='login image'
             width={310}
             height={280}
           />
