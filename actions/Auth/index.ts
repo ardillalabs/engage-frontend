@@ -540,7 +540,7 @@ export const resendEmailVerification =
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4Mjk1NTkyLCJleHAiOjE2ODgyOTgxODR9.sqeEVFM8QGrnXOweMZv5d4GXN1NkP6HkV0ybDXyf_o4'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
     dispatch({
       type: SET_UPDATE_PASSWORD_IS_LOADING,
     });
@@ -1181,7 +1181,7 @@ export const signOut =
 
   export const getProfileDetails =
   (access_token: string) => async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
     // API Header configarations
     const config = {
       headers: {
@@ -1209,7 +1209,7 @@ export const signOut =
   export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
     dispatch({
       type: SET_LOADING_UPDATE_USER_INFO,
     });
