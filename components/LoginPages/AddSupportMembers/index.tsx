@@ -11,6 +11,7 @@ import { RootState } from "../../../store";
 import {
   addSupportPerson,
   deleteSupporter,
+  getSupportGroup,
 } from "../../../actions/SupportGroup";
 
 interface teamMemberArray {
@@ -24,24 +25,26 @@ const AddSupportMembers = ({
   teamMemberData,
   addSupportPerson,
   deleteSupporter,
+  getSupportGroup,
+  supportGroup,
   auth,
 }: {
   auth: any;
   supportGroup: any;
   deleteSupporter: any;
+  getSupportGroup: any;
   changeTeamMemberData: any;
   addSupportPerson: (...args: any[]) => any;
   teamMemberData: teamMemberArray[];
 }) => {
-  const handleRemove = (email: string, id: number, i: number) => {
+  const handleRemove = async (email: string, id: number, i: number) => {
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
     changeTeamMemberData(filtered);
-    deleteSupporter(id, email);
+    await deleteSupporter(id, email);
+    getSupportGroup(1);
   };
-
-  console.log(auth);
 
   const [popupDiv, setPopupDiv] = useState(false);
 
@@ -57,13 +60,14 @@ const AddSupportMembers = ({
   const supportRef = useRef<any>({});
 
   const handleChange = (values: any) => {
+    supportGroup.failCreateSupporter = null;
     setData({
       ...isData,
       ...values,
     });
   };
 
-  const FunctionSupporterSubmit = () => {
+  const FunctionSupporterSubmit = async () => {
     const errors = {
       Email: "",
     };
@@ -77,11 +81,13 @@ const AddSupportMembers = ({
     }
 
     if (!errors.Email) {
-      addSupportPerson({
+      await addSupportPerson({
         userId: isData.userId,
         email: isData.Email,
       });
+      getSupportGroup(1);
     }
+
     setErrors(errors);
   };
 
@@ -161,6 +167,11 @@ const AddSupportMembers = ({
             <div onClick={() => FunctionSupporterSubmit()}>
               <button className={styles.inviteBtn}>Send Invite</button>
             </div>
+            <div className={styles.errorMessage}>
+              {errors.Email
+                ? errors.Email
+                : supportGroup?.failCreateSupporter?.response?.data?.message}
+            </div>
           </div>
 
           <div className={styles.memberDiv}>
@@ -199,6 +210,7 @@ const AddSupportMembers = ({
 AddSupportMembers.propTypes = {
   addSupportPerson: PropTypes.func.isRequired,
   deleteSupporter: PropTypes.func.isRequired,
+  getSupportGroup: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -209,4 +221,5 @@ const mapStateToProps = (state: RootState) => ({
 export default connect(mapStateToProps, {
   addSupportPerson,
   deleteSupporter,
+  getSupportGroup,
 })(AddSupportMembers);

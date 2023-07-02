@@ -29,7 +29,7 @@ export const addSupportPerson =
     // Stringyfy Json Body
     const body = JSON.stringify({
       patientUserId: 1,
-      email: "hashi@gmail.com",
+      email: supportData.email,
     });
 
     try {
@@ -43,6 +43,7 @@ export const addSupportPerson =
         type: CREATE_SUPPORT_GROUP,
         payload: response,
       });
+      getSupportGroup(1);
       // dispatch({
       //   type: SET_TOAST_STATE,
       //   payload: {
@@ -74,7 +75,7 @@ export const addSupportPerson =
 
         if (
           err.response.data.message !==
-          "This email address is already in use. Please use a different email or sign in with your existing account."
+          "This email address has already been used."
         ) {
           dispatch({
             type: FAIL_CREATE_SUPPORT_GROUP,

@@ -13,6 +13,7 @@ const initialState: any = {
   loading: false,
   supportGroup: [],
   failCreateSupporter: null,
+  isSupporterDeleted: false,
 };
 
 export default function (state = initialState, action: AnyAction) {
@@ -30,6 +31,11 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         loading: false,
         supportGroup: payload,
+      };
+    case SUPPORTER_DELETE:
+      return {
+        ...state,
+        isSupporterDeleted: true,
       };
 
     default:

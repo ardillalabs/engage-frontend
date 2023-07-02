@@ -12,6 +12,17 @@
   --image-translate: 120px;
 }
 
+.errorMessage {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: red;
+  font-stretch: 100;
+  min-height: 20px;
+  padding-bottom: 10px;
+}
 @media (min-width: 600px) {
   .memberTreeDiv {
     --image-translate: 180px;
