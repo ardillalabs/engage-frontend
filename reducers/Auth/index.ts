@@ -123,8 +123,8 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingSignUp: false,
         isSignedUp: true,
-        signedUpMessage: payload.data.message,
-        accessToken: payload.data.access_token,
+        signedUpMessage: payload.message,
+        accessToken: payload.access_token,
       };
 
     case REGISTER_FAIL:
@@ -132,10 +132,10 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingSignUp: false,
         isSignedUp: false,
-        signedUpMessage: payload.response.data.message,
+        signedUpMessage: payload.message,
         accessToken: null,
-        resCode: payload.response.status,
-        statusText: payload.response.statusText,
+        resCode: payload.status,
+        statusText: payload.statusText,
         loggedInMessage: payload.message,
         isSentVerificationEmail: true,
       };
@@ -145,8 +145,8 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingLogin: false,
         isLoggedIn: true,
-        loggedInMessage: payload.data.message,
-        accessToken: payload.data.access_token,
+        loggedInMessage: payload.message,
+        accessToken: payload.access_token,
       };
 
     case LOGIN_FAIL:
@@ -154,10 +154,10 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingLogin: false,
         isLoggedIn: false,
-        loggedInMessage: payload.response.data.message,
+        loggedInMessage: payload.message,
         accessToken: null,
-        resCode: payload.response.status,
-        statusText: payload.response.statusText,
+        resCode: payload.status,
+        statusText: payload.statusText,
       };
 
     case GET_CURRENT_USER_DETAILS_SUCCESS:
@@ -270,8 +270,8 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingUpdatePassword: false,
         isUpdatedPassword: true,
-        updatePasswordMessage: payload.data.message,
-        accessToken: payload.data.access_token,
+        updatePasswordMessage: payload.message,
+        accessToken: payload.access_token,
       };
 
     case UPDATE_PASSWORD_FAIL:
@@ -279,9 +279,7 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingUpdatePassword: false,
         isUpdatedPassword: false,
-        updatePasswordMessage: payload.response.data.message,
-        resCode: payload.response.status,
-        statusText: payload.response.statusText,
+        updatePasswordMessage: payload.message,
         accessToken: null,
       };
 
@@ -325,8 +323,8 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingUpdateUserInfo: false,
         isUpdatedUserInfo: true,
-        updateUserInfoMessage: payload.data.message,
-        accessToken: payload.data.access_token,
+        updateUserInfoMessage: payload.message,
+        accessToken: payload.access_token,
       };
 
     case UPDATE_USER_INFO_FAIL:
@@ -334,7 +332,7 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingUpdateUserInfo: false,
         isUpdatedUserInfo: false,
-        updateUserInfoMessage: payload.response.data.message,
+        updateUserInfoMessage: payload.message,
       };
 
     case DELETE_DP_SUCCESS:

@@ -232,6 +232,18 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
           "This email address is already in use. Please use a different email or sign in with your existing account.",
       });
     }
+
+    if (
+      auth.isSignedUp === false &&
+      auth.signedUpMessage ===
+        "This username is already in use. Please use a different username or sign in with your existing account."
+    ) {
+      setErrors({
+        ...errors,
+        UserName:
+          "This username is already in use. Please use a different username or sign in with your existing account.",
+      });
+    }
   }, [auth.isSignedUp, auth.signedUpMessage]);
 
   return (
@@ -312,6 +324,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
             <button>Continue</button>
           </div>
         </div>
+        {/* <div className={styles.CommonErrorMessage}>
+          {auth.signedUpMessage}
+        </div> */}
         <div className={styles.bottomDiv}>
           <p>
             Already have an account ? <Link href="/login"> Login</Link>

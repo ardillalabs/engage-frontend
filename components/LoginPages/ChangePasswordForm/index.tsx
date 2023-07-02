@@ -84,6 +84,19 @@ const ChangePasswordForm = ({updatePassword, auth}: Props) => {
   };
 
   useEffect(() => {
+    if (
+      auth.isUpdatedPassword === false &&
+      auth.updatePasswordMessage ===
+        "Incorrect password. Please try again with the correct password."
+    ) {
+      setErrors({
+        ...errors,
+        currentPassword: "Incorrect password. Please try again with the correct password.",
+      });
+    }
+  }, [auth.isUpdatedPassword, auth.updatePasswordMessage]);
+
+  useEffect(() => {
     if(auth.isUpdatedPassword)
       router.push('/dashboard')
   }, [auth.isUpdatedPassword])
