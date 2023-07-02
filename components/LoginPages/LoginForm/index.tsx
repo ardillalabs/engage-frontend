@@ -127,6 +127,7 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
     }
   }, [auth.isLoggedIn, auth.loggedInMessage]);
 
+  console.log(auth.isLoggedIn)
   useEffect(() => {
     if (auth.isLoggedIn) {
       router.push("/dashboard");

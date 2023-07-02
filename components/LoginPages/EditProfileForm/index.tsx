@@ -21,7 +21,7 @@ import { useRouter } from 'next/router';
 interface Props {
   getProfileDetails: (...args: any[]) => any;
   updateUserDetailsSubmit: (...args: any[]) => any;
-  auth: UserProfileUpdateDetails;
+  auth: any;
 }
 
 const EditProfileForm = ({
@@ -110,12 +110,7 @@ const EditProfileForm = ({
 
     if (!isData.PhoneNumber) {
       errors.PhoneNumber = 'The field is required';
-    } else if (
-      isData.PhoneNumber.length > 13 ||
-      isData.PhoneNumber.length < 10
-    ) {
-      errors.PhoneNumber = 'Phone number is invalid.';
-    }
+    } 
 
     if (!(errors.Name || errors.UserName || errors.PhoneNumber)) {
       updateUserDetailsSubmit(
@@ -130,6 +125,20 @@ const EditProfileForm = ({
 
     setErrors(errors);
   };
+
+  useEffect(() => {
+    if (
+      auth.isUpdatedUserInfo === false &&
+      auth.updateUserInfoMessage ===
+        "Username already exist."
+    ) {
+      setErrors({
+        ...errors,
+        UserName: "Username already exist.",
+      });
+    }
+  }, [auth.isUpdatedUserInfo, auth.updateUserInfoMessage]);
+
 
   useEffect(() => {
     if (auth.isUpdatedUserInfo) {

@@ -89,19 +89,19 @@ export const signUpSubmit =
         config
       );
 
-      dispatch({
-        type: REGISTER_SUCCESS,
-        payload: response,
-      });
-      // dispatch({
-      //   type: SET_TOAST_STATE,
-      //   payload: {
-      //     visibility: true,
-      //     type: "success",
-      //     title: "Success!",
-      //     description: `${response.data.message}`,
-      //   },
-      // });
+      if(response.data.success === true){
+        console.log(response)
+        dispatch({
+          type: REGISTER_SUCCESS,
+          payload: response.data,
+        });
+      } else {
+        console.log(response)
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: response.data
+        });
+      }
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
@@ -213,20 +213,17 @@ export const signInSubmit =
 
       console.log(response);
       
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: response,
-      });
-
-      // dispatch({
-      //   type: SET_TOAST_STATE,
-      //   payload: {
-      //     visibility: true,
-      //     type: "success",
-      //     title: "Success!",
-      //     description: `${response.data.message}`,
-      //   },
-      // });
+      if(response.data.success === true) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: response.data,
+        });
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: response.data,
+        });
+      }
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
@@ -543,7 +540,7 @@ export const resendEmailVerification =
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4Mjk1NTkyLCJleHAiOjE2ODgyOTgxODR9.sqeEVFM8QGrnXOweMZv5d4GXN1NkP6HkV0ybDXyf_o4'
     dispatch({
       type: SET_UPDATE_PASSWORD_IS_LOADING,
     });
@@ -572,21 +569,38 @@ export const updatePassword =
         body,
         config
       );
+      console.log(response.data)
+      if(response.data.success === true) {       
+        dispatch({
+          type: UPDATE_PASSWORD_SUCCESS,
+          payload: response.data,
+        });
+        
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "success",
+            title: "Success!",
+            description: `${response.data.message}`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_PASSWORD_FAIL,
+          payload:response.data
+        });
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Error`,
+          },
+        });
+      }
 
-      dispatch({
-        type: UPDATE_PASSWORD_SUCCESS,
-        payload: response,
-      });
-
-      dispatch({
-        type: SET_TOAST_STATE,
-        payload: {
-          visibility: true,
-          type: "success",
-          title: "Success!",
-          description: `${response.data.message}`,
-        },
-      });
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
@@ -1167,7 +1181,7 @@ export const signOut =
 
   export const getProfileDetails =
   (access_token: string) => async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
     // API Header configarations
     const config = {
       headers: {
@@ -1195,7 +1209,7 @@ export const signOut =
   export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU'
+    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
     dispatch({
       type: SET_LOADING_UPDATE_USER_INFO,
     });
@@ -1227,20 +1241,29 @@ export const signOut =
         config
       );
 
-      dispatch({
-        type: UPDATE_USER_INFO_SUCCESS,
-        payload: response,
-      });
+      console.log(response)
 
-      dispatch({
-        type: SET_TOAST_STATE,
-        payload: {
-          visibility: true,
-          type: "success",
-          title: "Success!",
-          description: `${response.data.message}`,
-        },
-      });
+      if(response.data.success === true){       
+        dispatch({
+          type: UPDATE_USER_INFO_SUCCESS,
+          payload: response.data,
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "success",
+            title: "Success!",
+            description: `${response.data.message}`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: response.data,
+        });
+      }
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
