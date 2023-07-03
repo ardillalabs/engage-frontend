@@ -70,8 +70,6 @@ const DashboardBody = () => {
   const [dailyMessage, setDailyMessage] = useState("Loading...");
   const [wellnessExcercise, setWellnessExcercise] = useState("Loading...");
 
-  console.log(`${year}-${monthNum}-${day}`);
-
   const dailyMessageFetch = async () => {
     try {
       // const res = await fetch(

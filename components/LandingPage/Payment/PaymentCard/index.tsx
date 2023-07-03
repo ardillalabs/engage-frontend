@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import { IpaymentPlan } from "../../../../tsc-types/paymentTypes";
+import Link from "next/link";
 
 interface props {
   plan: IpaymentPlan;
@@ -21,9 +22,11 @@ const PaymentCard = ({ plan }: props) => {
               ))}
             </ul>
             <div className={styles.priceDiv}>{plan.price}</div>
-            <div className={styles.signupButtonDiv}>
-              <button>Sign Up Now</button>
-            </div>
+            <Link href="/sign-up">
+              <div className={styles.signupButtonDiv}>
+                <button>Sign Up Now</button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

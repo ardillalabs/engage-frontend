@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import SignUpSteps from "../SignUpSteps";
 import AddSupportMembers from "../AddSupportMembers";
 import Image from "next/image";
+
+// redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store";
+import {
+  getSupportGroup,
+  deleteSupporter,
+} from "../../../actions/SupportGroup";
 
 interface teamMemberArray {
   userID: string;
@@ -11,58 +20,29 @@ interface teamMemberArray {
   email: string;
 }
 
-const SupportGroupForm = () => {
+const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
+  useEffect(() => {
+    getSupportGroup(1);
+  }, [supportGroup.supportGroup.length]);
+  const [teamMemberData, setTeamMemberData] = useState<any | null>(null);
+
+  const group: any =
+    supportGroup.supportGroup &&
+    supportGroup.supportGroup.map((supporter: any, index: any) => {
+      const support = {
+        userID: auth.id,
+        userName: supporter.support_user?.full_name
+          ? supporter.support_user?.full_name
+          : "unknown Name",
+        imageURL: supporter.support_user?.image_url
+          ? supporter.support_user.image_url
+          : "/dummy450x450.jpg",
+        email: supporter?.email,
+      };
+      return support;
+    });
+
   // Test Data
-  const [teamMemberData, setTeamMemberData] = useState([
-    {
-      userID: "U0001",
-      userName: "Test1",
-      imageURL: "https://source.unsplash.com/3TLl_97HNJo",
-      email: "test1@gmail.com",
-    },
-    {
-      userID: "U0002",
-      userName: "Test2",
-      imageURL: "https://source.unsplash.com/mEZ3PoFGs_k",
-      email: "test2@gmail.com",
-    },
-    {
-      userID: "U0003",
-      userName: "Test3",
-      imageURL: "https://source.unsplash.com/O3ymvT7Wf9U",
-      email: "test3@gmail.com",
-    },
-    {
-      userID: "U0004",
-      userName: "Test4",
-      imageURL: "https://source.unsplash.com/d1UPkiFd04A",
-      email: "test4@gmail.com",
-    },
-    {
-      userID: "U0005",
-      userName: "Test5",
-      imageURL: "https://source.unsplash.com/iFgRcqHznqg",
-      email: "test5@gmail.com",
-    },
-    {
-      userID: "U0006",
-      userName: "Test6",
-      imageURL: "https://source.unsplash.com/00ByEXKcSkA",
-      email: "test6@gmail.com",
-    },
-    {
-      userID: "U0007",
-      userName: "Test7",
-      imageURL: "https://source.unsplash.com/_KaMTEmJnxY",
-      email: "test7@gmail.com",
-    },
-    {
-      userID: "U0008",
-      userName: "Test8",
-      imageURL: "https://source.unsplash.com/JghQQDI4QWg",
-      email: "test8@gmail.com",
-    },
-  ]);
 
   const changeTeamMemberData = (data: teamMemberArray[]) => {
     setTeamMemberData(data);
@@ -100,36 +80,38 @@ const SupportGroupForm = () => {
                 <div className={styles.teamShowcase}>
                   <span>Team</span>
                   <div className={styles.showcaseImages}>
-                    {teamMemberData.map(({ imageURL }, i) => {
-                      return (
-                        <div key={i} className={styles.showcaseImageWrapper}>
-                          <Image
-                            src={imageURL}
-                            width={40}
-                            height={40}
-                            alt="Team Member Profile Picture"
-                            className={styles.showcaseImage}
-                          />
-                        </div>
-                      );
-                    })}
+                    {group &&
+                      group.map((team: any, i: number) => {
+                        return (
+                          <div key={i} className={styles.showcaseImageWrapper}>
+                            <Image
+                              src={team?.imageURL}
+                              width={40}
+                              height={40}
+                              alt="Team Member Profile Picture"
+                              className={styles.showcaseImage}
+                            />
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </div>
             </div>
             <AddSupportMembers
-              teamMemberData={teamMemberData}
+              teamMemberData={group}
               changeTeamMemberData={changeTeamMemberData}
             />
 
             <div className={styles.teamEmails}>
-              {teamMemberData.map(({ email }, i) => {
-                return (
-                  <div className={styles.teamEmail} key={i}>
-                    {email}
-                  </div>
-                );
-              })}
+              {group &&
+                group.map((team: any, i: number) => {
+                  return (
+                    <div className={styles.teamEmail} key={i}>
+                      {team?.email}
+                    </div>
+                  );
+                })}
             </div>
 
             <button className={styles.submitBtn}>
@@ -142,4 +124,15 @@ const SupportGroupForm = () => {
   );
 };
 
-export default SupportGroupForm;
+SupportGroupForm.propTypes = {
+  getSupportGroup: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+  supportGroup: state.supportGroup,
+});
+
+export default connect(mapStateToProps, {
+  getSupportGroup,
+})(SupportGroupForm);

@@ -39,7 +39,7 @@ import {
   SET_LOADING_SIGN_OUT,
   SET_TOAST_STATE,
   GET_USER_PROFILE_DETAILS_SUCCESS,
-  GET_CURRENT_USER_PROFILE_DETAILS_FAIL
+  GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
 } from "../types";
 import {
   CreateNewPasswordDetails,
@@ -52,7 +52,7 @@ import {
 
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
-const AUTH_BASE_URL = 'http://localhost:5001/auth/users'
+const AUTH_BASE_URL = "http://localhost:5001/auth/users";
 
 // @desc        Sign up user
 // @api         auth/signup
@@ -165,8 +165,8 @@ export const getCurrentUserDetails =
     };
 
     try {
-      const response  = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
-      
+      const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
+
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,
         payload: response,
@@ -540,7 +540,8 @@ export const resendEmailVerification =
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4Mjk1NTkyLCJleHAiOjE2ODgyOTgxODR9.sqeEVFM8QGrnXOweMZv5d4GXN1NkP6HkV0ybDXyf_o4'
+    access_token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
     dispatch({
       type: SET_UPDATE_PASSWORD_IS_LOADING,
     });
@@ -1179,9 +1180,10 @@ export const signOut =
     }
   };
 
-  export const getProfileDetails =
+export const getProfileDetails =
   (access_token: string) => async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
+    access_token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
     // API Header configarations
     const config = {
       headers: {
@@ -1192,8 +1194,8 @@ export const signOut =
     };
 
     try {
-      const response  = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
-      
+      const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
+
       dispatch({
         type: GET_USER_PROFILE_DETAILS_SUCCESS,
         payload: response,
@@ -1206,10 +1208,11 @@ export const signOut =
     }
   };
 
-  export const updateUserDetailsSubmit =
+export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
   async (dispatch: AppDispatch) => {
-    access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1Y2Nlc3MiOnRydWUsInN1Y2Nlc3NfY29kZSI6MjAwLCJtZXNzYWdlIjoiVXNlciBkZXRhaWxzIGFyZSByZXRyaXZlZCBzdWNjZXNzZnVsbHkiLCJpZCI6IjEifSwiaWF0IjoxNjg4MzAwODM1LCJleHAiOjE2ODgzMDM0Mjd9.HZWA_2SwRu6bMdIHheEwTQo0Z2yzlmxuGpcKjIO-KEc'
+    access_token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
     dispatch({
       type: SET_LOADING_UPDATE_USER_INFO,
     });
@@ -1231,8 +1234,6 @@ export const signOut =
       username: userProfileUpdateDetails.username,
       phone_number: userProfileUpdateDetails.phone_number,
     });
-
-    console.log('body', body);
 
     try {
       const response = await axios.put(

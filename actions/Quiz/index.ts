@@ -6,12 +6,12 @@ import {
   QUESTION_LIST_FAIL,
   SET_TOAST_STATE,
   SEND_QUIZ_MARKS_SUCCESS,
-  SEND_QUIZ_MARKS_FAIL
+  SEND_QUIZ_MARKS_FAIL,
 } from "../types";
 
 import axios from "axios";
 // const BASE_URL = "https://engage-backend-production.up.railway.app/api/";
-const BASE_URL = "http://localhost:5000/api/"
+const BASE_URL = "http://localhost:5000/api/";
 export const getQuestionList =
   (quizId: number) => async (dispatch: AppDispatch) => {
     try {
@@ -20,7 +20,6 @@ export const getQuestionList =
       });
       await axios.get(`${BASE_URL}question/${quizId}`).then((response) => {
         const data: Quiz[] = response.data;
-        console.log(data)
         const permissions: any = data.map((item: any) => item);
         dispatch({
           type: QUESTION_LIST_SUCCESS,
@@ -35,7 +34,8 @@ export const getQuestionList =
   };
 
 export const quizMarksSubmit =
-  (quizId: number, userId: number, marks: number) => async (dispatch: AppDispatch) => {
+  (quizId: number, userId: number, marks: number) =>
+  async (dispatch: AppDispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -45,9 +45,8 @@ export const quizMarksSubmit =
     const body = JSON.stringify({
       quizId: quizId,
       userId: userId,
-      marks: marks
-    })
-    console.log("body", body)
+      marks: marks,
+    });
     try {
       const response = await axios.post(`${BASE_URL}quiz_mark`, body, config);
       dispatch({

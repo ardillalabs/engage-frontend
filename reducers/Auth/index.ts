@@ -37,7 +37,7 @@ import {
   SIGN_OUT_FAIL,
   SET_LOADING_SIGN_OUT,
   GET_USER_PROFILE_DETAILS_SUCCESS,
-  GET_CURRENT_USER_PROFILE_DETAILS_FAIL
+  GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
 } from "../../actions/types";
 
 const initialState: any = {
@@ -546,7 +546,6 @@ export default function (state = initialState, action: AnyAction) {
       };
 
     case RESEND_EMAIL_VERIFICATION_SUCCESS:
-      console.log(payload.data.message, "RanSuccess");
       return {
         ...state,
         isLoadingResendVerification: false,
@@ -556,7 +555,6 @@ export default function (state = initialState, action: AnyAction) {
       };
 
     case RESEND_EMAIL_VERIFICATION_FAIL:
-      console.log(payload.response.data.message, "RanFail");
       return {
         ...state,
         isLoadingResendVerification: false,
@@ -629,24 +627,24 @@ export default function (state = initialState, action: AnyAction) {
         resCode: null,
         statusText: null,
       };
-    
+
     case GET_USER_PROFILE_DETAILS_SUCCESS:
       return {
         ...state,
         email: payload.data.email,
         full_name: payload.data.full_name,
         phone_number: payload.data.phone_number,
-        username: payload.data.username
-      }
+        username: payload.data.username,
+      };
 
-      case GET_CURRENT_USER_PROFILE_DETAILS_FAIL:
+    case GET_CURRENT_USER_PROFILE_DETAILS_FAIL:
       return {
         ...state,
         email: null,
         full_name: null,
         phone_number: null,
-        username: null
-      }
+        username: null,
+      };
     default:
       return state;
   }
