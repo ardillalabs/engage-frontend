@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./index.module.css";
 import Image from "next/image";
-import { RiDeleteBin6Fill } from "react-icons/ri";
+import styles from "./index.module.css";
 import { IoMdClose } from "react-icons/io";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import React, { useRef, useState } from "react";
 
 // redux
 import PropTypes from "prop-types";

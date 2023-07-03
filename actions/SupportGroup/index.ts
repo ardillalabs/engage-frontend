@@ -9,7 +9,6 @@ import {
   SUPPORTER_DELETE,
   FAIL_SUPPORTER_DELETE,
 } from "../types";
-import { UserSignUpDetails } from "../../tsc-types/Auth";
 
 // Import environment variables
 const BASE_URL = process.env.BASE_URL;
@@ -44,15 +43,6 @@ export const addSupportPerson =
         payload: response,
       });
       getSupportGroup(1);
-      // dispatch({
-      //   type: SET_TOAST_STATE,
-      //   payload: {
-      //     visibility: true,
-      //     type: "success",
-      //     title: "Success!",
-      //     description: `${response.data.message}`,
-      //   },
-      // });
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
