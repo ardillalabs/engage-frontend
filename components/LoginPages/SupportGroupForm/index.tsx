@@ -24,7 +24,6 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
   useEffect(() => {
     getSupportGroup(1);
   }, [supportGroup.supportGroup.length]);
-  // console.log(supportGroup.supportGroup, "ss");
   const [teamMemberData, setTeamMemberData] = useState<any | null>(null);
 
   const group: any =
@@ -43,12 +42,7 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
       return support;
     });
 
-  // setTeamMemberData(group);
-
-  console.log(group);
   // Test Data
-
-  // console.log(teamMemberData);
 
   const changeTeamMemberData = (data: teamMemberArray[]) => {
     setTeamMemberData(data);

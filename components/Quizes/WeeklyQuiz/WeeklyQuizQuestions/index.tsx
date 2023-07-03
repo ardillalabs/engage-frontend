@@ -165,7 +165,7 @@ interface Props {
 const WeeklyQuizQuestions = ({
   getQuestionList,
   quiz: { questionList },
-  quizMarksSubmit
+  quizMarksSubmit,
 }: Props) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(false);
@@ -175,21 +175,18 @@ const WeeklyQuizQuestions = ({
   const [showStart, setStart] = useState(true);
   const [score, setScore] = useState(0);
   const [result, setResult] = useState(0);
-  const [isData, setData] = useState(false)
+  const [isData, setData] = useState(false);
 
   useEffect(() => {
     getQuestionList(1);
   }, [getQuestionList]);
 
-  console.log(isData);
-
   useEffect(() => {
-    console.log(questionList);
-    if(questionList.length >0) {
-      setData(true)
+    if (questionList.length > 0) {
+      setData(true);
     }
   });
-  console.log(isData);
+
   const showWeeklyQuestions = () => {
     if (questionList !== null) {
       setStart(false);
@@ -199,20 +196,15 @@ const WeeklyQuizQuestions = ({
 
   const onClickNext = () => {
     setSelectedAnswerIndex(-1);
-    console.log("score", score);
-    console.log(result);
     setResult((prevResult) => prevResult + score); // Add the current score to the result
     if (activeStep < questionList.length - 1) {
       setActiveQuestion((prev) => prev + 1);
       setActiveStep((prev) => prev + 1);
-      console.log(activeStep, questionList.length);
     } else {
       setShowQuiz(false);
       setResult((prevResult) => prevResult + score); // Add the current score to the final result
-      console.log("Quiz is finished");
-      const finalScore = result + score
-      console.log("Final Result:", result + score, finalScore); // Log the final result
-      quizMarksSubmit(1, 1, finalScore)
+      const finalScore = result + score; // Log the final result
+      quizMarksSubmit(1, 1, finalScore);
     }
   };
 
@@ -220,111 +212,171 @@ const WeeklyQuizQuestions = ({
     setSelectedAnswerIndex(id);
     setSelectedAnswer(true);
     setScore(score);
-    console.log(score, result);
   };
 
   if (showStart) {
-    console.log(showStart);
     <SubHeader text="Let's establish your baseline mood for this week." />;
   }
 
-  console.log("index", selectedAnswerIndex);
   // const { questions } = quiz1;
   // const { questionNumber, question, questionWord, options } =
   //   questions[activeQuestion];
 
   return (
     <div className={styles.mainDiv}>
-      <div> {!isData ? ( <div> 
-        <div className={styles.componentDiv}>
-              <div
-                className={styles.initialDiv}>
+      <div>
+        {" "}
+        {!isData ? (
+          <div>
+            <div className={styles.componentDiv}>
+              <div className={styles.initialDiv}>
                 <div className={styles.title}>Loading....</div>
                 <div className={styles.bodyText}>Thanks for waiting!</div>
               </div>
             </div>
-      </div>): (<>
-        <>
-        {showStart && (
-          <SubHeader text="Let's establish your baseline mood for this week." />
-        )}
-      </>
-      <div className={`${showQuiz ? styles.stepsDiv : styles.hideSteps}`}>
-        {[...Array(10)].map((_, index) => (
-          <div
-            key={index}
-            className={
-              activeQuestion === index
-                ? styles.activeQuestion
-                : styles.inactiveQuestion
-            }
-          ></div>
-        ))}
-      </div>
-      <div
-        className={`${!showQuiz && !showStart ? styles.stepsDiv : styles.hideSteps
-          }`}
-      ></div>
-      {showStart ? (
-        <div className={styles.componentDiv}>
-          <div className={styles.bodyDiv}>
-            Please fill out this 10 question quiz to see where you are at!
           </div>
-          <div className={styles.questionNoDiv}>
-            {Array.from({ length: 10 }, (_, index) => (
-              <button key={index + 1}>{index + 1}</button>
-            ))}
-          </div>
-          <div className={styles.questionNoDivMobile}>
-            <div className={styles.topQuesNoDiv}>
-              {Array.from({ length: 5 }, (_, index) => (
-                <button key={index + 1}>{index + 1}</button>
+        ) : (
+          <>
+            <>
+              {showStart && (
+                <SubHeader text="Let's establish your baseline mood for this week." />
+              )}
+            </>
+            <div className={`${showQuiz ? styles.stepsDiv : styles.hideSteps}`}>
+              {[...Array(10)].map((_, index) => (
+                <div
+                  key={index}
+                  className={
+                    activeQuestion === index
+                      ? styles.activeQuestion
+                      : styles.inactiveQuestion
+                  }
+                ></div>
               ))}
             </div>
-            <div className={styles.bottomQuesNoDiv}>
-              {Array.from({ length: 5 }, (_, index) => (
-                <button key={index + 6}>{index + 6}</button>
-              ))}
-            </div>
-          </div>
-          <div className={styles.buttonDiv}>
-            <button onClick={showWeeklyQuestions}>Start Quiz</button>
-          </div>
-        </div>
-      ) : (
-        <>
-          {showQuiz ? (
-            <section>
+            <div
+              className={`${
+                !showQuiz && !showStart ? styles.stepsDiv : styles.hideSteps
+              }`}
+            ></div>
+            {showStart ? (
               <div className={styles.componentDiv}>
-                <div className={styles.quetionText}>{questionList[activeQuestion]?.description}</div>
-                <div className={styles.questionWord}>
-                  <button disabled>
-                    {activeQuestion + 1}.{questionList[activeQuestion]?.keyword}
-                  </button>
+                <div className={styles.bodyDiv}>
+                  Please fill out this 10 question quiz to see where you are at!
                 </div>
-                <ul>
-                  <li onClick={() => onAnswerSelected(questionList[activeQuestion]?.option1_score, 0)} className={
-                    selectedAnswerIndex === 0
-                      ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
-                      : styles.selectedAnswer}>{questionList[activeQuestion]?.option1}</li>
-                  <li onClick={() => onAnswerSelected(questionList[activeQuestion].option2_score, 1)} className={
-                    selectedAnswerIndex === 1
-                      ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
-                      : styles.selectedAnswer}>{questionList[activeQuestion]?.option2}</li>
-                  <li onClick={() => onAnswerSelected(questionList[activeQuestion].option3_score, 2)} className={
-                    selectedAnswerIndex === 2
-                      ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
-                      : styles.selectedAnswer}>{questionList[activeQuestion]?.option3}</li>
-                  <li onClick={() => onAnswerSelected(questionList[activeQuestion].option4_score, 3)} className={
-                    selectedAnswerIndex === 3
-                      ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
-                      : styles.selectedAnswer}>{questionList[activeQuestion]?.option4}</li>
-                  <li onClick={() => onAnswerSelected(questionList[activeQuestion].option5_score, 4)} className={
-                    selectedAnswerIndex === 4
-                      ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
-                      : styles.selectedAnswer}>{questionList[activeQuestion]?.option5}</li>
-                </ul>
-                {/* <ul>
+                <div className={styles.questionNoDiv}>
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <button key={index + 1}>{index + 1}</button>
+                  ))}
+                </div>
+                <div className={styles.questionNoDivMobile}>
+                  <div className={styles.topQuesNoDiv}>
+                    {Array.from({ length: 5 }, (_, index) => (
+                      <button key={index + 1}>{index + 1}</button>
+                    ))}
+                  </div>
+                  <div className={styles.bottomQuesNoDiv}>
+                    {Array.from({ length: 5 }, (_, index) => (
+                      <button key={index + 6}>{index + 6}</button>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.buttonDiv}>
+                  <button onClick={showWeeklyQuestions}>Start Quiz</button>
+                </div>
+              </div>
+            ) : (
+              <>
+                {showQuiz ? (
+                  <section>
+                    <div className={styles.componentDiv}>
+                      <div className={styles.quetionText}>
+                        {questionList[activeQuestion]?.description}
+                      </div>
+                      <div className={styles.questionWord}>
+                        <button disabled>
+                          {activeQuestion + 1}.
+                          {questionList[activeQuestion]?.keyword}
+                        </button>
+                      </div>
+                      <ul>
+                        <li
+                          onClick={() =>
+                            onAnswerSelected(
+                              questionList[activeQuestion]?.option1_score,
+                              0
+                            )
+                          }
+                          className={
+                            selectedAnswerIndex === 0
+                              ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                              : styles.selectedAnswer
+                          }
+                        >
+                          {questionList[activeQuestion]?.option1}
+                        </li>
+                        <li
+                          onClick={() =>
+                            onAnswerSelected(
+                              questionList[activeQuestion].option2_score,
+                              1
+                            )
+                          }
+                          className={
+                            selectedAnswerIndex === 1
+                              ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                              : styles.selectedAnswer
+                          }
+                        >
+                          {questionList[activeQuestion]?.option2}
+                        </li>
+                        <li
+                          onClick={() =>
+                            onAnswerSelected(
+                              questionList[activeQuestion].option3_score,
+                              2
+                            )
+                          }
+                          className={
+                            selectedAnswerIndex === 2
+                              ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                              : styles.selectedAnswer
+                          }
+                        >
+                          {questionList[activeQuestion]?.option3}
+                        </li>
+                        <li
+                          onClick={() =>
+                            onAnswerSelected(
+                              questionList[activeQuestion].option4_score,
+                              3
+                            )
+                          }
+                          className={
+                            selectedAnswerIndex === 3
+                              ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                              : styles.selectedAnswer
+                          }
+                        >
+                          {questionList[activeQuestion]?.option4}
+                        </li>
+                        <li
+                          onClick={() =>
+                            onAnswerSelected(
+                              questionList[activeQuestion].option5_score,
+                              4
+                            )
+                          }
+                          className={
+                            selectedAnswerIndex === 4
+                              ? `${styles.selectedAnswer} ${styles.selectedAnswerClicked}`
+                              : styles.selectedAnswer
+                          }
+                        >
+                          {questionList[activeQuestion]?.option5}
+                        </li>
+                      </ul>
+                      {/* <ul>
                   {options.map((option) => (
                     <li
                       onClick={() => onAnswerSelected(option.score, option.id)}
@@ -339,48 +391,61 @@ const WeeklyQuizQuestions = ({
                     </li>
                   ))}
                 </ul> */}
-                <button className={selectedAnswer ? styles.nextButton : styles.nextButtonDisabled} onClick={onClickNext}>
-                  Next
-                </button>
-              </div>
-            </section>
-          ) : (
-            <div className={styles.componentDiv}>
-              <div
-                className={`${styles.wrapperDiv} ${!showQuiz && !showStart ? "" : styles.hideFinishDiv
-                  }`}
-              >
-                <div className={styles.circleDiv}>
-                  <div className={styles.innerCircleDiv}>
-                    {/* <AiOutlineCheckCircle size={60}/> */}
-                    <AiFillCheckCircle />
+                      <button
+                        className={
+                          selectedAnswer
+                            ? styles.nextButton
+                            : styles.nextButtonDisabled
+                        }
+                        onClick={onClickNext}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </section>
+                ) : (
+                  <div className={styles.componentDiv}>
+                    <div
+                      className={`${styles.wrapperDiv} ${
+                        !showQuiz && !showStart ? "" : styles.hideFinishDiv
+                      }`}
+                    >
+                      <div className={styles.circleDiv}>
+                        <div className={styles.innerCircleDiv}>
+                          {/* <AiOutlineCheckCircle size={60}/> */}
+                          <AiFillCheckCircle />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`${styles.finishDiv} ${
+                        !showQuiz && !showStart ? "" : styles.hideFinishDiv
+                      }`}
+                    >
+                      <div className={styles.title}>Finished</div>
+                      <div className={styles.bodyText}>
+                        Thanks for your time!
+                      </div>
+                      <Link href="/dashboard">
+                        <div className={styles.finishButton}>
+                          <button>Back to Profile</button>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div
-                className={`${styles.finishDiv} ${!showQuiz && !showStart ? "" : styles.hideFinishDiv
-                  }`}
-              >
-                <div className={styles.title}>Finished</div>
-                <div className={styles.bodyText}>Thanks for your time!</div>
-                <Link href="/dashboard">
-                  <div className={styles.finishButton}>
-                    <button>Back to Profile</button>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          )}
-        </>
-      )}
-      </>)}</div>
+                )}
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
 WeeklyQuizQuestions.propTypes = {
   getQuestionList: PropTypes.func.isRequired,
-  quizMarksSubmit: PropTypes.func.isRequired
+  quizMarksSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -388,5 +453,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 export default connect(mapStateToProps, {
-  getQuestionList, quizMarksSubmit
+  getQuestionList,
+  quizMarksSubmit,
 })(WeeklyQuizQuestions);
