@@ -7,64 +7,43 @@ import Link from "next/link";
 import useDate from "@/hooks/useDate";
 import Barchart from "../Barchart";
 
+// redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store";
+import {
+  getSupportGroup,
+  deleteSupporter,
+} from "../../../actions/SupportGroup";
+
 interface teamMemberArray {
   userID: string;
   userName: string;
   imageURL: string;
   email: string;
 }
-const DashboardBody = () => {
+const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
+  useEffect(() => {
+    getSupportGroup(1);
+  }, [supportGroup.supportGroup.length]);
   // Test Data
-  const [teamMemberData, setTeamMemberData] = useState([
-    {
-      userID: "U0001",
-      userName: "Test1",
-      imageURL: "https://source.unsplash.com/3TLl_97HNJo",
-      email: "test1@gmail.com",
-    },
-    {
-      userID: "U0002",
-      userName: "Test2",
-      imageURL: "https://source.unsplash.com/mEZ3PoFGs_k",
-      email: "test2@gmail.com",
-    },
-    {
-      userID: "U0003",
-      userName: "Test3",
-      imageURL: "https://source.unsplash.com/O3ymvT7Wf9U",
-      email: "test3@gmail.com",
-    },
-    {
-      userID: "U0004",
-      userName: "Test4",
-      imageURL: "https://source.unsplash.com/d1UPkiFd04A",
-      email: "test4@gmail.com",
-    },
-    {
-      userID: "U0005",
-      userName: "Test5",
-      imageURL: "https://source.unsplash.com/iFgRcqHznqg",
-      email: "test5@gmail.com",
-    },
-    {
-      userID: "U0006",
-      userName: "Test6",
-      imageURL: "https://source.unsplash.com/00ByEXKcSkA",
-      email: "test6@gmail.com",
-    },
-    {
-      userID: "U0007",
-      userName: "Test7",
-      imageURL: "https://source.unsplash.com/_KaMTEmJnxY",
-      email: "test7@gmail.com",
-    },
-    {
-      userID: "U0008",
-      userName: "Test8",
-      imageURL: "https://source.unsplash.com/JghQQDI4QWg",
-      email: "test8@gmail.com",
-    },
-  ]);
+  const [teamMemberData, setTeamMemberData] = useState<any>(null);
+
+  const group: any =
+    supportGroup.supportGroup &&
+    supportGroup.supportGroup.map((supporter: any, index: any) => {
+      const support = {
+        userID: auth.id,
+        userName: supporter.support_user?.full_name
+          ? supporter.support_user?.full_name
+          : "unknown Name",
+        imageURL: supporter.support_user?.image_url
+          ? supporter.support_user.image_url
+          : "/dummy450x450.jpg",
+        email: supporter?.email,
+      };
+      return support;
+    });
 
   const { day, monthNum, year } = useDate();
   const [dailyMessage, setDailyMessage] = useState("Loading...");
@@ -195,7 +174,7 @@ const DashboardBody = () => {
           </span>
           <div className={styles.memberTreeWrapper}>
             <MemberTree
-              teamMemberData={teamMemberData}
+              teamMemberData={group}
               changeTeamMemberData={changeTeamMemberData}
             />
           </div>
@@ -222,4 +201,15 @@ const DashboardBody = () => {
   );
 };
 
-export default DashboardBody;
+DashboardBody.propTypes = {
+  getSupportGroup: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+  supportGroup: state.supportGroup,
+});
+
+export default connect(mapStateToProps, {
+  getSupportGroup,
+})(DashboardBody);
