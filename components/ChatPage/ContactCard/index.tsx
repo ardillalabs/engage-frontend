@@ -9,6 +9,7 @@ const ContactCard = ({
   imageURL,
   lastMessage,
   lastMessageTime,
+  unreadCount,
 }: {
   path: string;
   userID: string;
@@ -16,6 +17,7 @@ const ContactCard = ({
   imageURL?: string;
   lastMessage?: string;
   lastMessageTime?: any;
+  unreadCount?: number;
 }) => {
   const router = useRouter();
 
@@ -43,7 +45,12 @@ const ContactCard = ({
       </div>
       <div className={styles.contactRight}>
         <div className="body-font">{lastMessageTime}</div>
-        <div className={styles.msgCounter}>6</div>
+
+        {unreadCount ? (
+          <div className={styles.msgCounter}>{unreadCount}</div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

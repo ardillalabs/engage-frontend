@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import AllMessages from "../AllMessages";
 
 interface userDataArray {
+  userID: string;
   username: string;
   imageURL?: string;
 }
@@ -17,6 +18,7 @@ const ChatBox = () => {
   const router = useRouter();
   const chatID = router.query.chatID;
   const [userData, setUserData] = useState<userDataArray>();
+  const [allUserData, setAllUserData] = useState<any>();
 
   useEffect(() => {
     let res: any;
@@ -25,20 +27,42 @@ const ChatBox = () => {
       try {
         res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
       } catch (error) {
-        console.log("Failed to fetch user info", error);
+        // console.log("Failed to fetch user info", error);
+        throw new Error("failed to fetch userInfo");
       }
 
       await res.json().then((users: any) => {
+        setAllUserData(users);
         users.map((user: any) => {
           if (user.chat_id === chatID) {
             const support_user = user.support_user;
             setUserData({
+              userID: support_user.id,
               username: support_user.full_name,
               imageURL: support_user.image_url,
             });
           }
         });
       });
+    };
+
+    userInfoFetch();
+  }, []);
+
+  useEffect(() => {
+    const userInfoFetch = () => {
+      if (allUserData) {
+        allUserData.map((user: any) => {
+          if (user.chat_id === chatID) {
+            const support_user = user.support_user;
+            setUserData({
+              userID: support_user.id,
+              username: support_user.full_name,
+              imageURL: support_user.image_url,
+            });
+          }
+        });
+      }
     };
 
     userInfoFetch();
@@ -71,7 +95,7 @@ const ChatBox = () => {
       <div className={styles.chatBox}>
         <AllMessages username={userData?.username} />
       </div>
-      <ChatInput />
+      <ChatInput recUserID={userData?.userID} />
     </div>
   );
 };
