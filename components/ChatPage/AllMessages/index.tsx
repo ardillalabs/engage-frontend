@@ -2,23 +2,32 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import {
   DocumentData,
+  addDoc,
   collection,
+  doc,
   onSnapshot,
   orderBy,
   query,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import MessageBlock from "../MessageBlock";
 import Message from "../Message";
 import useDate from "@/hooks/useDate";
+import { useRouter } from "next/router";
 
-const AllMessages = () => {
+const AllMessages = ({ username }: any) => {
   const { dateString, day, month, year } = useDate();
   const [messages, setMessages] = useState<DocumentData>([]);
 
   // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
   const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
-  const chatID = "1X0ttXRbAcoLCHZC07X1";
+  // const chatID = "1X0ttXRbAcoLCHZC07X1";
+  const router = useRouter();
+  const [chatID, setChatID] = useState<any>(router.query.chatID);
+  useEffect(() => {
+    setChatID(router.query.chatID);
+  }, [router.query.chatID]);
 
   const monthNames = [
     "January",
@@ -40,10 +49,20 @@ const AllMessages = () => {
       collection(db, "chatMessages", chatID, "messages"),
       orderBy("messageTime")
     );
+    const docRef = doc(db, "chatMessages", chatID);
+
     onSnapshot(colRef, (snapshot) => {
       setMessages(snapshot.docs);
+      const lastMessageID = snapshot.docs[snapshot.docs.length - 1].id;
+      try {
+        setDoc(docRef, {
+          lastMessageID: lastMessageID,
+        });
+      } catch (error) {
+        console.log("Failed to post message", error);
+      }
     });
-  }, []);
+  }, [chatID]);
 
   return (
     <div className={styles.messageBlock}>
@@ -75,7 +94,7 @@ const AllMessages = () => {
         });
 
         return (
-          <>
+          <div key={i}>
             {startPos && (
               <div className={styles.messageDate}>{messageDate}</div>
             )}
@@ -84,20 +103,20 @@ const AllMessages = () => {
             )}
             {startPos && (
               <MessageBlock
-                key={i}
                 reversed={reversed}
                 messageTime={messageTime}
+                username={username}
               />
             )}
             {messageBlock && (
               <MessageBlock
-                key={i}
                 reversed={reversed}
                 messageTime={messageTime}
+                username={username}
               />
             )}
             <Message message={messageData.message} reversed={reversed} />
-          </>
+          </div>
         );
       })}
     </div>

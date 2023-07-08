@@ -1,28 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import { BiMicrophone } from "react-icons/bi";
 import { ImAttachment } from "react-icons/im";
 import { IoSend } from "react-icons/io5";
 
 // firebase
-import {
-  doc,
-  setDoc,
-  collection,
-  addDoc,
-  serverTimestamp,
-  Firestore,
-} from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase/config";
+import { useRouter } from "next/router";
 
 const ChatInput = () => {
   // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-  // const rec_userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
-
-  const rec_userID = "jccI1Kzu7VSFhOOsxKVo"; // JohnDoe
   const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
 
-  const chatID = "1X0ttXRbAcoLCHZC07X1";
+  const router = useRouter();
+  const [chatID, setChatID] = useState<any>(router.query.chatID);
+  const [recUserID, setRecUserID] = useState("");
+  useEffect(() => {
+    //Get current chatID
+    setChatID(router.query.chatID);
+
+    //Get current reciever user ID
+    let res;
+    setRecUserID("");
+    const fetchRecieverID = async () => {
+      try {
+        res = await fetch("http://localhost:5000/api/support_group/2");
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch chat list");
+      }
+
+      await res.json().then((users: any) => {
+        users.map((user: any) => {
+          if (user.chat_id === chatID) {
+            const support_user = user.support_user;
+            setRecUserID(() => support_user.id);
+          }
+        });
+      });
+    };
+
+    fetchRecieverID();
+  }, [router.query.chatID]);
 
   // Update data to firestore
   const handleSubmit = async (e: any) => {
@@ -34,9 +54,10 @@ const ChatInput = () => {
         message: message,
         messageTime: serverTimestamp(),
         senderID: userID,
-        recieverID: rec_userID,
+        recieverID: recUserID,
         mediaURL: null,
       });
+
       e.target[0].value = "";
     } catch (error) {
       console.log("Something went wrong", error);
@@ -53,7 +74,11 @@ const ChatInput = () => {
           className={styles.messageInput}
         />
         <ImAttachment />
-        <button type="submit" className={styles.sendBtn}>
+        <button
+          type="submit"
+          className={styles.sendBtn}
+          disabled={recUserID ? false : true}
+        >
           <IoSend className={styles.sendIcon} />
         </button>
       </form>
