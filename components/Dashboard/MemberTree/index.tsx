@@ -4,6 +4,16 @@ import Image from "next/image";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
 
+// redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store";
+import {
+  addSupportPerson,
+  deleteSupporter,
+  getSupportGroup,
+} from "../../../actions/SupportGroup";
+
 interface teamMemberArray {
   userID: string;
   userName: string;
@@ -13,19 +23,74 @@ interface teamMemberArray {
 const MemberTree = ({
   changeTeamMemberData,
   teamMemberData,
+  addSupportPerson,
+  deleteSupporter,
+  getSupportGroup,
+  supportGroup,
+  auth,
 }: {
   changeTeamMemberData: any;
   teamMemberData: teamMemberArray[];
+  auth: any;
+  supportGroup: any;
+  deleteSupporter: any;
+  getSupportGroup: any;
+  addSupportPerson: (...args: any[]) => any;
 }) => {
-  const handleRemove = (i: number) => {
+  const handleRemove = async (email: string, id: number, i: number) => {
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
 
     changeTeamMemberData(filtered);
+    await deleteSupporter(id, email);
+    getSupportGroup(1);
   };
 
   const [popupDiv, setPopupDiv] = useState(false);
+
+  const [isData, setData] = useState({
+    userId: auth.id,
+    Email: "",
+  });
+
+  const [errors, setErrors] = useState({
+    Email: "",
+  });
+
+  const supportRef = useRef<any>({});
+
+  const handleChange = (values: any) => {
+    supportGroup.failCreateSupporter = null;
+    setData({
+      ...isData,
+      ...values,
+    });
+  };
+
+  const FunctionSupporterSubmit = async () => {
+    const errors = {
+      Email: "",
+    };
+
+    if (!isData.Email) {
+      errors.Email = "The field is required";
+    } else if (
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
+    ) {
+      errors.Email = "Email is invalid.";
+    }
+
+    if (!errors.Email) {
+      await addSupportPerson({
+        userId: isData.userId,
+        email: isData.Email,
+      });
+      getSupportGroup(1);
+    }
+
+    setErrors(errors);
+  };
 
   return (
     <div className={styles.mainDivWrapper}>
@@ -106,8 +171,23 @@ const MemberTree = ({
               </div>
             </div>
             <div className={styles.searchDiv}>
-              <input type="text" className={styles.searchBar} />
-              <button className={styles.inviteBtn}>Send Invite</button>
+              <input
+                type="text"
+                id="email"
+                value={isData.Email}
+                autoFocus
+                ref={(input) => (supportRef.current.email = input)}
+                onChange={(e) => handleChange({ Email: e.target.value })}
+                className={styles.searchBar}
+              />
+              <div onClick={() => FunctionSupporterSubmit()}>
+                <button className={styles.inviteBtn}>Send Invite</button>
+              </div>
+              <div className={styles.errorMessage}>
+                {errors.Email
+                  ? errors.Email
+                  : supportGroup?.failCreateSupporter?.response?.data?.message}
+              </div>
             </div>
 
             <div className={styles.memberDiv}>
@@ -130,7 +210,7 @@ const MemberTree = ({
                       </div>
                       <div
                         className={styles.iconDiv}
-                        onClick={() => handleRemove(i)}
+                        onClick={() => handleRemove(email, 1, i)}
                       >
                         <RiDeleteBin6Fill />
                       </div>
@@ -146,4 +226,19 @@ const MemberTree = ({
   );
 };
 
-export default MemberTree;
+MemberTree.propTypes = {
+  addSupportPerson: PropTypes.func.isRequired,
+  deleteSupporter: PropTypes.func.isRequired,
+  getSupportGroup: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+  supportGroup: state.supportGroup,
+});
+
+export default connect(mapStateToProps, {
+  addSupportPerson,
+  deleteSupporter,
+  getSupportGroup,
+})(MemberTree);
