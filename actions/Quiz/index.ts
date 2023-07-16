@@ -11,7 +11,7 @@ import {
 
 import axios from "axios";
 // const BASE_URL = "https://engage-backend-production.up.railway.app/api/";
-const BASE_URL = "http://localhost:5000/api/";
+const BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/";
 export const getQuestionList =
   (quizId: number) => async (dispatch: AppDispatch) => {
     try {

@@ -55,7 +55,7 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
       //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
       // );
       const res = await fetch(
-        `http://localhost:5000/api/daily_message/${year}-${monthNum}-${day}`
+        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/daily_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {
@@ -75,7 +75,7 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
       //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
       // );
       const res = await fetch(
-        `http://localhost:5000/api/daily_message/${year}-${monthNum}-${day}`
+        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/daily_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {

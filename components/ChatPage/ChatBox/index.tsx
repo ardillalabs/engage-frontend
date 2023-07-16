@@ -23,7 +23,7 @@ const ChatBox = () => {
 
     const userInfoFetch = async () => {
       try {
-        res = await fetch("http://localhost:5000/api/support_group/2");
+        res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
       } catch (error) {
         console.log("Failed to fetch user info", error);
       }

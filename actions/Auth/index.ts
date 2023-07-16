@@ -52,7 +52,7 @@ import {
 
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
-const AUTH_BASE_URL = "http://localhost:5001/auth/users";
+const AUTH_BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5001/auth/users";
 
 // @desc        Sign up user
 // @api         auth/signup

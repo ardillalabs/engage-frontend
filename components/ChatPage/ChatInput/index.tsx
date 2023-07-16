@@ -25,7 +25,7 @@ const ChatInput = () => {
     setRecUserID("");
     const fetchRecieverID = async () => {
       try {
-        res = await fetch("http://localhost:5000/api/support_group/2");
+        res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
       } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch chat list");
