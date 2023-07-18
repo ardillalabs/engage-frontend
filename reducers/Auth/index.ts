@@ -214,7 +214,7 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingForgotPassword: false,
         isSentForgotPasswordEmail: true,
-        forgotPasswordMessage: payload.data.message,
+        forgotPasswordMessage: payload.message,
       };
 
     case FORGOT_PASSWORD_FAIL:
@@ -222,9 +222,9 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingForgotPassword: false,
         isSentForgotPasswordEmail: false,
-        forgotPasswordMessage: payload.response.data.message,
-        resCode: payload.response.status,
-        statusText: payload.response.statusText,
+        forgotPasswordMessage: payload.message,
+        resCode: payload.status,
+        statusText: payload.statusText,
       };
 
     case EMAIL_VERIFICATION_SUCCESS:

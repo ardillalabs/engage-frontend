@@ -48,6 +48,7 @@ import {
   UserSignInDetails,
   UserSignUpDetails,
   UserProfileUpdateDetails,
+  ForgotPasswordDetails,
 } from "../../tsc-types/Auth";
 
 // Import environment variables
@@ -281,7 +282,7 @@ export const signInSubmit =
 // @api         auth/forgot-password
 // @access      public
 export const forgotPassword =
-  (email: string) => async (dispatch: AppDispatch) => {
+  (forgotPasswordDetails: ForgotPasswordDetails) => async (dispatch: AppDispatch) => {
     dispatch({
       type: SET_FORGOT_PASSWORD_IS_LOADING,
     });
@@ -294,26 +295,32 @@ export const forgotPassword =
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true,
     };
 
     // Stringyfy Json Body
     const body = JSON.stringify({
-      email: email,
+      email: forgotPasswordDetails.email,
     });
 
     try {
       const response = await axios.post(
-        `${AUTH_BASE_URL}forgot-password`,
+        `${AUTH_BASE_URL}/forgot-password`,
         body,
         config
       );
 
-      dispatch({
-        type: FORGOT_PASSWORD_SUCCESS,
-        payload: response,
-      });
-
+      console.log(response)
+      if(response.data.success === true) {      
+        dispatch({
+          type: FORGOT_PASSWORD_SUCCESS,
+          payload: response.data,
+        });
+      } else {
+        dispatch({
+          type: FORGOT_PASSWORD_FAIL,
+          payload: response.data,
+        });
+      }
       dispatch({
         type: SET_TOAST_STATE,
         payload: {
