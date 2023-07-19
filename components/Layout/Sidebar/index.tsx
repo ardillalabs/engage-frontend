@@ -4,15 +4,22 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
 import { MdSpaceDashboard } from "react-icons/md";
-import { AiFillCaretLeft, AiFillHome } from "react-icons/ai";
-import { TbChartPieFilled } from "react-icons/tb";
+import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillMessage } from "react-icons/ai";
 import { IoLogOut } from "react-icons/io5";
+import { signOut } from "@/actions/Auth";
+import { deleteCookie } from "cookies-next";
 
 const Sidebar = () => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
+
+  const handleSignOut = () => {
+    signOut();
+    deleteCookie("access_token", { path: "/" });
+    router.push("/");
+  };
 
   return (
     <div className="flex">
@@ -68,7 +75,12 @@ const Sidebar = () => {
         </div>
 
         {/* Logout button */}
-        <button className={styles.logoutBtn}>
+        <button
+          className={styles.logoutBtn}
+          onClick={() => {
+            handleSignOut();
+          }}
+        >
           <IoLogOut className={styles.icon} />
         </button>
       </div>

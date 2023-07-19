@@ -50,11 +50,12 @@ import {
   UserProfileUpdateDetails,
 } from "../../tsc-types/Auth";
 
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from "cookies-next";
 
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
-const AUTH_BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5001/auth/users";
+const AUTH_BASE_URL =
+  "http://ec2-54-160-247-159.compute-1.amazonaws.com:5001/auth/users";
 // const AUTH_BASE_URL = 'localhost:5001/auth/users'
 
 // @desc        Sign up user
@@ -62,7 +63,6 @@ const AUTH_BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5001/au
 // @access      public
 export const signUpSubmit =
   (registerFormData: UserSignUpDetails) => async (dispatch: AppDispatch) => {
-
     dispatch({
       type: SET_REGISTER_IS_LOADING,
     });
@@ -94,17 +94,17 @@ export const signUpSubmit =
       );
 
       if (response.data.success === true) {
-        console.log(response.data)
-        setCookie('access_token', response.data.access_token);
+        console.log(response.data);
+        setCookie("access_token", response.data.access_token);
         dispatch({
           type: REGISTER_SUCCESS,
           payload: response.data,
         });
       } else {
-        console.log(response)
+        console.log(response);
         dispatch({
           type: REGISTER_FAIL,
-          payload: response.data
+          payload: response.data,
         });
       }
     } catch (err: any) {
@@ -172,7 +172,7 @@ export const getCurrentUserDetails =
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 
-      console.log(response)
+      console.log(response);
 
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,
@@ -221,7 +221,7 @@ export const signInSubmit =
       console.log(response);
 
       if (response.data.success === true) {
-        setCookie('access_token', response.data.access_token);
+        setCookie("access_token", response.data.access_token);
         dispatch({
           type: LOGIN_SUCCESS,
           payload: response.data,
@@ -284,7 +284,6 @@ export const signInSubmit =
       }
     }
   };
-
 
 // @desc        Forgot password
 // @api         auth/forgot-password
@@ -383,7 +382,7 @@ export const clearAuthMessages = () => async (dispatch: AppDispatch) => {
     dispatch({
       type: CLEAR_AUTH_ERROR_MESSAGES,
     });
-  } catch (err: any) { }
+  } catch (err: any) {}
 };
 
 // @desc        Email verification
@@ -391,77 +390,77 @@ export const clearAuthMessages = () => async (dispatch: AppDispatch) => {
 // @access      public
 export const emailVerification =
   (verification_code: string, access_token: string) =>
-    async (dispatch: AppDispatch) => {
-      // API Header configarations
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
+  async (dispatch: AppDispatch) => {
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+
+    try {
+      const response = await axios.get(
+        `${AUTH_BASE_URL}verification?verification_code=${verification_code}&access_token=${access_token}`,
+        config
+      );
+
+      dispatch({
+        type: EMAIL_VERIFICATION_SUCCESS,
+        payload: response,
+      });
+
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "success",
+          title: "Success!",
+          description: `${response.data.message}`,
         },
-        withCredentials: true,
-      };
-
-      try {
-        const response = await axios.get(
-          `${AUTH_BASE_URL}verification?verification_code=${verification_code}&access_token=${access_token}`,
-          config
-        );
-
+      });
+    } catch (err: any) {
+      if (err.message === "Network Error") {
         dispatch({
-          type: EMAIL_VERIFICATION_SUCCESS,
-          payload: response,
+          type: EMAIL_VERIFICATION_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
         });
 
         dispatch({
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: "success",
-            title: "Success!",
-            description: `${response.data.message}`,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
           },
         });
-      } catch (err: any) {
-        if (err.message === "Network Error") {
-          dispatch({
-            type: EMAIL_VERIFICATION_FAIL,
-            payload: {
-              response: {
-                data: {
-                  message: "Network Error",
-                  status: err.code,
-                  statusText: err.code,
-                },
-              },
-            },
-          });
+      } else {
+        dispatch({
+          type: EMAIL_VERIFICATION_FAIL,
+          payload: err,
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Network Error`,
-            },
-          });
-        } else {
-          dispatch({
-            type: EMAIL_VERIFICATION_FAIL,
-            payload: err,
-          });
-
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `${err.response.data.message}`,
-            },
-          });
-        }
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
       }
-    };
+    }
+  };
 
 // @desc        Email verification
 // @api         auth/verificaiton
@@ -548,154 +547,41 @@ export const resendEmailVerification =
 // @access      public
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
-    async (dispatch: AppDispatch) => {
-      dispatch({
-        type: SET_UPDATE_PASSWORD_IS_LOADING,
-      });
-      dispatch({
-        type: CLEAR_AUTH_ERROR_MESSAGES,
-      });
+  async (dispatch: AppDispatch) => {
+    dispatch({
+      type: SET_UPDATE_PASSWORD_IS_LOADING,
+    });
+    dispatch({
+      type: CLEAR_AUTH_ERROR_MESSAGES,
+    });
 
-      // API Header configarations
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-        // withCredentials: true,
-      };
-
-      // Stringyfy Json Body
-      const body = JSON.stringify({
-        currentPassword: updatePasswordDetails.currentPassword,
-        newPassword: updatePasswordDetails.newPassword,
-      });
-
-      try {
-        const response = await axios.put(
-          `${AUTH_BASE_URL}/update-password`,
-          body,
-          config
-        );
-        console.log(response.data)
-        if (response.data.success === true) {
-          // setCookie('access_token', response.data.access_token);
-          dispatch({
-            type: UPDATE_PASSWORD_SUCCESS,
-            payload: response.data,
-          });
-
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "success",
-              title: "Success!",
-              description: `${response.data.message}`,
-            },
-          });
-        } else {
-          dispatch({
-            type: UPDATE_PASSWORD_FAIL,
-            payload: response.data
-          });
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Error`,
-            },
-          });
-        }
-
-      } catch (err: any) {
-        if (err.message === "Network Error") {
-          dispatch({
-            type: UPDATE_PASSWORD_FAIL,
-            payload: {
-              response: {
-                data: {
-                  message: "Network Error",
-                  status: err.code,
-                  statusText: err.code,
-                },
-              },
-            },
-          });
-
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Network Error`,
-            },
-          });
-        } else {
-          dispatch({
-            type: UPDATE_PASSWORD_FAIL,
-            payload: err,
-          });
-
-          if (
-            err.response.data.message !==
-            "Incorrect password. Please try again with the correct password."
-          ) {
-            dispatch({
-              type: SET_TOAST_STATE,
-              payload: {
-                visibility: true,
-                type: "error",
-                title: "Error!",
-                description: `${err.response.data.message}`,
-              },
-            });
-          }
-        }
-      }
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      // withCredentials: true,
     };
 
-// @desc        Create new password
-// @api         auth/create-new-password
-// @access      public
-export const createNewPassword =
-  (createNewPasswordDetails: CreateNewPasswordDetails, access_token: string) =>
-    async (dispatch: AppDispatch) => {
-      dispatch({
-        type: SET_CREATE_NEW_PASSSWORD_IS_LOADING,
-      });
-      dispatch({
-        type: CLEAR_AUTH_ERROR_MESSAGES,
-      });
+    // Stringyfy Json Body
+    const body = JSON.stringify({
+      currentPassword: updatePasswordDetails.currentPassword,
+      newPassword: updatePasswordDetails.newPassword,
+    });
 
-      // API Header configarations
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-        withCredentials: true,
-      };
-
-      // Stringyfy Json Body
-      const body = JSON.stringify({
-        newPassword: createNewPasswordDetails.newPassword,
-        confirmPassword: createNewPasswordDetails.confirmPassword,
-      });
-
-      try {
-        const response = await axios.put(
-          `${AUTH_BASE_URL}create-new-password`,
-          body,
-          config
-        );
-
+    try {
+      const response = await axios.put(
+        `${AUTH_BASE_URL}/update-password`,
+        body,
+        config
+      );
+      console.log(response.data);
+      if (response.data.success === true) {
+        // setCookie('access_token', response.data.access_token);
         dispatch({
-          type: CREATE_NEW_PASSSWORD_SUCCESS,
-          payload: response,
+          type: UPDATE_PASSWORD_SUCCESS,
+          payload: response.data,
         });
 
         dispatch({
@@ -707,36 +593,55 @@ export const createNewPassword =
             description: `${response.data.message}`,
           },
         });
-      } catch (err: any) {
-        if (err.message === "Network Error") {
-          dispatch({
-            type: CREATE_NEW_PASSSWORD_FAIL,
-            payload: {
-              response: {
-                data: {
-                  message: "Network Error",
-                  status: err.code,
-                  statusText: err.code,
-                },
+      } else {
+        dispatch({
+          type: UPDATE_PASSWORD_FAIL,
+          payload: response.data,
+        });
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Error`,
+          },
+        });
+      }
+    } catch (err: any) {
+      if (err.message === "Network Error") {
+        dispatch({
+          type: UPDATE_PASSWORD_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
               },
             },
-          });
+          },
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Network Error`,
-            },
-          });
-        } else {
-          dispatch({
-            type: CREATE_NEW_PASSSWORD_FAIL,
-            payload: err,
-          });
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_PASSWORD_FAIL,
+          payload: err,
+        });
 
+        if (
+          err.response.data.message !==
+          "Incorrect password. Please try again with the correct password."
+        ) {
           dispatch({
             type: SET_TOAST_STATE,
             payload: {
@@ -748,7 +653,100 @@ export const createNewPassword =
           });
         }
       }
+    }
+  };
+
+// @desc        Create new password
+// @api         auth/create-new-password
+// @access      public
+export const createNewPassword =
+  (createNewPasswordDetails: CreateNewPasswordDetails, access_token: string) =>
+  async (dispatch: AppDispatch) => {
+    dispatch({
+      type: SET_CREATE_NEW_PASSSWORD_IS_LOADING,
+    });
+    dispatch({
+      type: CLEAR_AUTH_ERROR_MESSAGES,
+    });
+
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      withCredentials: true,
     };
+
+    // Stringyfy Json Body
+    const body = JSON.stringify({
+      newPassword: createNewPasswordDetails.newPassword,
+      confirmPassword: createNewPasswordDetails.confirmPassword,
+    });
+
+    try {
+      const response = await axios.put(
+        `${AUTH_BASE_URL}create-new-password`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: CREATE_NEW_PASSSWORD_SUCCESS,
+        payload: response,
+      });
+
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "success",
+          title: "Success!",
+          description: `${response.data.message}`,
+        },
+      });
+    } catch (err: any) {
+      if (err.message === "Network Error") {
+        dispatch({
+          type: CREATE_NEW_PASSSWORD_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
+          },
+        });
+      } else {
+        dispatch({
+          type: CREATE_NEW_PASSSWORD_FAIL,
+          payload: err,
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
+      }
+    }
+  };
 
 // @desc        Clear access token
 // @api
@@ -872,120 +870,120 @@ export const deactivateAccount =
 // @access      public
 export const updateUserInfoSubmit =
   (userInforUpdateDetails: UserInforUpdateDetails, access_token: string) =>
-    async (dispatch: AppDispatch) => {
+  async (dispatch: AppDispatch) => {
+    dispatch({
+      type: SET_LOADING_UPDATE_USER_INFO,
+    });
+    dispatch({
+      type: CLEAR_AUTH_ERROR_MESSAGES,
+    });
+
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${access_token}`,
+      },
+      withCredentials: true,
+    };
+
+    // Create FormData object and append properties
+    const formData = new FormData();
+    formData.append("first_name", userInforUpdateDetails.first_name);
+    formData.append("last_name", userInforUpdateDetails.last_name);
+
+    if (userInforUpdateDetails.username) {
+      formData.append("username", userInforUpdateDetails.username);
+    }
+    if (userInforUpdateDetails.phone_number) {
+      formData.append("phone_number", userInforUpdateDetails.phone_number);
+    }
+    if (userInforUpdateDetails.street) {
+      formData.append("street", userInforUpdateDetails.street);
+    }
+    if (userInforUpdateDetails.apartment) {
+      formData.append("apartment", userInforUpdateDetails.apartment);
+    }
+    if (userInforUpdateDetails.city) {
+      formData.append("city", userInforUpdateDetails.city);
+    }
+    if (userInforUpdateDetails.postal_code) {
+      formData.append("postal_code", userInforUpdateDetails.postal_code);
+    }
+    if (userInforUpdateDetails.country) {
+      formData.append("country", userInforUpdateDetails.country);
+    }
+
+    if (userInforUpdateDetails.dp) {
+      formData.append("dp", userInforUpdateDetails.dp);
+    }
+    if (userInforUpdateDetails.email) {
+      formData.append("email", userInforUpdateDetails.email);
+    }
+
+    try {
+      const response = await axios.put(
+        `${AUTH_BASE_URL}update-user-info`,
+        formData,
+        config
+      );
+
       dispatch({
-        type: SET_LOADING_UPDATE_USER_INFO,
-      });
-      dispatch({
-        type: CLEAR_AUTH_ERROR_MESSAGES,
+        type: UPDATE_USER_INFO_SUCCESS,
+        payload: response,
       });
 
-      // API Header configarations
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${access_token}`,
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "success",
+          title: "Success!",
+          description: `${response.data.message}`,
         },
-        withCredentials: true,
-      };
-
-      // Create FormData object and append properties
-      const formData = new FormData();
-      formData.append("first_name", userInforUpdateDetails.first_name);
-      formData.append("last_name", userInforUpdateDetails.last_name);
-
-      if (userInforUpdateDetails.username) {
-        formData.append("username", userInforUpdateDetails.username);
-      }
-      if (userInforUpdateDetails.phone_number) {
-        formData.append("phone_number", userInforUpdateDetails.phone_number);
-      }
-      if (userInforUpdateDetails.street) {
-        formData.append("street", userInforUpdateDetails.street);
-      }
-      if (userInforUpdateDetails.apartment) {
-        formData.append("apartment", userInforUpdateDetails.apartment);
-      }
-      if (userInforUpdateDetails.city) {
-        formData.append("city", userInforUpdateDetails.city);
-      }
-      if (userInforUpdateDetails.postal_code) {
-        formData.append("postal_code", userInforUpdateDetails.postal_code);
-      }
-      if (userInforUpdateDetails.country) {
-        formData.append("country", userInforUpdateDetails.country);
-      }
-
-      if (userInforUpdateDetails.dp) {
-        formData.append("dp", userInforUpdateDetails.dp);
-      }
-      if (userInforUpdateDetails.email) {
-        formData.append("email", userInforUpdateDetails.email);
-      }
-
-      try {
-        const response = await axios.put(
-          `${AUTH_BASE_URL}update-user-info`,
-          formData,
-          config
-        );
-
+      });
+    } catch (err: any) {
+      if (err.message === "Network Error") {
         dispatch({
-          type: UPDATE_USER_INFO_SUCCESS,
-          payload: response,
+          type: UPDATE_USER_INFO_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
         });
 
         dispatch({
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: "success",
-            title: "Success!",
-            description: `${response.data.message}`,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
           },
         });
-      } catch (err: any) {
-        if (err.message === "Network Error") {
-          dispatch({
-            type: UPDATE_USER_INFO_FAIL,
-            payload: {
-              response: {
-                data: {
-                  message: "Network Error",
-                  status: err.code,
-                  statusText: err.code,
-                },
-              },
-            },
-          });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: err,
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Network Error`,
-            },
-          });
-        } else {
-          dispatch({
-            type: UPDATE_USER_INFO_FAIL,
-            payload: err,
-          });
-
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `${err.response.data.message}`,
-            },
-          });
-        }
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
       }
-    };
+    }
+  };
 
 // @desc        Delete Dp
 // @api         auth/delete-dp
@@ -1093,63 +1091,62 @@ export const deleteDp =
 // @desc        Sign out
 // @api         auth/logout
 // @access      public
-export const signOut =
-  (access_token: string) => async (dispatch: AppDispatch) => {
-    dispatch({
-      type: SET_LOADING_SIGN_OUT,
-    });
-    dispatch({
-      type: CLEAR_AUTH_ERROR_MESSAGES,
-    });
-    try {
-      deleteCookie('access_token')
-    } catch (err: any) {
-      if (err.message === "Network Error") {
-        dispatch({
-          type: SIGN_OUT_FAIL,
-          payload: {
-            response: {
-              data: {
-                message: "Network Error",
-                status: err.code,
-                statusText: err.code,
-              },
+export const signOut = () => async (dispatch: AppDispatch) => {
+  dispatch({
+    type: SET_LOADING_SIGN_OUT,
+  });
+  dispatch({
+    type: CLEAR_AUTH_ERROR_MESSAGES,
+  });
+  try {
+    deleteCookie("access_token");
+  } catch (err: any) {
+    if (err.message === "Network Error") {
+      dispatch({
+        type: SIGN_OUT_FAIL,
+        payload: {
+          response: {
+            data: {
+              message: "Network Error",
+              status: err.code,
+              statusText: err.code,
             },
           },
-        });
+        },
+      });
 
-        dispatch({
-          type: SET_TOAST_STATE,
-          payload: {
-            visibility: true,
-            type: "error",
-            title: "Error!",
-            description: `Network Error`,
-          },
-        });
-      } else {
-        dispatch({
-          type: SIGN_OUT_FAIL,
-          payload: err,
-        });
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "error",
+          title: "Error!",
+          description: `Network Error`,
+        },
+      });
+    } else {
+      dispatch({
+        type: SIGN_OUT_FAIL,
+        payload: err,
+      });
 
-        dispatch({
-          type: SET_TOAST_STATE,
-          payload: {
-            visibility: true,
-            type: "error",
-            title: "Error!",
-            description: `${err.response.data.message}`,
-          },
-        });
-      }
+      dispatch({
+        type: SET_TOAST_STATE,
+        payload: {
+          visibility: true,
+          type: "error",
+          title: "Error!",
+          description: `${err.response.data.message}`,
+        },
+      });
     }
-  };
+  }
+};
 
 export const getProfileDetails =
   (access_token: string) => async (dispatch: AppDispatch) => {
-    console.log(access_token)
-   // API Header configarations
+    console.log(access_token);
+    // API Header configarations
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -1174,99 +1171,99 @@ export const getProfileDetails =
 
 export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
-    async (dispatch: AppDispatch) => {
-      dispatch({
-        type: SET_LOADING_UPDATE_USER_INFO,
-      });
-      dispatch({
-        type: CLEAR_AUTH_ERROR_MESSAGES,
-      });
+  async (dispatch: AppDispatch) => {
+    dispatch({
+      type: SET_LOADING_UPDATE_USER_INFO,
+    });
+    dispatch({
+      type: CLEAR_AUTH_ERROR_MESSAGES,
+    });
 
-      // API Header configarations
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-        // withCredentials: true,
-      };
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      // withCredentials: true,
+    };
 
-      const body = JSON.stringify({
-        full_name: userProfileUpdateDetails.full_name,
-        username: userProfileUpdateDetails.username,
-        phone_number: userProfileUpdateDetails.phone_number,
-      });
+    const body = JSON.stringify({
+      full_name: userProfileUpdateDetails.full_name,
+      username: userProfileUpdateDetails.username,
+      phone_number: userProfileUpdateDetails.phone_number,
+    });
 
-      try {
-        const response = await axios.put(
-          `${AUTH_BASE_URL}/update-user-info`,
-          body,
-          config
-        );
+    try {
+      const response = await axios.put(
+        `${AUTH_BASE_URL}/update-user-info`,
+        body,
+        config
+      );
 
-        console.log(response)
+      console.log(response);
 
-        if (response.data.success === true) {
-          setCookie('access_token', response.data.access_token);
-          dispatch({
-            type: UPDATE_USER_INFO_SUCCESS,
-            payload: response.data,
-          });
+      if (response.data.success === true) {
+        setCookie("access_token", response.data.access_token);
+        dispatch({
+          type: UPDATE_USER_INFO_SUCCESS,
+          payload: response.data,
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "success",
-              title: "Success!",
-              description: `${response.data.message}`,
-            },
-          });
-        } else {
-          dispatch({
-            type: UPDATE_USER_INFO_FAIL,
-            payload: response.data,
-          });
-        }
-      } catch (err: any) {
-        if (err.message === "Network Error") {
-          dispatch({
-            type: UPDATE_USER_INFO_FAIL,
-            payload: {
-              response: {
-                data: {
-                  message: "Network Error",
-                  status: err.code,
-                  statusText: err.code,
-                },
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "success",
+            title: "Success!",
+            description: `${response.data.message}`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: response.data,
+        });
+      }
+    } catch (err: any) {
+      if (err.message === "Network Error") {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
               },
             },
-          });
+          },
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `Network Error`,
-            },
-          });
-        } else {
-          dispatch({
-            type: UPDATE_USER_INFO_FAIL,
-            payload: err,
-          });
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: err,
+        });
 
-          dispatch({
-            type: SET_TOAST_STATE,
-            payload: {
-              visibility: true,
-              type: "error",
-              title: "Error!",
-              description: `${err.response.data.message}`,
-            },
-          });
-        }
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
       }
-    };
+    }
+  };
