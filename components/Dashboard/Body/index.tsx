@@ -75,12 +75,12 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
       //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
       // );
       const res = await fetch(
-        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/daily_message/${year}-${monthNum}-${day}`
+        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/wellness_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {
-        return res.json().then(({ daily_message }) => {
-          setWellnessExcercise(daily_message.description);
+        return res.json().then(({ wellness_message }) => {
+          setWellnessExcercise(wellness_message.description);
         });
       }
     } catch (error) {
