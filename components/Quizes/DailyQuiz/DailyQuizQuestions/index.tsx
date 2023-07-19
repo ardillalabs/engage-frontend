@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { RootState } from "../../../../store";
 import { getQuestionList, quizMarksSubmit } from "../../../../actions/Quiz";
+import { getCookie } from 'cookies-next';
+import { getCurrentUserDetails } from "@/actions/Auth";
 
 // const quiz = {
 //     totalQuestions: 2,
@@ -43,16 +45,25 @@ import { getQuestionList, quizMarksSubmit } from "../../../../actions/Quiz";
 // }
 
 interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
   getQuestionList: (quizId: number) => any;
   quiz: Quiz;
   quizMarksSubmit: (quizId: number, userId: number, marks: number) => any;
+  auth: any;
 }
 
 const DailyQuizQuestions = ({
+  getCurrentUserDetails,
   getQuestionList,
   quiz: { questionList },
   quizMarksSubmit,
+  auth
 }: Props) => {
+
+  const cookie = getCookie('access_token', auth.access_token);
+
+  console.log(cookie);
+
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -64,8 +75,18 @@ const DailyQuizQuestions = ({
   const [isData, setData] = useState(false);
 
   useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  console.log(auth);
+
+  const userId = auth.id
+
+  useEffect(() => {
     getQuestionList(2);
   }, [getQuestionList]);
+
+  console.log(questionList)
 
   useEffect(() => {
     if (questionList.length > 0) {
@@ -88,8 +109,8 @@ const DailyQuizQuestions = ({
       setShowQuiz(false);
       setResult((prevResult) => prevResult + score); // Add the current score to the final result
       const finalScore = result + score;
-      console.log("Final Result:", result + score, finalScore); // Log the final result
-      quizMarksSubmit(2, 1, finalScore);
+      console.log("Final Result:", result + score, finalScore, userId); // Log the final result
+      quizMarksSubmit(2, Number(userId), finalScore);
     }
   };
 
@@ -291,15 +312,18 @@ const DailyQuizQuestions = ({
 
 // export default DailyQuizQuestions
 DailyQuizQuestions.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
   getQuestionList: PropTypes.func.isRequired,
   quizMarksSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
   quiz: state.quiz,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {
+  getCurrentUserDetails,
   getQuestionList,
   quizMarksSubmit,
 })(DailyQuizQuestions);

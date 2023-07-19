@@ -11,11 +11,10 @@ import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import PropTypes from 'prop-types';
 import {
-  getCurrentUserDetails,
   getProfileDetails,
   updateUserDetailsSubmit,
 } from '@/actions/Auth';
-import { useCookies } from 'react-cookie';
+import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -29,12 +28,17 @@ const EditProfileForm = ({
   updateUserDetailsSubmit,
   auth,
 }: Props) => {
+  
   const router = useRouter();
+
+  const cookie = getCookie('access_token', auth.access_token);
 
   const myRef = useRef<any>({});
 
+  console.log(cookie);
+
   useEffect(() => {
-    getProfileDetails('cookies.access_token');
+    getProfileDetails(cookie);
   }, [getProfileDetails]);
 
   const [isClick, setClick] = useState({
@@ -119,7 +123,7 @@ const EditProfileForm = ({
           username: isData.UserName,
           phone_number: isData.PhoneNumber,
         },
-        'cookies.access_token'
+        cookie
       );
     }
 
@@ -208,7 +212,6 @@ EditProfileForm.propTypes = {
   getProfileDetails: PropTypes.func.isRequired,
   updateUserDetailsSubmit: PropTypes.func.isRequired,
 };
-
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });

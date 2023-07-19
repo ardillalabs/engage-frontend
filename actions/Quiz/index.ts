@@ -47,6 +47,9 @@ export const quizMarksSubmit =
       userId: userId,
       marks: marks,
     });
+
+    console.log(body);
+    
     try {
       const response = await axios.post(`${BASE_URL}quiz_mark`, body, config);
       dispatch({
