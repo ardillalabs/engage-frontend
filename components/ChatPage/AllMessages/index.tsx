@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import {
   DocumentData,
-  addDoc,
   collection,
   doc,
   onSnapshot,
@@ -22,7 +21,6 @@ const AllMessages = ({ username }: any) => {
 
   // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
   const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
-  // const chatID = "1X0ttXRbAcoLCHZC07X1";
   const router = useRouter();
   const [chatID, setChatID] = useState<any>(router.query.chatID);
   useEffect(() => {
@@ -49,18 +47,20 @@ const AllMessages = ({ username }: any) => {
       collection(db, "chatMessages", chatID, "messages"),
       orderBy("messageTime")
     );
-    const docRef = doc(db, "chatMessages", chatID);
 
+    // Reset unread counter
     onSnapshot(colRef, (snapshot) => {
       setMessages(snapshot.docs);
-      const lastMessageID = snapshot.docs[snapshot.docs.length - 1].id;
-      try {
-        setDoc(docRef, {
-          lastMessageID: lastMessageID,
-        });
-      } catch (error) {
-        console.log("Failed to post message", error);
-      }
+
+      setDoc(
+        doc(db, "chatMessages", chatID),
+        {
+          unreadCount: {
+            [userID]: 0,
+          },
+        },
+        { merge: true }
+      );
     });
   }, [chatID]);
 

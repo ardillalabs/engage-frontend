@@ -21,9 +21,11 @@ interface chatListArray {
   imageURL?: string;
   lastMessage?: string;
   lastMessageTime?: any;
+  unreadCount?: number;
 }
 
-const currentUserID = 22;
+//test
+const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
 
 const ChatList = () => {
   const [displaySearch, setDisplaySearch] = useState(false);
@@ -42,9 +44,8 @@ const ChatList = () => {
         throw new Error("Failed to fetch chat list");
       }
 
-      setChatList([]);
-
       await api_res.json().then((users) => {
+        setChatList([]);
         users.map((user: any) => {
           const chatID = user.chat_id;
           const support_user = user.support_user;
@@ -65,7 +66,6 @@ const ChatList = () => {
               lastMessageTime: "",
             },
           ]);
-
           // Update last message
           onSnapshot(colRef, (snapshot) => {
             const snapData: any = snapshot.docs;
@@ -93,12 +93,21 @@ const ChatList = () => {
           });
 
           // Update unread message count
-          // const docRef = doc(db, "chatMessages", chatID);
-          // let lastMessageID;
-          // onSnapshot(docRef, (snapshot) => {
-          //   lastMessageID = snapshot.data()?.lastMessageID;
-          //   console.log();
-          // });
+          onSnapshot(doc(db, "chatMessages", chatID), (snapshot) => {
+            const unreadCount = snapshot.data()?.unreadCount?.[userID];
+
+            const unreadCountUpdated = stateRef.current.map((obj: any) => {
+              if (obj.userID === support_user.id) {
+                return {
+                  ...obj,
+                  unreadCount,
+                };
+              }
+              return obj;
+            });
+            setChatList(() => unreadCountUpdated);
+            stateRef.current = unreadCountUpdated;
+          });
         });
       });
     };
@@ -156,6 +165,7 @@ const ChatList = () => {
             imageURL={user.imageURL}
             lastMessage={user.lastMessage}
             lastMessageTime={user.lastMessageTime}
+            unreadCount={user.unreadCount}
             path={user.chatID}
           />
         ))}

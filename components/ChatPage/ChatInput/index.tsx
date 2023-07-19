@@ -5,43 +5,27 @@ import { ImAttachment } from "react-icons/im";
 import { IoSend } from "react-icons/io5";
 
 // firebase
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  increment,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { useRouter } from "next/router";
 
-const ChatInput = () => {
+const ChatInput = ({ recUserID }: any) => {
   // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
   const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
 
   const router = useRouter();
   const [chatID, setChatID] = useState<any>(router.query.chatID);
-  const [recUserID, setRecUserID] = useState("");
+
   useEffect(() => {
     //Get current chatID
     setChatID(router.query.chatID);
-
-    //Get current reciever user ID
-    let res;
-    setRecUserID("");
-    const fetchRecieverID = async () => {
-      try {
-        res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to fetch chat list");
-      }
-
-      await res.json().then((users: any) => {
-        users.map((user: any) => {
-          if (user.chat_id === chatID) {
-            const support_user = user.support_user;
-            setRecUserID(() => support_user.id);
-          }
-        });
-      });
-    };
-
-    fetchRecieverID();
   }, [router.query.chatID]);
 
   // Update data to firestore
@@ -57,6 +41,17 @@ const ChatInput = () => {
         recieverID: recUserID,
         mediaURL: null,
       });
+
+      await setDoc(
+        doc(db, "chatMessages", chatID),
+        {
+          unreadCount: {
+            [recUserID]: increment(1),
+            [userID]: 0,
+          },
+        },
+        { merge: true }
+      );
 
       e.target[0].value = "";
     } catch (error) {
