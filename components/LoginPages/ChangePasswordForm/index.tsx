@@ -7,6 +7,7 @@ import { RootState } from '@/store';
 import { connect } from 'react-redux';
 import { updatePassword } from '@/actions/Auth';
 import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
 
 interface Props {
   updatePassword: (...args: any[]) => any;
@@ -16,6 +17,9 @@ interface Props {
 const ChangePasswordForm = ({updatePassword, auth}: Props) => {
   const router = useRouter();
 
+  const cookie = getCookie('access_token', auth.access_token);
+
+  console.log(cookie);
   // Input Fields
   const myRef = useRef<any>({});
 
@@ -78,7 +82,7 @@ const ChangePasswordForm = ({updatePassword, auth}: Props) => {
     }
 
     if (!(errors.currentPassword || errors.newPassword || errors.confirmPassword)) {
-      updatePassword({ currentPassword: isData.currentPassword, newPassword: isData.newPassword });
+      updatePassword({ currentPassword: isData.currentPassword, newPassword: isData.newPassword }, cookie);
     }
     setErrors(errors);
   };

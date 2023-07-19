@@ -55,6 +55,7 @@ import { deleteCookie, setCookie } from 'cookies-next';
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
 const AUTH_BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5001/auth/users";
+// const AUTH_BASE_URL = 'localhost:5001/auth/users'
 
 // @desc        Sign up user
 // @api         auth/signup
@@ -546,8 +547,6 @@ export const resendEmailVerification =
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
     async (dispatch: AppDispatch) => {
-      access_token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
       dispatch({
         type: SET_UPDATE_PASSWORD_IS_LOADING,
       });
@@ -1147,15 +1146,13 @@ export const signOut =
 
 export const getProfileDetails =
   (access_token: string) => async (dispatch: AppDispatch) => {
-    access_token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
-    // API Header configarations
+    console.log(access_token)
+   // API Header configarations
     const config = {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
-      // withCredentials: true,
     };
 
     try {
@@ -1176,8 +1173,6 @@ export const getProfileDetails =
 export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
     async (dispatch: AppDispatch) => {
-      access_token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsic3VjY2VzcyI6dHJ1ZSwic3VjY2Vzc19jb2RlIjoyMDAsIm1lc3NhZ2UiOiJVc2VyIGRldGFpbHMgYXJlIHJldHJpdmVkIHN1Y2Nlc3NmdWxseSIsImlkIjoiNDcifSwiaWF0IjoxNjg4MTQwOTc0LCJleHAiOjE2ODgxNDM1NjZ9.JDt0gJuUQbPUL5NDq9sFYdhcHIgpa2xbSrGBW3d2atU";
       dispatch({
         type: SET_LOADING_UPDATE_USER_INFO,
       });
@@ -1210,6 +1205,7 @@ export const updateUserDetailsSubmit =
         console.log(response)
 
         if (response.data.success === true) {
+          setCookie('access_token', response.data.access_token);
           dispatch({
             type: UPDATE_USER_INFO_SUCCESS,
             payload: response.data,
