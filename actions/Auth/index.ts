@@ -50,7 +50,7 @@ import {
   UserProfileUpdateDetails,
 } from "../../tsc-types/Auth";
 
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 
 // Import environment variables
 // const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
@@ -281,6 +281,7 @@ export const signInSubmit =
       }
     }
   };
+
 
 // @desc        Forgot password
 // @api         auth/forgot-password
@@ -1089,7 +1090,7 @@ export const deleteDp =
   };
 
 // @desc        Sign out
-// @api         auth//logout
+// @api         auth/logout
 // @access      public
 export const signOut =
   (access_token: string) => async (dispatch: AppDispatch) => {
@@ -1099,50 +1100,8 @@ export const signOut =
     dispatch({
       type: CLEAR_AUTH_ERROR_MESSAGES,
     });
-
-    // API Header configarations
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${access_token}`,
-      },
-      withCredentials: true,
-    };
-
     try {
-      const response = await axios.get(`${AUTH_BASE_URL}logout`, config);
-
-      if (response.data.success === true) {
-        dispatch({
-          type: SIGN_OUT_SUCCESS,
-          payload: response,
-        });
-
-        // dispatch({
-        //   type: SET_TOAST_STATE,
-        //   payload: {
-        //     visibility: true,
-        //     type: "success",
-        //     title: "Success!",
-        //     description: `${response.data.message}`,
-        //   },
-        // });
-      } else {
-        dispatch({
-          type: SIGN_OUT_FAIL,
-          payload: response,
-        });
-
-        dispatch({
-          type: SET_TOAST_STATE,
-          payload: {
-            visibility: true,
-            type: "error",
-            title: "Error!",
-            description: `${response.data.message}`,
-          },
-        });
-      }
+      deleteCookie('access_token')
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
