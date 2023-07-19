@@ -54,4 +54,10 @@
   border: none;
   padding: 10px 30px;
   border-radius: 80px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.alertBtn:hover {
+  background-color: #ba0419;
 }

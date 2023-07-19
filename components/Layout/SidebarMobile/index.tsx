@@ -1,15 +1,47 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
 import { SlMenu } from "react-icons/sl";
-import { AiFillHome, AiFillMessage } from "react-icons/ai";
+import { AiFillMessage } from "react-icons/ai";
 import Link from "next/link";
 import { MdSpaceDashboard } from "react-icons/md";
-import { TbChartPieFilled } from "react-icons/tb";
 import Image from "next/image";
 import { IoLogOut } from "react-icons/io5";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SidebarMobile = () => {
   const [sidebarActive, setSidebarActive] = useState(false);
+
+  const alertWellnessTeam = async () => {
+    try {
+      const res = await fetch(
+        "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/send-alert/2"
+      );
+      if (res.ok) {
+        toast.success("Support group alerted", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          toastId: "alert-feedback",
+          transition: Slide,
+        });
+      } else {
+        toast.success("Something went wrong. Try again!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          toastId: "alert-feedback",
+          transition: Slide,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={styles.mainDivContainer}>
@@ -21,7 +53,9 @@ const SidebarMobile = () => {
           />
           <span className={styles.menuText}>Menu</span>
         </div>
-        <button className={styles.alertBtn}>Alert Wellness Team</button>
+        <button className={styles.alertBtn} onClick={alertWellnessTeam}>
+          Alert Wellness Team
+        </button>
       </div>
 
       <div
@@ -52,6 +86,10 @@ const SidebarMobile = () => {
           <IoLogOut className={styles.icon} />
           <span>Logout</span>
         </button>
+      </div>
+
+      <div className="toast-container">
+        <ToastContainer limit={1} />
       </div>
     </div>
   );
