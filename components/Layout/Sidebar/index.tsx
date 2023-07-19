@@ -46,24 +46,7 @@ const Sidebar = () => {
               }
             />
           </div>
-          <div
-            className={styles.itemDiv}
-            onMouseOver={() => setPageSelectArrow(false)}
-            onMouseLeave={() => setPageSelectArrow(true)}
-          >
-            <Link href="/home" className={styles.link}>
-              <AiFillHome className={styles.icon} />
-            </Link>
-            <AiFillCaretLeft
-              className={
-                !routePath.includes("/home")
-                  ? styles.selectArrow
-                  : pageSelectArrow
-                  ? styles.selectArrowSelected
-                  : styles.selectArrow
-              }
-            />
-          </div>
+
           <div
             className={styles.itemDiv}
             onMouseOver={() => setPageSelectArrow(false)}

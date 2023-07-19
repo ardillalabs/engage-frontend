@@ -43,11 +43,6 @@ const SidebarMobile = () => {
           <span>Dashboard</span>
         </Link>
 
-        <Link href="/home" className={styles.link}>
-          <AiFillHome className={styles.icon} />
-          <span>Home</span>
-        </Link>
-
         <Link href="/chat" className={styles.link}>
           <AiFillMessage className={styles.icon} />
           <span>Chat</span>
