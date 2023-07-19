@@ -172,6 +172,8 @@ export const getCurrentUserDetails =
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 
+      console.log(response)
+
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,
         payload: response,
@@ -577,7 +579,7 @@ export const updatePassword =
         );
         console.log(response.data)
         if (response.data.success === true) {
-          setCookie('access_token', response.data.access_token);
+          // setCookie('access_token', response.data.access_token);
           dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
             payload: response.data,

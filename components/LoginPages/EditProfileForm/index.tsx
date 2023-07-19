@@ -31,9 +31,9 @@ const EditProfileForm = ({
   
   const router = useRouter();
 
-  const myRef = useRef<any>({});
-
   const cookie = getCookie('access_token', auth.access_token);
+
+  const myRef = useRef<any>({});
 
   console.log(cookie);
 

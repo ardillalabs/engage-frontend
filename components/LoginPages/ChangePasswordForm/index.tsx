@@ -5,16 +5,17 @@ import styles from "./index.module.css";
 import PropTypes from 'prop-types';
 import { RootState } from '@/store';
 import { connect } from 'react-redux';
-import { updatePassword } from '@/actions/Auth';
+import { getProfileDetails, updatePassword } from '@/actions/Auth';
 import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 
 interface Props {
+  getProfileDetails: (...args: any[]) => any;
   updatePassword: (...args: any[]) => any;
   auth: any;
 }
 
-const ChangePasswordForm = ({updatePassword, auth}: Props) => {
+const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) => {
   const router = useRouter();
 
   const cookie = getCookie('access_token', auth.access_token);
@@ -22,6 +23,10 @@ const ChangePasswordForm = ({updatePassword, auth}: Props) => {
   console.log(cookie);
   // Input Fields
   const myRef = useRef<any>({});
+
+  useEffect(() => {
+    getProfileDetails(cookie);
+  }, [getProfileDetails]);
 
   const [isClick, setClick] = useState({isCurrentPasswordClick: false, isNewPasswordClick: false, isConfirmPasswordClick: false});
 
@@ -183,12 +188,14 @@ const ChangePasswordForm = ({updatePassword, auth}: Props) => {
 
 // export default ChangePasswordForm
 ChangePasswordForm.propTypes = {
+  getProfileDetails: PropTypes.func.isRequired,
   updatePassword: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
 export default connect(mapStateToProps, {
+  getProfileDetails,
   updatePassword,
 })(ChangePasswordForm);
 
