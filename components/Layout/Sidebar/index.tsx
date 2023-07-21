@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,12 +8,27 @@ import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillMessage } from "react-icons/ai";
 import { IoLogOut } from "react-icons/io5";
 import { signOut } from "@/actions/Auth";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
-const Sidebar = () => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RootState } from "../../../store";
+import { getCurrentUserDetails } from "../../../actions/Auth";
+
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
+
+const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
+
+  useEffect(() => {
+    const cookie = getCookie("access_token", auth.access_token);
+    getCurrentUserDetails(cookie);
+  }, [routePath]);
 
   const handleSignOut = () => {
     signOut();
@@ -88,4 +103,16 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+Sidebar.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(Sidebar);
+
+// export default Sidebar;

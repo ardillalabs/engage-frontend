@@ -28,12 +28,12 @@ export default function App({ Component, pageProps }: Props) {
     );
   }
   return (
-    <Layout>
-      <main className={montserrat.className}>
-        <Provider store={store}>
+    <Provider store={store}>
+      <Layout>
+        <main className={montserrat.className}>
           <Component {...pageProps} />
-        </Provider>
-      </main>
-    </Layout>
+        </main>
+      </Layout>
+    </Provider>
   );
 }
