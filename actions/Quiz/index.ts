@@ -11,14 +11,14 @@ import {
 
 import axios from "axios";
 // const BASE_URL = "https://engage-backend-production.up.railway.app/api/";
-const BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/";
+const BASE_URL = process.env.BASE_URL;
 export const getQuestionList =
   (quizId: number) => async (dispatch: AppDispatch) => {
     try {
       dispatch({
         type: QUESTION_LIST_LOADING,
       });
-      await axios.get(`${BASE_URL}question/${quizId}`).then((response) => {
+      await axios.get(`${BASE_URL}/question/${quizId}`).then((response) => {
         const data: Quiz[] = response.data;
         const permissions: any = data.map((item: any) => item);
         dispatch({
@@ -51,7 +51,7 @@ export const quizMarksSubmit =
     console.log(body);
     
     try {
-      const response = await axios.post(`${BASE_URL}quiz_mark`, body, config);
+      const response = await axios.post(`${BASE_URL}/quiz_mark`, body, config);
       dispatch({
         type: SEND_QUIZ_MARKS_SUCCESS,
         payload: {
