@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import { IoMdClose } from "react-icons/io";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // redux
 import PropTypes from "prop-types";
@@ -13,6 +13,8 @@ import {
   deleteSupporter,
   getSupportGroup,
 } from "../../../actions/SupportGroup";
+import { getCookie } from "cookies-next";
+import { getCurrentUserDetails } from "../../../actions/Auth";
 
 interface teamMemberArray {
   userID: string;
@@ -28,6 +30,7 @@ const AddSupportMembers = ({
   getSupportGroup,
   supportGroup,
   auth,
+  getCurrentUserDetails,
 }: {
   auth: any;
   supportGroup: any;
@@ -36,14 +39,20 @@ const AddSupportMembers = ({
   changeTeamMemberData: any;
   addSupportPerson: (...args: any[]) => any;
   teamMemberData: teamMemberArray[];
+  getCurrentUserDetails: any;
 }) => {
+  useEffect(() => {
+    const cookie = getCookie("access_token", auth.access_token);
+    getCurrentUserDetails(cookie);
+  }, []);
+
   const handleRemove = async (email: string, id: number, i: number) => {
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
     changeTeamMemberData(filtered);
     await deleteSupporter(id, email);
-    getSupportGroup(1);
+    getSupportGroup(auth.id);
   };
 
   const [popupDiv, setPopupDiv] = useState(false);
@@ -82,10 +91,10 @@ const AddSupportMembers = ({
 
     if (!errors.Email) {
       await addSupportPerson({
-        userId: isData.userId,
+        userId: auth.id,
         email: isData.Email,
       });
-      getSupportGroup(1);
+      getSupportGroup(auth.id);
     }
 
     setErrors(errors);
@@ -193,7 +202,7 @@ const AddSupportMembers = ({
                   </div>
                   <div
                     className={styles.iconDiv}
-                    onClick={() => handleRemove(email, 1, i)}
+                    onClick={() => handleRemove(email, isData.userId, i)}
                   >
                     <RiDeleteBin6Fill />
                   </div>
@@ -211,6 +220,7 @@ AddSupportMembers.propTypes = {
   addSupportPerson: PropTypes.func.isRequired,
   deleteSupporter: PropTypes.func.isRequired,
   getSupportGroup: PropTypes.func.isRequired,
+  getCurrentUserDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -222,4 +232,5 @@ export default connect(mapStateToProps, {
   addSupportPerson,
   deleteSupporter,
   getSupportGroup,
+  getCurrentUserDetails,
 })(AddSupportMembers);
