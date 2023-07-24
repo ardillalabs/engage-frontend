@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import {
   Chart as ChartJS,
@@ -20,6 +20,16 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+interface weeklyScores {
+  weekNumber: number;
+  totalValue: number;
+}
+
+interface dailyScores {
+  dayNumber: number;
+  totalValue: number;
+}
 
 const Barchart = () => {
   const options = {
@@ -51,29 +61,72 @@ const Barchart = () => {
   };
 
   // Daily quiz data
-  const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const [dailyScores, setDailyScores] = useState<dailyScores[]>();
+  const [dailyScoreLabels, setDailyScoreLabels] = useState<any>();
+
+  useEffect(() => {
+    const date = new Date();
+    const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const DailyDataFetch = async () => {
+      try {
+        const res = fetch(
+          "http://localhost:5000/api/quiz_mark/last-7-day-summery/DAY/2/11"
+        );
+        (await res).json().then((days: dailyScores[]) => {
+          setDailyScores(days);
+          const tempDailyData = [];
+
+          for (let i = 0; i < days.length; i++) {
+            date.setDate(days[i].dayNumber);
+            tempDailyData.unshift(dailyLabels[date.getDay()]);
+          }
+          setDailyScoreLabels(tempDailyData);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    DailyDataFetch();
+  }, []);
 
   const dailyData = {
-    labels: dailyLabels,
+    labels: dailyScoreLabels,
     datasets: [
       {
         backgroundColor: "#324544",
         borderRadius: 6,
-        data: [10, 20, 30, 40, 50, 60, 70],
+        data: dailyScores?.map((day) => day.totalValue),
       },
     ],
   };
 
   // Weekly quiz data
-  const weeklyLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+  const [weeklyScores, setWeeklyScores] = useState<weeklyScores[]>();
+
+  useEffect(() => {
+    const weeklyDataFetch = async () => {
+      try {
+        const res = fetch(
+          "http://localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/2/11"
+        );
+        (await res).json().then((weeks) => {
+          setWeeklyScores(weeks);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    weeklyDataFetch();
+  }, []);
 
   const weeklyData = {
-    labels: weeklyLabels,
+    labels: weeklyScores?.map((week) => `Week ${week.weekNumber}`),
     datasets: [
       {
         backgroundColor: "#324544",
         borderRadius: 6,
-        data: [10, 20, 30, 40, 50, 60, 70],
+        data: weeklyScores?.map((week) => week.totalValue),
       },
     ],
   };
@@ -89,7 +142,9 @@ const Barchart = () => {
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.chartHeader}>Final output of weekly quizes</div>
-        <div className={styles.chartSubHeader}>Productivity of this month</div>
+        <div className={styles.chartSubHeader}>
+          Productivity of the last 7 weeks
+        </div>
         <Bar options={options} data={weeklyData} />
       </div>
     </div>
