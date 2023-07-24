@@ -249,7 +249,7 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-        <SignUpSteps step='1' />
+        <SignUpSteps step="1" />
         <div className={styles.headerDiv}>
           <h2>Let{"'"}s Get Started!</h2>
           <p>Tell us a little about your self.</p>
@@ -257,9 +257,9 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Full Name</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='name'
+            id="name"
             value={isData.Name}
             autoFocus
             ref={(input) => (myRef.current.name = input)}
@@ -270,11 +270,10 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>User Name</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='username'
+            id="username"
             value={isData.UserName}
-            autoFocus
             ref={(input) => (myRef.current.username = input)}
             onChange={(e) => handleChange({ UserName: e.target.value })}
           />
@@ -283,11 +282,10 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Phone Number</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='phonenumber'
+            id="phonenumber"
             value={isData.PhoneNumber}
-            autoFocus
             ref={(input) => (myRef.current.phonenumber = input)}
             onChange={(e) => handleChange({ PhoneNumber: e.target.value })}
           />
@@ -296,11 +294,10 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Email</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='email'
+            id="email"
             value={isData.Email}
-            autoFocus
             ref={(input) => (myRef.current.email = input)}
             onChange={(e) => handleChange({ Email: e.target.value })}
           />
@@ -309,11 +306,10 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         <div className={styles.inputDiv}>
           <div>Password</div>
           <input
-            type='password'
+            type="password"
             className={styles.input}
-            id='Password'
+            id="Password"
             value={isData.Password}
-            autoFocus
             ref={(input) => (myRef.current.Password = input)}
             onChange={(e) => handleChange({ Password: e.target.value })}
           />
@@ -329,15 +325,15 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         </div> */}
         <div className={styles.bottomDiv}>
           <p>
-            Already have an account ?{' '}
-            <Link href='/login'>
-              {' '}
+            Already have an account ?{" "}
+            <Link href="/login">
+              {" "}
               <span> Login </span>
             </Link>
           </p>
           <p>
-            By clicking “Sign up” you agree to our{' '}
-            <span> terms and conditions</span> & <span>privacy policy</span>{' '}
+            By clicking “Sign up” you agree to our{" "}
+            <span> terms and conditions</span> & <span>privacy policy</span>{" "}
           </p>
         </div>
       </div>
