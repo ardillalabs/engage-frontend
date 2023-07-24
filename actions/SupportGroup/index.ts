@@ -11,7 +11,7 @@ import {
 } from "../types";
 
 // Import environment variables
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api";
 
 // @desc        create support person
 // @api         support_group
@@ -24,10 +24,11 @@ export const addSupportPerson =
         "Content-Type": "application/json",
       },
     };
+    console.log(supportData);
 
     // Stringyfy Json Body
     const body = JSON.stringify({
-      patientUserId: 1,
+      patientUserId: parseInt(supportData.userId),
       email: supportData.email,
     });
 
@@ -42,7 +43,7 @@ export const addSupportPerson =
         type: CREATE_SUPPORT_GROUP,
         payload: response,
       });
-      getSupportGroup(1);
+      getSupportGroup(supportData.userId);
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({

@@ -167,6 +167,8 @@ export const getCurrentUserDetails =
       // withCredentials: true,
     };
 
+    console.log(access_token, "access");
+
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 

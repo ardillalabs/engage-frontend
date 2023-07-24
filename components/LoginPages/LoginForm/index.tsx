@@ -150,9 +150,9 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
                 isEmailClick: true,
               })
             }
-            type='text'
+            type="text"
             className={styles.input}
-            id='email'
+            id="email"
             value={isData.Email}
             autoFocus
             ref={(input) => (myRef.current.email = input)}
@@ -171,17 +171,16 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
               })
             }
             className={styles.input}
-            type={isPasswordHide.HidePassword1 ? 'text' : 'password'}
-            id='Password'
+            type={isPasswordHide.HidePassword1 ? "text" : "password"}
+            id="Password"
             value={isData.Password}
-            autoFocus
             ref={(input) => (myRef.current.Password = input)}
             onChange={(e) => handleChange({ Password: e.target.value })}
           />
           <div className={styles.errorMessage}>{errors.Password}</div>
           <div className={styles.forgotPassword}>
-            <Link href='/forgot-password'>
-              {' '}
+            <Link href="/forgot-password">
+              {" "}
               <span>Forgot Password </span>
             </Link>
           </div>
@@ -201,30 +200,30 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
               {(auth.loggedInMessage &&
                 !auth.isLoggedIn &&
                 auth.loggedInMessage !==
-                  'Incorrect password. Please try again with the correct password.') ||
-              'The email you entered does not belong to any registered user.'
+                  "Incorrect password. Please try again with the correct password.") ||
+              "The email you entered does not belong to any registered user."
                 ? auth.signedUpMessage
-                : ''}
+                : ""}
             </div>
           </>
         )}
         <div className={styles.bottomDiv}>
           <p>
-            Don{"'"}t have an account?{' '}
-            <Link href='/sign-up'>
-              {' '}
+            Don{"'"}t have an account?{" "}
+            <Link href="/sign-up">
+              {" "}
               <span> Sign up here </span>
             </Link>
           </p>
           <p>
-            By clicking “Sign up” you agree to our{' '}
-            <span> terms and conditions</span> & <span>privacy policy</span>{' '}
+            By clicking “Sign up” you agree to our{" "}
+            <span> terms and conditions</span> & <span>privacy policy</span>{" "}
           </p>
         </div>
         <div className={styles.imageDiv}>
           <Image
-            src='/login_image.png'
-            alt='login image'
+            src="/login_image.png"
+            alt="login image"
             width={310}
             height={280}
           />
