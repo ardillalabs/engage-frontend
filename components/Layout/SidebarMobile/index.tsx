@@ -9,9 +9,18 @@ import { IoLogOut } from "react-icons/io5";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signOut } from "@/actions/Auth";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 const SidebarMobile = () => {
+  const router = useRouter();
   const [sidebarActive, setSidebarActive] = useState(false);
+
+  const handleSignOut = () => {
+    signOut();
+    deleteCookie("access_token", { path: "/" });
+    router.push("/");
+  };
 
   const alertWellnessTeam = async () => {
     try {
@@ -85,7 +94,9 @@ const SidebarMobile = () => {
 
         <button
           className={`${styles.logoutBtn} ${styles.link}`}
-          onClick={signOut}
+          onClick={() => {
+            handleSignOut();
+          }}
         >
           <IoLogOut className={styles.icon} />
           <span>Logout</span>
