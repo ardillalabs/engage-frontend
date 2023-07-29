@@ -91,3 +91,17 @@
 .imageChangeIcons:hover .imageChangeIconDiv {
   border: 3px solid #12948e;
 }
+
+.buttonDiv button {
+  width: 88px;
+  height: 40px;
+  font-size: 16px;
+  color: #324544;
+  font-weight: 700;
+  line-height: 20px;
+  font-style: normal;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  background: #ffffff;
+  border: 1px solid #324544;
+}

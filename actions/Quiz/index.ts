@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 // const BASE_URL = "https://engage-backend-production.up.railway.app/api/";
 const BASE_URL = process.env.BASE_URL;
+// const BASE_URL = "localhost:5000/api";
 export const getQuestionList =
   (quizId: number) => async (dispatch: AppDispatch) => {
     try {
