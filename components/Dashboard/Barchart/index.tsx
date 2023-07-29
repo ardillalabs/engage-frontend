@@ -10,7 +10,18 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import useDate from "@/hooks/useDate";
+import { connect } from "react-redux";
+import { RootState } from "@/store";
+import { getCurrentUserDetails } from "@/actions/Auth";
+import PropTypes from "prop-types";
+import { getCookie } from "cookies-next";
+
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
+
+const BASE_URL = process.env.BASE_URL;
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +42,15 @@ interface dailyScores {
   totalValue: number;
 }
 
-const Barchart = () => {
+const Barchart = ({ getCurrentUserDetails, auth }: Props) => {
+  const cookie = getCookie("access_token", auth.access_token);
+
+  useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  const userID = auth.id;
+
   const options = {
     responsive: true,
     scales: {
@@ -70,7 +89,7 @@ const Barchart = () => {
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
-          "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/DAY/2/11"
+          `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${userID}`
         );
         (await res).json().then((days: dailyScores[]) => {
           setDailyScores(days);
@@ -108,7 +127,7 @@ const Barchart = () => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/WEEK/2/11"
+          `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/2/${userID}`
         );
         (await res).json().then((weeks) => {
           setWeeklyScores(weeks);
@@ -151,4 +170,15 @@ const Barchart = () => {
   );
 };
 
-export default Barchart;
+// export default Barchart;
+Barchart.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(Barchart);

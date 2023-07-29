@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { FiKey } from "react-icons/fi";
@@ -6,16 +6,32 @@ import useDate from "@/hooks/useDate";
 import Link from "next/link";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
+import { getCurrentUserDetails } from "@/actions/Auth";
+import PropTypes from "prop-types";
+import { getCookie } from "cookies-next";
 
-const Header = () => {
-  const date = new Date();
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
+
+const BASE_URL = process.env.BASE_URL;
+
+const Header = ({ getCurrentUserDetails, auth }: Props) => {
+  const cookie = getCookie("access_token", auth.access_token);
+
+  useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  const userID = auth.id;
   const { dayWithSyntax, weekday, month } = useDate();
 
   const alertWellnessTeam = async () => {
     try {
-      const res = await fetch(
-        "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/send-alert/2"
-      );
+      const res = await fetch(`${BASE_URL}/support_group/send-alert/${userID}`);
       if (res.ok) {
         toast.success("Support group alerted", {
           position: toast.POSITION.TOP_CENTER,
@@ -75,4 +91,15 @@ const Header = () => {
   );
 };
 
-export default Header;
+// export default Header;
+Header.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(Header);

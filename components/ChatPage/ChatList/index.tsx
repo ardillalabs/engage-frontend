@@ -3,6 +3,8 @@ import { GrClose } from "react-icons/gr";
 import styles from "./index.module.css";
 import ContactCard from "../ContactCard";
 import { useState, useEffect, useRef } from "react";
+import { getCurrentUserDetails } from "@/actions/Auth";
+import PropTypes from "prop-types";
 
 import { db } from "@/firebase/config";
 import {
@@ -13,6 +15,9 @@ import {
   limit,
   doc,
 } from "firebase/firestore";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
+import { getCookie } from "cookies-next";
 
 interface chatListArray {
   userID: string;
@@ -24,10 +29,22 @@ interface chatListArray {
   unreadCount?: number;
 }
 
-//test
-const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
 
-const ChatList = () => {
+const BASE_URL = process.env.BASE_URL;
+
+const ChatList = ({ getCurrentUserDetails, auth }: Props) => {
+  const cookie = getCookie("access_token", auth.access_token);
+
+  useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  const userID = auth.id;
+
   const [displaySearch, setDisplaySearch] = useState(false);
   const [chatList, setChatList] = useState<chatListArray[]>([]);
   const stateRef: any = useRef();
@@ -38,7 +55,7 @@ const ChatList = () => {
 
     const chatListFetch = async () => {
       try {
-        api_res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
+        api_res = await fetch(`${BASE_URL}/support_group/${userID}`);
       } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch chat list");
@@ -174,4 +191,15 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
+// export default ChatList;
+ChatList.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(ChatList);

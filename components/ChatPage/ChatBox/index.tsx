@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./index.module.css";
+import { getCurrentUserDetails } from "@/actions/Auth";
+import PropTypes from "prop-types";
 
 // react-icons
 import { useRouter } from "next/router";
@@ -7,6 +9,9 @@ import { FiChevronLeft } from "react-icons/fi";
 import ChatInput from "../ChatInput";
 import { useEffect, useState } from "react";
 import AllMessages from "../AllMessages";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
+import { getCookie } from "cookies-next";
 
 interface userDataArray {
   userID: string;
@@ -14,8 +19,23 @@ interface userDataArray {
   imageURL?: string;
 }
 
-const ChatBox = () => {
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
+
+const BASE_URL = process.env.BASE_URL;
+
+const ChatBox = ({ getCurrentUserDetails, auth }: Props) => {
   const router = useRouter();
+  const cookie = getCookie("access_token", auth.access_token);
+
+  useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  const userID = auth.id;
+
   const chatID = router.query.chatID;
   const [userData, setUserData] = useState<userDataArray>();
   const [allUserData, setAllUserData] = useState<any>();
@@ -25,7 +45,7 @@ const ChatBox = () => {
 
     const userInfoFetch = async () => {
       try {
-        res = await fetch("http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/2");
+        res = await fetch(`${BASE_URL}/support_group/${userID}`);
       } catch (error) {
         // console.log("Failed to fetch user info", error);
         throw new Error("failed to fetch userInfo");
@@ -100,4 +120,15 @@ const ChatBox = () => {
   );
 };
 
-export default ChatBox;
+// export default ChatBox;
+ChatBox.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(ChatBox);

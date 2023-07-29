@@ -22,6 +22,9 @@ interface teamMemberArray {
   imageURL: string;
   email: string;
 }
+
+const BASE_URL = process.env.BASE_URL;
+
 const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
   useEffect(() => {
     getSupportGroup(1);
@@ -51,11 +54,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
 
   const dailyMessageFetch = async () => {
     try {
-      // const res = await fetch(
-      //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
-      // );
       const res = await fetch(
-        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/daily_message/${year}-${monthNum}-${day}`
+        `${BASE_URL}/daily_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {
@@ -71,11 +71,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
 
   const wellnessExcerciseFetch = async () => {
     try {
-      // const res = await fetch(
-      //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
-      // );
       const res = await fetch(
-        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/wellness_message/${year}-${monthNum}-${day}`
+        `${BASE_URL}/wellness_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {
