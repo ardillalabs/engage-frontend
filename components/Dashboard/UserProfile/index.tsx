@@ -2,9 +2,24 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from "./index.module.css";
 import Image from 'next/image';
 import { HiCamera } from 'react-icons/hi';
+import { RootState } from '@/store';
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+import { updateUserInfoSubmit } from '@/actions/Auth';
+import { getCookie } from 'cookies-next';
 
-const UserProfile = () => {
+interface Props {
+    updateUserInfoSubmit: (...args: any[]) => any;
+    auth: any;
+}
+
+const UserProfile = ({auth, updateUserInfoSubmit}:Props) => {
+
+    const cookie = getCookie('access_token', auth.access_token);
+    
     const [pictureUpdate, setPictureUpdate] = useState(false);
+
+    console.log(cookie)
 
     const useOutsideAlerter = (ref: any) => {
         useEffect(() => {
@@ -25,6 +40,18 @@ const UserProfile = () => {
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
+    const [profilePicture, setProfilePicture] = useState('');
+
+    const submitImage = (event: any) => {
+        console.log(event.target.files[0]);
+        setProfilePicture(event.target.files[0])
+    }
+
+    console.log(auth)
+
+    function uploadImage(){
+        updateUserInfoSubmit(profilePicture, cookie)
+    }
 
     return (
         <div className={styles.profileView}>
@@ -33,8 +60,8 @@ const UserProfile = () => {
                 onClick={ () => setPictureUpdate(true) }    
             >
                 {/* Image */}
-                <Image
-                src="https://source.unsplash.com/_7LbC5J-jw4"
+                <img
+                src={auth?.image_url}
                 alt="Profile Picture"
                 className={styles.profilePicture}
                 width={60}
@@ -74,7 +101,7 @@ const UserProfile = () => {
                     <span className='body-4'>Avatar</span>
                 </div>
                 <label htmlFor="profilePictureUpload" className={styles.imageChangeIcons}>
-                    <input type="file" id='profilePictureUpload' className={styles.imageChangeInput} />
+                    <input type="file" id='profilePictureUpload' className={styles.imageChangeInput} onChange={submitImage}/>
                     <div className={styles.imageChangeIconDiv}>
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M17.0996 8.54957C17.0996 7.05842 18.3084 5.84961 19.7996 5.84961C21.2908 5.84961 22.4995 7.05842 22.4995 8.54957C22.4995 10.0407 21.2908 11.2495 19.7996 11.2495C18.3084 11.2495 17.0996 10.0407 17.0996 8.54957Z" fill="#D9D9D9"/>
@@ -83,12 +110,27 @@ const UserProfile = () => {
 
                     </div>
                     <span className='body-4'>Gallery</span>
-                </label>
+                </label>       
                 </div>
+                
+                <div className={styles.buttonDiv}>                        
+                    <button onClick={uploadImage}>Upload</button>
+                    </div>
             </div>
-            <h6>Anne Perera</h6>
+            <h6>{auth?.username}</h6>
         </div>
     )
 }
 
-export default UserProfile;
+UserProfile.prototype = {
+    updateUserInfoSubmit: PropTypes.func.isRequired,
+  };
+
+// export default UserProfile;
+const mapStateToProps = (state: RootState) => ({
+    auth: state.auth,
+  });
+  
+export default connect(mapStateToProps, {
+    updateUserInfoSubmit,
+})(UserProfile);

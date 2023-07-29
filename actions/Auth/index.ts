@@ -48,6 +48,7 @@ import {
   UserSignInDetails,
   UserSignUpDetails,
   UserProfileUpdateDetails,
+  UpdateProfilePicture,
 } from "../../tsc-types/Auth";
 
 import { deleteCookie, setCookie } from "cookies-next";
@@ -55,6 +56,7 @@ import { deleteCookie, setCookie } from "cookies-next";
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
 // const AUTH_BASE_URL = 'localhost:5001/auth/users'
+console.log(AUTH_BASE_URL)
 
 // @desc        Sign up user
 // @api         auth/signup
@@ -869,7 +871,7 @@ export const deactivateAccount =
 // @api         auth/update-user-info
 // @access      public
 export const updateUserInfoSubmit =
-  (userInforUpdateDetails: UserInforUpdateDetails, access_token: string) =>
+  (updateProfilePicture: any, access_token: string) =>
     async (dispatch: AppDispatch) => {
       dispatch({
         type: SET_LOADING_UPDATE_USER_INFO,
@@ -878,52 +880,24 @@ export const updateUserInfoSubmit =
         type: CLEAR_AUTH_ERROR_MESSAGES,
       });
 
+      console.log(updateProfilePicture)
+    
       // API Header configarations
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${access_token}`,
         },
-        withCredentials: true,
       };
 
       // Create FormData object and append properties
       const formData = new FormData();
-      formData.append("first_name", userInforUpdateDetails.first_name);
-      formData.append("last_name", userInforUpdateDetails.last_name);
-
-      if (userInforUpdateDetails.username) {
-        formData.append("username", userInforUpdateDetails.username);
-      }
-      if (userInforUpdateDetails.phone_number) {
-        formData.append("phone_number", userInforUpdateDetails.phone_number);
-      }
-      if (userInforUpdateDetails.street) {
-        formData.append("street", userInforUpdateDetails.street);
-      }
-      if (userInforUpdateDetails.apartment) {
-        formData.append("apartment", userInforUpdateDetails.apartment);
-      }
-      if (userInforUpdateDetails.city) {
-        formData.append("city", userInforUpdateDetails.city);
-      }
-      if (userInforUpdateDetails.postal_code) {
-        formData.append("postal_code", userInforUpdateDetails.postal_code);
-      }
-      if (userInforUpdateDetails.country) {
-        formData.append("country", userInforUpdateDetails.country);
-      }
-
-      if (userInforUpdateDetails.dp) {
-        formData.append("dp", userInforUpdateDetails.dp);
-      }
-      if (userInforUpdateDetails.email) {
-        formData.append("email", userInforUpdateDetails.email);
-      }
+      formData.append('dp', updateProfilePicture);
+      console.log(formData)
 
       try {
         const response = await axios.put(
-          `${AUTH_BASE_URL}update-user-info`,
+          `${AUTH_BASE_URL}/update-user-info`,
           formData,
           config
         );
@@ -978,7 +952,7 @@ export const updateUserInfoSubmit =
               visibility: true,
               type: "error",
               title: "Error!",
-              description: `${err.response.data.message}`,
+              description: `${err.responses}`,
             },
           });
         }
