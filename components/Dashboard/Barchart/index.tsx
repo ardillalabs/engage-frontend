@@ -96,7 +96,7 @@ const Barchart = () => {
       {
         backgroundColor: "#324544",
         borderRadius: 6,
-        data: dailyScores?.map((day) => day.totalValue),
+        data: Array.isArray(dailyScores) ? dailyScores.map((day) => day.totalValue) : [],
       },
     ],
   };
@@ -108,7 +108,7 @@ const Barchart = () => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/WEEK/2/11"
+          "localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/2/11"
         );
         (await res).json().then((weeks) => {
           setWeeklyScores(weeks);
@@ -126,7 +126,7 @@ const Barchart = () => {
       {
         backgroundColor: "#324544",
         borderRadius: 6,
-        data: weeklyScores?.map((week) => week.totalValue),
+        data: Array.isArray(weeklyScores) ? weeklyScores.map((week) => week.totalValue) : [],
       },
     ],
   };

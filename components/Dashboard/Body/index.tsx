@@ -44,6 +44,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
       };
       return support;
     });
+  
+  console.log(auth)
 
   const { day, monthNum, year } = useDate();
   const [dailyMessage, setDailyMessage] = useState("Loading...");
@@ -103,7 +105,7 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
       <div className={styles.leftDiv}>
         {/* Dashboard Top */}
         <div className={styles.dashboardTop}>
-          <h3 className={styles.welcomeText}>Hello Anne!</h3>
+          {/* <h3 className={styles.welcomeText}>Hello {auth?.username}</h3> */}
           <span className="body-1">{dailyMessage}</span>
           <div className={styles.dashboardTopMenus}>
             <Link href="/daily-quiz">
@@ -169,9 +171,9 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
 
         {/* Dashboard support system */}
         <div className={styles.dashboardSupportSystemDiv}>
-          <span className={styles.supportSystemText}>
+          {/* <span className={styles.supportSystemText}>
             Depiction of Support System surrounding the patient
-          </span>
+          </span> */}
           <div className={styles.memberTreeWrapper}>
             <MemberTree
               teamMemberData={group}

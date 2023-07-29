@@ -104,8 +104,8 @@ const MemberTree = ({
         <div className={styles.memberTreeDiv}>
           {/* User image */}
           <div className={styles.userImageContainer}>
-            <Image
-              src="https://source.unsplash.com/_7LbC5J-jw4"
+            <img
+              src={auth?.image_url}
               alt="Profile Picture"
               className={styles.userImage}
               width={100}

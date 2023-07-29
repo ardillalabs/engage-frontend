@@ -46,3 +46,7 @@ export interface UpdatePasswordDetails {
   currentPassword: string;
   newPassword: string;
 }
+
+export interface UpdateProfilePicture {
+  dp: any;
+}
