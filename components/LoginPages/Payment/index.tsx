@@ -1,137 +1,132 @@
-import React, { useState } from "react";
-import styles from "./index.module.css";
-import SignUpSteps from "../SignUpSteps";
-import { loadStripe } from "@stripe/stripe-js";
+import React, { useEffect, useState } from 'react';
+import styles from './index.module.css';
+import SignUpSteps from '../SignUpSteps';
+import { loadStripe } from '@stripe/stripe-js';
 import {
-  CardCvcElement,
-  CardExpiryElement,
-  CardNumberElement,
   Elements,
-} from "@stripe/react-stripe-js";
+} from '@stripe/react-stripe-js';
+import { ChooseYourPlanInitialStates } from "../../../tsc-types/ChossePlan";
+import { setChooseYourPlanModal } from "../../../actions/ChoosePlan";
+import PropTypes from "prop-types";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
+import { RootState } from '@/store';
+import CardPayment from './CardPayment';
 
-import Image from "next/image";
-import Link from "next/link";
 
-const stripePromise = loadStripe(
-  "pk_test_51NJZSpE4oQnZXS7iRgA3z5BdTUeJxOJg3mUpo88pJPAPGezh7QpUanl3UvztEfZ5eSndr6qzYcXTkx0HAmEd53af00C4OJOff2"
-);
 
-const PaymentForm = () => {
-  const stripeInputOptions = {
-    style: {
-      base: {
-        fontSize: "18px",
-      },
-    },
-  };
+interface Props {
+  ChoosePlan: ChooseYourPlanInitialStates;
+  setChooseYourPlanModal: (condition: boolean) => any;
+  toast: any;
+  setToastState: any;
+}
 
-  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+
+const PaymentForm =  ({
+  setChooseYourPlanModal,
+  ChoosePlan: { chooseYourPlan, choosePlanModal },
+  toast,
+  setToastState,
+}: Props) => {
+  const router = useRouter();
+  const [isRouteUrl, setRouteUrl] = useState<string>("");
+  const [isRouteUrlParam, setRouteUrlParam] = useState<any>({
+    paymentType: "",
+    membershipType: "",
+  });
+  const [isPaymentMethod, setPaymentMethod] = useState<any>({
+    message: true,
+    method: "",
+    approvedMethod: "",
+  });
+  
+  const stripePromise = loadStripe(
+    'pk_test_51MHKfpGmuOIea0UaVmOCfKt5hm2Htqx4z916uycgaTYztLq8PYLOOYqwo6QHLAaSfJJ4XiqDsqIUPN2fbKnkbECA00CDQ3MjSz'
+  );
+
+  useEffect(() => {
+    setRouteUrl(router.route);
+  }, [router.route]);
+
+  useEffect(() => {
+    if (router.query.paymentType || router.query.membershipType) {
+      setRouteUrlParam({
+        paymentType: router.query.paymentType,
+        membershipType: router.query.membershipType,
+      });
+    }
+
+    if (!router.query.paymentType || !router.query.membershipType) {
+      if (
+        !router.asPath.includes("paymentType") ||
+        !router.asPath.includes("membershipType")
+      ) {
+        setRouteUrlParam({
+          paymentType: "Yearly",
+          membershipType: "Gold",
+        });
+      }
+    }
+  }, [router.query.paymentType]);
 
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-        <SignUpSteps step="3" />
+        <SignUpSteps step='3' />
         <div className={styles.contentDiv}>
           <div className={styles.sectionDiv}>
             <h2>Payment Method</h2>
             <div className={styles.selectPayment}>
-              <div className={styles.selectPaymentTop}>
+              {/* <div className={styles.selectPaymentTop}>
                 <label className={styles.paymentMethod}>
                   <input
-                    type="radio"
-                    name="credit-card"
+                    type='radio'
+                    name='credit-card'
                     className={styles.radioBtn}
-                    checked={paymentMethod === "credit-card" ? true : false}
-                    onClick={() => setPaymentMethod("credit-card")}
+                    checked={paymentMethod === 'credit-card' ? true : false}
+                    onClick={() => setPaymentMethod('credit-card')}
                   />
                   Credit Card
                 </label>
                 <label className={styles.paymentMethod}>
                   <input
-                    type="radio"
-                    name="paypal"
+                    type='radio'
+                    name='paypal'
                     className={styles.radioBtn}
-                    checked={paymentMethod === "paypal" ? true : false}
-                    onClick={() => setPaymentMethod("paypal")}
+                    checked={paymentMethod === 'paypal' ? true : false}
+                    onClick={() => setPaymentMethod('paypal')}
                   />
                   Paypal
                 </label>
-              </div>
+              </div> */}
               <div className={styles.paymentLogoWrap}>
                 <Image
-                  src={"/mastercard-logo.png"}
+                  src={'/mastercard-logo.png'}
                   width={100}
                   height={100}
-                  alt="Mastercard Logo"
+                  alt='Mastercard Logo'
                   className={styles.paymentTypeLogo}
                 />
                 <Image
-                  src={"/visa-logo.png"}
+                  src={'/visa-logo.png'}
                   width={100}
                   height={100}
-                  alt="Visa Logo"
+                  alt='Visa Logo'
                   className={styles.paymentTypeLogo}
                 />
                 <Image
-                  src={"/paypal-logo.png"}
+                  src={'/paypal-logo.png'}
                   width={100}
                   height={100}
-                  alt="Paypal Logo"
+                  alt='Paypal Logo'
                   className={styles.paymentTypeLogo}
                 />
               </div>
             </div>
             <Elements stripe={stripePromise}>
-              {/* Credit Card Payment */}
-              <form
-                className={
-                  paymentMethod === "credit-card"
-                    ? styles.creditCardForm
-                    : styles.creditCardFormHidden
-                }
-              >
-                <label className={styles.fieldWrap}>
-                  <span>Cardholder Name</span>
-                  <input type="text" className={styles.inputField} />
-                </label>
-                <label className={styles.fieldWrap}>
-                  <span>Card Number</span>
-                  <div className={styles.stripeInputField}>
-                    <CardNumberElement options={stripeInputOptions} />
-                  </div>
-                </label>
-                <div className={styles.halfFieldWrap}>
-                  <label className={styles.fieldWrap}>
-                    <span>Expiration Date</span>
-                    <div className={styles.stripeInputField}>
-                      <CardExpiryElement options={stripeInputOptions} />
-                    </div>
-                  </label>
-                  <label className={styles.fieldWrap}>
-                    <span>CVC</span>
-                    <div className={styles.stripeInputField}>
-                      <CardCvcElement options={stripeInputOptions} />
-                    </div>
-                  </label>
-                </div>
-                <div className={styles.btnsWrapper}>
-                  <button className={styles.purchaseBtn}>Purchase</button>
-                  <Link href={"/dashboard"} className={styles.trialLink}>
-                    Free Trial
-                  </Link>
-                </div>
-              </form>
-
-              {/* Paypal Payment */}
-              <form
-                className={
-                  paymentMethod === "paypal"
-                    ? styles.paypalForm
-                    : styles.paypalFormHidden
-                }
-              >
-                <div>Paypal</div>
-              </form>
+              <CardPayment isPaymentMethod={isPaymentMethod} />
             </Elements>
           </div>
         </div>
@@ -140,4 +135,17 @@ const PaymentForm = () => {
   );
 };
 
-export default PaymentForm;
+PaymentForm.prototype = {
+  setChooseYourPlanModal: PropTypes.func.isRequired,
+  setToastState: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  ChoosePlan: state.ChoosePlan,
+  toast: state.toast,
+});
+
+export default connect(mapStateToProps, {
+  setChooseYourPlanModal,
+})(PaymentForm);
+
