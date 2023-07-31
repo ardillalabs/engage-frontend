@@ -11,6 +11,8 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import useDate from "@/hooks/useDate";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -31,15 +33,45 @@ interface dailyScores {
   totalValue: number;
 }
 
-const Barchart = () => {
+interface Props {
+  auth: any;
+}
+const Barchart = ({auth}: Props) => {
   const options = {
     responsive: true,
     scales: {
       y: {
         beginAtZero: true,
-        max: 90,
+        max: 60,
         ticks: {
-          stepSize: 30,
+          stepSize: 20,
+        },
+      },
+      x: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        // position: "top" as const,
+        display: false,
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
+      },
+    },
+  };
+  const options_daily = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 15,
+        ticks: {
+          stepSize: 5,
         },
       },
       x: {
@@ -64,13 +96,15 @@ const Barchart = () => {
   const [dailyScores, setDailyScores] = useState<dailyScores[]>();
   const [dailyScoreLabels, setDailyScoreLabels] = useState<any>();
 
+  console.log(auth)
+
   useEffect(() => {
     const date = new Date();
     const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
-          "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/DAY/2/11"
+          `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
         );
         (await res).json().then((days: dailyScores[]) => {
           setDailyScores(days);
@@ -108,7 +142,7 @@ const Barchart = () => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          "localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/2/11"
+          `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
         );
         (await res).json().then((weeks) => {
           setWeeklyScores(weeks);
@@ -138,7 +172,7 @@ const Barchart = () => {
         <div className={styles.chartSubHeader}>
           Productivity of the last 7 days
         </div>
-        <Bar options={options} data={dailyData} />
+        <Bar options={options_daily} data={dailyData} />
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.chartHeader}>Final output of weekly quizes</div>
@@ -151,4 +185,10 @@ const Barchart = () => {
   );
 };
 
-export default Barchart;
+// export default Barchart;
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+})(Barchart);
