@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["source.unsplash.com"],
+    domains: ["source.unsplash.com",],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "engage-prod-v1.s3.us-east-1.amazonaws.com",
+      },
+    ]
   },
   env: {
     AUTH_BASE_URL: process.env.AUTH_BASE_URL,

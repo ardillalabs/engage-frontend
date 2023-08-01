@@ -161,6 +161,7 @@ export default function (state = initialState, action: AnyAction) {
       };
 
     case GET_CURRENT_USER_DETAILS_SUCCESS:
+      console.log('GET_CURRENT_USER_DETAILS_SUCCESS', payload.data)
       return {
         ...state,
         isLoadingSignUp: false,
@@ -453,33 +454,33 @@ export default function (state = initialState, action: AnyAction) {
         accessToken: null,
       };
 
-    case GET_CURRENT_USER_DETAILS_SUCCESS:
-      return {
-        ...state,
-        isLoadingSignUp: false,
-        // isSignedUp: true,
-        isLoadingLogin: false,
-        isLoggedIn: true,
-        //-----------------
-        apartment: payload.data.apartment,
-        city: payload.data.city,
-        country: payload.data.country,
-        email: payload.data.email,
-        first_name: payload.data.first_name,
-        id: payload.data.id,
-        image_url: payload.data.image_url,
-        is_subscribed_telegram: payload.data.is_subscribed_telegram,
-        lastname: payload.data.lastname,
-        membership: payload.data.membership,
-        phone_number: payload.data.phone_number,
-        postal_code: payload.data.postal_code,
-        register_type: payload.data.register_type,
-        role: payload.data.role,
-        status: payload.data.status,
-        street: payload.data.street,
-        username: payload.data.username,
-        is_verified: payload.data.is_verified,
-      };
+    // case GET_CURRENT_USER_DETAILS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoadingSignUp: false,
+    //     // isSignedUp: true,
+    //     isLoadingLogin: false,
+    //     isLoggedIn: true,
+    //     //-----------------
+    //     apartment: payload.data.apartment,
+    //     city: payload.data.city,
+    //     country: payload.data.country,
+    //     email: payload.data.email,
+    //     first_name: payload.data.first_name,
+    //     id: payload.data.id,
+    //     image_url: payload.data.image_url,
+    //     is_subscribed_telegram: payload.data.is_subscribed_telegram,
+    //     lastname: payload.data.lastname,
+    //     membership: payload.data.membership,
+    //     phone_number: payload.data.phone_number,
+    //     postal_code: payload.data.postal_code,
+    //     register_type: payload.data.register_type,
+    //     role: payload.data.role,
+    //     status: payload.data.status,
+    //     street: payload.data.street,
+    //     username: payload.data.username,
+    //     is_verified: payload.data.is_verified,
+    //   };
 
     case GET_CURRENT_USER_DETAILS_FAIL:
       return {

@@ -26,7 +26,7 @@ const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
 
   useEffect(() => {
-    const cookie = getCookie("access_token", auth.access_token);
+    const cookie = getCookie("access_token", { path: "/" });
     getCurrentUserDetails(cookie);
   }, [routePath]);
 

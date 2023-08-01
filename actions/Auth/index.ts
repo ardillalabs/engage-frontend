@@ -55,7 +55,7 @@ import { deleteCookie, setCookie } from "cookies-next";
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
-// const AUTH_BASE_URL = 'localhost:5001/auth/users'
+// const AUTH_BASE_URL = 'ec2-54-160-247-159.compute-1.amazonaws.com:5001/auth/users'
 console.log(AUTH_BASE_URL)
 
 // @desc        Sign up user
@@ -174,7 +174,7 @@ export const getCurrentUserDetails =
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 
-      console.log(response);
+      console.log('response-get-user', response);
 
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,

@@ -44,7 +44,7 @@ const MemberTree = ({
 
     changeTeamMemberData(filtered);
     await deleteSupporter(id, email);
-    getSupportGroup(1);
+    getSupportGroup(auth.id);
   };
 
   const [popupDiv, setPopupDiv] = useState(false);
@@ -86,7 +86,7 @@ const MemberTree = ({
         userId: isData.userId,
         email: isData.Email,
       });
-      getSupportGroup(1);
+      getSupportGroup(auth.id);
     }
 
     setErrors(errors);

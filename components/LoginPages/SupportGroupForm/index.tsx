@@ -22,8 +22,9 @@ interface teamMemberArray {
 
 const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
   useEffect(() => {
-    getSupportGroup(1);
-  }, [supportGroup.supportGroup.length]);
+    console.log('auth - get support group', auth)
+    getSupportGroup(auth.id);
+  }, [supportGroup.supportGroup.length, auth.id]);
   const [teamMemberData, setTeamMemberData] = useState<any | null>(null);
 
   const group: any =

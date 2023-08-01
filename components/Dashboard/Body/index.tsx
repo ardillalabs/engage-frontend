@@ -24,8 +24,8 @@ interface teamMemberArray {
 }
 const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
   useEffect(() => {
-    getSupportGroup(1);
-  }, [supportGroup.supportGroup.length]);
+    getSupportGroup(auth.id);
+  }, [supportGroup.supportGroup.length, auth.id]);
   // Test Data
   const [teamMemberData, setTeamMemberData] = useState<any>(null);
 
@@ -53,9 +53,6 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
 
   const dailyMessageFetch = async () => {
     try {
-      // const res = await fetch(
-      //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
-      // );
       const res = await fetch(
         `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/daily_message/${year}-${monthNum}-${day}`
       );

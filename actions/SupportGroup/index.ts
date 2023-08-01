@@ -92,6 +92,7 @@ export const getSupportGroup =
         .get(`${BASE_URL}/support_group/${userId}`)
         .then((response) => {
           const data: any = response.data;
+          console.log('support-group-res', data)
           dispatch({
             type: GET_SUPPORT_GROUP,
             payload: data,
