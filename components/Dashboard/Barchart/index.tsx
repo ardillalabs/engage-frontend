@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styles from './index.module.css';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styles from "./index.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,11 +9,11 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import useDate from '@/hooks/useDate';
-import { RootState } from '@/store';
-import { connect } from 'react-redux';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import useDate from "@/hooks/useDate";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -62,7 +62,7 @@ const Barchart = ({ auth }: Props) => {
       },
       title: {
         display: false,
-        text: 'Chart.js Bar Chart',
+        text: "Chart.js Bar Chart",
       },
     },
   };
@@ -72,9 +72,9 @@ const Barchart = ({ auth }: Props) => {
   const [dailyScoreLabels, setDailyScoreLabels] = useState<any>();
 
   useEffect(() => {
-    console.log('auth.id', auth);
+    console.log("auth.id", auth);
     const date = new Date();
-    const dailyLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
@@ -102,7 +102,7 @@ const Barchart = ({ auth }: Props) => {
     labels: dailyScoreLabels,
     datasets: [
       {
-        backgroundColor: '#324544',
+        backgroundColor: "#324544",
         borderRadius: 6,
         data: Array.isArray(dailyScores)
           ? dailyScores.map((day) => day.totalValue)
@@ -120,7 +120,7 @@ const Barchart = ({ auth }: Props) => {
         const res = fetch(
           `http://localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
         );
-        console.log('last-7-day-summery/WEEK - res ', res);
+        console.log("last-7-day-summery/WEEK - res ", res);
         (await res).json().then((weeks) => {
           setWeeklyScores(weeks);
         });
@@ -135,7 +135,7 @@ const Barchart = ({ auth }: Props) => {
     labels: weeklyScores?.map((week) => `Week ${week.weekNumber}`),
     datasets: [
       {
-        backgroundColor: '#324544',
+        backgroundColor: "#324544",
         borderRadius: 6,
         data: Array.isArray(weeklyScores)
           ? weeklyScores.map((week) => week.totalValue)

@@ -1,14 +1,14 @@
 import Image from "next/image";
 import styles from "./index.module.css";
 
-const MessageBlock = ({ reversed, messageTime, username }: any) => {
+const MessageBlock = ({ reversed, messageTime, username, imageURL }: any) => {
   return (
     <div className={styles.mainDiv}>
       <div
         className={!reversed ? styles.profileInfo : styles.profileInfoReversed}
       >
         <Image
-          src="https://source.unsplash.com/_7LbC5J-jw4"
+          src={imageURL ? imageURL : "https://source.unsplash.com/_7LbC5J-jw4"}
           alt="Profile Picture"
           className={styles.profilePicture}
           width={60}

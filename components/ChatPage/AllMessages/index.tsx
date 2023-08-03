@@ -14,13 +14,14 @@ import MessageBlock from "../MessageBlock";
 import Message from "../Message";
 import useDate from "@/hooks/useDate";
 import { useRouter } from "next/router";
+import { connect } from "react-redux";
+import { RootState } from "@/store";
 
-const AllMessages = ({ username }: any) => {
+const AllMessages = ({ username, auth, imageURL }: any) => {
   const { dateString, day, month, year } = useDate();
   const [messages, setMessages] = useState<DocumentData>([]);
 
-  // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-  const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+  const userID = auth.id;
   const router = useRouter();
   const [chatID, setChatID] = useState<any>(router.query.chatID);
   useEffect(() => {
@@ -106,6 +107,7 @@ const AllMessages = ({ username }: any) => {
                 reversed={reversed}
                 messageTime={messageTime}
                 username={username}
+                imageURL={imageURL}
               />
             )}
             {messageBlock && (
@@ -113,6 +115,7 @@ const AllMessages = ({ username }: any) => {
                 reversed={reversed}
                 messageTime={messageTime}
                 username={username}
+                imageURL={imageURL}
               />
             )}
             <Message message={messageData.message} reversed={reversed} />
@@ -123,4 +126,9 @@ const AllMessages = ({ username }: any) => {
   );
 };
 
-export default AllMessages;
+// export default AllMessages;
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(AllMessages);

@@ -13,6 +13,11 @@ import {
   limit,
   doc,
 } from "firebase/firestore";
+import { RootState } from "@/store";
+import { connect } from "react-redux";
+import { getCurrentUserDetails } from "@/actions/Auth";
+import PropTypes from "prop-types";
+import { getCookie } from "cookies-next";
 
 interface chatListArray {
   userID: string;
@@ -24,10 +29,22 @@ interface chatListArray {
   unreadCount?: number;
 }
 
-//test
-const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
+  auth: any;
+}
 
-const ChatList = () => {
+const BASE_URL = process.env.BASE_URL;
+
+const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
+  const cookie = getCookie("access_token", auth.access_token);
+  useEffect(() => {
+    getCurrentUserDetails(cookie);
+  }, [getCurrentUserDetails]);
+
+  const userID = auth.id;
+  console.log(userID);
+
   const [displaySearch, setDisplaySearch] = useState(false);
   const [chatList, setChatList] = useState<chatListArray[]>([]);
   const stateRef: any = useRef();
@@ -36,84 +53,102 @@ const ChatList = () => {
   useEffect(() => {
     let api_res;
 
-    const chatListFetch = async () => {
-      try {
-        api_res = await fetch("http://localhost:5000/api/support_group/2");
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to fetch chat list");
-      }
+    if (userID) {
+      const chatListFetch = async () => {
+        try {
+          api_res = await fetch(`${BASE_URL}/support_group/${userID}`);
+        } catch (error) {
+          console.log(error);
+          throw new Error("Failed to fetch chat list");
+        }
 
-      await api_res.json().then((users) => {
-        setChatList([]);
-        users.map((user: any) => {
-          const chatID = user.chat_id;
-          const support_user = user.support_user;
-          const colRef = query(
-            collection(db, "chatMessages", chatID, "messages"),
-            orderBy("messageTime", "desc"),
-            limit(1)
-          );
+        await api_res.json().then((users) => {
+          setChatList([]);
+          users.map((user: any) => {
+            const chatID = user.chat_id;
+            console.log(user.support_user);
 
-          setChatList((prevState) => [
-            ...prevState,
-            {
-              userID: support_user.id,
-              chatID,
-              username: support_user.full_name,
-              imageURL: support_user.image_url,
-              lastMessage: "",
-              lastMessageTime: "",
-            },
-          ]);
-          // Update last message
-          onSnapshot(colRef, (snapshot) => {
-            const snapData: any = snapshot.docs;
-            const snapLastMessage = snapData[0].data().message;
-            const snapLastMessageTime = snapData[0]
-              .data()
-              .messageTime?.toDate()
-              .toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              });
+            if (user.support_user) {
+              const support_user = user.support_user;
 
-            const lastMessageUpdated = stateRef.current.map((obj: any) => {
-              if (obj.userID === support_user.id) {
-                return {
-                  ...obj,
-                  lastMessage: snapLastMessage,
-                  lastMessageTime: snapLastMessageTime,
-                };
-              }
-              return obj;
-            });
-            setChatList(() => lastMessageUpdated);
-            stateRef.current = lastMessageUpdated;
-          });
+              setChatList((prevState) => [
+                ...prevState,
+                {
+                  userID: support_user.id,
+                  chatID,
+                  username: support_user.full_name,
+                  imageURL: support_user.image_url,
+                  lastMessage: "",
+                  lastMessageTime: "",
+                },
+              ]);
 
-          // Update unread message count
-          onSnapshot(doc(db, "chatMessages", chatID), (snapshot) => {
-            const unreadCount = snapshot.data()?.unreadCount?.[userID];
+              // Update last message
+              try {
+                const colRef = query(
+                  collection(db, "chatMessages", chatID, "messages"),
+                  orderBy("messageTime", "desc"),
+                  limit(1)
+                );
 
-            const unreadCountUpdated = stateRef.current.map((obj: any) => {
-              if (obj.userID === support_user.id) {
-                return {
-                  ...obj,
-                  unreadCount,
-                };
-              }
-              return obj;
-            });
-            setChatList(() => unreadCountUpdated);
-            stateRef.current = unreadCountUpdated;
+                onSnapshot(colRef, (snapshot) => {
+                  const snapData: any = snapshot.docs;
+                  const snapLastMessage = snapData[0]?.data().message;
+                  const snapLastMessageTime = snapData[0]
+                    ?.data()
+                    .messageTime?.toDate()
+                    .toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    });
+
+                  const lastMessageUpdated = stateRef.current.map(
+                    (obj: any) => {
+                      if (obj.userID === support_user.id) {
+                        return {
+                          ...obj,
+                          lastMessage: snapLastMessage,
+                          lastMessageTime: snapLastMessageTime,
+                        };
+                      }
+                      return obj;
+                    }
+                  );
+                  setChatList(() => lastMessageUpdated);
+                  stateRef.current = lastMessageUpdated;
+                });
+              } catch (error) {}
+
+              // Update unread message count
+              try {
+                onSnapshot(doc(db, "chatMessages", chatID), (snapshot) => {
+                  const unreadCount = snapshot.data()?.unreadCount?.[userID];
+
+                  const unreadCountUpdated = stateRef.current.map(
+                    (obj: any) => {
+                      if (obj.userID === support_user.id) {
+                        return {
+                          ...obj,
+                          unreadCount,
+                        };
+                      }
+                      return obj;
+                    }
+                  );
+                  setChatList(() => unreadCountUpdated);
+                  stateRef.current = unreadCountUpdated;
+                });
+              } catch (error) {}
+            }
           });
         });
-      });
-    };
+      };
 
-    chatListFetch();
-  }, []);
+      chatListFetch();
+    }
+  }, [auth.id]);
+
+  console.log(chatList);
 
   return (
     <div className={styles.mainDiv}>
@@ -174,4 +209,15 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
+// export default ChatList;
+ChatList.propTypes = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getCurrentUserDetails,
+})(ChatList);
