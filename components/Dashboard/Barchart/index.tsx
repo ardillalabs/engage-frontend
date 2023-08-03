@@ -78,7 +78,7 @@ const Barchart = ({ auth }: Props) => {
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
-          `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
+          `http://localhost:5000/api/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
         );
         (await res).json().then((days: dailyScores[]) => {
           setDailyScores(days);
@@ -118,7 +118,7 @@ const Barchart = ({ auth }: Props) => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
+          `http://localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
         );
         console.log('last-7-day-summery/WEEK - res ', res);
         (await res).json().then((weeks) => {

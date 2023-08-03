@@ -11,7 +11,7 @@ import {
 } from '../types';
 
 // Import environment variables
-const BASE_URL = 'http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api';
+const BASE_URL = 'http://localhost:5000/api';
 
 // @desc        create support person
 // @api         support_group

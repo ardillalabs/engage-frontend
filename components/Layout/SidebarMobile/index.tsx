@@ -32,7 +32,7 @@ const SidebarMobile = ({ auth }: Props) => {
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
-        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/send-alert/${auth.id}`
+        `http://localhost:5000/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
         toast.success('Support group alerted', {
