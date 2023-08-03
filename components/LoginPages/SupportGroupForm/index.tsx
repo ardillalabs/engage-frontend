@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import styles from "./index.module.css";
-import SignUpSteps from "../SignUpSteps";
-import AddSupportMembers from "../AddSupportMembers";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import styles from './index.module.css';
+import SignUpSteps from '../SignUpSteps';
+import AddSupportMembers from '../AddSupportMembers';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 // redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { RootState } from "../../../store";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   getSupportGroup,
   deleteSupporter,
-} from "../../../actions/SupportGroup";
+} from '../../../actions/SupportGroup';
+import Link from 'next/link';
 
 interface teamMemberArray {
   userID: string;
@@ -22,7 +24,7 @@ interface teamMemberArray {
 
 const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
   useEffect(() => {
-    console.log('auth - get support group', auth)
+    console.log('auth - get support group', auth);
     getSupportGroup(auth.id);
   }, [supportGroup.supportGroup.length, auth.id]);
   const [teamMemberData, setTeamMemberData] = useState<any | null>(null);
@@ -34,10 +36,10 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
         userID: auth.id,
         userName: supporter.support_user?.full_name
           ? supporter.support_user?.full_name
-          : "unknown Name",
+          : 'unknown Name',
         imageURL: supporter.support_user?.image_url
           ? supporter.support_user.image_url
-          : "/dummy450x450.jpg",
+          : '/dummy450x450.jpg',
         email: supporter?.email,
       };
       return support;
@@ -52,7 +54,7 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-        <SignUpSteps step="2" />
+        <SignUpSteps step='2' />
         <div className={styles.contentDiv}>
           <div className={styles.sectionDiv}>
             <h2>Build your team.</h2>
@@ -89,7 +91,7 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
                               src={team?.imageURL}
                               width={40}
                               height={40}
-                              alt="Team Member Profile Picture"
+                              alt='Team Member Profile Picture'
                               className={styles.showcaseImage}
                             />
                           </div>
@@ -114,10 +116,11 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
                   );
                 })}
             </div>
-
-            <button className={styles.submitBtn}>
-              Submit member{"'"}s email
-            </button>
+            <Link href={`/payment`}>
+              <button className={styles.submitBtn}>
+                Submit member{"'"}s email
+              </button>
+            </Link>
           </div>
         </div>
       </div>

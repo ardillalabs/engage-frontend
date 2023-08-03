@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -38,7 +38,8 @@ import {
   SET_LOADING_SIGN_OUT,
   GET_USER_PROFILE_DETAILS_SUCCESS,
   GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
-} from "../../actions/types";
+  CLEAR_IS_UPDATED_USER_INFO,
+} from '../../actions/types';
 
 const initialState: any = {
   isLoadingSignUp: null,
@@ -161,7 +162,7 @@ export default function (state = initialState, action: AnyAction) {
       };
 
     case GET_CURRENT_USER_DETAILS_SUCCESS:
-      console.log('GET_CURRENT_USER_DETAILS_SUCCESS', payload.data)
+      console.log('GET_CURRENT_USER_DETAILS_SUCCESS', payload.data);
       return {
         ...state,
         isLoadingSignUp: false,
@@ -273,6 +274,13 @@ export default function (state = initialState, action: AnyAction) {
         isUpdatedPassword: true,
         updatePasswordMessage: payload.message,
         accessToken: payload.access_token,
+      };
+
+    case CLEAR_IS_UPDATED_USER_INFO:
+      return {
+        ...state,
+        isUpdatedPassword: false,
+        isUpdatedUserInfo: false,
       };
 
     case UPDATE_PASSWORD_FAIL:

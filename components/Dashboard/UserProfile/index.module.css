@@ -93,7 +93,7 @@
 }
 
 .buttonDiv button {
-  width: 88px;
+  padding: 0 20px;
   height: 40px;
   font-size: 16px;
   color: #324544;

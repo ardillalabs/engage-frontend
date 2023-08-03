@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from "./index.module.css";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './index.module.css';
 
 // redux
 import PropTypes from 'prop-types';
@@ -15,7 +15,11 @@ interface Props {
   auth: any;
 }
 
-const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) => {
+const ChangePasswordForm = ({
+  getProfileDetails,
+  updatePassword,
+  auth,
+}: Props) => {
   const router = useRouter();
 
   const cookie = getCookie('access_token', auth.access_token);
@@ -28,11 +32,23 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
     getProfileDetails(cookie);
   }, [getProfileDetails]);
 
-  const [isClick, setClick] = useState({isCurrentPasswordClick: false, isNewPasswordClick: false, isConfirmPasswordClick: false});
+  const [isClick, setClick] = useState({
+    isCurrentPasswordClick: false,
+    isNewPasswordClick: false,
+    isConfirmPasswordClick: false,
+  });
 
-  const [isData, setData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [isData, setData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
 
-  const [errors, setErrors] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [errors, setErrors] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
 
   const handleChange = (values: any) => {
     setData({
@@ -43,51 +59,59 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
 
   useEffect(() => {
     if (isData.currentPassword.length === 0) {
-      setErrors({ ...errors, currentPassword: "" });
+      setErrors({ ...errors, currentPassword: '' });
     }
   }, [isData.currentPassword]);
 
   useEffect(() => {
     if (isData.newPassword.length === 0) {
-      setErrors({ ...errors, newPassword: "" });
+      setErrors({ ...errors, newPassword: '' });
     }
   }, [isData.newPassword]);
 
   useEffect(() => {
     if (isData.confirmPassword.length === 0) {
-      setErrors({ ...errors, confirmPassword: "" });
+      setErrors({ ...errors, confirmPassword: '' });
     }
   }, [isData.confirmPassword]);
 
-
   const changePasswordSubmit = () => {
     const errors = {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     };
 
     if (!isData.currentPassword) {
-      errors.currentPassword = "The field is required";
+      errors.currentPassword = 'The field is required';
     }
     if (isData.currentPassword && isData.currentPassword.length < 8) {
-      errors.currentPassword = "Min length: 8";
+      errors.currentPassword = 'Min length: 8';
     }
     if (!isData.newPassword) {
-      errors.newPassword = "The field is required";
+      errors.newPassword = 'The field is required';
     }
     if (isData.newPassword && isData.newPassword.length < 8) {
-      errors.newPassword = "Min length: 8";
+      errors.newPassword = 'Min length: 8';
     }
     if (!isData.confirmPassword) {
-      errors.confirmPassword = "The field is required";
+      errors.confirmPassword = 'The field is required';
     }
     if (isData.newPassword !== isData.confirmPassword) {
-      errors.confirmPassword = "New password and Confirm password must be same.";
+      errors.confirmPassword =
+        'New password and Confirm password must be same.';
     }
 
-    if (!(errors.currentPassword || errors.newPassword || errors.confirmPassword)) {
-      updatePassword({ currentPassword: isData.currentPassword, newPassword: isData.newPassword }, cookie);
+    if (
+      !(errors.currentPassword || errors.newPassword || errors.confirmPassword)
+    ) {
+      updatePassword(
+        {
+          currentPassword: isData.currentPassword,
+          newPassword: isData.newPassword,
+        },
+        cookie
+      );
     }
     setErrors(errors);
   };
@@ -96,11 +120,12 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
     if (
       auth.isUpdatedPassword === false &&
       auth.updatePasswordMessage ===
-        "Incorrect password. Please try again with the correct password."
+        'Incorrect password. Please try again with the correct password.'
     ) {
       setErrors({
         ...errors,
-        currentPassword: "Incorrect password. Please try again with the correct password.",
+        currentPassword:
+          'Incorrect password. Please try again with the correct password.',
       });
     }
   }, [auth.isUpdatedPassword, auth.updatePasswordMessage]);
@@ -129,9 +154,9 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
                 isCurrentPasswordClick: true,
               })
             }
-            type="password"
+            type='password'
             className={styles.input}
-            id="existingPassword"
+            id='existingPassword'
             value={isData.currentPassword}
             autoFocus
             ref={(input) => (myRef.current.currentPassword = input)}
@@ -148,15 +173,15 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
                 isNewPasswordClick: true,
               })
             }
-            type="password"
+            type='password'
             className={styles.input}
-            id="newPassword"
+            id='newPassword'
             value={isData.newPassword}
             autoFocus
             ref={(input) => (myRef.current.newPassword = input)}
             onChange={(e) => handleChange({ newPassword: e.target.value })}
           />
-           <div className={styles.errorMessage}>{errors.newPassword}</div>
+          <div className={styles.errorMessage}>{errors.newPassword}</div>
         </div>
         <div className={styles.inputDiv}>
           <div>Confirm Password</div>
@@ -167,24 +192,27 @@ const ChangePasswordForm = ({getProfileDetails, updatePassword, auth}: Props) =>
                 isConfirmPasswordClick: true,
               })
             }
-            type="password"
+            type='password'
             className={styles.input}
-            id="confirmPassword"
+            id='confirmPassword'
             value={isData.confirmPassword}
             autoFocus
             ref={(input) => (myRef.current.confirmPassword = input)}
             onChange={(e) => handleChange({ confirmPassword: e.target.value })}
           />
-           <div className={styles.errorMessage}>{errors.confirmPassword}</div>
+          <div className={styles.errorMessage}>{errors.confirmPassword}</div>
         </div>
 
-        <div className={styles.buttonDiv}  onClick={() => changePasswordSubmit()}>
+        <div
+          className={styles.buttonDiv}
+          onClick={() => changePasswordSubmit()}
+        >
           <button>Update New Password </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 // export default ChangePasswordForm
 ChangePasswordForm.propTypes = {
@@ -198,4 +226,3 @@ export default connect(mapStateToProps, {
   getProfileDetails,
   updatePassword,
 })(ChangePasswordForm);
-

@@ -1,5 +1,5 @@
-import { AppDispatch } from "../../store";
-import axios from "axios";
+import { AppDispatch } from '../../store';
+import axios from 'axios';
 import {
   CREATE_SUPPORT_GROUP,
   FAIL_CREATE_SUPPORT_GROUP,
@@ -8,10 +8,10 @@ import {
   FAIL_GET_SUPPORT_GROUP,
   SUPPORTER_DELETE,
   FAIL_SUPPORTER_DELETE,
-} from "../types";
+} from '../types';
 
 // Import environment variables
-const BASE_URL = "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api";
+const BASE_URL = 'http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api';
 
 // @desc        create support person
 // @api         support_group
@@ -21,10 +21,10 @@ export const addSupportPerson =
     // API Header configarations
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
-    console.log(supportData);
+    console.log('supportData', supportData);
 
     // Stringyfy Json Body
     const body = JSON.stringify({
@@ -45,13 +45,13 @@ export const addSupportPerson =
       });
       getSupportGroup(supportData.userId);
     } catch (err: any) {
-      if (err.message === "Network Error") {
+      if (err.message === 'Network Error') {
         dispatch({
           type: FAIL_CREATE_SUPPORT_GROUP,
           payload: {
             response: {
               data: {
-                message: "Network Error",
+                message: 'Network Error',
                 status: err.code,
                 statusText: err.code,
               },
@@ -66,14 +66,14 @@ export const addSupportPerson =
 
         if (
           err.response.data.message !==
-          "This email address has already been used."
+          'This email address has already been used.'
         ) {
           dispatch({
             type: FAIL_CREATE_SUPPORT_GROUP,
             payload: {
               visibility: true,
-              type: "error",
-              title: "Error!",
+              type: 'error',
+              title: 'Error!',
               description: `${err.response.data.message}`,
             },
           });
@@ -92,7 +92,7 @@ export const getSupportGroup =
         .get(`${BASE_URL}/support_group/${userId}`)
         .then((response) => {
           const data: any = response.data;
-          console.log('support-group-res', data)
+          console.log('support-group-res', data);
           dispatch({
             type: GET_SUPPORT_GROUP,
             payload: data,

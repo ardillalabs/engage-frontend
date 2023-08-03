@@ -83,7 +83,7 @@ const MemberTree = ({
 
     if (!errors.Email) {
       await addSupportPerson({
-        userId: isData.userId,
+        userId: auth.id,
         email: isData.Email,
       });
       getSupportGroup(auth.id);

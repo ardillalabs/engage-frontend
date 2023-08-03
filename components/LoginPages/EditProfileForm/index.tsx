@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import PropTypes from 'prop-types';
 import {
+  clearIsUpdatedUserInfo,
   getProfileDetails,
   updateUserDetailsSubmit,
 } from '@/actions/Auth';
@@ -20,15 +21,16 @@ import { useRouter } from 'next/router';
 interface Props {
   getProfileDetails: (...args: any[]) => any;
   updateUserDetailsSubmit: (...args: any[]) => any;
+  clearIsUpdatedUserInfo: (...args: any[]) => any;
   auth: any;
 }
 
 const EditProfileForm = ({
   getProfileDetails,
   updateUserDetailsSubmit,
+  clearIsUpdatedUserInfo,
   auth,
 }: Props) => {
-  
   const router = useRouter();
 
   const cookie = getCookie('access_token', auth.access_token);
@@ -114,7 +116,7 @@ const EditProfileForm = ({
 
     if (!isData.PhoneNumber) {
       errors.PhoneNumber = 'The field is required';
-    } 
+    }
 
     if (!(errors.Name || errors.UserName || errors.PhoneNumber)) {
       updateUserDetailsSubmit(
@@ -133,22 +135,20 @@ const EditProfileForm = ({
   useEffect(() => {
     if (
       auth.isUpdatedUserInfo === false &&
-      auth.updateUserInfoMessage ===
-        "Username already exist."
+      auth.updateUserInfoMessage === 'Username already exist.'
     ) {
       setErrors({
         ...errors,
-        UserName: "Username already exist.",
+        UserName: 'Username already exist.',
       });
     }
   }, [auth.isUpdatedUserInfo, auth.updateUserInfoMessage]);
-
 
   useEffect(() => {
     if (auth.isUpdatedUserInfo) {
       router.push('/dashboard');
     }
-  }, [auth]);
+  }, [auth.isUpdatedUserInfo]);
 
   return (
     <div className={styles.mainDiv}>
@@ -211,6 +211,7 @@ const EditProfileForm = ({
 EditProfileForm.propTypes = {
   getProfileDetails: PropTypes.func.isRequired,
   updateUserDetailsSubmit: PropTypes.func.isRequired,
+  clearIsUpdatedUserInfo: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
@@ -219,4 +220,5 @@ const mapStateToProps = (state: RootState) => ({
 export default connect(mapStateToProps, {
   getProfileDetails,
   updateUserDetailsSubmit,
+  clearIsUpdatedUserInfo,
 })(EditProfileForm);

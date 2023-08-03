@@ -1,50 +1,57 @@
-import React, { useState } from "react";
-import styles from "./index.module.css";
-import { SlMenu } from "react-icons/sl";
-import { AiFillMessage } from "react-icons/ai";
-import Link from "next/link";
-import { MdSpaceDashboard } from "react-icons/md";
-import Image from "next/image";
-import { IoLogOut } from "react-icons/io5";
-import { Slide, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { signOut } from "@/actions/Auth";
-import { deleteCookie } from "cookies-next";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import styles from './index.module.css';
+import { SlMenu } from 'react-icons/sl';
+import { AiFillMessage } from 'react-icons/ai';
+import Link from 'next/link';
+import { MdSpaceDashboard } from 'react-icons/md';
+import Image from 'next/image';
+import { IoLogOut } from 'react-icons/io5';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { signOut } from '@/actions/Auth';
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
+import { RootState } from '@/store';
+import PropTypes from 'prop-types';
 
-const SidebarMobile = () => {
+interface Props {
+  auth: any;
+}
+
+const SidebarMobile = ({ auth }: Props) => {
   const router = useRouter();
   const [sidebarActive, setSidebarActive] = useState(false);
 
   const handleSignOut = () => {
     signOut();
-    deleteCookie("access_token", { path: "/" });
-    router.push("/");
+    deleteCookie('access_token', { path: '/' });
+    router.push('/');
   };
 
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
-        "http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/send-alert/2"
+        `http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
-        toast.success("Support group alerted", {
+        toast.success('Support group alerted', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
-          toastId: "alert-feedback",
+          toastId: 'alert-feedback',
           transition: Slide,
         });
       } else {
-        toast.success("Something went wrong. Try again!", {
+        toast.success('Something went wrong. Try again!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
-          toastId: "alert-feedback",
+          toastId: 'alert-feedback',
           transition: Slide,
         });
       }
@@ -73,8 +80,8 @@ const SidebarMobile = () => {
       >
         <div className={styles.profilePreview}>
           <Image
-            src="https://source.unsplash.com/_7LbC5J-jw4"
-            alt="Profile Picture"
+            src='https://source.unsplash.com/_7LbC5J-jw4'
+            alt='Profile Picture'
             className={styles.profilePicture}
             width={60}
             height={60}
@@ -82,12 +89,12 @@ const SidebarMobile = () => {
           <span className={styles.profileName}>Denneal Perera</span>
         </div>
 
-        <Link href="/dashboard" className={styles.link}>
+        <Link href='/dashboard' className={styles.link}>
           <MdSpaceDashboard className={styles.icon} />
           <span>Dashboard</span>
         </Link>
 
-        <Link href="/chat" className={styles.link}>
+        <Link href='/chat' className={styles.link}>
           <AiFillMessage className={styles.icon} />
           <span>Chat</span>
         </Link>
@@ -103,11 +110,16 @@ const SidebarMobile = () => {
         </button>
       </div>
 
-      <div className="toast-container">
+      <div className='toast-container'>
         <ToastContainer limit={1} />
       </div>
     </div>
   );
 };
 
-export default SidebarMobile;
+SidebarMobile.propTypes = {};
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(SidebarMobile);
