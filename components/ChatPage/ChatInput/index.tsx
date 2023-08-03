@@ -15,10 +15,13 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { useRouter } from "next/router";
+import { connect } from "react-redux";
+import { RootState } from "@/store";
 
-const ChatInput = ({ recUserID }: any) => {
+const ChatInput = ({ recUserID, auth }: any) => {
   // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-  const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+  // const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
+  const userID = auth.id;
 
   const router = useRouter();
   const [chatID, setChatID] = useState<any>(router.query.chatID);
@@ -81,4 +84,9 @@ const ChatInput = ({ recUserID }: any) => {
   );
 };
 
-export default ChatInput;
+// export default ChatInput;
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(ChatInput);
