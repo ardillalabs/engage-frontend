@@ -30,7 +30,7 @@ const ChatBox = ({ auth }: any) => {
 
     const userInfoFetch = async () => {
       try {
-        res = await fetch(`${BASE_URL}/support_group/${userID}`);
+        res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
       } catch (error) {
         // console.log("Failed to fetch user info", error);
         throw new Error("failed to fetch userInfo");

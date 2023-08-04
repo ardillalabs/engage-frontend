@@ -56,7 +56,7 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
     if (userID) {
       const chatListFetch = async () => {
         try {
-          api_res = await fetch(`${BASE_URL}/support_group/${userID}`);
+          api_res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
         } catch (error) {
           console.log(error);
           throw new Error("Failed to fetch chat list");
@@ -66,18 +66,18 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
           setChatList([]);
           users.map((user: any) => {
             const chatID = user.chat_id;
-            console.log(user.support_user);
 
-            if (user.support_user) {
+            if (user.support_user && user.chat_id != null) {
               const support_user = user.support_user;
+              const patient_user = user.patient_user;
 
               setChatList((prevState) => [
                 ...prevState,
                 {
-                  userID: support_user.id,
+                  userID: support_user.id != auth.id ? support_user.id : patient_user.id,
                   chatID,
-                  username: support_user.full_name,
-                  imageURL: support_user.image_url,
+                  username: support_user.id != auth.id ? support_user.full_name : patient_user.full_name,
+                  imageURL: support_user.id != auth.id ? support_user.image_url : patient_user.image_url,
                   lastMessage: "",
                   lastMessageTime: "",
                 },
@@ -148,7 +148,7 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
     }
   }, [auth.id]);
 
-  console.log(chatList);
+  console.log('chatList', chatList);
 
   return (
     <div className={styles.mainDiv}>
