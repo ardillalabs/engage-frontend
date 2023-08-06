@@ -26,6 +26,10 @@ const ChatBox = ({ auth }: any) => {
   const [allUserData, setAllUserData] = useState<any>();
 
   useEffect(() => {
+    console.log("changed");
+  }, [chatID]);
+
+  useEffect(() => {
     let res: any;
 
     const userInfoFetch = async () => {
@@ -40,11 +44,16 @@ const ChatBox = ({ auth }: any) => {
         setAllUserData(users);
         users.map((user: any) => {
           if (user.chat_id === chatID) {
-            const support_user = user.support_user;
+            let chat_user;
+            if (user.support_user.id === userID) {
+              chat_user = user.patient_user;
+            } else if (user.patient_user.id === userID) {
+              chat_user = user.support_user;
+            }
             setUserData({
-              userID: support_user.id,
-              username: support_user.full_name,
-              imageURL: support_user.image_url,
+              userID: chat_user.id,
+              username: chat_user.full_name,
+              imageURL: chat_user.image_url,
             });
           }
         });
@@ -56,14 +65,20 @@ const ChatBox = ({ auth }: any) => {
 
   useEffect(() => {
     const userInfoFetch = () => {
+      console.log(allUserData);
       if (allUserData) {
         allUserData.map((user: any) => {
           if (user.chat_id === chatID) {
-            const support_user = user.support_user;
+            let chat_user;
+            if (user.support_user.id === userID) {
+              chat_user = user.patient_user;
+            } else if (user.patient_user.id === userID) {
+              chat_user = user.support_user;
+            }
             setUserData({
-              userID: support_user.id,
-              username: support_user.full_name,
-              imageURL: support_user.image_url,
+              userID: chat_user.id,
+              username: chat_user.full_name,
+              imageURL: chat_user.image_url,
             });
           }
         });
