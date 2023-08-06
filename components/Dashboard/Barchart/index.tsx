@@ -147,14 +147,14 @@ const Barchart = ({ auth }: Props) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Final output of daily quizes</div>
+        <div className={styles.chartHeader}>Daily quiz score</div>
         <div className={styles.chartSubHeader}>
           Productivity of the last 7 days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Final output of weekly quizes</div>
+        <div className={styles.chartHeader}>Weekly quiz score</div>
         <div className={styles.chartSubHeader}>
           Productivity of the last 7 weeks
         </div>

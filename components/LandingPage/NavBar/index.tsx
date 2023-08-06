@@ -62,10 +62,6 @@ const NavBar = () => {
                 </Link>
               ))}
             </div>
-            <div className={styles.telNumber}>
-              | <IoMdCall className={styles.callIcon} />
-              (555) 555-1234
-            </div>
           </div>
           <div className={styles.rightDiv}>
             <div className={styles.loginButtonDiv}>
