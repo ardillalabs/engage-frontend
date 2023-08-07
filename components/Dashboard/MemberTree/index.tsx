@@ -13,6 +13,7 @@ import {
   deleteSupporter,
   getSupportGroup,
 } from "../../../actions/SupportGroup";
+import { BsFillTriangleFill } from "react-icons/bs";
 
 interface teamMemberArray {
   userID: string;
@@ -127,13 +128,20 @@ const MemberTree = ({
                     <div>+</div>
                   </div>
                 ) : (
-                  <Image
-                    src={teamMemberData[i].imageURL}
-                    height={100}
-                    width={100}
-                    alt="Member Profile Picture"
-                    className={styles.image}
-                  />
+                  <>
+                    <Image
+                      src={teamMemberData[i].imageURL}
+                      height={100}
+                      width={100}
+                      alt="Member Profile Picture"
+                      className={styles.image}
+                    />
+                    <div className={styles.infoPopup}>
+                      <span>{teamMemberData[i].userName}</span>
+                      <span>{teamMemberData[i].email}</span>
+                      <BsFillTriangleFill className={styles.bottomChev} />
+                    </div>
+                  </>
                 )}
               </div>
             );
