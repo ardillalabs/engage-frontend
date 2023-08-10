@@ -466,7 +466,7 @@ const CardPayment = ({
 
   return (
     <div className={styles.main}>
-      <div className={styles.backSection}>
+      {/* <div className={styles.backSection}>
         <div>
           <Link href="/" tabIndex={0}>
             <MdOutlineArrowBackIos className={styles.backIcon} />
@@ -480,7 +480,7 @@ const CardPayment = ({
             Back to payment plans{" "}
           </div>
         </Link>
-      </div>
+      </div> */}
       <div className={styles.welcomeHeading}>Payment Details</div>
       <div className={styles.Fields}>
         <div className={styles.EmailMainDiv} tabIndex={1}>
@@ -495,7 +495,7 @@ const CardPayment = ({
             }
           >
             {isClick.CardName !== false && isData.CardName !== "" && (
-              <div className={styles.Email}>Name on card</div>
+              <div className={styles.Email}>Name on Card</div>
             )}
 
             {(isClick.CardName !== true || isData.CardName === "") && (
@@ -504,7 +504,7 @@ const CardPayment = ({
                   className={styles.EmailClick}
                 >
                   <div className={errors.CardName && styles.EmailTextError}>
-                    Name on card
+                    Name on Card
                   </div>
                   {errors.CardName && (
                     <div className={styles.EmailErrorIcon}>
@@ -522,10 +522,10 @@ const CardPayment = ({
                 </div>
                 <div className={styles.EmailClickInput} tabIndex={0}>
                   <input
-                    className={styles.EmailClickInputField}
+                    className={styles.input}
                     type="text"
                     id="cardName"
-                    placeholder="visa / Master"
+                    placeholder="Visa / Master"
                     // value={isData.CardName}
                     onChange={(e) => handleChange({ CardName: e.target.value })}
                     autoFocus
@@ -578,6 +578,7 @@ const CardPayment = ({
                 <div className={styles.EmailClickInput}>
                   <CardNumberElement
                     id="cardNumber"
+                    className={styles.input}
                     options={stripeInputOptions}
                     onChange={(e) => {
                       handleChangeStripe(e);
@@ -646,11 +647,10 @@ const CardPayment = ({
                           </div>
                         )}
                       </div>
-                      <div
-                        className={styles.EmailClickInput}
-                      >
+                      <div className={styles.EmailClickInput}>
                         <CardExpiryElement
                           id="cardExpiry"
+                          className={styles.input}
                           options={stripeInputOptions}
                           onChange={(e) => {
                             handleChangeStripe(e);
@@ -719,6 +719,7 @@ const CardPayment = ({
                       <div className={styles.EmailClickInput}>
                         <CardCvcElement
                           id="cardCvc"
+                          className={styles.input}
                           options={stripeInputOptions}
                           onChange={(e) => handleChangeStripe(e)}
                           onReady={(e) => {

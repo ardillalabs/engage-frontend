@@ -6,7 +6,7 @@ import {
   CREATE_PAYMENT_FAIL,
   SAVE_PAYMENT_METHOD,
   GET_STRIPE_PAYMENT_METHODS_SUCCESS,
-  GET_STRIPE_PAYMENT_METHODS_LOADING,
+  GET_STRIPE_PAYMENT_METHODS_LOADINNG,
   GET_SUBSCRIPTIONS_SUCCESS,
   CANCEL_SUBSCRIPTIONS_SUCCESS,
   SELECTED_SUBSCRIPTION,
@@ -106,7 +106,7 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         savedStripePaymentMethods: payload,
       };
-    case GET_STRIPE_PAYMENT_METHODS_LOADING:
+    case GET_STRIPE_PAYMENT_METHODS_LOADINNG:
       return {
         ...state,
       };
