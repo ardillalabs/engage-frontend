@@ -107,7 +107,7 @@ const AllMessages = ({ username, auth, imageURL }: any) => {
                 reversed={reversed}
                 messageTime={messageTime}
                 username={username}
-                imageURL={imageURL}
+                imageURL={reversed ? auth?.image_url : imageURL}
               />
             )}
             {messageBlock && (
@@ -115,7 +115,7 @@ const AllMessages = ({ username, auth, imageURL }: any) => {
                 reversed={reversed}
                 messageTime={messageTime}
                 username={username}
-                imageURL={imageURL}
+                imageURL={reversed ? auth?.image_url : imageURL}
               />
             )}
             <Message message={messageData.message} reversed={reversed} />

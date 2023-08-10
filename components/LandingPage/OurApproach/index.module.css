@@ -34,7 +34,8 @@
 .cardsDiv {
   display: grid;
   column-gap: 50px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 80px;
 }
 .cardDiv {
   display: flex;

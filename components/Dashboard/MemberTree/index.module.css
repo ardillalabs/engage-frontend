@@ -132,35 +132,43 @@
 }
 
 .memberTreeDiv :nth-child(2) .imagePlaceholder,
-.memberTreeDiv :nth-child(2) .image {
+.memberTreeDiv :nth-child(2) .image,
+.memberTreeDiv :nth-child(2) .infoPopup {
   transform: rotate(-90deg) translate(var(--image-translate)) rotate(90deg);
 }
 .memberTreeDiv :nth-child(3) .imagePlaceholder,
-.memberTreeDiv :nth-child(3) .image {
+.memberTreeDiv :nth-child(3) .image,
+.memberTreeDiv :nth-child(3) .infoPopup {
   transform: rotate(-45deg) translate(var(--image-translate)) rotate(45deg);
 }
 .memberTreeDiv :nth-child(4) .imagePlaceholder,
-.memberTreeDiv :nth-child(4) .image {
+.memberTreeDiv :nth-child(4) .image,
+.memberTreeDiv :nth-child(4) .infoPopup {
   transform: rotate(0deg) translate(var(--image-translate)) rotate(0deg);
 }
 .memberTreeDiv :nth-child(5) .imagePlaceholder,
-.memberTreeDiv :nth-child(5) .image {
+.memberTreeDiv :nth-child(5) .image,
+.memberTreeDiv :nth-child(5) .infoPopup {
   transform: rotate(45deg) translate(var(--image-translate)) rotate(-45deg);
 }
 .memberTreeDiv :nth-child(6) .imagePlaceholder,
-.memberTreeDiv :nth-child(6) .image {
+.memberTreeDiv :nth-child(6) .image,
+.memberTreeDiv :nth-child(6) .infoPopup {
   transform: rotate(90deg) translate(var(--image-translate)) rotate(-90deg);
 }
 .memberTreeDiv :nth-child(7) .imagePlaceholder,
-.memberTreeDiv :nth-child(7) .image {
+.memberTreeDiv :nth-child(7) .image,
+.memberTreeDiv :nth-child(7) .infoPopup {
   transform: rotate(135deg) translate(var(--image-translate)) rotate(-135deg);
 }
 .memberTreeDiv :nth-child(8) .imagePlaceholder,
-.memberTreeDiv :nth-child(8) .image {
+.memberTreeDiv :nth-child(8) .image,
+.memberTreeDiv :nth-child(8) .infoPopup {
   transform: rotate(180deg) translate(var(--image-translate)) rotate(-180deg);
 }
 .memberTreeDiv :nth-child(9) .imagePlaceholder,
-.memberTreeDiv :nth-child(9) .image {
+.memberTreeDiv :nth-child(9) .image,
+.memberTreeDiv :nth-child(9) .infoPopup {
   transform: rotate(225deg) translate(var(--image-translate)) rotate(-225deg);
 }
 
@@ -174,6 +182,38 @@
   border: 2px solid #d9d9d9;
   background-color: #ffffff;
   color: #d9d9d9;
+}
+
+.infoPopup {
+  background-color: #324544;
+  padding: 12px;
+  border-radius: 10px;
+  position: absolute;
+  top: -72px;
+  left: 0;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font: 500 12px "Montserrat";
+  z-index: 8;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s ease;
+}
+
+.imageContainer:hover .infoPopup {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bottomChev {
+  position: absolute;
+  bottom: -10px;
+  transform: rotate(180deg);
+  font-size: 20px;
+  color: #324544;
+  left: 40px;
 }
 
 .line {

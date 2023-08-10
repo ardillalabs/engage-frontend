@@ -1,38 +1,43 @@
 .mainDiv {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .componentDiv {
-    width: 100%;
+  width: 100%;
 }
 .imageDiv {
-    padding-bottom: 65px;
+  padding-bottom: 65px;
+  display: flex;
+  justify-content: center;
 }
 .step {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px; 
-    color: #324544;
-    padding-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #324544;
+  padding-bottom: 20px;
+}
+.descriptionDiv {
+  text-align: center;
 }
 .descriptionDiv p {
-    color: #324544;
+  color: #324544;
 }
 @media (max-width: 768px) {
-    .componentDiv {
-        text-align: center;
-    }
-    .imageDiv {
-        padding-bottom: 25px;
-    }
-    .step {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 20px; 
-        padding-bottom: 15px;
-    }
-    .descriptionDiv p {
-        color: #324544;
-        text-align: center;
-    }
+  .componentDiv {
+    text-align: center;
+  }
+  .imageDiv {
+    padding-bottom: 25px;
+  }
+  .step {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    padding-bottom: 15px;
+  }
+  .descriptionDiv p {
+    color: #324544;
+    text-align: center;
+  }
 }
