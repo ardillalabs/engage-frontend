@@ -15,6 +15,8 @@ import {
   getSupportGroup,
   deleteSupporter,
 } from "../../../actions/SupportGroup";
+import { checkQuizEligibility } from "@/actions/Quiz";
+import { useRouter } from "next/router";
 
 interface teamMemberArray {
   userID: string;
@@ -22,13 +24,14 @@ interface teamMemberArray {
   imageURL: string;
   email: string;
 }
-const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
+const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibility, quiz }: any) => {
   useEffect(() => {
     getSupportGroup(auth.id);
   }, [supportGroup.supportGroup.length, auth.id]);
   // Test Data
   const [teamMemberData, setTeamMemberData] = useState<any>(null);
-
+  const router = useRouter();
+  
   const group: any =
     supportGroup.supportGroup &&
     supportGroup.supportGroup.map((supporter: any, index: any) => {
@@ -97,6 +100,25 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
     setTeamMemberData(data);
   };
 
+  const checkEligibility = (id: number) => {
+    console.log('cLICKED')
+    const dateToday = `${year}-${monthNum}-${day}`
+    checkQuizEligibility(auth.id, id, dateToday)
+    console.log(quiz.data)
+    if (quiz.data === 'You have already done today quiz') {
+
+    }
+    if (quiz.data === 'You are eligible to do today quiz') {
+      router.push('/daily-quiz');
+    }
+    if (quiz.data === 'You have already done this week quiz') {
+
+    }
+    if (quiz.data === 'You are eligible to do this week quiz') {
+      router.push('/weekly-quiz');
+    }
+  }
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.leftDiv}>
@@ -104,8 +126,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
         <div className={styles.dashboardTop}>
           {/* <h3 className={styles.welcomeText}>Hello {auth?.username}</h3> */}
           <div className={styles.dashboardTopMenus}>
-            <Link href="/daily-quiz">
-              <div className={styles.dashboardTopMenu}>
+            <Link  href="">
+              <div className={styles.dashboardTopMenu} onClick={() => checkEligibility(2)}>
                 <div className={styles.menuImageDiv}>
                   <svg
                     width="35"
@@ -133,8 +155,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
                 </span>
               </div>
             </Link>
-            <Link href="/weekly-quiz">
-              <div className={styles.dashboardTopMenu}>
+            <Link href="">
+              <div className={styles.dashboardTopMenu} onClick={() => checkEligibility(1)}>
                 <div className={styles.menuImageDiv}>
                   <svg
                     width="35"
@@ -208,13 +230,16 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup }: any) => {
 
 DashboardBody.propTypes = {
   getSupportGroup: PropTypes.func.isRequired,
+  checkQuizEligibility: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
   supportGroup: state.supportGroup,
+  quiz: state.quiz
 });
 
 export default connect(mapStateToProps, {
   getSupportGroup,
+  checkQuizEligibility
 })(DashboardBody);
