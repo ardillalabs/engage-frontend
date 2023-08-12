@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
+import { BsFillTriangleFill } from "react-icons/bs";
 
 const ContactCard = ({
   path,
   userID,
   username,
+  email,
+  phoneNumber,
   imageURL,
   lastMessage,
   lastMessageTime,
@@ -14,6 +17,8 @@ const ContactCard = ({
   path: string;
   userID: string;
   username: string;
+  email: string;
+  phoneNumber: string;
   imageURL?: string;
   lastMessage?: string;
   lastMessageTime?: any;
@@ -38,6 +43,11 @@ const ContactCard = ({
           width={60}
           height={60}
         />
+        <div className={styles.hoverPreview}>
+          <BsFillTriangleFill className={styles.leftChev} />
+          <span>{email}</span>
+          <span>{phoneNumber}</span>
+        </div>
         <div className={styles.contactPreviewText}>
           <div className="body-heading">{username}</div>
           <div className="body-font">{lastMessage}</div>
