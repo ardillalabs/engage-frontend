@@ -23,6 +23,8 @@ interface chatListArray {
   userID: string;
   chatID: string;
   username: string;
+  email: string;
+  phoneNumber: string;
   imageURL?: string;
   lastMessage?: string;
   lastMessageTime?: any;
@@ -74,10 +76,27 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
               setChatList((prevState) => [
                 ...prevState,
                 {
-                  userID: support_user.id != auth.id ? support_user.id : patient_user.id,
+                  userID:
+                    support_user.id != auth.id
+                      ? support_user.id
+                      : patient_user.id,
                   chatID,
-                  username: support_user.id != auth.id ? support_user.full_name : patient_user.full_name,
-                  imageURL: support_user.id != auth.id ? support_user.image_url : patient_user.image_url,
+                  username:
+                    support_user.id != auth.id
+                      ? support_user.full_name
+                      : patient_user.full_name,
+                  imageURL:
+                    support_user.id != auth.id
+                      ? support_user.image_url
+                      : patient_user.image_url,
+                  email:
+                    support_user.id != auth.id
+                      ? support_user.email
+                      : patient_user.email,
+                  phoneNumber:
+                    support_user.id != auth.id
+                      ? support_user.phone_number
+                      : patient_user.phone_number,
                   lastMessage: "",
                   lastMessageTime: "",
                 },
@@ -148,7 +167,7 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
     }
   }, [auth.id]);
 
-  console.log('chatList', chatList);
+  console.log("chatList", chatList);
 
   return (
     <div className={styles.mainDiv}>
@@ -197,6 +216,8 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
             key={user.userID}
             userID={user.userID}
             username={user.username}
+            email={user.email}
+            phoneNumber={user.phoneNumber}
             imageURL={user.imageURL}
             lastMessage={user.lastMessage}
             lastMessageTime={user.lastMessageTime}
@@ -204,6 +225,7 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
             path={user.chatID}
           />
         ))}
+        <div className={styles.chatEnd}></div>
       </div>
     </div>
   );
