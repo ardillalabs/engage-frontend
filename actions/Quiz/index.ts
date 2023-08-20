@@ -8,7 +8,8 @@ import {
   SEND_QUIZ_MARKS_SUCCESS,
   SEND_QUIZ_MARKS_FAIL,
   QUIZ_ELIGIBILITY_LOADING,
-  ELIGIBILITY_CHECK_SUCCESS
+  DAILY_QUIZ_ELIGIBILITY_CHECK_SUCCESS,
+  WEEKLY_QUIZ_ELIGIBILITY_CHECK_SUCCESS,
 } from "../types";
 
 import axios from "axios";
@@ -16,7 +17,7 @@ import axios from "axios";
 const BASE_URL = process.env.BASE_URL;
 // const BASE_URL = "localhost:5000/api";
 
-export const checkQuizEligibility = 
+export const checkDailyQuizEligibility = 
   (userId: number, quizId: number, dateToday: any) => async (dispatch: AppDispatch) => {
     console.log('received')
     try {
@@ -27,7 +28,27 @@ export const checkQuizEligibility =
         const data = respose.data
         console.log(data)
         dispatch({
-          type: ELIGIBILITY_CHECK_SUCCESS,
+          type: DAILY_QUIZ_ELIGIBILITY_CHECK_SUCCESS,
+          payload: data,
+        });
+      })
+    } catch {
+
+    }
+  }
+
+  export const checkWeeklyQuizEligibility = 
+  (userId: number, quizId: number, dateToday: any) => async (dispatch: AppDispatch) => {
+    console.log('received')
+    try {
+      dispatch({
+        type: QUIZ_ELIGIBILITY_LOADING,
+      });
+      await axios.get(`${BASE_URL}/quiz_mark/${dateToday}/${quizId}/${userId}`).then((respose) => {
+        const data = respose.data
+        console.log(data)
+        dispatch({
+          type: WEEKLY_QUIZ_ELIGIBILITY_CHECK_SUCCESS,
           payload: data,
         });
       })

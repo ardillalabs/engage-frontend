@@ -15,8 +15,10 @@ import {
   getSupportGroup,
   deleteSupporter,
 } from "../../../actions/SupportGroup";
-import { checkQuizEligibility } from "@/actions/Quiz";
+import { checkDailyQuizEligibility, checkWeeklyQuizEligibility } from "@/actions/Quiz";
 import { useRouter } from "next/router";
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface teamMemberArray {
   userID: string;
@@ -24,14 +26,15 @@ interface teamMemberArray {
   imageURL: string;
   email: string;
 }
-const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibility, quiz }: any) => {
+
+const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkDailyQuizEligibility, checkWeeklyQuizEligibility, quiz }: any) => {
   useEffect(() => {
     getSupportGroup(auth.id);
   }, [supportGroup.supportGroup.length, auth.id]);
   // Test Data
   const [teamMemberData, setTeamMemberData] = useState<any>(null);
   const router = useRouter();
-  
+
   const group: any =
     supportGroup.supportGroup &&
     supportGroup.supportGroup.map((supporter: any, index: any) => {
@@ -100,24 +103,44 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibili
     setTeamMemberData(data);
   };
 
-  const checkEligibility = (id: number) => {
-    console.log('cLICKED')
+  useEffect(() => {
     const dateToday = `${year}-${monthNum}-${day}`
-    checkQuizEligibility(auth.id, id, dateToday)
-    console.log(quiz.data)
-    if (quiz.data === 'You have already done today quiz') {
+    checkDailyQuizEligibility(auth.id, 2, dateToday)
+    checkWeeklyQuizEligibility(auth.id, 1, dateToday)
+  }, [quiz.dailyQuiz, quiz.weeklyQuiz]);
 
+  const handleLinkClick = () => {
+    if (quiz?.dailyQuiz === 'You are eligible to do today quiz') {
+      router.push('/daily-quiz'); // Navigate to "daily-quiz" route
+    }else {
+      toast.error('You have already done today quiz. Do again tomorrow!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        toastId: 'alert-feedback',
+        transition: Slide,
+      });
     }
-    if (quiz.data === 'You are eligible to do today quiz') {
-      router.push('/daily-quiz');
-    }
-    if (quiz.data === 'You have already done this week quiz') {
+  };
 
+  const handleLinkClickWeekly = () => {
+    console.log(quiz?.weeklyQuiz)
+    if (quiz?.weeklyQuiz === 'You are eligible to do this week quiz') {
+      router.push('/weekly-quiz'); // Navigate to "weekly-quiz" route
+    }else {
+      toast.error('You have already done this week quiz. Do again next week!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        toastId: 'alert-feedback',
+        transition: Slide,
+      });
     }
-    if (quiz.data === 'You are eligible to do this week quiz') {
-      router.push('/weekly-quiz');
-    }
-  }
+  };
 
   return (
     <div className={styles.mainDiv}>
@@ -126,8 +149,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibili
         <div className={styles.dashboardTop}>
           {/* <h3 className={styles.welcomeText}>Hello {auth?.username}</h3> */}
           <div className={styles.dashboardTopMenus}>
-            <Link  href="">
-              <div className={styles.dashboardTopMenu} onClick={() => checkEligibility(2)}>
+            <Link href="" onClick={handleLinkClick}>
+              <div className={styles.dashboardTopMenu}>
                 <div className={styles.menuImageDiv}>
                   <svg
                     width="35"
@@ -155,8 +178,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibili
                 </span>
               </div>
             </Link>
-            <Link href="">
-              <div className={styles.dashboardTopMenu} onClick={() => checkEligibility(1)}>
+            <Link href="" onClick={handleLinkClickWeekly}>
+              <div className={styles.dashboardTopMenu}>
                 <div className={styles.menuImageDiv}>
                   <svg
                     width="35"
@@ -230,7 +253,8 @@ const DashboardBody = ({ getSupportGroup, auth, supportGroup, checkQuizEligibili
 
 DashboardBody.propTypes = {
   getSupportGroup: PropTypes.func.isRequired,
-  checkQuizEligibility: PropTypes.func.isRequired,
+  checkDailyQuizEligibility: PropTypes.func.isRequired,
+  checkWeeklyQuizEligibility: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -241,5 +265,6 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(mapStateToProps, {
   getSupportGroup,
-  checkQuizEligibility
+  checkDailyQuizEligibility,
+  checkWeeklyQuizEligibility,
 })(DashboardBody);

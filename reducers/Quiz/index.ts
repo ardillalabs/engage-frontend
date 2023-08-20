@@ -6,7 +6,8 @@ import {
   SEND_QUIZ_MARKS_FAIL,
   SEND_QUIZ_MARKS_SUCCESS,
   QUIZ_ELIGIBILITY_LOADING,
-  ELIGIBILITY_CHECK_SUCCESS
+  DAILY_QUIZ_ELIGIBILITY_CHECK_SUCCESS,
+  WEEKLY_QUIZ_ELIGIBILITY_CHECK_SUCCESS
 } from "../../actions/types";
 import { Quiz } from "@/tsc-types/Quiz";
 
@@ -49,10 +50,15 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         eligibilityLoading: true
       }
-    case ELIGIBILITY_CHECK_SUCCESS:
+    case DAILY_QUIZ_ELIGIBILITY_CHECK_SUCCESS:
       return {
         ...state,
-        data: payload
+        dailyQuiz: payload
+      }
+    case WEEKLY_QUIZ_ELIGIBILITY_CHECK_SUCCESS:
+      return {
+        ...state,
+        weeklyQuiz: payload
       }
     default: 
       return state;
