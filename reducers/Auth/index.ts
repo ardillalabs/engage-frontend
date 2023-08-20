@@ -658,12 +658,24 @@ export default function (state = initialState, action: AnyAction) {
     
     case CLEAR_LOGGED_IN_USER: 
       return {
+        ...state,
         isLoadingSignUp: null,
         isSignedUp: null,
         signedUpMessage: null,
         isLoadingLogin: null,
         isLoggedIn: null,
         loggedInMessage: null,
+        //-----------------
+        email: null,
+        first_name: null,
+        full_name: null,
+        id: null,
+        image_url: null,
+        phone_number: null,
+        role: null,
+        status: null,
+        username: null,
+        accessToken: null,
       };
     default:
       return state;

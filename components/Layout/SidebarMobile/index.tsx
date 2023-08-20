@@ -14,21 +14,25 @@ import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import PropTypes from 'prop-types';
+import { removeSupportGroupDetails } from '@/actions/SupportGroup';
 
 interface Props {
   auth: any;
+  signOut: any;
+  removeSupportGroupDetails: any;
 }
 
-const SidebarMobile = ({ auth }: Props) => {
+const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
   const router = useRouter();
   const [sidebarActive, setSidebarActive] = useState(false);
 
   const handleSignOut = () => {
     signOut();
-    deleteCookie('access_token', { path: '/' });
-    router.push('/');
+    deleteCookie("access_token", { path: "/" });
+    router.push("/");
+    removeSupportGroupDetails();
   };
-
+  
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
@@ -117,9 +121,12 @@ const SidebarMobile = ({ auth }: Props) => {
   );
 };
 
-SidebarMobile.propTypes = {};
+SidebarMobile.propTypes = {
+  signOut: PropTypes.func.isRequired,
+  removeSupportGroupDetails: PropTypes.func.isRequired,
+};
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {})(SidebarMobile);
+export default connect(mapStateToProps, {signOut, removeSupportGroupDetails})(SidebarMobile);
