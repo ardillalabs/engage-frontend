@@ -2,20 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import SignUpSteps from '../SignUpSteps';
 import { loadStripe } from '@stripe/stripe-js';
-import {
-  Elements,
-} from '@stripe/react-stripe-js';
-import { ChooseYourPlanInitialStates } from "../../../tsc-types/ChossePlan";
-import { setChooseYourPlanModal } from "../../../actions/ChoosePlan";
-import PropTypes from "prop-types";
+import { Elements } from '@stripe/react-stripe-js';
+import { ChooseYourPlanInitialStates } from '../../../tsc-types/ChossePlan';
+import { setChooseYourPlanModal } from '../../../actions/ChoosePlan';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import CardPayment from './CardPayment';
-import { getCookie } from "cookies-next";
-import { getCurrentUserDetails } from "../../../actions/Auth";
-
+import { getCookie } from 'cookies-next';
+import { getCurrentUserDetails } from '../../../actions/Auth';
 
 interface Props {
   ChoosePlan: ChooseYourPlanInitialStates;
@@ -26,7 +23,7 @@ interface Props {
   getCurrentUserDetails: any;
 }
 
-const PaymentForm =  ({
+const PaymentForm = ({
   setChooseYourPlanModal,
   ChoosePlan: { chooseYourPlan, choosePlanModal },
   toast,
@@ -35,25 +32,25 @@ const PaymentForm =  ({
   getCurrentUserDetails,
 }: Props) => {
   const router = useRouter();
-  const [isRouteUrl, setRouteUrl] = useState<string>("");
+  const [isRouteUrl, setRouteUrl] = useState<string>('');
   const [isRouteUrlParam, setRouteUrlParam] = useState<any>({
-    paymentType: "",
-    membershipType: "",
+    paymentType: '',
+    membershipType: '',
   });
   const [isPaymentMethod, setPaymentMethod] = useState<any>({
     message: true,
-    method: "",
-    approvedMethod: "",
+    method: '',
+    approvedMethod: '',
   });
 
   useEffect(() => {
-    const cookie = getCookie("access_token");
-    console.log('payment - access token')
+    const cookie = getCookie('access_token');
+    console.log('payment - access token');
     getCurrentUserDetails(cookie);
   }, []);
-  
+
   const stripePromise = loadStripe(
-    'pk_test_51MHKfpGmuOIea0UaVmOCfKt5hm2Htqx4z916uycgaTYztLq8PYLOOYqwo6QHLAaSfJJ4XiqDsqIUPN2fbKnkbECA00CDQ3MjSz'
+    'pk_test_51L7XS0AkohmLDDScBrUoZzy984RNkDHLkEPlCCXMWetb0IZvDjbFMqfRsFN3BCJ4MXYd0bfYW9YLpWECKv7BKHdg00OOZnS5qu'
   );
 
   useEffect(() => {
@@ -70,12 +67,12 @@ const PaymentForm =  ({
 
     if (!router.query.paymentType || !router.query.membershipType) {
       if (
-        !router.asPath.includes("paymentType") ||
-        !router.asPath.includes("membershipType")
+        !router.asPath.includes('paymentType') ||
+        !router.asPath.includes('membershipType')
       ) {
         setRouteUrlParam({
-          paymentType: "Yearly",
-          membershipType: "Gold",
+          paymentType: 'Yearly',
+          membershipType: 'Gold',
         });
       }
     }
@@ -88,6 +85,16 @@ const PaymentForm =  ({
         <div className={styles.contentDiv}>
           <div className={styles.sectionDiv}>
             <h2>Payment Method</h2>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginBottom: '10px',
+              }}
+            >
+              <button style={{ marginRight: '20px' }}>Monthly</button>
+              <button>Yearly</button>
+            </div>
             <div className={styles.selectPayment}>
               {/* <div className={styles.selectPaymentTop}>
                 <label className={styles.paymentMethod}>
@@ -153,11 +160,9 @@ PaymentForm.prototype = {
 const mapStateToProps = (state: RootState) => ({
   ChoosePlan: state.ChoosePlan,
   toast: state.toast,
-  
 });
 
 export default connect(mapStateToProps, {
   setChooseYourPlanModal,
   getCurrentUserDetails,
 })(PaymentForm);
-
