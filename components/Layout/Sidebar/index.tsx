@@ -14,13 +14,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { RootState } from "../../../store";
 import { getCurrentUserDetails } from "../../../actions/Auth";
+import { removeSupportGroupDetails } from "@/actions/SupportGroup";
 
 interface Props {
   getCurrentUserDetails: (...args: any[]) => any;
   auth: any;
+  signOut: (...args: any[]) => any;
+  removeSupportGroupDetails: (...args: any[]) => any;
 }
 
-const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
+const Sidebar = ({ getCurrentUserDetails, auth, signOut, removeSupportGroupDetails }: Props) => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
@@ -34,6 +37,7 @@ const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
     signOut();
     deleteCookie("access_token", { path: "/" });
     router.push("/");
+    removeSupportGroupDetails();
   };
 
   return (
@@ -105,6 +109,8 @@ const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
 
 Sidebar.propTypes = {
   getCurrentUserDetails: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
+  removeSupportGroupDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -113,6 +119,8 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(mapStateToProps, {
   getCurrentUserDetails,
+  signOut,
+  removeSupportGroupDetails
 })(Sidebar);
 
 // export default Sidebar;

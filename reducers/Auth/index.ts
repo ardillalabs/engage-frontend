@@ -39,6 +39,7 @@ import {
   GET_USER_PROFILE_DETAILS_SUCCESS,
   GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
   CLEAR_IS_UPDATED_USER_INFO,
+  CLEAR_LOGGED_IN_USER
 } from '../../actions/types';
 
 const initialState: any = {
@@ -653,6 +654,28 @@ export default function (state = initialState, action: AnyAction) {
         full_name: null,
         phone_number: null,
         username: null,
+      };
+    
+    case CLEAR_LOGGED_IN_USER: 
+      return {
+        ...state,
+        isLoadingSignUp: null,
+        isSignedUp: null,
+        signedUpMessage: null,
+        isLoadingLogin: null,
+        isLoggedIn: null,
+        loggedInMessage: null,
+        //-----------------
+        email: null,
+        first_name: null,
+        full_name: null,
+        id: null,
+        image_url: null,
+        phone_number: null,
+        role: null,
+        status: null,
+        username: null,
+        accessToken: null,
       };
     default:
       return state;

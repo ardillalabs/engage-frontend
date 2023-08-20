@@ -8,6 +8,9 @@ import {
   FAIL_GET_SUPPORT_GROUP,
   SUPPORTER_DELETE,
   FAIL_SUPPORTER_DELETE,
+  SET_LOADING_CLEAR_SUPPORT_GROUP,
+  CLEAR_SUPPORT_GROUP_MESSAGES,
+  CLEAR_SUPPORT_GROUP,
 } from '../types';
 
 // Import environment variables
@@ -123,3 +126,19 @@ export const deleteSupporter =
       });
     }
   };
+
+export const removeSupportGroupDetails = () => async (dispatch: AppDispatch) => {
+  dispatch({
+    type: SET_LOADING_CLEAR_SUPPORT_GROUP,
+  });
+  dispatch({
+    type: CLEAR_SUPPORT_GROUP_MESSAGES,
+  });
+  try {
+    console.log('Sign Out');
+    dispatch({
+      type: CLEAR_SUPPORT_GROUP
+    })
+  } catch (err: any) {
+  }
+}

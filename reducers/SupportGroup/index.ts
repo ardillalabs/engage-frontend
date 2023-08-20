@@ -7,6 +7,7 @@ import {
   FAIL_GET_SUPPORT_GROUP,
   SUPPORTER_DELETE,
   FAIL_SUPPORTER_DELETE,
+  CLEAR_SUPPORT_GROUP
 } from "../../actions/types";
 
 const initialState: any = {
@@ -37,7 +38,11 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isSupporterDeleted: true,
       };
-
+    case CLEAR_SUPPORT_GROUP:
+      return {
+        ...state,
+        supportGroup: []
+      }
     default:
       return state;
   }
