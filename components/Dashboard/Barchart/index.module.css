@@ -6,6 +6,13 @@
   gap: 50px;
 }
 
+.chartWrapper {
+  background-color: #fafafa;
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .chartHeader {
   font: var(--body-2);
   padding-bottom: 10px;
