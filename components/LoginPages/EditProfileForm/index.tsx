@@ -1,22 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import styles from './index.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import styles from "./index.module.css";
 import {
   UserInforUpdateDetails,
   UserProfileUpdateDetails,
-} from '@/tsc-types/Auth';
+} from "@/tsc-types/Auth";
 
 //redux
-import { connect } from 'react-redux';
-import { RootState } from '@/store';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { RootState } from "@/store";
+import PropTypes from "prop-types";
 import {
   clearIsUpdatedUserInfo,
   getProfileDetails,
   updateUserDetailsSubmit,
-} from '@/actions/Auth';
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
+} from "@/actions/Auth";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 interface Props {
   getProfileDetails: (...args: any[]) => any;
@@ -33,7 +35,7 @@ const EditProfileForm = ({
 }: Props) => {
   const router = useRouter();
 
-  const cookie = getCookie('access_token', auth.access_token);
+  const cookie = getCookie("access_token", auth.access_token);
 
   const myRef = useRef<any>({});
 
@@ -50,15 +52,15 @@ const EditProfileForm = ({
   });
 
   const [isData, setData] = useState({
-    Name: '',
-    UserName: '',
-    PhoneNumber: '',
+    Name: "",
+    UserName: "",
+    PhoneNumber: "",
   });
 
   const [errors, setErrors] = useState({
-    Name: '',
-    UserName: '',
-    PhoneNumber: '',
+    Name: "",
+    UserName: "",
+    PhoneNumber: "",
   });
 
   useEffect(() => {
@@ -81,41 +83,41 @@ const EditProfileForm = ({
 
   useEffect(() => {
     if (isData.UserName && isData.UserName.length === 0) {
-      setErrors({ ...errors, UserName: '' });
+      setErrors({ ...errors, UserName: "" });
     }
   }, [isData.UserName]);
 
   useEffect(() => {
     if (isData.PhoneNumber && isData.PhoneNumber.length === 0) {
-      setErrors({ ...errors, PhoneNumber: '' });
+      setErrors({ ...errors, PhoneNumber: "" });
     }
   }, [isData.PhoneNumber]);
 
   const UpdateProfileDetailsSubmit = () => {
     const errors = {
-      Name: '',
-      UserName: '',
-      PhoneNumber: '',
+      Name: "",
+      UserName: "",
+      PhoneNumber: "",
     };
 
     if (!isData.Name) {
-      errors.Name = 'The field is required';
+      errors.Name = "The field is required";
     }
 
     if (isData.Name && isData.Name.length < 2) {
-      errors.Name = 'Min length: 2';
+      errors.Name = "Min length: 2";
     }
 
     if (!isData.UserName) {
-      errors.UserName = 'The field is required';
+      errors.UserName = "The field is required";
     }
 
     if (isData.UserName && isData.UserName.length < 2) {
-      errors.UserName = 'Min length: 2';
+      errors.UserName = "Min length: 2";
     }
 
     if (!isData.PhoneNumber) {
-      errors.PhoneNumber = 'The field is required';
+      errors.PhoneNumber = "The field is required";
     }
 
     if (!(errors.Name || errors.UserName || errors.PhoneNumber)) {
@@ -135,18 +137,18 @@ const EditProfileForm = ({
   useEffect(() => {
     if (
       auth.isUpdatedUserInfo === false &&
-      auth.updateUserInfoMessage === 'Username already exist.'
+      auth.updateUserInfoMessage === "Username already exist."
     ) {
       setErrors({
         ...errors,
-        UserName: 'Username already exist.',
+        UserName: "Username already exist.",
       });
     }
   }, [auth.isUpdatedUserInfo, auth.updateUserInfoMessage]);
 
   useEffect(() => {
     if (auth.isUpdatedUserInfo) {
-      router.push('/dashboard');
+      router.push("/dashboard");
     }
   }, [auth.isUpdatedUserInfo]);
 
@@ -159,9 +161,9 @@ const EditProfileForm = ({
         <div className={styles.inputDiv}>
           <div>Full Name</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='name'
+            id="name"
             value={isData.Name}
             autoFocus
             ref={(input) => (myRef.current.name = input)}
@@ -172,9 +174,9 @@ const EditProfileForm = ({
         <div className={styles.inputDiv}>
           <div>User Name</div>
           <input
-            type='text'
+            type="text"
             className={styles.input}
-            id='username'
+            id="username"
             value={isData.UserName}
             autoFocus
             ref={(input) => (myRef.current.username = input)}
@@ -184,7 +186,7 @@ const EditProfileForm = ({
         </div>
         <div className={styles.inputDiv}>
           <div>Phone Number</div>
-          <input
+          {/* <input
             type='text'
             className={styles.input}
             id='phonenumber'
@@ -192,6 +194,14 @@ const EditProfileForm = ({
             autoFocus
             ref={(input) => (myRef.current.phonenumber = input)}
             onChange={(e) => handleChange({ PhoneNumber: e.target.value })}
+          /> */}
+          <PhoneInput
+            defaultCountry="us"
+            className={`${styles.input} ${styles.phoneNumber}`}
+            value={isData.PhoneNumber}
+            onChange={(phoneNumber) =>
+              handleChange({ PhoneNumber: phoneNumber })
+            }
           />
           <div className={styles.errorMessage}>{errors.PhoneNumber}</div>
         </div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import type { ChartArea } from "chart.js";
 import PropTypes from "prop-types";
 import styles from "./index.module.css";
 import {
@@ -14,6 +15,7 @@ import { Bar } from "react-chartjs-2";
 import useDate from "@/hooks/useDate";
 import { RootState } from "@/store";
 import { connect } from "react-redux";
+const BASE_URL = process.env.BASE_URL;
 
 ChartJS.register(
   CategoryScale,
@@ -39,6 +41,19 @@ interface dailyScores {
 }
 
 const Barchart = ({ auth }: Props) => {
+  const createGradient = (
+    ctx: CanvasRenderingContext2D,
+    area: ChartArea,
+    bottomColor: string,
+    topColor: string
+  ) => {
+    const gradient = ctx.createLinearGradient(0, 210, 0, 40);
+    gradient.addColorStop(0, bottomColor);
+    gradient.addColorStop(1, topColor);
+
+    return gradient;
+  };
+
   const options = {
     responsive: true,
     scales: {
@@ -72,13 +87,12 @@ const Barchart = ({ auth }: Props) => {
   const [dailyScoreLabels, setDailyScoreLabels] = useState<any>();
 
   useEffect(() => {
-    console.log("auth.id", auth);
     const date = new Date();
     const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
-          `http://localhost:5000/api/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
+          `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
         );
         (await res).json().then((days: dailyScores[]) => {
           setDailyScores(days);
@@ -102,7 +116,10 @@ const Barchart = ({ auth }: Props) => {
     labels: dailyScoreLabels,
     datasets: [
       {
-        backgroundColor: "#324544",
+        backgroundColor: (context: any) => {
+          const { ctx, chartArea } = context.chart;
+          return createGradient(ctx, chartArea, "#1F2F98", "#2EAAFA");
+        },
         borderRadius: 6,
         data: Array.isArray(dailyScores)
           ? dailyScores.map((day) => day.totalValue)
@@ -118,7 +135,7 @@ const Barchart = ({ auth }: Props) => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          `http://localhost:5000/api/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
+          `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
         );
         console.log("last-7-day-summery/WEEK - res ", res);
         (await res).json().then((weeks) => {
@@ -135,7 +152,10 @@ const Barchart = ({ auth }: Props) => {
     labels: weeklyScores?.map((week) => `Week ${week.weekNumber}`),
     datasets: [
       {
-        backgroundColor: "#324544",
+        backgroundColor: (context: any) => {
+          const { ctx, chartArea } = context.chart;
+          return createGradient(ctx, chartArea, "#007542", "#B3F68A");
+        },
         borderRadius: 6,
         data: Array.isArray(weeklyScores)
           ? weeklyScores.map((week) => week.totalValue)
