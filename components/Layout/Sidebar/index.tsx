@@ -29,7 +29,7 @@ const Sidebar = ({ getCurrentUserDetails, auth, signOut, removeSupportGroupDetai
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
 
   useEffect(() => {
-    const cookie = getCookie("access_token", { path: "/" });
+    const cookie = getCookie("access_token");
     getCurrentUserDetails(cookie);
   }, [routePath]);
 

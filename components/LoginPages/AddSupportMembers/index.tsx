@@ -42,7 +42,7 @@ const AddSupportMembers = ({
   getCurrentUserDetails: any;
 }) => {
   useEffect(() => {
-    const cookie = getCookie("access_token", { path: "/" });
+    const cookie = getCookie("access_token");
     console.log('support - access token')
     getCurrentUserDetails(cookie);
   }, []);

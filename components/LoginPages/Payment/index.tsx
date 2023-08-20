@@ -13,7 +13,8 @@ import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import CardPayment from './CardPayment';
-
+import { getCookie } from "cookies-next";
+import { getCurrentUserDetails } from "../../../actions/Auth";
 
 
 interface Props {
@@ -21,14 +22,17 @@ interface Props {
   setChooseYourPlanModal: (condition: boolean) => any;
   toast: any;
   setToastState: any;
+  auth: any;
+  getCurrentUserDetails: any;
 }
-
 
 const PaymentForm =  ({
   setChooseYourPlanModal,
   ChoosePlan: { chooseYourPlan, choosePlanModal },
   toast,
   setToastState,
+  auth,
+  getCurrentUserDetails,
 }: Props) => {
   const router = useRouter();
   const [isRouteUrl, setRouteUrl] = useState<string>("");
@@ -41,6 +45,12 @@ const PaymentForm =  ({
     method: "",
     approvedMethod: "",
   });
+
+  useEffect(() => {
+    const cookie = getCookie("access_token");
+    console.log('payment - access token')
+    getCurrentUserDetails(cookie);
+  }, []);
   
   const stripePromise = loadStripe(
     'pk_test_51MHKfpGmuOIea0UaVmOCfKt5hm2Htqx4z916uycgaTYztLq8PYLOOYqwo6QHLAaSfJJ4XiqDsqIUPN2fbKnkbECA00CDQ3MjSz'
@@ -116,13 +126,13 @@ const PaymentForm =  ({
                   alt='Visa Logo'
                   className={styles.paymentTypeLogo}
                 />
-                <Image
+                {/* <Image
                   src={'/paypal-logo.png'}
                   width={100}
                   height={100}
                   alt='Paypal Logo'
                   className={styles.paymentTypeLogo}
-                />
+                /> */}
               </div>
             </div>
             <Elements stripe={stripePromise}>
@@ -143,9 +153,11 @@ PaymentForm.prototype = {
 const mapStateToProps = (state: RootState) => ({
   ChoosePlan: state.ChoosePlan,
   toast: state.toast,
+  
 });
 
 export default connect(mapStateToProps, {
   setChooseYourPlanModal,
+  getCurrentUserDetails,
 })(PaymentForm);
 

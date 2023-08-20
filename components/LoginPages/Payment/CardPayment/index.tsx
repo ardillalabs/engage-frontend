@@ -46,7 +46,7 @@ interface Props {
       id: string;
     };
   };
-  newAuth: any;
+  auth: any;
   ChoosePlan: ChooseYourPlanInitialStates;
 }
 
@@ -59,7 +59,7 @@ const CardPayment = ({
     isSaved,
     selectedPaymentMethod: { id, method },
   },
-  newAuth,
+  auth,
   ChoosePlan: {
     chooseYourPlan: { planType, planDate },
   },
@@ -79,7 +79,7 @@ const CardPayment = ({
     console.log(saveCardError, "saveCarderror");
     console.log(
       {
-        newAuth: 2,
+        auth: auth,
         mem: 1,
         price: 479,
         // methodId: PaymentMethods.stripe ? id : "abcd",
@@ -118,7 +118,7 @@ const CardPayment = ({
         return;
       }
       const sub_id = await createStripePayment(
-        2, //userId
+        +auth.id, //userId
         1, //membershipId
         5.99, //amount
         paymentMethod?.id
@@ -481,7 +481,7 @@ const CardPayment = ({
           </div>
         </Link>
       </div> */}
-      <div className={styles.welcomeHeading}>Payment Details</div>
+      {/* <div className={styles.welcomeHeading}>Payment Details</div> */}
       <div className={styles.Fields}>
         <div className={styles.EmailMainDiv} tabIndex={1}>
           <div
@@ -762,12 +762,7 @@ const CardPayment = ({
               <>Loading...</>
             ) : (
               <>
-                Complete Payment{" "}
-                {!router.query.paymentType
-                  ? `$${ChoosePlan.membershipDedails?.yearly_payment}`
-                  : router.query.paymentType === "Monthly"
-                    ? `$${ChoosePlan.membershipDedails?.monthly_payment}`
-                    : `$${ChoosePlan.membershipDedails?.yearly_payment}`}
+                Complete Payment
               </>
             )}
           </div>
@@ -785,7 +780,7 @@ CardPayment.prototype = {
 const mapStateToProps = (state: RootState) => ({
   ChoosePlan: state.ChoosePlan,
   Payment: state.Payment,
-  newAuth: state.newAuth,
+  auth: state.auth,
   common: state.common,
 });
 

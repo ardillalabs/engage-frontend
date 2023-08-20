@@ -174,7 +174,7 @@ const WeeklyQuizQuestions = ({
   auth
 }: Props) => {
 
-  const cookie = getCookie('access_token', auth.access_token);
+  const cookie = getCookie('access_token');
 
   console.log(cookie);
 
