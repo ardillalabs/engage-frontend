@@ -40,7 +40,8 @@ import {
   SET_TOAST_STATE,
   GET_USER_PROFILE_DETAILS_SUCCESS,
   GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
-  CLEAR_IS_UPDATED_USER_INFO
+  CLEAR_IS_UPDATED_USER_INFO,
+  CLEAR_LOGGED_IN_USER
 } from '../types';
 import {
   CreateNewPasswordDetails,
@@ -1075,6 +1076,10 @@ export const signOut = () => async (dispatch: AppDispatch) => {
   });
   try {
     deleteCookie('access_token');
+    console.log('Sign Out');
+    dispatch({
+      type: CLEAR_LOGGED_IN_USER
+    })
   } catch (err: any) {
     if (err.message === 'Network Error') {
       dispatch({

@@ -18,9 +18,10 @@ import { getCurrentUserDetails } from "../../../actions/Auth";
 interface Props {
   getCurrentUserDetails: (...args: any[]) => any;
   auth: any;
+  signOut: (...args: any[]) => any;
 }
 
-const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
+const Sidebar = ({ getCurrentUserDetails, auth, signOut }: Props) => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
@@ -105,6 +106,7 @@ const Sidebar = ({ getCurrentUserDetails, auth }: Props) => {
 
 Sidebar.propTypes = {
   getCurrentUserDetails: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -113,6 +115,7 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(mapStateToProps, {
   getCurrentUserDetails,
+  signOut
 })(Sidebar);
 
 // export default Sidebar;
