@@ -48,7 +48,7 @@
 }
 
 .alertBtn {
-  background-color: #de001b;
+  background-color: #7efaef;
   color: var(--white);
   font: var(--btn-text);
   border: none;
@@ -56,6 +56,7 @@
   border-radius: 80px;
   cursor: pointer;
   transition: 0.2s ease;
+  color: #324544;
 }
 
 .alertBtn:hover {

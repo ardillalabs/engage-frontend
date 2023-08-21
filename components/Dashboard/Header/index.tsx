@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import styles from './index.module.css';
-import { RiUserSettingsLine } from 'react-icons/ri';
-import { FiKey } from 'react-icons/fi';
-import useDate from '@/hooks/useDate';
-import Link from 'next/link';
-import { Slide, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { connect } from 'react-redux';
-import { RootState } from '@/store';
-import PropTypes from 'prop-types';
-import { clearIsUpdatedUserInfo } from '@/actions/Auth';
+import React, { useEffect, useState } from "react";
+import styles from "./index.module.css";
+import { RiUserSettingsLine } from "react-icons/ri";
+import { FiKey } from "react-icons/fi";
+import useDate from "@/hooks/useDate";
+import Link from "next/link";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { connect } from "react-redux";
+import { RootState } from "@/store";
+import PropTypes from "prop-types";
+import { clearIsUpdatedUserInfo } from "@/actions/Auth";
 
 interface Props {
   auth: any;
@@ -26,23 +26,23 @@ const Header = ({ auth, clearIsUpdatedUserInfo }: Props) => {
         `http://localhost:5000/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
-        toast.success('Support group alerted', {
+        toast.success("Support group alerted", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
-          toastId: 'alert-feedback',
+          toastId: "alert-feedback",
           transition: Slide,
         });
       } else {
-        toast.success('Something went wrong. Try again!', {
+        toast.success("Something went wrong. Try again!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
-          toastId: 'alert-feedback',
+          toastId: "alert-feedback",
           transition: Slide,
         });
       }
@@ -65,23 +65,23 @@ const Header = ({ auth, clearIsUpdatedUserInfo }: Props) => {
           >{`${weekday}, ${month} ${dayWithSyntax}`}</span>
           <div className={styles.headerIcons}>
             <div className={styles.headerIcon}>
-              <Link href='/edit-profile'>
+              <Link href="/edit-profile">
                 <RiUserSettingsLine />
               </Link>
             </div>
             <div className={styles.headerIcon}>
-              <Link href='/change-password'>
+              <Link href="/change-password">
                 <FiKey />
               </Link>
             </div>
           </div>
           <button className={styles.alertBtn} onClick={alertWellnessTeam}>
-            Alert Wellness Team
+            Alert Supporters
           </button>
         </div>
       </div>
 
-      <div className='toast-container'>
+      <div className="toast-container">
         <ToastContainer limit={1} />
       </div>
     </>

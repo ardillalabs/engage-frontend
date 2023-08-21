@@ -41,6 +41,8 @@ interface dailyScores {
 }
 
 const Barchart = ({ auth }: Props) => {
+  const { day, monthNum } = useDate();
+
   const createGradient = (
     ctx: CanvasRenderingContext2D,
     area: ChartArea,
@@ -167,16 +169,20 @@ const Barchart = ({ auth }: Props) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Daily quiz score</div>
+        <div className={styles.chartHeader}>Daily Quiz</div>
         <div className={styles.chartSubHeader}>
-          Productivity of the last 7 days
+          <span>Productivity of the last 7 days</span>
+          {/* Date */}
+          <span>{`${monthNum}/${day}`}</span>
         </div>
         <Bar options={options} data={dailyData} />
       </div>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Weekly quiz score</div>
+        <div className={styles.chartHeader}>Weekly Quiz</div>
         <div className={styles.chartSubHeader}>
-          Productivity of the last 7 weeks
+          <span>Productivity of the last 7 weeks</span>
+          {/* Date */}
+          <span>Date</span>
         </div>
         <Bar options={options} data={weeklyData} />
       </div>
