@@ -35,7 +35,7 @@ const EditProfileForm = ({
 }: Props) => {
   const router = useRouter();
 
-  const cookie = getCookie("access_token", auth.access_token);
+  const cookie = getCookie('access_token');
 
   const myRef = useRef<any>({});
 

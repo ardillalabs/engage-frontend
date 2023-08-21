@@ -39,7 +39,7 @@ interface Props {
 const BASE_URL = process.env.BASE_URL;
 
 const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
-  const cookie = getCookie("access_token", auth.access_token);
+  const cookie = getCookie("access_token");
   useEffect(() => {
     getCurrentUserDetails(cookie);
   }, [getCurrentUserDetails]);
