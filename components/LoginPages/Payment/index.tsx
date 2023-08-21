@@ -16,7 +16,7 @@ import { getCurrentUserDetails } from '../../../actions/Auth';
 
 interface Props {
   ChoosePlan: ChooseYourPlanInitialStates;
-  setChooseYourPlanModal: (condition: boolean) => any;
+  setChooseYourPlanModal: any;
   toast: any;
   setToastState: any;
   auth: any;
@@ -30,7 +30,7 @@ const PaymentForm = ({
   setToastState,
   auth,
   getCurrentUserDetails,
-}: Props) => {
+}: any) => {
   const router = useRouter();
   const [isRouteUrl, setRouteUrl] = useState<string>('');
   const [isRouteUrlParam, setRouteUrlParam] = useState<any>({
