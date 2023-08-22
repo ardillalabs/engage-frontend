@@ -15,6 +15,10 @@
   border: 1px solid #dadada;
   padding: 45px 20px 125px 20px;
 }
+
+.paymentTitle {
+  padding-bottom: 30px;
+}
 @media (min-width: 600px) {
   .componentDiv {
     width: 70%;
