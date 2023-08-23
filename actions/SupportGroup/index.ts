@@ -14,7 +14,7 @@ import {
 } from '../types';
 
 // Import environment variables
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://ec2-54-160-247-159.compute-1.amazonaws.com:5000/api';
 
 // @desc        create support person
 // @api         support_group
@@ -33,6 +33,72 @@ export const addSupportPerson =
     const body = JSON.stringify({
       patientUserId: parseInt(supportData.userId),
       email: supportData.email,
+    });
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/support_group`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: CREATE_SUPPORT_GROUP,
+        payload: response,
+      });
+      getSupportGroup(supportData.userId);
+    } catch (err: any) {
+      if (err.message === 'Network Error') {
+        dispatch({
+          type: FAIL_CREATE_SUPPORT_GROUP,
+          payload: {
+            response: {
+              data: {
+                message: 'Network Error',
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: FAIL_CREATE_SUPPORT_GROUP,
+          payload: err,
+        });
+
+        if (
+          err.response.data.message !==
+          'This email address has already been used.'
+        ) {
+          dispatch({
+            type: FAIL_CREATE_SUPPORT_GROUP,
+            payload: {
+              visibility: true,
+              type: 'error',
+              title: 'Error!',
+              description: `${err.response.data.message}`,
+            },
+          });
+        }
+      }
+    }
+  };
+
+  export const addSupportPersonByPhoneNumber =
+  (supportData: any) => async (dispatch: AppDispatch) => {
+    // API Header configarations
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    console.log('supportData', supportData);
+
+    // Stringyfy Json Body
+    const body = JSON.stringify({
+      patientUserId: parseInt(supportData.userId),
+      phoneNumber: supportData.phoneNumber,
     });
 
     try {

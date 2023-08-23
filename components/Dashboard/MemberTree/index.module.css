@@ -362,12 +362,49 @@
   flex-grow: 1;
 }
 
+.searchBar1 {
+  /* border: 1px solid #c3c3c3; */
+  border-radius: 8px;
+  padding: 6px 10px;
+  flex-grow: 1;
+}
+
+.phoneNumber {
+  padding: 0;
+  /* width: calc(100% + 10px); */
+}
+.phoneNumber input {
+  width: 100%;
+  font: 500 0.9rem "Montserrat" !important;
+}
+
+@media (max-width: 576px) { 
+  .searchDiv {
+    padding: 10px 20px;
+  }
+}
+
 @media (min-width: 992px) {
   .searchBar {
     flex-grow: 0;
     max-width: 400px;
     width: 50%;
   }
+  .searchBar1 {
+    flex-grow: 0;
+    max-width: 420px;
+    width: 50%;
+  }
+  
+  .phoneNumber {
+    padding: 0;
+    width: calc(100% + 10px);
+  }
+  .phoneNumber input {
+    width: 100%;
+    font: 500 0.9rem "Montserrat" !important;
+  }
+
 }
 
 .searchBar:focus {
@@ -453,4 +490,22 @@
 .iconDiv:hover {
   background-color: #324544;
   border: 1px solid transparent;
+}
+
+.inputDiv {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  color: #201f1f;
+  line-height: 24px;
+  font-style: normal;
+}
+.input {
+  width: 98%;
+  height: 36px;
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #c3c3c3;
 }
