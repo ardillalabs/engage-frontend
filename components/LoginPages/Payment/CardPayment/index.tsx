@@ -78,6 +78,8 @@ const CardPayment = ({
 
   const [isTick, setTick] = useState<boolean>(false);
   const [saveCardError, setSaveCardError] = useState<boolean>(false);
+  const [tab, setTab] = useState('Yearly');
+
   const handleStripePayment = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -143,8 +145,7 @@ const CardPayment = ({
         console.log(`inside_is_done error`);
         setSaveCardError(false);
         router.push(
-          `/payment-message?isPaymentMessage=${
-            PaymentRouteStatus.FAIL
+          `/payment-message?isPaymentMessage=${PaymentRouteStatus.FAIL
           }&message=${"We couldn't process your subscription request. Please try again."}`
         );
       }
@@ -320,13 +321,13 @@ const CardPayment = ({
           ) {
             setErrorsStripe({
               ...errorsStripe,
-              SecurityCode: 'security code is incomplete.',
+              SecurityCode: 'Security code is incomplete.',
             });
           }
 
           setErrors({
             ...errors,
-            SecurityCode: 'security code is incomplete.',
+            SecurityCode: 'Security code is incomplete.',
           });
         } else if (e.complete === true) {
           setErrorsStripe({ ...errorsStripe, SecurityCode: '' });
@@ -497,7 +498,24 @@ const CardPayment = ({
         </Link>
       </div> */}
       {/* <div className={styles.welcomeHeading}>Payment Details</div> */}
+      <div className={styles.button_wrap}>
+        <button
+          className={tab === "Monthly" && "active" ? styles.toggledButton : styles.unSelectedButton}
+          onClick={() => setTab("Monthly")}
+        >
+          Monthly
+        </button>
+        <button
+          className={tab === "Yearly" && "active" ? styles.toggledButton : styles.unSelectedButton}
+          onClick={() => setTab("Yearly")}
+        >
+          Yearly
+        </button>
+      </div>
       <div className={styles.Fields}>
+        <div className={styles.plan}>
+          Payment Plan: {tab}
+        </div>
         <div className={styles.EmailMainDiv} tabIndex={1}>
           <div
             tabIndex={0}
@@ -505,8 +523,8 @@ const CardPayment = ({
               isClick.CardName !== false && isData.CardName !== ''
                 ? styles.EmailDiv
                 : errors.CardName === ''
-                ? styles.EmailDivClick
-                : styles.EmailDivClickError
+                  ? styles.EmailDivClick
+                  : styles.EmailDivClickError
             }
           >
             {isClick.CardName !== false && isData.CardName !== '' && (
@@ -521,7 +539,7 @@ const CardPayment = ({
                   </div>
                   {errors.CardName && (
                     <div className={styles.EmailErrorIcon}>
-                      <Image
+                      {/* <Image
                         src='/authentication/ErrorImage.svg'
                         alt='/authentication/ErrorImage.svg'
                         width={22}
@@ -529,7 +547,7 @@ const CardPayment = ({
                         objectFit='cover'
                         blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
                         priority={true}
-                      />
+                      /> */}
                     </div>
                   )}
                 </div>
@@ -543,8 +561,8 @@ const CardPayment = ({
                     onChange={(e) => handleChange({ CardName: e.target.value })}
                     autoFocus
                     ref={(e) => (myRef.current.CardName = e)}
-                    // tabIndex={1}
-                    // onKeyDown={(e) => onKeyDown(e, 1)}
+                  // tabIndex={1}
+                  // onKeyDown={(e) => onKeyDown(e, 1)}
                   />
                 </div>
               </div>
@@ -558,8 +576,8 @@ const CardPayment = ({
               isClick.CardNumber === false && isData.CardNumber === false
                 ? styles.EmailDiv
                 : errors.CardNumber === '' || isData.CardNumber === false
-                ? styles.EmailDivClick
-                : styles.EmailDivClickError
+                  ? styles.EmailDivClick
+                  : styles.EmailDivClickError
             }
           >
             {isClick.CardNumber === false && isData.CardNumber === false && (
@@ -574,7 +592,7 @@ const CardPayment = ({
                   </div>
                   {errors.CardNumber && (
                     <div className={styles.EmailErrorIcon}>
-                      <Image
+                      {/* <Image
                         src='/authentication/ErrorImage.svg'
                         alt='/authentication/ErrorImage.svg'
                         width={22}
@@ -582,7 +600,7 @@ const CardPayment = ({
                         objectFit='cover'
                         blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
                         priority={true}
-                      />
+                      /> */}
                     </div>
                   )}
                 </div>
@@ -618,12 +636,12 @@ const CardPayment = ({
                 // onKeyDown={(e) => onKeyDown(e, 2)}
                 className={
                   isClick.ExpirationDate === false &&
-                  isData.ExpirationDate === false
+                    isData.ExpirationDate === false
                     ? styles.EmailDiv
                     : errors.ExpirationDate === '' ||
                       isData.ExpirationDate === false
-                    ? styles.EmailDivClick
-                    : styles.EmailDivClickError
+                      ? styles.EmailDivClick
+                      : styles.EmailDivClickError
                 }
               >
                 {isClick.ExpirationDate === false &&
@@ -633,18 +651,18 @@ const CardPayment = ({
 
                 {(isClick.ExpirationDate === true ||
                   isData.ExpirationDate === true) && (
-                  <div className={styles.EmailmainClick}>
-                    <div className={styles.EmailClick}>
-                      <div
-                        className={
-                          errors.ExpirationDate && styles.EmailTextError
-                        }
-                      >
-                        Expiration date
-                      </div>
-                      {errors.ExpirationDate && (
-                        <div className={styles.EmailErrorIcon}>
-                          <Image
+                    <div className={styles.EmailmainClick}>
+                      <div className={styles.EmailClick}>
+                        <div
+                          className={
+                            errors.ExpirationDate && styles.EmailTextError
+                          }
+                        >
+                          Expiration date
+                        </div>
+                        {errors.ExpirationDate && (
+                          <div className={styles.EmailErrorIcon}>
+                            {/* <Image
                             src='/authentication/ErrorImage.svg'
                             alt='/authentication/ErrorImage.svg'
                             width={22}
@@ -652,30 +670,30 @@ const CardPayment = ({
                             objectFit='cover'
                             blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
                             priority={true}
-                          />
-                        </div>
-                      )}
+                          /> */}
+                          </div>
+                        )}
+                      </div>
+                      <div className={styles.EmailClickInput}>
+                        <CardExpiryElement
+                          id='cardExpiry'
+                          className={styles.input}
+                          options={stripeInputOptions}
+                          onChange={(e) => {
+                            handleChangeStripe(e);
+                          }}
+                          onReady={(e) => {
+                            // e.focus();
+                            setClick({
+                              ...isClick,
+                              ExpirationDate: true,
+                            });
+                            handleChange({ ExpireDate: '1' });
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className={styles.EmailClickInput}>
-                      <CardExpiryElement
-                        id='cardExpiry'
-                        className={styles.input}
-                        options={stripeInputOptions}
-                        onChange={(e) => {
-                          handleChangeStripe(e);
-                        }}
-                        onReady={(e) => {
-                          // e.focus();
-                          setClick({
-                            ...isClick,
-                            ExpirationDate: true,
-                          });
-                          handleChange({ ExpireDate: '1' });
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
+                  )}
               </div>
               <div className={styles.EmailErrorMessage}>
                 {errors.ExpirationDate}
@@ -687,12 +705,12 @@ const CardPayment = ({
               <div
                 className={
                   isClick.SecurityCode === false &&
-                  isData.SecurityCode === false
+                    isData.SecurityCode === false
                     ? styles.EmailDiv
                     : errors.SecurityCode === '' ||
                       isData.SecurityCode === false
-                    ? styles.EmailDivClick
-                    : styles.EmailDivClickError
+                      ? styles.EmailDivClick
+                      : styles.EmailDivClickError
                 }
               >
                 {isClick.SecurityCode === false &&
@@ -702,16 +720,16 @@ const CardPayment = ({
 
                 {(isClick.SecurityCode === true ||
                   isData.SecurityCode === true) && (
-                  <div className={styles.EmailmainClick}>
-                    <div className={styles.EmailClick}>
-                      <div
-                        className={errors.SecurityCode && styles.EmailTextError}
-                      >
-                        Security code
-                      </div>
-                      {errors.SecurityCode && (
-                        <div className={styles.EmailErrorIcon}>
-                          <Image
+                    <div className={styles.EmailmainClick}>
+                      <div className={styles.EmailClick}>
+                        <div
+                          className={errors.SecurityCode && styles.EmailTextError}
+                        >
+                          Security code
+                        </div>
+                        {errors.SecurityCode && (
+                          <div className={styles.EmailErrorIcon}>
+                            {/* <Image
                             src='/authentication/ErrorImage.svg'
                             alt='/authentication/ErrorImage.svg'
                             width={22}
@@ -719,26 +737,26 @@ const CardPayment = ({
                             objectFit='cover'
                             blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
                             priority={true}
-                          />
-                        </div>
-                      )}
+                          /> */}
+                          </div>
+                        )}
+                      </div>
+                      <div className={styles.EmailClickInput}>
+                        <CardCvcElement
+                          id='cardCvc'
+                          className={styles.input}
+                          options={stripeInputOptions}
+                          onChange={(e) => handleChangeStripe(e)}
+                          onReady={(e) => {
+                            setClick({
+                              ...isClick,
+                              SecurityCode: true,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className={styles.EmailClickInput}>
-                      <CardCvcElement
-                        id='cardCvc'
-                        className={styles.input}
-                        options={stripeInputOptions}
-                        onChange={(e) => handleChangeStripe(e)}
-                        onReady={(e) => {
-                          setClick({
-                            ...isClick,
-                            SecurityCode: true,
-                          });
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
+                  )}
               </div>
               <div className={styles.EmailErrorMessage}>
                 {errors.SecurityCode}
@@ -749,11 +767,10 @@ const CardPayment = ({
       </div>
       <div className={styles.buttonSection}>
         <Link
-          href={`/payment-message?isPaymentMessage=${
-            isPaymentMethod.message == false
+          href={`/payment-message?isPaymentMessage=${isPaymentMethod.message == false
               ? PaymentRouteStatus.FAIL
               : PaymentRouteStatus.PENDING
-          }`}
+            }`}
         >
           <div
             tabIndex={0}
@@ -790,3 +807,4 @@ export default connect(mapStateToProps, {
   createStripePayment,
   savePaymentMethod,
 })(CardPayment);
+

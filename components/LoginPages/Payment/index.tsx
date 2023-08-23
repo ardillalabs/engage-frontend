@@ -84,7 +84,30 @@ const PaymentForm = ({
         <SignUpSteps step='3' />
         <div className={styles.contentDiv}>
           <div className={styles.sectionDiv}>
-            <h2>Payment Method</h2>
+            <h2 className={styles.paymentTitle}>Payment Method</h2>
+            <div className={styles.paymentLogoWrap}>
+                <Image
+                  src={'/mastercard-logo.png'}
+                  width={100}
+                  height={100}
+                  alt='Mastercard Logo'
+                  className={styles.paymentTypeLogo}
+                />
+                <Image
+                  src={'/visa-logo.png'}
+                  width={100}
+                  height={100}
+                  alt='Visa Logo'
+                  className={styles.paymentTypeLogo}
+                />
+                {/* <Image
+                  src={'/paypal-logo.png'}
+                  width={100}
+                  height={100}
+                  alt='Paypal Logo'
+                  className={styles.paymentTypeLogo}
+                /> */}
+              </div>
             <div
               style={{
                 display: 'flex',
@@ -92,8 +115,8 @@ const PaymentForm = ({
                 marginBottom: '10px',
               }}
             >
-              <button style={{ marginRight: '20px' }}>Monthly</button>
-              <button>Yearly</button>
+              {/* <button style={{ marginRight: '20px' }}>Monthly</button>
+              <button>Yearly</button> */}
             </div>
             <div className={styles.selectPayment}>
               {/* <div className={styles.selectPaymentTop}>
@@ -118,29 +141,6 @@ const PaymentForm = ({
                   Paypal
                 </label>
               </div> */}
-              <div className={styles.paymentLogoWrap}>
-                <Image
-                  src={'/mastercard-logo.png'}
-                  width={100}
-                  height={100}
-                  alt='Mastercard Logo'
-                  className={styles.paymentTypeLogo}
-                />
-                <Image
-                  src={'/visa-logo.png'}
-                  width={100}
-                  height={100}
-                  alt='Visa Logo'
-                  className={styles.paymentTypeLogo}
-                />
-                {/* <Image
-                  src={'/paypal-logo.png'}
-                  width={100}
-                  height={100}
-                  alt='Paypal Logo'
-                  className={styles.paymentTypeLogo}
-                /> */}
-              </div>
             </div>
             <Elements stripe={stripePromise}>
               <CardPayment isPaymentMethod={isPaymentMethod} />
