@@ -15,6 +15,8 @@ import { Bar } from "react-chartjs-2";
 import useDate from "@/hooks/useDate";
 import { RootState } from "@/store";
 import { connect } from "react-redux";
+import { FaDownload } from "react-icons/fa";
+
 const BASE_URL = process.env.BASE_URL;
 
 ChartJS.register(
@@ -59,9 +61,9 @@ const Barchart = ({ auth }: Props) => {
     scales: {
       y: {
         beginAtZero: true,
-        max: 50,
+        // max: 50,
         ticks: {
-          stepSize: 10,
+          // stepSize: 10,
         },
       },
       x: {
@@ -167,14 +169,23 @@ const Barchart = ({ auth }: Props) => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Daily quiz score</div>
+        <div className={styles.leftDiv}>
+          <div className={styles.chartHeader}>Daily Quiz Score</div>
+          
+        <button className={styles.downloadButtonDaily}><FaDownload className={styles.icon}/>Download as csv</button>
+        </div>
+        {/* <div className={styles.rightDiv}>     */}
+        {/* </div> */}
         <div className={styles.chartSubHeader}>
           Productivity of the last 7 days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
       <div className={styles.chartWrapper}>
-        <div className={styles.chartHeader}>Weekly quiz score</div>
+      <div className={styles.leftDiv}>
+        <div className={styles.chartHeader}>Weekly Quiz Score</div>
+        <button className={styles.downloadButtonWeekly}><FaDownload className={styles.icon}/>Download as csv</button>
+        </div>
         <div className={styles.chartSubHeader}>
           Productivity of the last 7 weeks
         </div>
