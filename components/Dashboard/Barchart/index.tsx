@@ -33,12 +33,14 @@ interface Props {
 }
 
 interface weeklyScores {
-  weekNumber: number;
+  weekRange: string;
+  // weekNumber: number;
   totalValue: number;
 }
 
 interface dailyScores {
-  dayNumber: number;
+  day: Date;
+  // dayNumber: number;
   totalValue: number;
 }
 
@@ -87,24 +89,42 @@ const Barchart = ({ auth }: Props) => {
   // Daily quiz data
   const [dailyScores, setDailyScores] = useState<dailyScores[]>();
   const [dailyScoreLabels, setDailyScoreLabels] = useState<any>();
+  const { day, monthNum, year } = useDate();
+  console.log(year, monthNum, day)
+  
+  const date = new Date(); 
 
+  date.setDate(date.getDate() - 7);
+  console.log(date);
+
+  const dateObject = new Date(date);
+
+  const yearStart = dateObject.getFullYear();
+  const monthStart = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+  const dayStart = dateObject.getDate().toString().padStart(2, '0');
+
+  const formattedDate = `${yearStart}-${monthStart}-${dayStart}`;
   useEffect(() => {
     const date = new Date();
+    console.log(date)
     const dailyLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const DailyDataFetch = async () => {
       try {
         const res = fetch(
-          `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
+          // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
+          `http://localhost:5000/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${year}-${monthNum}-${day}`
         );
         (await res).json().then((days: dailyScores[]) => {
           setDailyScores(days);
-          const tempDailyData = [];
+          console.log(days)
+          // const tempDailyData = [];
 
-          for (let i = 0; i < days.length; i++) {
-            date.setDate(days[i].dayNumber);
-            tempDailyData.unshift(dailyLabels[date.getDay()]);
-          }
-          setDailyScoreLabels(tempDailyData);
+          // for (let i = 0; i < days.length; i++) {
+          //   // date.setDate(scoreDate[i]);
+          //   tempDailyData.unshift(date.getDay());
+          //   console.log(tempDailyData)
+          // }
+          // setDailyScoreLabels(tempDailyData);
         });
       } catch (error) {
         console.log(error);
@@ -115,7 +135,7 @@ const Barchart = ({ auth }: Props) => {
   }, [auth.id]);
 
   const dailyData = {
-    labels: dailyScoreLabels,
+    labels: dailyScores?.map(day =>  new Date(day.day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
     datasets: [
       {
         backgroundColor: (context: any) => {
@@ -133,11 +153,23 @@ const Barchart = ({ auth }: Props) => {
   // Weekly quiz data
   const [weeklyScores, setWeeklyScores] = useState<weeklyScores[]>();
 
+  const sevenWeeksAgo = new Date(date);
+  sevenWeeksAgo.setDate(date.getDate() - (7 * 7)); // Subtract 7 weeks
+
+  const weekObject = new Date(sevenWeeksAgo);
+  console.log(weekObject)
+
+  const yearStart1 = weekObject.getFullYear();
+  const monthStart1 = (weekObject.getMonth() + 1).toString().padStart(2, '0');
+  const dayStart1 = weekObject.getDate().toString().padStart(2, '0');
+
+  const formattedWeek = `${yearStart1}-${monthStart1}-${dayStart1}`;
   useEffect(() => {
     const weeklyDataFetch = async () => {
       try {
         const res = fetch(
-          `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
+          // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
+          `http://localhost:5000/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${year}-${monthNum}-${day}`
         );
         console.log("last-7-day-summery/WEEK - res ", res);
         (await res).json().then((weeks) => {
@@ -151,7 +183,7 @@ const Barchart = ({ auth }: Props) => {
   }, [auth.id]);
 
   const weeklyData = {
-    labels: weeklyScores?.map((week) => `Week ${week.weekNumber}`),
+    labels: weeklyScores?.map(week =>  week.weekRange),
     datasets: [
       {
         backgroundColor: (context: any) => {
