@@ -28,15 +28,15 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
 
   const handleSignOut = () => {
     signOut();
-    deleteCookie("access_token", { path: "/" });
-    router.push("/");
+    deleteCookie('access_token', { path: '/' });
+    router.push('/');
     removeSupportGroupDetails();
   };
-  
+
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/support_group/send-alert/${auth.id}`
+        `https://api.stayengaged.io/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
         toast.success('Support group alerted', {
@@ -129,4 +129,6 @@ const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {signOut, removeSupportGroupDetails})(SidebarMobile);
+export default connect(mapStateToProps, { signOut, removeSupportGroupDetails })(
+  SidebarMobile
+);

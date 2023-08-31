@@ -23,7 +23,7 @@ const Header = ({ auth, clearIsUpdatedUserInfo }: Props) => {
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/support_group/send-alert/${auth.id}`
+        `https://api.stayengaged.io/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
         toast.success('Support group alerted', {

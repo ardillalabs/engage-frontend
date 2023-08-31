@@ -14,7 +14,7 @@ import {
 } from '../types';
 
 // Import environment variables
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://api.stayengaged.io/api';
 
 // @desc        create support person
 // @api         support_group
@@ -127,18 +127,18 @@ export const deleteSupporter =
     }
   };
 
-export const removeSupportGroupDetails = () => async (dispatch: AppDispatch) => {
-  dispatch({
-    type: SET_LOADING_CLEAR_SUPPORT_GROUP,
-  });
-  dispatch({
-    type: CLEAR_SUPPORT_GROUP_MESSAGES,
-  });
-  try {
-    console.log('Sign Out');
+export const removeSupportGroupDetails =
+  () => async (dispatch: AppDispatch) => {
     dispatch({
-      type: CLEAR_SUPPORT_GROUP
-    })
-  } catch (err: any) {
-  }
-}
+      type: SET_LOADING_CLEAR_SUPPORT_GROUP,
+    });
+    dispatch({
+      type: CLEAR_SUPPORT_GROUP_MESSAGES,
+    });
+    try {
+      console.log('Sign Out');
+      dispatch({
+        type: CLEAR_SUPPORT_GROUP,
+      });
+    } catch (err: any) {}
+  };
