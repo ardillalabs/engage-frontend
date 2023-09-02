@@ -786,6 +786,7 @@ const CardPayment = ({
             {loading === true ? <>Loading...</> : <>Complete Payment</>}
           </div>
         </Link>
+        <Link href={'/dashboard'}><div className={styles.trialClick}>Free Trial</div></Link>
       </div>
     </div>
   );
