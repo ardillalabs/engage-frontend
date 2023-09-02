@@ -16,6 +16,14 @@ import useDate from '@/hooks/useDate';
 import { RootState } from '@/store';
 import { connect } from 'react-redux';
 import { FaDownload } from 'react-icons/fa';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
+import 'react-calendar/dist/Calendar.css';
+
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -104,35 +112,38 @@ const Barchart = ({ auth }: Props) => {
   const dayStart = dateObject.getDate().toString().padStart(2, '0');
 
   const formattedDate = `${yearStart}-${monthStart}-${dayStart}`;
+  const todayDate = `${year}-${monthNum}-${day}`;
+
+  // const date = new Date();
+  console.log(date);
+  const dailyLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const DailyDataFetch = async (formattedDate: string, todayDate: string) => {
+    try {
+      const res = fetch(
+        // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
+        `http://localhost:5000/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayDate}`
+      );
+      (await res).json().then((days: dailyScores[]) => {
+        setDailyScores(days);
+        console.log(days);
+        // const tempDailyData = [];
+
+        // for (let i = 0; i < days.length; i++) {
+        //   // date.setDate(scoreDate[i]);
+        //   tempDailyData.unshift(date.getDay());
+        //   console.log(tempDailyData)
+        // }
+        // setDailyScoreLabels(tempDailyData);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const date = new Date();
-    console.log(date);
-    const dailyLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const DailyDataFetch = async () => {
-      try {
-        const res = fetch(
-          // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
-          `https://api.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${year}-${monthNum}-${day}`
-        );
-        (await res).json().then((days: dailyScores[]) => {
-          setDailyScores(days);
-          console.log(days);
-          // const tempDailyData = [];
-
-          // for (let i = 0; i < days.length; i++) {
-          //   // date.setDate(scoreDate[i]);
-          //   tempDailyData.unshift(date.getDay());
-          //   console.log(tempDailyData)
-          // }
-          // setDailyScoreLabels(tempDailyData);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    DailyDataFetch();
+    DailyDataFetch(formattedDate, todayDate);
   }, [auth.id]);
+
 
   const dailyData = {
     labels: dailyScores?.map((day) =>
@@ -169,22 +180,24 @@ const Barchart = ({ auth }: Props) => {
   const dayStart1 = weekObject.getDate().toString().padStart(2, '0');
 
   const formattedWeek = `${yearStart1}-${monthStart1}-${dayStart1}`;
+
+  const weeklyDataFetch = async (formattedWeek: string, todayDate: string) => {
+    try {
+      const res = fetch(
+        // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
+        `http://localhost:5000/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayDate}`
+      );
+      console.log('last-7-day-summery/WEEK - res ', res);
+      (await res).json().then((weeks) => {
+        setWeeklyScores(weeks);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const weeklyDataFetch = async () => {
-      try {
-        const res = fetch(
-          // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
-          `https://api.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${year}-${monthNum}-${day}`
-        );
-        console.log('last-7-day-summery/WEEK - res ', res);
-        (await res).json().then((weeks) => {
-          setWeeklyScores(weeks);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    weeklyDataFetch();
+    weeklyDataFetch(formattedWeek, todayDate);
   }, [auth.id]);
 
   const weeklyData = {
@@ -203,13 +216,115 @@ const Barchart = ({ auth }: Props) => {
     ],
   };
 
+  console.log(weeklyScores?.[0])
+  type ValuePiece = Date | null;
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+  // const [value, onChange] = useState<Value>([new Date(), new Date()]);
+
+  // console.log(Array.isArray(value)? value[0]: []);
+  const formatDate = (newDate: any) => {
+    const dateObject = new Date(newDate);
+    const yearStart = dateObject.getFullYear();
+    const monthStart = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const dayStart = dateObject.getDate().toString().padStart(2, '0');
+    const formattedDate = `${yearStart}-${monthStart}-${dayStart}`;
+
+    return formattedDate
+  }
+
+  const [date1, setDate1] = useState(todayDate);
+  const [date2, setDate2] = useState(formattedDate);
+  const [date3, setDate3] = useState(formattedWeek);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const onChange = (dates: any) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    console.log(start, end)
+    const initialDate = formatDate(start)
+    const lastDate = formatDate(end)
+    console.log(initialDate, lastDate)
+    DailyDataFetch(initialDate, lastDate)
+    weeklyDataFetch(initialDate, lastDate)
+    setDate1(lastDate)
+    setDate2(initialDate)
+    setDate3(initialDate)
+  };
+
+  console.log('dates', date1, date2, date3);
+
+  const downloadBlob = (blob: any, filename: string) => {
+    const url = window.URL.createObjectURL(new Blob([blob]));
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const onClickDailyScore = () => {
+    try {
+      axios({
+        method: 'get',
+        url: `http://localhost:5000/api/quiz_mark/csv-file-download/DAY/2/${auth.id}/${date3}/${date1}`,
+        responseType: 'blob',
+        headers: {
+          'Accept': 'text/csv'
+        }
+      })
+        .then((response) => {
+          downloadBlob(response.data, `daily scores ${date3} ${date1}.csv`);
+        })
+      // downloadBlob(res, 'weekly scores.csv');
+      // console.log('last-7-day-summery/WEEK - res ', res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const onClickWeeklyScore = () => {
+    try {
+      axios({
+        method: 'get',
+        url: `http://localhost:5000/api/quiz_mark/csv-file-download/WEEK/1/${auth.id}/${date3}/${date1}`,
+        responseType: 'blob',
+        headers: {
+          'Accept': 'text/csv'
+        }
+      })
+        .then((response) => {
+          downloadBlob(response.data, `weekly scores ${date3} ${date1}.csv`);
+        })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className={styles.mainDiv}>
+      <div className={styles.chartWrapper}>
+        <div className={styles.filterText}>Filter scores with date range</div>
+        <DatePicker
+          showIcon
+          onChange={onChange}
+          startDate={startDate}
+          endDate={endDate}
+          maxDate={new Date()}
+          selectsRange 
+          className={styles.datePicker}
+          placeholderText="Filter by Date"
+        />
+      </div>
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
           <div className={styles.chartHeader}>Daily Quiz Score</div>
 
-          <button className={styles.downloadButtonDaily}>
+          <button className={styles.downloadButtonDaily} onClick={onClickDailyScore}>
             <FaDownload className={styles.icon} />
             Download as csv
           </button>
@@ -224,7 +339,7 @@ const Barchart = ({ auth }: Props) => {
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
           <div className={styles.chartHeader}>Weekly Quiz Score</div>
-          <button className={styles.downloadButtonWeekly}>
+          <button className={styles.downloadButtonWeekly} onClick={onClickWeeklyScore}>
             <FaDownload className={styles.icon} />
             Download as csv
           </button>
