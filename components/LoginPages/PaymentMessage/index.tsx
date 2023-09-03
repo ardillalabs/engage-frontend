@@ -8,13 +8,12 @@ const PaymentMessage = () => {
   const router = useRouter();
   const paymentState = router.query.isPaymentMessage;
   const paymentMessage = router.query.message;
-  console.log(paymentMessage);
   return (
     <div className={styles.mainDiv}>
       <div className={styles.paymentIcon}>
         {paymentState === "success" ? (
           <FcPaid />
-        ) : paymentState === "loading" ? (
+        ) : paymentState === "pending" ? (
           <Ring size={40} lineWeight={5} speed={2} color="black" />
         ) : paymentState === "fail" ? (
           <BiErrorCircle className={styles.failedIcon} />
