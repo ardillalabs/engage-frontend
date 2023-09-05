@@ -159,9 +159,11 @@ export const getSupportGroup =
       dispatch({
         type: SUPPORT_GROUP_LOADING,
       });
+      console.log('received');
       await axios
         .get(`${BASE_URL}/support_group/${userId}`)
         .then((response) => {
+          console.log('received', response);
           const data: any = response.data;
           console.log('support-group-res', data);
           dispatch({

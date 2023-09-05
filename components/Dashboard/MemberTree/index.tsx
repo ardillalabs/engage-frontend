@@ -45,6 +45,7 @@ const MemberTree = ({
   addSupportPersonByPhoneNumber: (...args: any[]) => any;
 }) => {
   const handleRemove = async (email: string, id: number, i: number) => {
+    console.log(email, 'email')
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
@@ -64,7 +65,7 @@ const MemberTree = ({
 
   const [isDataPhoneNumber, setDataPhoneNumber] = useState({
     userId: auth.id,
-    PhoneNumber: ""
+    PhoneNumber: "",
   });
 
   const [errors, setErrors] = useState({
@@ -228,6 +229,7 @@ const MemberTree = ({
                 type="text"
                 id="email"
                 value={isData.Email}
+                placeholder="Support member email"
                 autoFocus
                 ref={(input) => (supportRef.current.email = input)}
                 onChange={(e) => handleChange({ Email: e.target.value })}
