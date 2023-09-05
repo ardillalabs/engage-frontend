@@ -10,21 +10,26 @@ import { connect } from "react-redux";
 import { RootState } from "../../../store";
 import {
   addSupportPerson,
+  addSupportPersonByPhoneNumber,
   deleteSupporter,
   getSupportGroup,
 } from "../../../actions/SupportGroup";
 import { BsFillTriangleFill } from "react-icons/bs";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 interface teamMemberArray {
   userID: string;
   userName: string;
   imageURL: string;
   email: string;
+  phoneNumber: string;
 }
 const MemberTree = ({
   changeTeamMemberData,
   teamMemberData,
   addSupportPerson,
+  addSupportPersonByPhoneNumber,
   deleteSupporter,
   getSupportGroup,
   supportGroup,
@@ -37,6 +42,7 @@ const MemberTree = ({
   deleteSupporter: any;
   getSupportGroup: any;
   addSupportPerson: (...args: any[]) => any;
+  addSupportPersonByPhoneNumber: (...args: any[]) => any;
 }) => {
   const handleRemove = async (email: string, id: number, i: number) => {
     const filtered = teamMemberData
@@ -53,10 +59,20 @@ const MemberTree = ({
   const [isData, setData] = useState({
     userId: auth.id,
     Email: "",
+    PhoneNumber: ""
+  });
+
+  const [isDataPhoneNumber, setDataPhoneNumber] = useState({
+    userId: auth.id,
+    PhoneNumber: ""
   });
 
   const [errors, setErrors] = useState({
     Email: "",
+  });
+
+  const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
+    PhoneNumber: ""
   });
 
   const supportRef = useRef<any>({});
@@ -65,6 +81,14 @@ const MemberTree = ({
     supportGroup.failCreateSupporter = null;
     setData({
       ...isData,
+      ...values,
+    });
+  };
+
+  const handlePhoneNumberChange = (values: any) => {
+    supportGroup.failCreateSupporter = null;
+    setDataPhoneNumber({
+      ...isDataPhoneNumber,
       ...values,
     });
   };
@@ -91,6 +115,27 @@ const MemberTree = ({
     }
 
     setErrors(errors);
+  };
+
+  const FunctionSupporterSubmitPhoneNumber = async () => {
+    console.log(isDataPhoneNumber.PhoneNumber, 'phone number')
+    const errorsPhoneNumber = {
+      PhoneNumber: "",
+    };
+
+    if (!isDataPhoneNumber.PhoneNumber) {
+      errorsPhoneNumber.PhoneNumber = "The field is required";
+    }
+
+    if (!errorsPhoneNumber.PhoneNumber) {
+      addSupportPersonByPhoneNumber({
+        userId: auth.id,
+        phoneNumber: isDataPhoneNumber.PhoneNumber,
+      });
+      getSupportGroup(auth.id);
+    }
+
+    setErrorsPhoneNumber(errorsPhoneNumber);
   };
 
   return (
@@ -197,7 +242,24 @@ const MemberTree = ({
                   : supportGroup?.failCreateSupporter?.response?.data?.message}
               </div>
             </div>
-
+            <div className={styles.searchDiv}>
+              <PhoneInput
+                defaultCountry="us"
+                className={`${styles.searchBar1} ${styles.phoneNumber}`}
+                value={isData.PhoneNumber}
+                onChange={(phoneNumber) =>
+                  handlePhoneNumberChange({ PhoneNumber: phoneNumber })
+                }
+              />
+              <div onClick={() => FunctionSupporterSubmitPhoneNumber()}>
+                <button className={styles.inviteBtn}>Send Invite</button>
+              </div>
+              <div className={styles.errorMessage}>
+                {errorsPhoneNumber.PhoneNumber
+                  ? errorsPhoneNumber.PhoneNumber
+                  : supportGroup?.failCreateSupporter?.response?.data?.message}
+              </div>
+            </div>
             <div className={styles.memberDiv}>
               {teamMemberData.map(
                 ({ userID, userName, imageURL, email }, i) => {
@@ -236,6 +298,7 @@ const MemberTree = ({
 
 MemberTree.propTypes = {
   addSupportPerson: PropTypes.func.isRequired,
+  addSupportPersonByPhoneNumber: PropTypes.func.isRequired,
   deleteSupporter: PropTypes.func.isRequired,
   getSupportGroup: PropTypes.func.isRequired,
 };
@@ -247,6 +310,7 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(mapStateToProps, {
   addSupportPerson,
+  addSupportPersonByPhoneNumber,
   deleteSupporter,
   getSupportGroup,
 })(MemberTree);

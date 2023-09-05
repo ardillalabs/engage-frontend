@@ -362,12 +362,50 @@
   flex-grow: 1;
 }
 
+.searchBar1 {
+  /* border: 1px solid #c3c3c3; */
+  border-radius: 8px;
+  padding: 6px 10px;
+  flex-grow: 1;
+}
+
+.phoneNumber {
+  padding: 0;
+  /* width: calc(100% + 10px); */
+}
+.phoneNumber input {
+  width: 100%;
+  font: 500 0.9rem "Montserrat" !important;
+}
+
+@media (max-width: 576px) { 
+  .searchDiv {
+    padding: 10px 20px;
+  }
+}
+
 @media (min-width: 992px) {
   .searchBar {
     flex-grow: 0;
     max-width: 400px;
     width: 50%;
   }
+
+  .searchBar1 {
+    flex-grow: 0;
+    max-width: 420px;
+    width: 50%;
+  }
+  
+  .phoneNumber {
+    padding: 0;
+    width: calc(100% + 10px);
+  }
+  .phoneNumber input {
+    width: 100%;
+    font: 500 0.9rem "Montserrat" !important;
+  }
+
 }
 
 .searchBar:focus {
