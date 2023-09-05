@@ -280,7 +280,7 @@ const MemberTree = ({
                       </div>
                       <div
                         className={styles.iconDiv}
-                        onClick={() => handleRemove(email, 1, i)}
+                        onClick={() => handleRemove(email, auth.id, i)}
                       >
                         <RiDeleteBin6Fill />
                       </div>

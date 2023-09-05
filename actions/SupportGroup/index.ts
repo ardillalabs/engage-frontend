@@ -100,7 +100,7 @@ export const addSupportPerson =
     // Stringyfy Json Body
     const body = JSON.stringify({
       patientUserId: parseInt(supportData.userId),
-      phoneNumber: supportData.phoneNumber.toString(),
+      phone_number: supportData.phoneNumber.toString(),
     });
 
     try {
