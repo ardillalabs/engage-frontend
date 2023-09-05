@@ -296,6 +296,21 @@
     max-width: 400px;
     width: 50%;
   }
+
+  .searchBar1 {
+    flex-grow: 0;
+    max-width: 420px;
+    width: 50%;
+  }
+  
+  .phoneNumber {
+    padding: 0;
+    width: calc(100% + 10px);
+  }
+  .phoneNumber input {
+    width: 100%;
+    font: 500 0.9rem "Montserrat" !important;
+  }
 }
 
 .searchBar:focus {
@@ -381,4 +396,19 @@
 .iconDiv:hover {
   background-color: #324544;
   border: 1px solid transparent;
+}
+
+.searchBar1 {
+  flex-grow: 0;
+  max-width: 420px;
+  width: 50%;
+}
+
+.phoneNumber {
+  padding: 0;
+  width: calc(100% + 10px);
+}
+.phoneNumber input {
+  width: 100%;
+  font: 500 0.9rem "Montserrat" !important;
 }
