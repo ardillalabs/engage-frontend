@@ -170,12 +170,7 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
 
     if (!isData.PhoneNumber) {
       errors.PhoneNumber = "The field is required";
-    } else if (
-      isData.PhoneNumber.length > 13 ||
-      isData.PhoneNumber.length < 8
-    ) {
-      errors.PhoneNumber = "Phone number is invalid.";
-    }
+    } 
 
     if (!isData.Email) {
       errors.Email = "The field is required";

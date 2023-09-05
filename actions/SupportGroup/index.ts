@@ -14,7 +14,8 @@ import {
 } from '../types';
 
 // Import environment variables
-const BASE_URL = 'https://api.stayengaged.io/api';
+// const BASE_URL = 'https://api.stayengaged.io/api';
+const BASE_URL = process.env.BASE_URL;
 
 // @desc        create support person
 // @api         support_group
@@ -38,6 +39,73 @@ export const addSupportPerson =
     try {
       const response = await axios.post(
         `${BASE_URL}/support_group`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: CREATE_SUPPORT_GROUP,
+        payload: response,
+      });
+      getSupportGroup(supportData.userId);
+    } catch (err: any) {
+      if (err.message === 'Network Error') {
+        dispatch({
+          type: FAIL_CREATE_SUPPORT_GROUP,
+          payload: {
+            response: {
+              data: {
+                message: 'Network Error',
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: FAIL_CREATE_SUPPORT_GROUP,
+          payload: err,
+        });
+
+        if (
+          err.response.data.message !==
+          'This email address has already been used.'
+        ) {
+          dispatch({
+            type: FAIL_CREATE_SUPPORT_GROUP,
+            payload: {
+              visibility: true,
+              type: 'error',
+              title: 'Error!',
+              description: `${err.response.data.message}`,
+            },
+          });
+        }
+      }
+    }
+  };
+
+  export const addSupportPersonByPhoneNumber =
+  (supportData: any) => async (dispatch: AppDispatch) => {
+    // API Header configarations
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    console.log('supportData');
+    console.log('supportData', typeof supportData.phoneNumber);
+
+    // Stringyfy Json Body
+    const body = JSON.stringify({
+      patientUserId: parseInt(supportData.userId),
+      phone_number: supportData.phoneNumber.toString(),
+    });
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/support_group/support_group_with_phone_number`,
         body,
         config
       );

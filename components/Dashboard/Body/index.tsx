@@ -251,9 +251,9 @@ const DashboardBody = ({
       <div className={styles.rightDiv}>
         <div className={styles.dashboardInfo}>
           <UserProfile />
-          <div className={styles.calendarDiv}>
+          {/* <div className={styles.calendarDiv}>
             <Calendar />
-          </div>
+          </div> */}
         </div>
         <Barchart />
       </div>

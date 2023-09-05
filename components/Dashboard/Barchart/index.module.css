@@ -48,3 +48,15 @@
 .icon {
   margin-right: 5px;
 }
+
+.filterText {
+  font-size:14px;
+  margin-bottom: 10px;
+}
+
+.datePicker {
+  width: 400px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(148, 132, 132);
+}
