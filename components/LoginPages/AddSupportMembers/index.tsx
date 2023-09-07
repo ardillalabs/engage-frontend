@@ -214,6 +214,7 @@ const AddSupportMembers = ({
               type="text"
               id="email"
               value={isData.Email}
+              placeholder="Support member email"
               autoFocus
               ref={(input) => (supportRef.current.email = input)}
               onChange={(e) => handleChange({ Email: e.target.value })}

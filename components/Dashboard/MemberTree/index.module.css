@@ -343,13 +343,13 @@
   max-width: 100%;
   padding: 30px 20px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 10px;
 }
 
 @media (min-width: 600px) {
   .searchDiv {
-    padding: 30px 40px;
+    padding: 20px 40px;
     flex-direction: row;
     gap: 10px;
   }
@@ -399,7 +399,7 @@
   
   .phoneNumber {
     padding: 0;
-    width: calc(100% + 10px);
+    width: calc(52% + 10px);
   }
   .phoneNumber input {
     width: 100%;
