@@ -41,7 +41,7 @@ import {
   GET_USER_PROFILE_DETAILS_SUCCESS,
   GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
   CLEAR_IS_UPDATED_USER_INFO,
-  CLEAR_LOGGED_IN_USER
+  CLEAR_LOGGED_IN_USER,
 } from '../types';
 import {
   CreateNewPasswordDetails,
@@ -576,7 +576,7 @@ export const updatePassword =
 
     try {
       const response = await axios.put(
-        `https://api.stayengaged.io/auth/users/update-password`,
+        `https://backend.stayengaged.io/auth/users/update-password`,
         body,
         config
       );
@@ -1078,8 +1078,8 @@ export const signOut = () => async (dispatch: AppDispatch) => {
     deleteCookie('access_token');
     console.log('Sign Out');
     dispatch({
-      type: CLEAR_LOGGED_IN_USER
-    })
+      type: CLEAR_LOGGED_IN_USER,
+    });
   } catch (err: any) {
     if (err.message === 'Network Error') {
       dispatch({
@@ -1176,7 +1176,7 @@ export const updateUserDetailsSubmit =
 
     try {
       const response = await axios.put(
-        `https://api.stayengaged.io/auth/users/update-user-info`,
+        `https://backend.stayengaged.io/auth/users/update-user-info`,
         body,
         config
       );
@@ -1247,13 +1247,12 @@ export const updateUserDetailsSubmit =
     }
   };
 
-
 export const clearIsUpdatedUserInfo = () => async (dispatch: AppDispatch) => {
   try {
     dispatch({
       type: CLEAR_IS_UPDATED_USER_INFO,
     });
   } catch (err: any) {
-    console.log(err, "err");
+    console.log(err, 'err');
   }
 };

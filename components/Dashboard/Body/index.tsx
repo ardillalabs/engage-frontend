@@ -70,7 +70,7 @@ const DashboardBody = ({
   const dailyMessageFetch = async () => {
     try {
       const res = await fetch(
-        `https://api.stayengaged.io/api/daily_message/${year}-${monthNum}-${day}`
+        `https://backend.stayengaged.io/api/daily_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {
@@ -90,7 +90,7 @@ const DashboardBody = ({
       //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
       // );
       const res = await fetch(
-        `https://api.stayengaged.io/api/wellness_message/${year}-${monthNum}-${day}`
+        `https://backend.stayengaged.io/api/wellness_message/${year}-${monthNum}-${day}`
       );
 
       if (res.ok) {

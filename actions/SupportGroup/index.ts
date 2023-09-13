@@ -14,7 +14,7 @@ import {
 } from '../types';
 
 // Import environment variables
-// const BASE_URL = 'https://api.stayengaged.io/api';
+// const BASE_URL = 'https://backend.stayengaged.io/api';
 const BASE_URL = process.env.BASE_URL;
 
 // @desc        create support person
@@ -86,7 +86,7 @@ export const addSupportPerson =
     }
   };
 
-  export const addSupportPersonByPhoneNumber =
+export const addSupportPersonByPhoneNumber =
   (supportData: any) => async (dispatch: AppDispatch) => {
     // API Header configarations
     const config = {

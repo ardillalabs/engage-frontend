@@ -20,9 +20,9 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
 const BASE_URL = process.env.BASE_URL;
@@ -121,7 +121,7 @@ const Barchart = ({ auth }: Props) => {
     try {
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
-        `http://localhost:5000/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayDate}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayDate}`
       );
       (await res).json().then((days: dailyScores[]) => {
         setDailyScores(days);
@@ -143,7 +143,6 @@ const Barchart = ({ auth }: Props) => {
   useEffect(() => {
     DailyDataFetch(formattedDate, todayDate);
   }, [auth.id]);
-
 
   const dailyData = {
     labels: dailyScores?.map((day) =>
@@ -185,7 +184,7 @@ const Barchart = ({ auth }: Props) => {
     try {
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
-        `http://localhost:5000/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayDate}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayDate}`
       );
       console.log('last-7-day-summery/WEEK - res ', res);
       (await res).json().then((weeks) => {
@@ -216,7 +215,7 @@ const Barchart = ({ auth }: Props) => {
     ],
   };
 
-  console.log(weeklyScores?.[0])
+  console.log(weeklyScores?.[0]);
   type ValuePiece = Date | null;
   type Value = ValuePiece | [ValuePiece, ValuePiece];
 
@@ -230,8 +229,8 @@ const Barchart = ({ auth }: Props) => {
     const dayStart = dateObject.getDate().toString().padStart(2, '0');
     const formattedDate = `${yearStart}-${monthStart}-${dayStart}`;
 
-    return formattedDate
-  }
+    return formattedDate;
+  };
 
   const [date1, setDate1] = useState(todayDate);
   const [date2, setDate2] = useState(formattedDate);
@@ -243,15 +242,15 @@ const Barchart = ({ auth }: Props) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-    console.log(start, end)
-    const initialDate = formatDate(start)
-    const lastDate = formatDate(end)
-    console.log(initialDate, lastDate)
-    DailyDataFetch(initialDate, lastDate)
-    weeklyDataFetch(initialDate, lastDate)
-    setDate1(lastDate)
-    setDate2(initialDate)
-    setDate3(initialDate)
+    console.log(start, end);
+    const initialDate = formatDate(start);
+    const lastDate = formatDate(end);
+    console.log(initialDate, lastDate);
+    DailyDataFetch(initialDate, lastDate);
+    weeklyDataFetch(initialDate, lastDate);
+    setDate1(lastDate);
+    setDate2(initialDate);
+    setDate3(initialDate);
   };
 
   console.log('dates', date1, date2, date3);
@@ -271,39 +270,37 @@ const Barchart = ({ auth }: Props) => {
     try {
       axios({
         method: 'get',
-        url: `http://localhost:5000/api/quiz_mark/csv-file-download/DAY/2/${auth.id}/${date3}/${date1}`,
+        url: `https://backend.stayengaged.io/api/quiz_mark/csv-file-download/DAY/2/${auth.id}/${date3}/${date1}`,
         responseType: 'blob',
         headers: {
-          'Accept': 'text/csv'
-        }
-      })
-        .then((response) => {
-          downloadBlob(response.data, `daily scores ${date3} ${date1}.csv`);
-        })
+          Accept: 'text/csv',
+        },
+      }).then((response) => {
+        downloadBlob(response.data, `daily scores ${date3} ${date1}.csv`);
+      });
       // downloadBlob(res, 'weekly scores.csv');
       // console.log('last-7-day-summery/WEEK - res ', res);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const onClickWeeklyScore = () => {
     try {
       axios({
         method: 'get',
-        url: `http://localhost:5000/api/quiz_mark/csv-file-download/WEEK/1/${auth.id}/${date3}/${date1}`,
+        url: `https://backend.stayengaged.io/api/quiz_mark/csv-file-download/WEEK/1/${auth.id}/${date3}/${date1}`,
         responseType: 'blob',
         headers: {
-          'Accept': 'text/csv'
-        }
-      })
-        .then((response) => {
-          downloadBlob(response.data, `weekly scores ${date3} ${date1}.csv`);
-        })
+          Accept: 'text/csv',
+        },
+      }).then((response) => {
+        downloadBlob(response.data, `weekly scores ${date3} ${date1}.csv`);
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className={styles.mainDiv}>
@@ -315,16 +312,19 @@ const Barchart = ({ auth }: Props) => {
           startDate={startDate}
           endDate={endDate}
           maxDate={new Date()}
-          selectsRange 
+          selectsRange
           className={styles.datePicker}
-          placeholderText="Filter by Date"
+          placeholderText='Filter by Date'
         />
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
           <div className={styles.chartHeader}>Daily Quiz Score</div>
 
-          <button className={styles.downloadButtonDaily} onClick={onClickDailyScore}>
+          <button
+            className={styles.downloadButtonDaily}
+            onClick={onClickDailyScore}
+          >
             <FaDownload className={styles.icon} />
             Download as csv
           </button>
@@ -339,7 +339,10 @@ const Barchart = ({ auth }: Props) => {
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
           <div className={styles.chartHeader}>Weekly Quiz Score</div>
-          <button className={styles.downloadButtonWeekly} onClick={onClickWeeklyScore}>
+          <button
+            className={styles.downloadButtonWeekly}
+            onClick={onClickWeeklyScore}
+          >
             <FaDownload className={styles.icon} />
             Download as csv
           </button>

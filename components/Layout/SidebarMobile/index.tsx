@@ -36,7 +36,7 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
   const alertWellnessTeam = async () => {
     try {
       const res = await fetch(
-        `https://api.stayengaged.io/api/support_group/send-alert/${auth.id}`
+        `https://backend.stayengaged.io/api/support_group/send-alert/${auth.id}`
       );
       if (res.ok) {
         toast.success('Support group alerted', {

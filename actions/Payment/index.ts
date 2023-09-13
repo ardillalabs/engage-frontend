@@ -33,7 +33,7 @@ export const createStripePayment =
         type: CREATE_PAYMENT_LOADING,
       });
       const response = await axios.post(
-        `https://api.stayengaged.io/stripe/create-subscription`,
+        `https://backend.stayengaged.io/stripe/create-subscription`,
         {
           userId: userId,
           subscriptionId: subscriptionId,
