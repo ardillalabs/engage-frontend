@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import AllMessages from "../AllMessages";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
+import { HiVideoCamera } from "react-icons/hi";
+import VideoRoom from "./VideoRoom";
+import dynamic from "next/dynamic";
 
 interface userDataArray {
   userID: string;
@@ -18,12 +21,17 @@ interface userDataArray {
 
 const BASE_URL = process.env.BASE_URL;
 
+const MeetingContainer: any = dynamic(() => import("./VideoRoom"), {
+  ssr: false,
+});
+
 const ChatBox = ({ auth }: any) => {
   const userID = auth.id;
   const router = useRouter();
   const chatID = router.query.chatID;
   const [userData, setUserData] = useState<userDataArray>();
   const [allUserData, setAllUserData] = useState<any>();
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
     console.log("changed");
@@ -89,37 +97,50 @@ const ChatBox = ({ auth }: any) => {
   }, [chatID]);
 
   return (
-    <div className={styles.mainDiv}>
-      <div className={styles.header}>
-        <div className={styles.headerInfo}>
-          <FiChevronLeft
-            className={styles.backBtn}
-            onClick={() => {
-              router.push("/chat");
-            }}
-          />
-          <Image
-            src={
-              userData?.imageURL
-                ? userData.imageURL
-                : "https://source.unsplash.com/_7LbC5J-jw4"
-            }
-            alt="Profile Picture"
-            className={styles.profilePicture}
-            width={60}
-            height={60}
-          />
-          <div className="page-subheading">{userData?.username}</div>
+    <>
+      <div className={styles.mainDiv}>
+        <div className={styles.header}>
+          <div className={styles.headerInfo}>
+            <FiChevronLeft
+              className={styles.backBtn}
+              onClick={() => {
+                router.push("/chat");
+              }}
+            />
+            <Image
+              src={
+                userData?.imageURL
+                  ? userData.imageURL
+                  : "https://source.unsplash.com/_7LbC5J-jw4"
+              }
+              alt="Profile Picture"
+              className={styles.profilePicture}
+              width={60}
+              height={60}
+            />
+            <div className="page-subheading">{userData?.username}</div>
+          </div>
+          <div className={styles.videoIcon} onClick={() => setJoined(true)}>
+            <HiVideoCamera />
+          </div>
         </div>
+        <div className={styles.chatBox}>
+          <AllMessages
+            username={userData?.username}
+            imageURL={userData?.imageURL}
+          />
+        </div>
+        <ChatInput recUserID={userData?.userID} />
       </div>
-      <div className={styles.chatBox}>
-        <AllMessages
-          username={userData?.username}
-          imageURL={userData?.imageURL}
-        />
+
+      <div
+        className={`${styles.videoCallSection} ${
+          joined ? styles.callScreenOpen : ""
+        }`}
+      >
+        {joined && <MeetingContainer />}
       </div>
-      <ChatInput recUserID={userData?.userID} />
-    </div>
+    </>
   );
 };
 

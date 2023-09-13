@@ -1,0 +1,12 @@
+.video {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 40px);
+}
+
+.video div {
+  border-radius: 10px;
+}
+
+.mainDiv {
+}

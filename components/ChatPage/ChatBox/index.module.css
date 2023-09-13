@@ -184,3 +184,28 @@
 .messageBlock {
   height: 1000px;
 }
+
+.videoIcon {
+  font-size: 34px;
+  color: #8f8f8f;
+  cursor: pointer;
+}
+
+.videoCallSection {
+  z-index: 99;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #8f8f8f;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.callScreenOpen {
+  visibility: visible;
+  opacity: 1;
+}
