@@ -94,7 +94,7 @@ const UserProfile = ({
         }
         ref={pictureUpdate ? wrapperRef : null}
       >
-        <span className='body-1'>Profile Photo</span>
+        <div className={styles.body1}>Profile Photo</div>
         <div className={styles.imageChangeIconsDiv}>
           <div className={styles.imageChangeIcons}>
             <div className={styles.imageChangeIconDiv}>

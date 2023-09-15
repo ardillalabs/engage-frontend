@@ -285,6 +285,10 @@ const Barchart = ({ auth }: Props) => {
     }
   };
 
+  const dayCount = (+new Date(date1) - +new Date(date2))/(24 * 60 * 60 * 1000)
+  const weekCount = Math.round((+new Date(date1) - +new Date(date3))/(24 * 60 * 60 * 1000 * 7))
+  console.log(dayCount, weekCount)
+
   const onClickWeeklyScore = () => {
     try {
       axios({
@@ -332,7 +336,7 @@ const Barchart = ({ auth }: Props) => {
         {/* <div className={styles.rightDiv}>     */}
         {/* </div> */}
         <div className={styles.chartSubHeader}>
-          Productivity of the last 7 days
+          Productivity of the last {dayCount} days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
@@ -348,7 +352,7 @@ const Barchart = ({ auth }: Props) => {
           </button>
         </div>
         <div className={styles.chartSubHeader}>
-          Productivity of the last 7 weeks
+          Productivity of the last {weekCount} weeks
         </div>
         <Bar options={options} data={weeklyData} />
       </div>

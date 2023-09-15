@@ -17,13 +17,6 @@
     padding: 30px 40px;
   }
 }
-@media (min-width: 1200px) {
-  .mainDiv {
-    max-width: 1300px;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-}
 
 .dashboardTop {
   display: flex;
@@ -40,12 +33,6 @@
   gap: 40px;
   max-width: 100%;
   padding-top: 30px;
-}
-
-@media (min-width: 1200px) {
-  .dashboardTopMenus {
-    max-width: 80%;
-  }
 }
 
 .dashboardTopMenu {
@@ -89,8 +76,8 @@
 
 .dashboardSupportSystemDiv {
   padding: 40px 0px;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .supportSystemText {
@@ -127,5 +114,46 @@
 @media (min-width: 1200px) {
   .dashboardInfo {
     display: block;
+  }
+  .dashboardSupportSystemDiv {
+    padding: 40px 0px;
+    display: flex;
+    /* flex-direction: column; */
+  }
+  .dashboardTopMenus {
+    max-width: 80%;
+  }
+  .mainDiv {
+    max-width: 1300px;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboardTopMenu {
+    max-width: 200px;
+    min-width: 100px;
+    flex: 1;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .rightDiv {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .topMenuText {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1200px) {
+  .rightDiv {
+    max-width: 80%;
+    margin-left: 10%;
   }
 }

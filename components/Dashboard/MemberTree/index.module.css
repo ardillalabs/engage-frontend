@@ -492,3 +492,6 @@
   background-color: #324544;
   border: 1px solid transparent;
 }
+
+@media (max-width: 1200px) {
+}
