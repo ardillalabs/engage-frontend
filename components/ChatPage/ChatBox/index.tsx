@@ -12,6 +12,15 @@ import { RootState } from "@/store";
 import { HiVideoCamera } from "react-icons/hi";
 // import VideoRoom from "./VideoRoom";
 import dynamic from "next/dynamic";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  increment,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "@/firebase/config";
 
 interface userDataArray {
   userID: string;
@@ -28,10 +37,11 @@ const MeetingContainer: any = dynamic(() => import("./VideoRoom"), {
 const ChatBox = ({ auth }: any) => {
   const userID = auth.id;
   const router = useRouter();
-  const chatID = router.query.chatID;
+  const chatID: any = router.query.chatID;
   const [userData, setUserData] = useState<userDataArray>();
   const [allUserData, setAllUserData] = useState<any>();
   const [joined, setJoined] = useState(false);
+  const recUserID: any = userData?.userID;
 
   useEffect(() => {
     console.log("changed");
@@ -100,6 +110,62 @@ const ChatBox = ({ auth }: any) => {
     setJoined(false);
   };
 
+  const joinCall = async () => {
+    setJoined(true);
+
+    try {
+      await addDoc(collection(db, "chatMessages", chatID, "messages"), {
+        message: `${auth.username} joined the video call`,
+        messageType: "join-video-call",
+        messageTime: serverTimestamp(),
+        senderID: auth.id,
+        recieverID: recUserID,
+        mediaURL: null,
+      });
+
+      await setDoc(
+        doc(db, "chatMessages", chatID),
+        {
+          unreadCount: {
+            [recUserID]: increment(1),
+            [userID]: 0,
+          },
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
+
+  const handleJoin = async () => {
+    setJoined(true);
+
+    try {
+      await addDoc(collection(db, "chatMessages", chatID, "messages"), {
+        message: `${auth.username} started a video call`,
+        messageType: "start-video-call",
+        messageTime: serverTimestamp(),
+        senderID: userID,
+        recieverID: recUserID,
+        mediaURL: null,
+      });
+
+      await setDoc(
+        doc(db, "chatMessages", chatID),
+        {
+          unreadCount: {
+            [recUserID]: increment(1),
+            [userID]: 0,
+          },
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
+
   return (
     <>
       <div className={styles.mainDiv}>
@@ -124,7 +190,7 @@ const ChatBox = ({ auth }: any) => {
             />
             <div className="page-subheading">{userData?.username}</div>
           </div>
-          <div className={styles.videoIcon} onClick={() => setJoined(true)}>
+          <div className={styles.videoIcon} onClick={() => handleJoin()}>
             <HiVideoCamera />
           </div>
         </div>
@@ -132,6 +198,7 @@ const ChatBox = ({ auth }: any) => {
           <AllMessages
             username={userData?.username}
             imageURL={userData?.imageURL}
+            joinCall={joinCall}
           />
         </div>
         <ChatInput recUserID={userData?.userID} />
@@ -142,7 +209,9 @@ const ChatBox = ({ auth }: any) => {
           joined ? styles.callScreenOpen : ""
         }`}
       >
-        {joined && <MeetingContainer leaveCall={leaveCall} />}
+        {joined && (
+          <MeetingContainer leaveCall={leaveCall} recUserID={recUserID} />
+        )}
       </div>
     </>
   );

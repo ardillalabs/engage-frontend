@@ -7,6 +7,16 @@ import { connect } from "react-redux";
 import { BsFillMicMuteFill } from "react-icons/bs";
 import { FaVideoSlash } from "react-icons/fa";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
+import {
+  addDoc,
+  collection,
+  doc,
+  increment,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "@/firebase/config";
+import { Router, useRouter } from "next/router";
 
 const APP_ID = "98fd19afaf3248548277a8b98b20a34d";
 const TOKEN =
@@ -18,9 +28,12 @@ const client = AgoraRTC.createClient({
   codec: "vp8",
 });
 
-const VideoRoom = ({ auth, leaveCall }: any) => {
+const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
   const [users, setUsers] = useState<any>([]);
   const [engageUsers, setEngageUsers] = useState<string[]>([]);
+  const router = useRouter();
+  const chatID: any = router.query.chatID;
+  const userID = auth.id;
 
   const handleUserJoined = async (user: any, mediaType: any) => {
     await client.subscribe(user, mediaType);
@@ -55,6 +68,30 @@ const VideoRoom = ({ auth, leaveCall }: any) => {
     });
 
     leaveCall();
+
+    try {
+      await addDoc(collection(db, "chatMessages", chatID, "messages"), {
+        message: `${auth.username} left the video call`,
+        messageType: "leave-video-call",
+        messageTime: serverTimestamp(),
+        senderID: auth.id,
+        recieverID: recUserID,
+        mediaURL: null,
+      });
+
+      await setDoc(
+        doc(db, "chatMessages", chatID),
+        {
+          unreadCount: {
+            [recUserID]: increment(1),
+            [userID]: 0,
+          },
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
   };
 
   useEffect(() => {

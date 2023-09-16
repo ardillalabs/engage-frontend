@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
 
-const AllMessages = ({ username, auth, imageURL }: any) => {
+const AllMessages = ({ username, auth, imageURL, joinCall }: any) => {
   const { dateString, day, month, year } = useDate();
   const [messages, setMessages] = useState<DocumentData>([]);
 
@@ -118,7 +118,12 @@ const AllMessages = ({ username, auth, imageURL }: any) => {
                 imageURL={reversed ? auth?.image_url : imageURL}
               />
             )}
-            <Message message={messageData.message} reversed={reversed} />
+            <Message
+              message={messageData.message}
+              messageType={messageData.messageType}
+              reversed={reversed}
+              joinCall={joinCall}
+            />
           </div>
         );
       })}
