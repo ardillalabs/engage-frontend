@@ -10,7 +10,7 @@ import AllMessages from "../AllMessages";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
 import { HiVideoCamera } from "react-icons/hi";
-import VideoRoom from "./VideoRoom";
+// import VideoRoom from "./VideoRoom";
 import dynamic from "next/dynamic";
 
 interface userDataArray {
@@ -96,6 +96,10 @@ const ChatBox = ({ auth }: any) => {
     userInfoFetch();
   }, [chatID]);
 
+  const leaveCall = () => {
+    setJoined(false);
+  };
+
   return (
     <>
       <div className={styles.mainDiv}>
@@ -138,7 +142,7 @@ const ChatBox = ({ auth }: any) => {
           joined ? styles.callScreenOpen : ""
         }`}
       >
-        {joined && <MeetingContainer />}
+        {joined && <MeetingContainer leaveCall={leaveCall} />}
       </div>
     </>
   );

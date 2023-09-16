@@ -5,8 +5,13 @@ const VideoPlayer = ({ user }: any) => {
   const ref: any = useRef();
 
   useEffect(() => {
-    user.videoTrack.play(ref.current);
-  }, []);
+    if (user.tracks) {
+      user.tracks.videoTrack.play(ref.current);
+    } else {
+      user._videoTrack.play(ref.current);
+    }
+    console.log(user);
+  }, [user]);
 
   return (
     <div className={styles.mainDiv}>

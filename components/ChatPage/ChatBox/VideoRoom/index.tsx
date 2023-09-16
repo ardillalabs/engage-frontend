@@ -10,7 +10,7 @@ import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 
 const APP_ID = "98fd19afaf3248548277a8b98b20a34d";
 const TOKEN =
-  "007eJxTYEiL4Mt7ws2n1XY37eaeZbmizvMaGrc5eS4Rur3Oqr4ubI4Cg6VFWoqhZWJaYpqxkYmFqYmFkbl5okWSpUWSkUGisUnKuxKG1IZARob6WzMZGKEQxGdjSM1LT0xPZWAAACLuHyI=";
+  "007eJxTYNjRv2PqduNLfz0mKp3aseYLQ9kX3u1TGL6zWv25NCX20SE1BQZLi7QUQ8vEtMQ0YyMTC1MTCyNz80SLJEuLJCODRGOTlIitLKkNgYwM381aGRihEMRnY0jNS09MT2VgAABLMSIK";
 const CHANNEL = "engage";
 
 const client = AgoraRTC.createClient({
@@ -18,7 +18,7 @@ const client = AgoraRTC.createClient({
   codec: "vp8",
 });
 
-const VideoRoom = (auth: any) => {
+const VideoRoom = ({ auth, leaveCall }: any) => {
   const [users, setUsers] = useState<any>([]);
   const [engageUsers, setEngageUsers] = useState<string[]>([]);
 
@@ -31,8 +31,6 @@ const VideoRoom = (auth: any) => {
       }
 
       if (mediaType === "audio") {
-        // user.audioTrack.play()
-        //
       }
     }
   };
@@ -44,8 +42,19 @@ const VideoRoom = (auth: any) => {
   };
 
   const endVideo = async () => {
-    client.unpublish();
     client.leave();
+    client.removeAllListeners();
+
+    const index = users.findIndex((user: any) => user.uid === auth.id);
+
+    users[index].tracks.videoTrack.close();
+    users[index].tracks.audioTrack.close();
+
+    setUsers((current: any) => {
+      current.filter((user: any) => user.uid !== auth.id);
+    });
+
+    leaveCall();
   };
 
   useEffect(() => {
@@ -54,7 +63,7 @@ const VideoRoom = (auth: any) => {
 
     if (!engageUsers.includes(auth.id) && engageUsers.length < 2) {
       client
-        .join(APP_ID, CHANNEL, TOKEN, null)
+        .join(APP_ID, CHANNEL, TOKEN, auth.id)
         .then((uid: any) =>
           Promise.all([AgoraRTC.createMicrophoneAndCameraTracks(), uid])
         )
@@ -64,20 +73,13 @@ const VideoRoom = (auth: any) => {
             ...prevUsers,
             {
               uid,
-              videoTrack,
-              audioTrack,
+              tracks: { videoTrack, audioTrack },
             },
           ]);
           setEngageUsers((prevUsers: any) => [...prevUsers, auth.id]);
           client.publish(tracks);
         });
     }
-
-    // return () => {
-    //   client.off("user-published", handleUserJoined);
-    //   client.off("user-left", handleUserLeft);
-    //   client.unpublish().then(() => client.leave());
-    // };
   }, []);
 
   console.log(users);
@@ -85,9 +87,8 @@ const VideoRoom = (auth: any) => {
   return (
     <div>
       <div className={styles.videoGrid}>
-        {users.map((user: any) => (
-          <VideoPlayer key={user.uid} user={user} />
-        ))}
+        {users &&
+          users.map((user: any) => <VideoPlayer key={user.uid} user={user} />)}
 
         <div className={styles.controls}>
           <div>
