@@ -2,8 +2,18 @@
   box-sizing: border-box;
   width: 100%;
   height: calc(100vh - 40px);
+  background-color: aliceblue;
+  border-radius: 10px;
+  position: relative;
 }
 
 .video div {
   border-radius: 10px;
+}
+
+.video .videoCallUserDetails {
+  position: absolute;
+  font-size: 30px;
+  top: 50%;
+  left: 50%;
 }
