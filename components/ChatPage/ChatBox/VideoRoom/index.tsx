@@ -16,13 +16,13 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 const BASE_URL = process.env.BASE_URL;
 
 const APP_ID = "98fd19afaf3248548277a8b98b20a34d";
-const TOKEN =
-  "007eJxTYDA+I6vGMokl5NAv/UaWWCNnNtODNxOV9mUon9S4orqA554Cg6VFWoqhZWJaYpqxkYmFqYmFkbl5okWSpUWSkUGisUnKTja21IZARoZ7W5IZGKEQxGdjSM1LT0xPZWAAAGgXHJ0=";
-const CHANNEL = "engage";
+// const TOKEN =
+//   "007eJxTYDA+I6vGMokl5NAv/UaWWCNnNtODNxOV9mUon9S4orqA554Cg6VFWoqhZWJaYpqxkYmFqYmFkbl5okWSpUWSkUGisUnKTja21IZARoZ7W5IZGKEQxGdjSM1LT0xPZWAAAGgXHJ0=";
+// const CHANNEL = "engage";
 
 const client = AgoraRTC.createClient({
   mode: "rtc",
@@ -31,8 +31,6 @@ const client = AgoraRTC.createClient({
 
 const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
   const stateRef: any = useRef();
-  // const tokenRef: any = useRef();
-  // const [videoToken, setVideoToken] = useState();
   const [users, setUsers] = useState<any>([]);
   const [engageUsers, setEngageUsers] = useState<string[]>([]);
   const [videoAccess, setVideoAccess] = useState(false);
@@ -41,24 +39,7 @@ const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
   const chatID: any = router.query.chatID;
   const userID = auth.id;
   stateRef.current = users;
-  // tokenRef.current = videoToken;
   console.log(auth);
-
-  // const tokenFetch = async () => {
-  //   const res: any = await fetch(
-  //     `${BASE_URL}/video-call/agora-access-token/${auth.id}/${chatID}`
-  //   );
-
-  //   const token = await res.json().then((tk: any) => {
-  //     // setVideoToken(tk.token);
-  //     // tokenRef.current = tk.token;
-  //     return tk.token;
-  //   });
-
-  //   return token
-  // };
-
-  // const videoToken = tokenFetch();
 
   const handleUserJoined = async (user: any, mediaType: any) => {
     await client.subscribe(user, mediaType);
