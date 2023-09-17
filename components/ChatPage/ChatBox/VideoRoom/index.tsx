@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import VideoPlayer from "../VideoPlayer";
 import styles from "./index.module.css";
@@ -20,7 +20,7 @@ import { Router, useRouter } from "next/router";
 
 const APP_ID = "98fd19afaf3248548277a8b98b20a34d";
 const TOKEN =
-  "007eJxTYNjRv2PqduNLfz0mKp3aseYLQ9kX3u1TGL6zWv25NCX20SE1BQZLi7QUQ8vEtMQ0YyMTC1MTCyNz80SLJEuLJCODRGOTlIitLKkNgYwM381aGRihEMRnY0jNS09MT2VgAABLMSIK";
+  "007eJxTYDA+I6vGMokl5NAv/UaWWCNnNtODNxOV9mUon9S4orqA554Cg6VFWoqhZWJaYpqxkYmFqYmFkbl5okWSpUWSkUGisUnKTja21IZARoZ7W5IZGKEQxGdjSM1LT0xPZWAAAGgXHJ0=";
 const CHANNEL = "engage";
 
 const client = AgoraRTC.createClient({
@@ -29,21 +29,46 @@ const client = AgoraRTC.createClient({
 });
 
 const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
+  const stateRef: any = useRef();
   const [users, setUsers] = useState<any>([]);
   const [engageUsers, setEngageUsers] = useState<string[]>([]);
+  const [videoAccess, setVideoAccess] = useState(false);
+  const [audioAccess, setAudioAccess] = useState(false);
   const router = useRouter();
   const chatID: any = router.query.chatID;
   const userID = auth.id;
+  stateRef.current = users;
 
   const handleUserJoined = async (user: any, mediaType: any) => {
     await client.subscribe(user, mediaType);
-
-    if (!engageUsers.includes(auth.id) && engageUsers.length < 2) {
+    if (!stateRef.current.some((u: any) => u.uid === user.uid)) {
       if (mediaType === "video") {
-        setUsers((prevUsers: any) => [...prevUsers, user]);
+        setUsers((prevUsers: any) => [
+          ...prevUsers,
+          {
+            uid: user.uid,
+            tracks: {
+              videoTrack: user._videoTrack,
+              audioTrack: user._audioTrack,
+            },
+          },
+        ]);
       }
 
       if (mediaType === "audio") {
+      }
+    } else {
+      if (mediaType === "video") {
+        setUsers((prevUsers: any) => [
+          ...prevUsers.filter((u: any) => u.uid !== user.uid),
+          {
+            uid: user.uid,
+            tracks: {
+              videoTrack: user._videoTrack,
+              audioTrack: user._audioTrack,
+            },
+          },
+        ]);
       }
     }
   };
@@ -53,6 +78,19 @@ const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
       prevUsers.filter((u: any) => u.uid !== user.uid)
     );
   };
+
+  const muteVideo = async () => {
+    const index = users.findIndex((user: any) => user.uid === auth.id);
+
+    if (videoAccess) {
+      await users[index].tracks.videoTrack.setEnabled(false);
+      setVideoAccess(false);
+    } else {
+      await users[index].tracks.videoTrack.setEnabled(true);
+      setVideoAccess(true);
+    }
+  };
+  const muteAudio = () => {};
 
   const endVideo = async () => {
     client.leave();
@@ -115,6 +153,8 @@ const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
           ]);
           setEngageUsers((prevUsers: any) => [...prevUsers, auth.id]);
           client.publish(tracks);
+          setAudioAccess(true);
+          setVideoAccess(true);
         });
     }
   }, []);
@@ -125,13 +165,20 @@ const VideoRoom = ({ auth, leaveCall, recUserID }: any) => {
     <div>
       <div className={styles.videoGrid}>
         {users &&
-          users.map((user: any) => <VideoPlayer key={user.uid} user={user} />)}
+          users.map((user: any) => (
+            <VideoPlayer
+              key={user.uid}
+              user={user}
+              videoAccess={videoAccess}
+              audioAccess={audioAccess}
+            />
+          ))}
 
         <div className={styles.controls}>
           <div>
             <BsFillMicMuteFill />
           </div>
-          <div>
+          <div onClick={() => muteVideo()}>
             <FaVideoSlash />
           </div>
           <div onClick={() => endVideo()}>

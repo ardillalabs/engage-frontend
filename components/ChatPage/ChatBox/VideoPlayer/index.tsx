@@ -1,17 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import styles from "./index.module.css";
 
-const VideoPlayer = ({ user }: any) => {
+const VideoPlayer = ({ user, videoAccess, audioAccess }: any) => {
   const ref: any = useRef();
 
   useEffect(() => {
-    if (user.tracks) {
-      user.tracks.videoTrack.play(ref.current);
-    } else {
-      user._videoTrack.play(ref.current);
-    }
-    console.log(user);
-  }, [user]);
+    user.tracks?.videoTrack.play(ref.current);
+  }, [user, videoAccess, audioAccess]);
 
   return (
     <div className={styles.mainDiv}>
