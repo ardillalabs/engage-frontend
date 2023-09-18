@@ -576,7 +576,7 @@ export const updatePassword =
 
     try {
       const response = await axios.put(
-        `http://localhost:5001/auth/users/update-password`,
+        `https://backend.stayengaged.io/auth/users/update-password`,
         body,
         config
       );
@@ -1176,7 +1176,7 @@ export const updateUserDetailsSubmit =
 
     try {
       const response = await axios.put(
-        `http://localhost:5001/auth/users/update-user-info`,
+        `https://backend.stayengaged.io/auth/users/update-user-info`,
         body,
         config
       );

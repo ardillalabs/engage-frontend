@@ -4,13 +4,20 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  position: relative;
+  /* position: relative; */
+}
+
+@media screen and (max-width: 600px) {
+  .videoGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
 }
 
 .controls {
   font-size: 24px;
   position: absolute;
-  bottom: 10px;
+  bottom: 30px;
   left: calc(50% - 100px);
   /* right: 50%; */
   width: 200px;

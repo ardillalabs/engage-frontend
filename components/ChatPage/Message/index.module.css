@@ -1,44 +1,115 @@
 .mainDivContainer,
 .mainDivContainerReversed {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .mainDivContainerReversed {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .mainDiv,
 .mainDivReversed {
-    padding: 15px 30px;
-    border-radius: 10px;
-    max-width: 300px;
+  padding: 15px 30px;
+  border-radius: 10px;
+  max-width: 300px;
 }
 
 .mainDiv {
-    background-color: var(--light-grey);
-    margin: 10px 0 10px 50px;
+  background-color: var(--light-grey);
+  margin: 10px 0 10px 50px;
 }
 
 .mainDiv div {
-    color: var(--black);
+  color: var(--black);
 }
 
 .mainDivReversed {
-    background-color: var(--black);
-    color: var(--light-grey);
-    margin: 10px 50px 10px 0px;
+  background-color: var(--black);
+  color: var(--light-grey);
+  margin: 10px 50px 10px 0px;
 }
 
 @media (min-width: 600px) {
-    .mainDiv {
-        margin-left: 100px;
-    }
-    .mainDivReversed {
-        margin-right: 100px;
-    }
+  .mainDiv {
+    margin-left: 100px;
+  }
+  .mainDivReversed {
+    margin-right: 100px;
+  }
 }
 
 .mainDivReversed div {
-    color: var(--light-grey);
+  color: var(--light-grey);
+}
+
+.startCall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.callIcon {
+  background-color: #55d8ad;
+  fill: rgb(231, 137, 14);
+  border-radius: 999px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: 0.5s ease;
+}
+
+.callIcon * {
+  color: #ffffff;
+}
+
+.joinCall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.5s ease;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: inherit;
+}
+
+.joinCall:hover {
+  background-color: #55d8ad;
+}
+
+.joinCall:hover .callIcon {
+  background-color: #324544;
+}
+
+.leftCall {
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.leftCall span {
+  display: block;
+  padding: 0 20px;
+  width: max-content;
+}
+
+.leftCall .hr {
+  flex: 1;
+  height: 2px;
+  background-color: #32454433;
 }
