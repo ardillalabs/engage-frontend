@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import Image from "next/image";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { FiKey } from "react-icons/fi";
+import Link from "next/link";
 
 const HeaderMobile = () => {
   return (
@@ -15,10 +16,14 @@ const HeaderMobile = () => {
       />
       <div className={styles.headerIcons}>
         <div className={styles.headerIcon}>
+        <Link href='/edit-profile'>
           <RiUserSettingsLine />
+          </Link>
         </div>
         <div className={styles.headerIcon}>
+        <Link href='/change-password'>
           <FiKey />
+          </Link>
         </div>
       </div>
     </div>

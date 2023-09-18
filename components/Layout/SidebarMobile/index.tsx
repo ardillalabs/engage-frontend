@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { RootState } from '@/store';
 import PropTypes from 'prop-types';
 import { removeSupportGroupDetails } from '@/actions/SupportGroup';
+import UserProfile from '@/components/Dashboard/UserProfile';
 
 interface Props {
   auth: any;
@@ -83,14 +84,15 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
         className={sidebarActive ? styles.sidebarDiv : styles.sidebarDivHidden}
       >
         <div className={styles.profilePreview}>
-          <Image
+          {/* <Image
             src='https://source.unsplash.com/_7LbC5J-jw4'
             alt='Profile Picture'
             className={styles.profilePicture}
             width={60}
             height={60}
           />
-          <span className={styles.profileName}>Denneal Perera</span>
+          <span className={styles.profileName}>Denneal Perera</span> */}
+          <UserProfile/>
         </div>
 
         <Link href='/dashboard' className={styles.link}>
