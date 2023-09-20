@@ -184,7 +184,7 @@ const ChatBox = ({ auth }: any) => {
               width={60}
               height={60}
             />
-            <div className="page-subheading">{userData?.username}</div>
+            <div className={styles.subheading}>{userData?.username}</div>
           </div>
           <div className={styles.videoIcon} onClick={() => handleJoin()}>
             <HiVideoCamera />

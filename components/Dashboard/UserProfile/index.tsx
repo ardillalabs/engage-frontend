@@ -215,7 +215,7 @@ const UserProfile = ({
           )}
         </div>
       </div>
-      <h6>{auth?.username}</h6>
+      <h6 className={styles.userName}>{auth?.username}</h6>
     </div>
   );
 };

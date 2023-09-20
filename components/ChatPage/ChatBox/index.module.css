@@ -210,3 +210,20 @@
   visibility: visible;
   opacity: 1;
 }
+
+.subheading {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+}
+
+@media (max-width: 576px) {
+  .subheading {
+    font-size: 12px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .subheading {
+    font-size: 14px;
+  }
+}
