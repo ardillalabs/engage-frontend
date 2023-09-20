@@ -42,9 +42,10 @@
   padding-bottom: 70px;
 }
 .cardsDiv {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 .backgroundImageDiv {
   width: 100%;
@@ -62,6 +63,27 @@
   position: absolute;
   bottom: -10%;
   width: 100%;
+}
+.signUpButtonDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.signUpButtonDiv button {
+  border: 0;
+  width: 115px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fcfcfc;
+  line-height: 20px;
+  font-style: normal;
+  margin-right: 30px;
+  border-radius: 20px;
+  background: #324544;
 }
 
 @media (max-width: 1024px) {
@@ -89,6 +111,12 @@
 }
 
 @media (max-width: 768px) {
+  .halfImageOneDiv {
+    display: flex;
+    /* flex-direction: column; */
+    position: inherit;
+    align-items: center;
+  }
   .componentDiv {
     padding: 30px 50px;
   }

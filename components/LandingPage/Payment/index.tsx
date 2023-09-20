@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import PaymentCard from "./PaymentCard";
 import { IpaymentPlan } from "../../../tsc-types/paymentTypes";
 import Author from "./Author";
+import Link from "next/link";
 
 const monthlyPlan: IpaymentPlan = {
   header: "Monthly",
@@ -26,11 +27,18 @@ const yearlyPlan: IpaymentPlan = {
 };
 
 const Payment = () => {
+  
+  const [selectedPlan, setSelectedPlan] = useState(yearlyPlan);
+
+  const handleCardClick = (plan: any) => {
+    setSelectedPlan(plan);
+  };
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.halfImageOneDiv}>
         <Image
-          src="/teamwork-illustration-right.png"
+          src="/smartphone-153650_1280.png"
           alt=""
           width={500}
           height={500}
@@ -42,7 +50,7 @@ const Payment = () => {
       </div>
       <div className={styles.halfImageTwoDiv}>
         <Image
-          src="/teamwork-illustration.png"
+          src="/947d14e772006a63e67af42ccf5ebe37.png"
           alt=""
           width={500}
           height={500}
@@ -55,12 +63,25 @@ const Payment = () => {
 
       <div className={styles.componentDiv}>
         <div className={styles.headerDiv}>
-          Proactive positive support when you need it most
+          Proactive positive support <br/>when you need it most
         </div>
-        <p className={styles.paragraph}>Select your engagement package.</p>
+        <p className={styles.paragraph}>Select a plan:</p>
         <div className={styles.cardsDiv}>
-          <PaymentCard plan={monthlyPlan} />
-          <PaymentCard plan={yearlyPlan} />
+        <PaymentCard
+          plan={yearlyPlan}
+          onClick={() => handleCardClick(yearlyPlan)}
+          isSelected={selectedPlan === yearlyPlan}
+        />
+        <PaymentCard
+          plan={monthlyPlan}
+          onClick={() => handleCardClick(monthlyPlan)}
+          isSelected={selectedPlan === monthlyPlan}
+        />
+        </div>
+        <div className={styles.signUpButtonDiv}>
+        <Link href="/sign-up">
+        <button>Sign Up</button>
+            </Link>
         </div>
       </div>
       <div className={styles.backgroundImageDiv}>
