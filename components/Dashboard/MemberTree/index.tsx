@@ -45,7 +45,7 @@ const MemberTree = ({
   addSupportPersonByPhoneNumber: (...args: any[]) => any;
 }) => {
   const handleRemove = async (email: string, id: number, i: number) => {
-    console.log(email, 'email')
+    console.log(email, "email");
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
@@ -60,7 +60,7 @@ const MemberTree = ({
   const [isData, setData] = useState({
     userId: auth.id,
     Email: "",
-    PhoneNumber: ""
+    PhoneNumber: "",
   });
 
   const [isDataPhoneNumber, setDataPhoneNumber] = useState({
@@ -73,7 +73,7 @@ const MemberTree = ({
   });
 
   const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
-    PhoneNumber: ""
+    PhoneNumber: "",
   });
 
   const supportRef = useRef<any>({});
@@ -119,7 +119,7 @@ const MemberTree = ({
   };
 
   const FunctionSupporterSubmitPhoneNumber = async () => {
-    console.log(isDataPhoneNumber.PhoneNumber, 'phone number')
+    console.log(isDataPhoneNumber.PhoneNumber, "phone number");
     const errorsPhoneNumber = {
       PhoneNumber: "",
     };
@@ -151,7 +151,7 @@ const MemberTree = ({
         <div className={styles.memberTreeDiv}>
           {/* User image */}
           <div className={styles.userImageContainer}>
-            <img
+            <Image
               src={auth?.image_url}
               alt="Profile Picture"
               className={styles.userImage}
@@ -185,6 +185,7 @@ const MemberTree = ({
                     <div className={styles.infoPopup}>
                       <span>{teamMemberData[i].userName}</span>
                       <span>{teamMemberData[i].email}</span>
+                      <span>{teamMemberData[i].phoneNumber}</span>
                       <BsFillTriangleFill className={styles.bottomChev} />
                     </div>
                   </>
