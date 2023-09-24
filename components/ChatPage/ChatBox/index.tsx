@@ -60,7 +60,7 @@ const ChatBox = ({ auth }: any) => {
 
       await res.json().then((users: any) => {
         setAllUserData(users);
-        users.map((user: any) => {
+        users?.map((user: any) => {
           if (user.chat_id === chatID) {
             let chat_user;
             if (user.support_user.id === userID) {
@@ -178,11 +178,7 @@ const ChatBox = ({ auth }: any) => {
               }}
             />
             <Image
-              src={
-                userData?.imageURL
-                  ? userData.imageURL
-                  : "https://source.unsplash.com/_7LbC5J-jw4"
-              }
+              src={userData?.imageURL ? userData.imageURL : "/dummy450x450.jpg"}
               alt="Profile Picture"
               className={styles.profilePicture}
               width={60}

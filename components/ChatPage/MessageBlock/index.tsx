@@ -8,7 +8,7 @@ const MessageBlock = ({ reversed, messageTime, username, imageURL }: any) => {
         className={!reversed ? styles.profileInfo : styles.profileInfoReversed}
       >
         <Image
-          src={imageURL ? imageURL : "https://source.unsplash.com/_7LbC5J-jw4"}
+          src={imageURL ? imageURL : "/dummy450x450.jpg"}
           alt="Profile Picture"
           className={styles.profilePicture}
           width={60}
