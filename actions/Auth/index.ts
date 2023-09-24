@@ -306,7 +306,7 @@ export const forgotPassword =
       headers: {
         'Content-Type': 'application/json',
       },
-      withCredentials: true,
+      // withCredentials: true,
     };
 
     // Stringyfy Json Body
@@ -314,17 +314,28 @@ export const forgotPassword =
       email: email,
     });
 
+    console.log('fp email', body)
+
     try {
       const response = await axios.post(
-        `${AUTH_BASE_URL}forgot-password`,
+        `${AUTH_BASE_URL}/forgot-password`,
         body,
         config
       );
 
-      dispatch({
-        type: FORGOT_PASSWORD_SUCCESS,
-        payload: response,
-      });
+      console.log(response)
+
+      if (response.data.success === true) { 
+        dispatch({
+          type: FORGOT_PASSWORD_SUCCESS,
+          payload: response,
+        });
+      } else {
+        dispatch({
+          type: FORGOT_PASSWORD_FAIL,
+          payload: response,
+        });
+      }
 
       dispatch({
         type: SET_TOAST_STATE,
