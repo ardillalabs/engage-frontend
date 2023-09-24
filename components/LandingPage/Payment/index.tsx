@@ -36,21 +36,10 @@ const Payment = () => {
 
   return (
     <div className={styles.mainDiv}>
-      <div className={styles.halfImageOneDiv}>
-        <Image
-          src="/smartphone-153650_1280.png"
-          alt=""
-          width={500}
-          height={500}
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      </div>
+      <div className={styles.componentDiv}>
       <div className={styles.halfImageTwoDiv}>
         <Image
-          src="/947d14e772006a63e67af42ccf5ebe37.png"
+          src="/iPhone Mockup.png"
           alt=""
           width={500}
           height={500}
@@ -60,9 +49,20 @@ const Payment = () => {
           }}
         />
       </div>
-
-      <div className={styles.componentDiv}>
-        <div className={styles.headerDiv}>
+      <div className={styles.mobileImageDiv}>
+        <Image
+          src="/iPhone Mockup.png"
+          alt=""
+          width={500}
+          height={500}
+          // style={{
+          //   width: "100%",
+          //   height: "100%",
+          // }}
+        />
+      </div>
+      <div className={styles.centerDiv}>
+      <div className={styles.headerDiv}>
           Proactive positive support <br/>when you need it most
         </div>
         <p className={styles.paragraph}>Select a plan:</p>
@@ -83,6 +83,19 @@ const Payment = () => {
         <button>Sign Up</button>
             </Link>
         </div>
+      </div>
+        <div className={styles.halfImageOneDiv}>
+        <Image
+          src="/PSD_05.png"
+          alt=""
+          width={500}
+          height={500}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </div>
       </div>
       <div className={styles.backgroundImageDiv}>
         <img
