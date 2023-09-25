@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
-// redux
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import type { Page } from '../../tsc-types/next';
 import Head from 'next/head';
-import { RootState } from '@/store';
-// import CommonLoadingComp from "components/Layout/Common/CommonLoadingComp";
+import PaymentMessage from '@/components/LoginPages/Payment/PaymentMessage';
 
-const PaymentMessagePage = ({ auth }: any) => {
+type Props = {
+  Component: Page;
+};
+
+export default function PaymentMessagePage() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -24,14 +24,13 @@ const PaymentMessagePage = ({ auth }: any) => {
         <link rel='shortcut icon' href='./favicon.ico' />
         <link rel='icon' type='image/x-icon' href='../favicon.ico' />
       </Head>
-      {/* <CommonLoadingComp /> */}
-      <h1>Payment Processing...</h1>
+      <main className='bg-color min-h-screen'>
+        <PaymentMessage />
+      </main>
     </div>
   ) : null;
-};
+}
 
-PaymentMessagePage.propTypes = {};
-const mapStateToProps = (state: RootState) => ({
-  auth: state.auth,
-});
-export default connect(mapStateToProps, {})(PaymentMessagePage);
+PaymentMessagePage.getLayout = function pageLayout(page: Props) {
+  return <>{page}</>;
+};
