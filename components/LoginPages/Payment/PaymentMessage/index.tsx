@@ -5,6 +5,7 @@ import axios from "axios";
 import { setCookie } from "cookies-next";
 import { GrStatusCritical, GrStatusGood } from "react-icons/gr";
 import { Ring } from "@uiball/loaders";
+import Link from "next/link";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -34,9 +35,9 @@ const PaymentMessage = () => {
         if (status == "active") {
           setCookie("membership", 1);
           clearInterval(interval);
-          setInterval(() => {
-            router.push(`/dashboard`);
-          }, 5000);
+          // setInterval(() => {
+          //   router.push(`/dashboard`);
+          // }, 5000);
         }
         if (status == "rejected") {
           clearInterval(interval);
@@ -67,16 +68,19 @@ const PaymentMessage = () => {
           <>
             <GrStatusCritical className={styles.messageIcon} />
             <span>You have already purchased a subscription</span>
+            <Link href={"/dashboard"}>Go back to dashboard</Link>
           </>
         ) : status == "active" ? (
           <>
             <GrStatusGood className={styles.messageIcon} />
             <span>Payment Successful</span>
+            <Link href={"/dashboard"}>Go back to dashboard</Link>
           </>
         ) : (
           <>
             <GrStatusCritical className={styles.messageIcon} />
             <span>Something went wrong. Please try again</span>
+            <Link href={"/dashboard"}>Go back to dashboard</Link>
           </>
         )}
       </div>

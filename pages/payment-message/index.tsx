@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-// redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import type { Page } from "../../tsc-types/next";
 import Head from "next/head";
-import { RootState } from "@/store";
 import PaymentMessage from "@/components/LoginPages/Payment/PaymentMessage";
-// import CommonLoadingComp from "components/Layout/Common/CommonLoadingComp";
 
-const PaymentMessagePage = ({ auth }: any) => {
+type Props = {
+  Component: Page;
+};
+
+export default function PaymentMessagePage() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -30,10 +29,8 @@ const PaymentMessagePage = ({ auth }: any) => {
       </main>
     </div>
   ) : null;
-};
+}
 
-PaymentMessagePage.propTypes = {};
-const mapStateToProps = (state: RootState) => ({
-  auth: state.auth,
-});
-export default connect(mapStateToProps, {})(PaymentMessagePage);
+PaymentMessagePage.getLayout = function pageLayout(page: Props) {
+  return <>{page}</>;
+};
