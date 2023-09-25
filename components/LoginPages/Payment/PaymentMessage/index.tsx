@@ -35,9 +35,6 @@ const PaymentMessage = () => {
         if (status == "active") {
           setCookie("membership", 1);
           clearInterval(interval);
-          // setInterval(() => {
-          //   router.push(`/dashboard`);
-          // }, 5000);
         }
         if (status == "rejected") {
           clearInterval(interval);
