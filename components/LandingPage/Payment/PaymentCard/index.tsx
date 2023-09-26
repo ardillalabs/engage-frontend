@@ -29,13 +29,11 @@ const PaymentCard = ({ plan, onClick, isSelected }: any|props) => {
             </div>
             <div className={styles.priceDiv}>{plan.price}</div>
           </div>
-          {/* <div className={styles.selectionType}> */}
             <input type="checkbox" checked= {isSelected} className={isSelected? styles.selectionCheckBoxChecked: styles.selectionCheckBox}/>
-          {/* </div> */}
         </div>
       </div>
     </div>
-      </div>
+    </div>
     </div>
   );
 };

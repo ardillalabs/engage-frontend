@@ -15,16 +15,17 @@
 }
 .halfImageTwoDiv {
   /* top: 570px; */
-  left: -10%;
+  left: 0;
   width: 30%;
   height: 100%;
   /* left: 0; */
   position: absolute;
 }
 .componentDiv {
-  max-width: 1440px;
-  padding: 60px 90px;
+  max-width: 960px;
+  padding: 60px 20px;
   display: flex;
+  overflow: hidden;
 }
 .headerDiv {
   font-size: 44px;
@@ -97,10 +98,10 @@
 }
 @media (max-width: 1024px) {
   .halfImageOneDiv {
-    display: none;
+   max-width: 50%;
   }
   .halfImageTwoDiv {
-    display: none;
+    left: -5%;
   }
   .componentDiv {
     padding: 60px 60px;
@@ -117,17 +118,22 @@
     margin: 60px 0 0 0;
     position: static;
   }
+  .headerDiv {
+    font-size: 32px;
+    font-weight: 500;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .centerDiv {
+    width: auto;
+    padding: 0px;
+  }
   .halfImageOneDiv {
     display: none;
   }
   .halfImageTwoDiv {
     display: none;
-  }
-  .componentDiv {
-    padding: 30px 50px;
   }
   .headerDiv {
     font-size: 22px;
@@ -141,13 +147,11 @@
   .cardsDiv {
     flex-direction: column;
   }
-}
-
-@media (max-width: 768px) {
   .componentDiv {
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
+    max-width: max-content;
   }
   .backgroundImageDiv {
     flex-direction: column;
