@@ -1,5 +1,5 @@
-import { AppDispatch } from '../../store';
-import axios from 'axios';
+import { AppDispatch } from "../../store";
+import axios from "axios";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -42,7 +42,7 @@ import {
   GET_CURRENT_USER_PROFILE_DETAILS_FAIL,
   CLEAR_IS_UPDATED_USER_INFO,
   CLEAR_LOGGED_IN_USER,
-} from '../types';
+} from "../types";
 import {
   CreateNewPasswordDetails,
   UpdatePasswordDetails,
@@ -51,9 +51,9 @@ import {
   UserSignUpDetails,
   UserProfileUpdateDetails,
   UpdateProfilePicture,
-} from '../../tsc-types/Auth';
+} from "../../tsc-types/Auth";
 
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from "cookies-next";
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
@@ -75,7 +75,7 @@ export const signUpSubmit =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -90,14 +90,14 @@ export const signUpSubmit =
 
     try {
       const response = await axios.post(
-        `${AUTH_BASE_URL}/signup`,
+        `http://localhost:5001/auth/users/signup`,
         body,
         config
       );
 
       if (response.data.success === true) {
         console.log(response.data);
-        setCookie('access_token', response.data.access_token);
+        setCookie("access_token", response.data.access_token);
         dispatch({
           type: REGISTER_SUCCESS,
           payload: response.data,
@@ -110,13 +110,13 @@ export const signUpSubmit =
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: REGISTER_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -128,8 +128,8 @@ export const signUpSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -141,14 +141,14 @@ export const signUpSubmit =
 
         if (
           err.response.data.message !==
-          'This email address is already in use. Please use a different email or sign in with your existing account.'
+          "This email address is already in use. Please use a different email or sign in with your existing account."
         ) {
           dispatch({
             type: SET_TOAST_STATE,
             payload: {
               visibility: true,
-              type: 'error',
-              title: 'Error!',
+              type: "error",
+              title: "Error!",
               description: `${err.response.data.message}`,
             },
           });
@@ -165,18 +165,18 @@ export const getCurrentUserDetails =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       // withCredentials: true,
     };
 
-    console.log(access_token, 'access');
+    console.log(access_token, "access");
 
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 
-      console.log('response-get-user', response);
+      console.log("response-get-user", response);
 
       dispatch({
         type: GET_CURRENT_USER_DETAILS_SUCCESS,
@@ -205,7 +205,7 @@ export const signInSubmit =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -225,7 +225,7 @@ export const signInSubmit =
       console.log(response);
 
       if (response.data.success === true) {
-        setCookie('access_token', response.data.access_token);
+        setCookie("access_token", response.data.access_token);
         dispatch({
           type: LOGIN_SUCCESS,
           payload: response.data,
@@ -237,13 +237,13 @@ export const signInSubmit =
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: LOGIN_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -255,8 +255,8 @@ export const signInSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -268,18 +268,18 @@ export const signInSubmit =
 
         if (
           err.response.data.message !==
-          'The email you entered does not belong to any registered user.'
+          "The email you entered does not belong to any registered user."
         ) {
           if (
             err.response.data.message !==
-            'Incorrect password. Please try again with the correct password.'
+            "Incorrect password. Please try again with the correct password."
           ) {
             dispatch({
               type: SET_TOAST_STATE,
               payload: {
                 visibility: true,
-                type: 'error',
-                title: 'Error!',
+                type: "error",
+                title: "Error!",
                 description: `${err.response.data.message}`,
               },
             });
@@ -304,7 +304,7 @@ export const forgotPassword =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       withCredentials: true,
     };
@@ -330,19 +330,19 @@ export const forgotPassword =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'success',
-          title: 'Success!',
+          type: "success",
+          title: "Success!",
           description: `${response.data.message}`,
         },
       });
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: FORGOT_PASSWORD_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -354,8 +354,8 @@ export const forgotPassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -369,8 +369,8 @@ export const forgotPassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -398,14 +398,14 @@ export const emailVerification =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       withCredentials: true,
     };
 
     try {
       const response = await axios.get(
-        `${AUTH_BASE_URL}verification?verification_code=${verification_code}&access_token=${access_token}`,
+        `http://localhost:5001/auth/users/verification/${access_token}/${verification_code}`,
         config
       );
 
@@ -418,19 +418,20 @@ export const emailVerification =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'success',
-          title: 'Success!',
+          type: "success",
+          title: "Success!",
           description: `${response.data.message}`,
         },
       });
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      console.log(err);
+      if (err.message === "Network Error") {
         dispatch({
           type: EMAIL_VERIFICATION_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -442,8 +443,8 @@ export const emailVerification =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -457,8 +458,8 @@ export const emailVerification =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -477,7 +478,7 @@ export const resendEmailVerification =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       withCredentials: true,
@@ -498,19 +499,19 @@ export const resendEmailVerification =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'success',
-          title: 'Success!',
+          type: "success",
+          title: "Success!",
           description: `${response.data.message}`,
         },
       });
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: RESEND_EMAIL_VERIFICATION_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -522,8 +523,8 @@ export const resendEmailVerification =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -537,8 +538,8 @@ export const resendEmailVerification =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -562,7 +563,7 @@ export const updatePassword =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       // withCredentials: true,
@@ -592,8 +593,8 @@ export const updatePassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'success',
-            title: 'Success!',
+            type: "success",
+            title: "Success!",
             description: `${response.data.message}`,
           },
         });
@@ -606,20 +607,20 @@ export const updatePassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Error`,
           },
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: UPDATE_PASSWORD_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -631,8 +632,8 @@ export const updatePassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -644,14 +645,14 @@ export const updatePassword =
 
         if (
           err.response.data.message !==
-          'Incorrect password. Please try again with the correct password.'
+          "Incorrect password. Please try again with the correct password."
         ) {
           dispatch({
             type: SET_TOAST_STATE,
             payload: {
               visibility: true,
-              type: 'error',
-              title: 'Error!',
+              type: "error",
+              title: "Error!",
               description: `${err.response.data.message}`,
             },
           });
@@ -676,7 +677,7 @@ export const createNewPassword =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       withCredentials: true,
@@ -704,19 +705,19 @@ export const createNewPassword =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'success',
-          title: 'Success!',
+          type: "success",
+          title: "Success!",
           description: `${response.data.message}`,
         },
       });
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: CREATE_NEW_PASSSWORD_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -728,8 +729,8 @@ export const createNewPassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -743,8 +744,8 @@ export const createNewPassword =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -761,7 +762,7 @@ export const clearAccessToken = () => async (dispatch: AppDispatch) => {
       type: SET_ACCESS_TOKEN_NULL,
     });
   } catch (err: any) {
-    console.log(err, 'err');
+    console.log(err, "err");
   }
 };
 
@@ -782,7 +783,7 @@ export const deactivateAccount =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       withCredentials: true,
@@ -820,20 +821,20 @@ export const deactivateAccount =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${response.data.message}`,
           },
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: DEACTIVATE_ACCOUNT_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -845,8 +846,8 @@ export const deactivateAccount =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -860,8 +861,8 @@ export const deactivateAccount =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -887,14 +888,14 @@ export const updateUserInfoSubmit =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${access_token}`,
       },
     };
 
     // Create FormData object and append properties
     const formData = new FormData();
-    formData.append('dp', updateProfilePicture);
+    formData.append("dp", updateProfilePicture);
     console.log(formData);
 
     try {
@@ -913,19 +914,19 @@ export const updateUserInfoSubmit =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'success',
-          title: 'Success!',
+          type: "success",
+          title: "Success!",
           description: `${response.data.message}`,
         },
       });
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: UPDATE_USER_INFO_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -937,8 +938,8 @@ export const updateUserInfoSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -952,8 +953,8 @@ export const updateUserInfoSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.responses}`,
           },
         });
@@ -978,7 +979,7 @@ export const deleteDp =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       withCredentials: true,
@@ -1001,8 +1002,8 @@ export const deleteDp =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'success',
-            title: 'Success!',
+            type: "success",
+            title: "Success!",
             description: `${response.data.message}`,
           },
         });
@@ -1016,20 +1017,20 @@ export const deleteDp =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${response.data.message}`,
           },
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: DELETE_DP_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -1041,8 +1042,8 @@ export const deleteDp =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -1056,8 +1057,8 @@ export const deleteDp =
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'error',
-          title: 'Error!',
+          type: "error",
+          title: "Error!",
           description: `${err.response.data.message}`,
         },
       });
@@ -1075,19 +1076,19 @@ export const signOut = () => async (dispatch: AppDispatch) => {
     type: CLEAR_AUTH_ERROR_MESSAGES,
   });
   try {
-    deleteCookie('access_token');
-    console.log('Sign Out');
+    deleteCookie("access_token");
+    console.log("Sign Out");
     dispatch({
       type: CLEAR_LOGGED_IN_USER,
     });
   } catch (err: any) {
-    if (err.message === 'Network Error') {
+    if (err.message === "Network Error") {
       dispatch({
         type: SIGN_OUT_FAIL,
         payload: {
           response: {
             data: {
-              message: 'Network Error',
+              message: "Network Error",
               status: err.code,
               statusText: err.code,
             },
@@ -1099,8 +1100,8 @@ export const signOut = () => async (dispatch: AppDispatch) => {
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'error',
-          title: 'Error!',
+          type: "error",
+          title: "Error!",
           description: `Network Error`,
         },
       });
@@ -1114,8 +1115,8 @@ export const signOut = () => async (dispatch: AppDispatch) => {
         type: SET_TOAST_STATE,
         payload: {
           visibility: true,
-          type: 'error',
-          title: 'Error!',
+          type: "error",
+          title: "Error!",
           description: `${err.response.data.message}`,
         },
       });
@@ -1129,7 +1130,7 @@ export const getProfileDetails =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
     };
@@ -1162,7 +1163,7 @@ export const updateUserDetailsSubmit =
     // API Header configarations
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
       // withCredentials: true,
@@ -1193,8 +1194,8 @@ export const updateUserDetailsSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'success',
-            title: 'Success!',
+            type: "success",
+            title: "Success!",
             description: `${response.data.message}`,
           },
         });
@@ -1205,13 +1206,13 @@ export const updateUserDetailsSubmit =
         });
       }
     } catch (err: any) {
-      if (err.message === 'Network Error') {
+      if (err.message === "Network Error") {
         dispatch({
           type: UPDATE_USER_INFO_FAIL,
           payload: {
             response: {
               data: {
-                message: 'Network Error',
+                message: "Network Error",
                 status: err.code,
                 statusText: err.code,
               },
@@ -1223,8 +1224,8 @@ export const updateUserDetailsSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `Network Error`,
           },
         });
@@ -1238,8 +1239,8 @@ export const updateUserDetailsSubmit =
           type: SET_TOAST_STATE,
           payload: {
             visibility: true,
-            type: 'error',
-            title: 'Error!',
+            type: "error",
+            title: "Error!",
             description: `${err.response.data.message}`,
           },
         });
@@ -1253,6 +1254,6 @@ export const clearIsUpdatedUserInfo = () => async (dispatch: AppDispatch) => {
       type: CLEAR_IS_UPDATED_USER_INFO,
     });
   } catch (err: any) {
-    console.log(err, 'err');
+    console.log(err, "err");
   }
 };
