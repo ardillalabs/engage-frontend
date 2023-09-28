@@ -5,6 +5,7 @@ import PaymentCard from "./PaymentCard";
 import { IpaymentPlan } from "../../../tsc-types/paymentTypes";
 import Author from "./Author";
 import Link from "next/link";
+import RightSideImage from "./RightSideImage";
 
 const monthlyPlan: IpaymentPlan = {
   header: "Monthly",
@@ -80,14 +81,15 @@ const Payment = () => {
             </Link>
         </div>
       </div>
-        <div className={styles.halfImageOneDiv}>
+      <RightSideImage/>
+        {/* <div className={styles.halfImageOneDiv}>
         <Image
           src="/iPhone Mockup-Recovered.png"
           alt=""
           width={500}
           height={500}
         />
-      </div>
+      </div> */}
       </div>
       <div className={styles.backgroundImageDiv}>
         <img
