@@ -90,7 +90,7 @@ export const signUpSubmit =
 
     try {
       const response = await axios.post(
-        `http://localhost:5001/auth/users/signup`,
+        `${AUTH_BASE_URL}/signup`,
         body,
         config
       );
@@ -400,12 +400,11 @@ export const emailVerification =
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true,
     };
 
     try {
       const response = await axios.get(
-        `http://localhost:5001/auth/users/verification/${access_token}/${verification_code}`,
+        `${AUTH_BASE_URL}/verification/${access_token}/${verification_code}`,
         config
       );
 
@@ -424,7 +423,6 @@ export const emailVerification =
         },
       });
     } catch (err: any) {
-      console.log(err);
       if (err.message === "Network Error") {
         dispatch({
           type: EMAIL_VERIFICATION_FAIL,
