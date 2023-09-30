@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import PaymentCard from "../Payment/PaymentCard";
 import { IpaymentPlan } from "@/tsc-types/paymentTypes";
 import Image from "next/image";
+import FreeTrial from "../Payment/FreeTrial";
 
 const EngageForFree = () => {
   const freePlan: IpaymentPlan = {
@@ -20,7 +21,7 @@ const EngageForFree = () => {
         <h2 className={styles.header}>Try Engage for free</h2>
         <div className={styles.freeDiv}>
           <div className={styles.leftDiv}>
-            <PaymentCard plan={freePlan} />
+            <FreeTrial plan={freePlan} />
           </div>
           <div className={styles.rightDiv}>
             <Image
