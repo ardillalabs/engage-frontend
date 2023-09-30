@@ -77,7 +77,7 @@ const PaymentMessage = () => {
           <>
             <GrStatusCritical className={styles.messageIcon} />
             <span>Something went wrong. Please try again</span>
-            <Link href={"/dashboard"}>Go back to dashboard</Link>
+            <Link href={"/payment"}>Go back to payment</Link>
           </>
         )}
       </div>
