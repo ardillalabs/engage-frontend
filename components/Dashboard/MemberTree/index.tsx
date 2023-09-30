@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./index.module.css";
-import Image from "next/image";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import { IoMdClose } from "react-icons/io";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './index.module.css';
+import Image from 'next/image';
+import { RiDeleteBin6Fill } from 'react-icons/ri';
+import { IoMdClose } from 'react-icons/io';
 
 // redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { RootState } from "../../../store";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   addSupportPerson,
   addSupportPersonByPhoneNumber,
   deleteSupporter,
   getSupportGroup,
-} from "../../../actions/SupportGroup";
-import { BsFillTriangleFill } from "react-icons/bs";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
+} from '../../../actions/SupportGroup';
+import { BsFillTriangleFill } from 'react-icons/bs';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 interface teamMemberArray {
   userID: string;
@@ -45,7 +45,7 @@ const MemberTree = ({
   addSupportPersonByPhoneNumber: (...args: any[]) => any;
 }) => {
   const handleRemove = async (email: string, id: number, i: number) => {
-    console.log(email, "email");
+    console.log(email, 'email');
     const filtered = teamMemberData
       .slice(0, i)
       .concat(teamMemberData.slice(i + 1, teamMemberData.length));
@@ -59,21 +59,21 @@ const MemberTree = ({
 
   const [isData, setData] = useState({
     userId: auth.id,
-    Email: "",
-    PhoneNumber: "",
+    Email: '',
+    PhoneNumber: '',
   });
 
   const [isDataPhoneNumber, setDataPhoneNumber] = useState({
     userId: auth.id,
-    PhoneNumber: "",
+    PhoneNumber: '',
   });
 
   const [errors, setErrors] = useState({
-    Email: "",
+    Email: '',
   });
 
   const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
-    PhoneNumber: "",
+    PhoneNumber: '',
   });
 
   const supportRef = useRef<any>({});
@@ -96,15 +96,15 @@ const MemberTree = ({
 
   const FunctionSupporterSubmit = async () => {
     const errors = {
-      Email: "",
+      Email: '',
     };
 
     if (!isData.Email) {
-      errors.Email = "The field is required";
+      errors.Email = 'The field is required';
     } else if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
     ) {
-      errors.Email = "Email is invalid.";
+      errors.Email = 'Email is invalid.';
     }
 
     if (!errors.Email) {
@@ -119,13 +119,13 @@ const MemberTree = ({
   };
 
   const FunctionSupporterSubmitPhoneNumber = async () => {
-    console.log(isDataPhoneNumber.PhoneNumber, "phone number");
+    console.log(isDataPhoneNumber.PhoneNumber, 'phone number');
     const errorsPhoneNumber = {
-      PhoneNumber: "",
+      PhoneNumber: '',
     };
 
     if (!isDataPhoneNumber.PhoneNumber) {
-      errorsPhoneNumber.PhoneNumber = "The field is required";
+      errorsPhoneNumber.PhoneNumber = 'The field is required';
     }
 
     if (!errorsPhoneNumber.PhoneNumber) {
@@ -152,8 +152,8 @@ const MemberTree = ({
           {/* User image */}
           <div className={styles.userImageContainer}>
             <Image
-              src={auth.image_url ? auth.image_url : "/dummy450x450.jpg"}
-              alt="Profile Picture"
+              src={auth.image_url ? auth.image_url : '/dummy450x450.jpg'}
+              alt='Profile Picture'
               className={styles.userImage}
               width={100}
               height={100}
@@ -179,7 +179,7 @@ const MemberTree = ({
                       src={teamMemberData[i].imageURL}
                       height={100}
                       width={100}
-                      alt="Member Profile Picture"
+                      alt='Member Profile Picture'
                       className={styles.image}
                     />
                     <div className={styles.infoPopup}>
@@ -227,10 +227,10 @@ const MemberTree = ({
             </div>
             <div className={styles.searchDiv}>
               <input
-                type="text"
-                id="email"
+                type='text'
+                id='email'
                 value={isData.Email}
-                placeholder="Support member email"
+                placeholder='Support member email'
                 autoFocus
                 ref={(input) => (supportRef.current.email = input)}
                 onChange={(e) => handleChange({ Email: e.target.value })}
@@ -247,10 +247,10 @@ const MemberTree = ({
             </div>
             <div className={styles.searchDiv}>
               <PhoneInput
-                defaultCountry="us"
+                defaultCountry='us'
                 className={`${styles.searchBar1} ${styles.phoneNumber}`}
                 value={isData.PhoneNumber}
-                onChange={(phoneNumber) =>
+                onChange={(phoneNumber: any) =>
                   handlePhoneNumberChange({ PhoneNumber: phoneNumber })
                 }
               />
@@ -265,7 +265,7 @@ const MemberTree = ({
             </div>
             <div className={styles.memberDiv}>
               {teamMemberData.map(
-                ({ userID, userName, imageURL, email }, i) => {
+                ({ userID, userName, imageURL, email, phoneNumber }, i) => {
                   return (
                     <div className={styles.member} key={userID}>
                       <div className={styles.memberDetailsDiv}>
@@ -273,17 +273,19 @@ const MemberTree = ({
                           src={imageURL}
                           height={60}
                           width={60}
-                          alt="Profile Picture"
+                          alt='Profile Picture'
                           className={styles.memberImage}
                         />
                         <div className={styles.memberDetails}>
-                          <span className="body-3">{userName}</span>
-                          <span className={styles.memberEmail}>{email}</span>
+                          <span className='body-3'>{userName}</span>
+                          <span className={styles.memberEmail}>
+                            {email ? email : phoneNumber}
+                          </span>
                         </div>
                       </div>
                       <div
                         className={styles.iconDiv}
-                        onClick={() => handleRemove(email, auth.id, i)}
+                        onClick={() => handleRemove(email ? email : phoneNumber, auth.id, i)}
                       >
                         <RiDeleteBin6Fill />
                       </div>

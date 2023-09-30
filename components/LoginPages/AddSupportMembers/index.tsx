@@ -1,29 +1,30 @@
-import Image from "next/image";
-import styles from "./index.module.css";
-import { IoMdClose } from "react-icons/io";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import React, { useEffect, useRef, useState } from "react";
+import Image from 'next/image';
+import styles from './index.module.css';
+import { IoMdClose } from 'react-icons/io';
+import { RiDeleteBin6Fill } from 'react-icons/ri';
+import React, { useEffect, useRef, useState } from 'react';
 
 // redux
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { RootState } from "../../../store";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   addSupportPerson,
   addSupportPersonByPhoneNumber,
   deleteSupporter,
   getSupportGroup,
-} from "../../../actions/SupportGroup";
-import { getCookie } from "cookies-next";
-import { getCurrentUserDetails } from "../../../actions/Auth";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
+} from '../../../actions/SupportGroup';
+import { getCookie } from 'cookies-next';
+import { getCurrentUserDetails } from '../../../actions/Auth';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 interface teamMemberArray {
   userID: string;
   userName: string;
   imageURL: string;
   email: string;
+  phoneNumber: string;
 }
 const AddSupportMembers = ({
   changeTeamMemberData,
@@ -47,8 +48,8 @@ const AddSupportMembers = ({
   getCurrentUserDetails: any;
 }) => {
   useEffect(() => {
-    const cookie = getCookie("access_token");
-    console.log('support - access token')
+    const cookie = getCookie('access_token');
+    console.log('support - access token');
     getCurrentUserDetails(cookie);
   }, []);
 
@@ -65,23 +66,22 @@ const AddSupportMembers = ({
 
   const [isData, setData] = useState({
     userId: auth.id,
-    Email: "",
-    PhoneNumber: ""
+    Email: '',
+    PhoneNumber: '',
   });
 
   const [isDataPhoneNumber, setDataPhoneNumber] = useState({
     userId: auth.id,
-    PhoneNumber: ""
+    PhoneNumber: '',
   });
 
   const [errors, setErrors] = useState({
-    Email: "",
+    Email: '',
   });
 
   const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
-    PhoneNumber: ""
+    PhoneNumber: '',
   });
-
 
   const supportRef = useRef<any>({});
 
@@ -103,15 +103,15 @@ const AddSupportMembers = ({
 
   const FunctionSupporterSubmit = async () => {
     const errors = {
-      Email: "",
+      Email: '',
     };
 
     if (!isData.Email) {
-      errors.Email = "The field is required";
+      errors.Email = 'The field is required';
     } else if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
     ) {
-      errors.Email = "Email is invalid.";
+      errors.Email = 'Email is invalid.';
     }
 
     if (!errors.Email) {
@@ -126,13 +126,13 @@ const AddSupportMembers = ({
   };
 
   const FunctionSupporterSubmitPhoneNumber = async () => {
-    console.log(isDataPhoneNumber.PhoneNumber, 'phone number')
+    console.log(isDataPhoneNumber.PhoneNumber, 'phone number');
     const errorsPhoneNumber = {
-      PhoneNumber: "",
+      PhoneNumber: '',
     };
 
     if (!isDataPhoneNumber.PhoneNumber) {
-      errorsPhoneNumber.PhoneNumber = "The field is required";
+      errorsPhoneNumber.PhoneNumber = 'The field is required';
     }
 
     if (!errorsPhoneNumber.PhoneNumber) {
@@ -170,7 +170,7 @@ const AddSupportMembers = ({
                   src={teamMemberData[i].imageURL}
                   height={60}
                   width={60}
-                  alt="Member Profile Picture"
+                  alt='Member Profile Picture'
                   className={styles.image}
                 />
               )}
@@ -211,10 +211,10 @@ const AddSupportMembers = ({
           </div>
           <div className={styles.searchDiv}>
             <input
-              type="text"
-              id="email"
+              type='text'
+              id='email'
               value={isData.Email}
-              placeholder="Support member email"
+              placeholder='Support member email'
               autoFocus
               ref={(input) => (supportRef.current.email = input)}
               onChange={(e) => handleChange({ Email: e.target.value })}
@@ -230,49 +230,55 @@ const AddSupportMembers = ({
             </div>
           </div>
           <div className={styles.searchDiv}>
-              <PhoneInput
-                defaultCountry="us"
-                className={`${styles.searchBar1} ${styles.phoneNumber}`}
-                value={isData.PhoneNumber}
-                onChange={(phoneNumber) =>
-                  handlePhoneNumberChange({ PhoneNumber: phoneNumber })
-                }
-              />
-              <div onClick={() => FunctionSupporterSubmitPhoneNumber()}>
-                <button className={styles.inviteBtn}>Send Invite</button>
-              </div>
-              <div className={styles.errorMessage}>
-                {errorsPhoneNumber.PhoneNumber
-                  ? errorsPhoneNumber.PhoneNumber
-                  : supportGroup?.failCreateSupporter?.response?.data?.message}
-              </div>
+            <PhoneInput
+              defaultCountry='us'
+              className={`${styles.searchBar1} ${styles.phoneNumber}`}
+              value={isData.PhoneNumber}
+              onChange={(phoneNumber: any) =>
+                handlePhoneNumberChange({ PhoneNumber: phoneNumber })
+              }
+            />
+            <div onClick={() => FunctionSupporterSubmitPhoneNumber()}>
+              <button className={styles.inviteBtn}>Send Invite</button>
             </div>
+            <div className={styles.errorMessage}>
+              {errorsPhoneNumber.PhoneNumber
+                ? errorsPhoneNumber.PhoneNumber
+                : supportGroup?.failCreateSupporter?.response?.data?.message}
+            </div>
+          </div>
           <div className={styles.memberDiv}>
-            {teamMemberData.map(({ userID, userName, imageURL, email }, i) => {
-              return (
-                <div className={styles.member} key={userID}>
-                  <div className={styles.memberDetailsDiv}>
-                    <Image
-                      src={imageURL}
-                      height={60}
-                      width={60}
-                      alt="Profile Picture"
-                      className={styles.memberImage}
-                    />
-                    <div className={styles.memberDetails}>
-                      <span className="body-3">{userName}</span>
-                      <span className={styles.memberEmail}>{email}</span>
+            {teamMemberData.map(
+              ({ userID, userName, imageURL, email, phoneNumber }, i) => {
+                return (
+                  <div className={styles.member} key={userID}>
+                    <div className={styles.memberDetailsDiv}>
+                      <Image
+                        src={imageURL}
+                        height={60}
+                        width={60}
+                        alt='Profile Picture'
+                        className={styles.memberImage}
+                      />
+                      <div className={styles.memberDetails}>
+                        <span className='body-3'>{userName}</span>
+                        <span className={styles.memberEmail}>
+                          {email ? email : phoneNumber}
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className={styles.iconDiv}
+                      onClick={() =>
+                        handleRemove(email ? email : phoneNumber, auth.id, i)
+                      }
+                    >
+                      <RiDeleteBin6Fill />
                     </div>
                   </div>
-                  <div
-                    className={styles.iconDiv}
-                    onClick={() => handleRemove(email, isData.userId, i)}
-                  >
-                    <RiDeleteBin6Fill />
-                  </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         </div>
       </div>

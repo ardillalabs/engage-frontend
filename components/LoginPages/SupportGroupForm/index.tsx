@@ -20,6 +20,7 @@ interface teamMemberArray {
   userName: string;
   imageURL: string;
   email: string;
+  phoneNumber: string;
 }
 
 const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
@@ -36,11 +37,12 @@ const SupportGroupForm = ({ getSupportGroup, auth, supportGroup }: any) => {
         userID: auth.id,
         userName: supporter.support_user?.full_name
           ? supporter.support_user?.full_name
-          : 'unknown Name',
+          : 'Anonymous',
         imageURL: supporter.support_user?.image_url
           ? supporter.support_user.image_url
           : '/dummy450x450.jpg',
         email: supporter?.email,
+        phoneNumber: supporter?.phone_number,
       };
       return support;
     });
