@@ -17,7 +17,7 @@ export default function VerifyEmailPage() {
   return shouldRender ? (
     <>
       <Head>
-        <title>Coin Bureau Club - Email Verification</title>
+        <title>Enagege - Email Verification</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* If we go live we want remove this meta tag 👇 */}
         <meta name="robots" content="noindex, nofollow" />

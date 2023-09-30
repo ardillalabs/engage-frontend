@@ -92,29 +92,6 @@ export const SET_LOADING_SIGN_OUT = 'SET_LOADING_SIGN_OUT';
 // End of Auth Region
 // End of chose your Plan
 
-// Video Poll
-export const VIDEO_POLL_LOADING: string = 'VIDEO_POLL_LOADING';
-export const CURRENT_VIDEO_POLL_LOADING_SUCCESS: string =
-  'CURRENT_VIDEO_POLL_LOADING_SUCCESS';
-export const SEND_VOTE: string = 'SEND_VOTE';
-export const IS_VOTED: string = 'IS_VOTED';
-export const VIDEO_POLL_SUCCESS: string = 'VIDEO_POLL_SUCCESS';
-export const VIDEO_POLL_FAIL: string = 'VIDEO_POLL_FAIL';
-export const VIDEO_POLL_VOTE_COUNT: string = 'VIDEO_POLL_VOTE_COUNT';
-
-// End of Video Poll
-
-// COIN_REVIEW Poll
-export const COIN_REVIEW_POLL_LOADING: string = 'COIN_REVIEW_POLL_LOADING';
-export const CURRENT_COIN_REVIEW_POLL_LOADING_SUCCESS: string =
-  'CURRENT_COIN_REVIEW_POLL_LOADING_SUCCESS';
-export const SEND_COIN_REVIEW_VOTE: string = 'SEND_COIN_REVIEW_VOTE';
-export const IS_COIN_REVIEW_VOTED: string = 'IS_COIN_REVIEW_VOTED';
-export const COIN_REVIEW_POLL_SUCCESS: string = 'COIN_REVIEW_POLL_SUCCESS';
-export const COIN_REVIEW_POLL_FAIL: string = 'COIN_REVIEW_POLL_FAIL';
-export const COIN_REVIEW_POLL_VOTE_COUNT: string =
-  'COIN_REVIEW_POLL_VOTE_COUNT';
-// End of COIN_REVIEW Poll
 //payments
 export const CREATE_PAYMENT_LOADING: string = 'CREATE_PAYMENT_LOADING';
 export const CREATE_PAYMENT_SUCCESS: string = 'CREATE_PAYMENT_SUCCESS';
@@ -144,11 +121,6 @@ export const CANCEL_SUBSCRIPTIONS_LOADINNG: string =
 export const CANCEL_SUBSCRIPTIONS_SUCCESS: string =
   'CANCEL_SUBSCRIPTIONS_SUCCESS';
 export const CANCEL_SUBSCRIPTIONS_FAIL: string = 'CANCEL_SUBSCRIPTIONS_FAIL';
-
-//coin-payment
-export const COIN_PAYMENT_LOADING: string = 'COIN_PAYMENT_LOADING';
-export const COIN_PAYMENT_SUCCESS: string = 'COIN_PAYMENT_SUCCESS';
-export const COIN_PAYMENT_FAIL: string = 'COIN_PAYMENT_FAIL';
 
 // paypal
 export const SET_SELECTED_PAYMENT_METHOD: string =

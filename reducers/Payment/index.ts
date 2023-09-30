@@ -10,7 +10,6 @@ import {
   GET_SUBSCRIPTIONS_SUCCESS,
   CANCEL_SUBSCRIPTIONS_SUCCESS,
   SELECTED_SUBSCRIPTION,
-  COIN_PAYMENT_SUCCESS,
   SET_SELECTED_PAYMENT_METHOD,
   PAYMENT_METHOD_STATE_CHANGED,
   SET_SUBSCRIPTION_STATUS,
@@ -151,11 +150,6 @@ export default function (state = initialState, action: AnyAction) {
       return {
         ...state,
         selectedSubscription: payload,
-      };
-    case COIN_PAYMENT_SUCCESS:
-      return {
-        ...state,
-        coinPaymentDetails: payload,
       };
     case SET_SELECTED_PAYMENT_METHOD:
       return {
