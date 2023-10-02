@@ -705,7 +705,6 @@ export const createNewPassword =
         console.log("response", response);
         if(response.data.success === true) {
           setCookie('access_token', response.data.access_token);
-          console.log('new access token', getCookie('access_token'));
           dispatch({
             type: CREATE_NEW_PASSSWORD_SUCCESS,
             payload: response,
