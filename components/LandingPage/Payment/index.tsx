@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import PaymentCard from "./PaymentCard";
 import { IpaymentPlan } from "../../../tsc-types/paymentTypes";
 import Author from "./Author";
+import Link from "next/link";
+import RightSideImage from "./RightSideImage";
+import LeftSideImage from "./LeftSideImage";
 
 const monthlyPlan: IpaymentPlan = {
   header: "Monthly",
@@ -26,42 +29,60 @@ const yearlyPlan: IpaymentPlan = {
 };
 
 const Payment = () => {
+  
+  const [selectedPlan, setSelectedPlan] = useState(yearlyPlan);
+
+  const handleCardClick = (plan: any) => {
+    setSelectedPlan(plan);
+  };
+
   return (
     <div className={styles.mainDiv}>
-      <div className={styles.halfImageOneDiv}>
-        <Image
-          src="/teamwork-illustration-right.png"
-          alt=""
-          width={500}
-          height={500}
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      </div>
-      <div className={styles.halfImageTwoDiv}>
-        <Image
-          src="/teamwork-illustration.png"
-          alt=""
-          width={500}
-          height={500}
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      </div>
-
       <div className={styles.componentDiv}>
-        <div className={styles.headerDiv}>
-          Proactive positive support when you need it most
+      {/* <div className={styles.halfImageTwoDiv}>
+        <Image
+          src="/Frame 5.png"
+          alt=""
+          width={500}
+          height={500}
+        />
+      </div> */}
+      <LeftSideImage/>
+      <div className={styles.mobileImageDiv}>
+        <Image
+          src="/Frame 5.png"
+          alt=""
+          width={500}
+          height={500}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </div>
+      <div className={styles.centerDiv}>
+      <div className={styles.headerDiv}>
+          Be kind to your mind
         </div>
-        <p className={styles.paragraph}>Select your engagement package.</p>
+        <p className={styles.paragraph}>Select a plan:</p>
         <div className={styles.cardsDiv}>
-          <PaymentCard plan={monthlyPlan} />
-          <PaymentCard plan={yearlyPlan} />
+        <PaymentCard/>
         </div>
+        <div className={styles.signUpButtonDiv}>
+        <Link href="/sign-up">
+        <button>Sign Up</button>
+            </Link>
+        </div>
+      </div>
+      <RightSideImage/>
+        {/* <div className={styles.halfImageOneDiv}>
+        <Image
+          src="/iPhone Mockup-Recovered.png"
+          alt=""
+          width={500}
+          height={500}
+        />
+      </div> */}
       </div>
       <div className={styles.backgroundImageDiv}>
         <img

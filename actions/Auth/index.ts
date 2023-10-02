@@ -53,7 +53,7 @@ import {
   UpdateProfilePicture,
 } from "../../tsc-types/Auth";
 
-import { deleteCookie, setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from 'cookies-next';
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
@@ -306,7 +306,6 @@ export const forgotPassword =
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true,
     };
 
     // Stringyfy Json Body
@@ -316,25 +315,33 @@ export const forgotPassword =
 
     try {
       const response = await axios.post(
-        `${AUTH_BASE_URL}forgot-password`,
+        `${AUTH_BASE_URL}/forgot-password`,
         body,
         config
       );
 
-      dispatch({
-        type: FORGOT_PASSWORD_SUCCESS,
-        payload: response,
-      });
-
-      dispatch({
-        type: SET_TOAST_STATE,
-        payload: {
-          visibility: true,
-          type: "success",
-          title: "Success!",
-          description: `${response.data.message}`,
-        },
-      });
+      console.log(response.data);
+      console.log(response.data.success);
+      if (response.data.success === true) {
+        dispatch({
+          type: FORGOT_PASSWORD_SUCCESS,
+          payload: response,
+        });
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: 'success',
+            title: 'Success!',
+            description: `${response.data.message}`,
+          },
+        });
+      } else {
+        dispatch({
+          type: FORGOT_PASSWORD_FAIL,
+          payload: response,
+        });
+      }
     } catch (err: any) {
       if (err.message === "Network Error") {
         dispatch({
@@ -386,7 +393,7 @@ export const clearAuthMessages = () => async (dispatch: AppDispatch) => {
     dispatch({
       type: CLEAR_AUTH_ERROR_MESSAGES,
     });
-  } catch (err: any) {}
+  } catch (err: any) { }
 };
 
 // @desc        Email verification
@@ -408,10 +415,10 @@ export const emailVerification =
         config
       );
 
-      dispatch({
-        type: EMAIL_VERIFICATION_SUCCESS,
-        payload: response,
-      });
+        dispatch({
+          type: EMAIL_VERIFICATION_SUCCESS,
+          payload: response,
+        });
 
       dispatch({
         type: SET_TOAST_STATE,
@@ -550,13 +557,13 @@ export const resendEmailVerification =
 // @access      public
 export const updatePassword =
   (updatePasswordDetails: UpdatePasswordDetails, access_token: string) =>
-  async (dispatch: AppDispatch) => {
-    dispatch({
-      type: SET_UPDATE_PASSWORD_IS_LOADING,
-    });
-    dispatch({
-      type: CLEAR_AUTH_ERROR_MESSAGES,
-    });
+    async (dispatch: AppDispatch) => {
+      dispatch({
+        type: SET_UPDATE_PASSWORD_IS_LOADING,
+      });
+      dispatch({
+        type: CLEAR_AUTH_ERROR_MESSAGES,
+      });
 
     // API Header configarations
     const config = {
@@ -567,25 +574,25 @@ export const updatePassword =
       // withCredentials: true,
     };
 
-    // Stringyfy Json Body
-    const body = JSON.stringify({
-      currentPassword: updatePasswordDetails.currentPassword,
-      newPassword: updatePasswordDetails.newPassword,
-    });
+      // Stringyfy Json Body
+      const body = JSON.stringify({
+        currentPassword: updatePasswordDetails.currentPassword,
+        newPassword: updatePasswordDetails.newPassword,
+      });
 
-    try {
-      const response = await axios.put(
-        `https://backend.stayengaged.io/auth/users/update-password`,
-        body,
-        config
-      );
-      console.log(response.data);
-      if (response.data.success === true) {
-        // setCookie('access_token', response.data.access_token);
-        dispatch({
-          type: UPDATE_PASSWORD_SUCCESS,
-          payload: response.data,
-        });
+      try {
+        const response = await axios.put(
+          `https://backend.stayengaged.io/auth/users/update-password`,
+          body,
+          config
+        );
+        console.log(response.data);
+        if (response.data.success === true) {
+          // setCookie('access_token', response.data.access_token);
+          dispatch({
+            type: UPDATE_PASSWORD_SUCCESS,
+            payload: response.data,
+          });
 
         dispatch({
           type: SET_TOAST_STATE,
@@ -664,13 +671,13 @@ export const updatePassword =
 // @access      public
 export const createNewPassword =
   (createNewPasswordDetails: CreateNewPasswordDetails, access_token: string) =>
-  async (dispatch: AppDispatch) => {
-    dispatch({
-      type: SET_CREATE_NEW_PASSSWORD_IS_LOADING,
-    });
-    dispatch({
-      type: CLEAR_AUTH_ERROR_MESSAGES,
-    });
+    async (dispatch: AppDispatch) => {
+      dispatch({
+        type: SET_CREATE_NEW_PASSSWORD_IS_LOADING,
+      });
+      dispatch({
+        type: CLEAR_AUTH_ERROR_MESSAGES,
+      });
 
     // API Header configarations
     const config = {
@@ -678,50 +685,60 @@ export const createNewPassword =
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
-      withCredentials: true,
+      // withCredentials: true,
     };
 
-    // Stringyfy Json Body
-    const body = JSON.stringify({
-      newPassword: createNewPasswordDetails.newPassword,
-      confirmPassword: createNewPasswordDetails.confirmPassword,
-    });
-
-    try {
-      const response = await axios.put(
-        `${AUTH_BASE_URL}create-new-password`,
-        body,
-        config
-      );
-
-      dispatch({
-        type: CREATE_NEW_PASSSWORD_SUCCESS,
-        payload: response,
+      console.log('received', createNewPasswordDetails, access_token)
+      // Stringyfy Json Body
+      const body = JSON.stringify({
+        newPassword: createNewPasswordDetails.newPassword,
+        // confirmPassword: createNewPasswordDetails.confirmPassword,
       });
 
-      dispatch({
-        type: SET_TOAST_STATE,
-        payload: {
-          visibility: true,
-          type: "success",
-          title: "Success!",
-          description: `${response.data.message}`,
-        },
-      });
-    } catch (err: any) {
-      if (err.message === "Network Error") {
-        dispatch({
-          type: CREATE_NEW_PASSSWORD_FAIL,
-          payload: {
-            response: {
-              data: {
-                message: "Network Error",
-                status: err.code,
-                statusText: err.code,
+      try {
+        const response = await axios.post(
+          `${AUTH_BASE_URL}/reset-password`,
+          body,
+          config
+        );
+
+        console.log("response", response);
+        if(response.data.success === true) {
+          setCookie('access_token', response.data.access_token);
+          dispatch({
+            type: CREATE_NEW_PASSSWORD_SUCCESS,
+            payload: response,
+          });
+  
+          dispatch({
+            type: SET_TOAST_STATE,
+            payload: {
+              visibility: true,
+              type: 'success',
+              title: 'Success!',
+              description: `${response.data.message}`,
+            },
+          });
+        } else {
+          dispatch({
+            type: CREATE_NEW_PASSSWORD_FAIL,
+            payload: response,
+          });
+        }
+      } catch (err: any) {
+        if (err.message === 'Network Error') {
+          dispatch({
+            type: CREATE_NEW_PASSSWORD_FAIL,
+            payload: {
+              response: {
+                data: {
+                  message: 'Network Error',
+                  status: err.code,
+                  statusText: err.code,
+                },
               },
             },
-          },
-        });
+          });
 
         dispatch({
           type: SET_TOAST_STATE,
@@ -873,15 +890,15 @@ export const deactivateAccount =
 // @access      public
 export const updateUserInfoSubmit =
   (updateProfilePicture: any, access_token: string) =>
-  async (dispatch: AppDispatch) => {
-    dispatch({
-      type: SET_LOADING_UPDATE_USER_INFO,
-    });
-    dispatch({
-      type: CLEAR_AUTH_ERROR_MESSAGES,
-    });
+    async (dispatch: AppDispatch) => {
+      dispatch({
+        type: SET_LOADING_UPDATE_USER_INFO,
+      });
+      dispatch({
+        type: CLEAR_AUTH_ERROR_MESSAGES,
+      });
 
-    console.log(updateProfilePicture);
+      console.log(updateProfilePicture);
 
     // API Header configarations
     const config = {
@@ -896,17 +913,17 @@ export const updateUserInfoSubmit =
     formData.append("dp", updateProfilePicture);
     console.log(formData);
 
-    try {
-      const response = await axios.put(
-        `${AUTH_BASE_URL}/update-user-info`,
-        formData,
-        config
-      );
+      try {
+        const response = await axios.put(
+          `${AUTH_BASE_URL}/update-user-info`,
+          formData,
+          config
+        );
 
-      dispatch({
-        type: UPDATE_USER_INFO_SUCCESS,
-        payload: response,
-      });
+        dispatch({
+          type: UPDATE_USER_INFO_SUCCESS,
+          payload: response,
+        });
 
       dispatch({
         type: SET_TOAST_STATE,
@@ -1150,13 +1167,13 @@ export const getProfileDetails =
 
 export const updateUserDetailsSubmit =
   (userProfileUpdateDetails: UserProfileUpdateDetails, access_token: string) =>
-  async (dispatch: AppDispatch) => {
-    dispatch({
-      type: SET_LOADING_UPDATE_USER_INFO,
-    });
-    dispatch({
-      type: CLEAR_AUTH_ERROR_MESSAGES,
-    });
+    async (dispatch: AppDispatch) => {
+      dispatch({
+        type: SET_LOADING_UPDATE_USER_INFO,
+      });
+      dispatch({
+        type: CLEAR_AUTH_ERROR_MESSAGES,
+      });
 
     // API Header configarations
     const config = {
@@ -1167,26 +1184,26 @@ export const updateUserDetailsSubmit =
       // withCredentials: true,
     };
 
-    const body = JSON.stringify({
-      full_name: userProfileUpdateDetails.full_name,
-      username: userProfileUpdateDetails.username,
-      phone_number: userProfileUpdateDetails.phone_number,
-    });
+      const body = JSON.stringify({
+        full_name: userProfileUpdateDetails.full_name,
+        username: userProfileUpdateDetails.username,
+        phone_number: userProfileUpdateDetails.phone_number,
+      });
 
-    try {
-      const response = await axios.put(
-        `https://backend.stayengaged.io/auth/users/update-user-info`,
-        body,
-        config
-      );
+      try {
+        const response = await axios.put(
+          `https://backend.stayengaged.io/auth/users/update-user-info`,
+          body,
+          config
+        );
 
-      console.log(response);
+        console.log(response);
 
-      if (response.data.success === true) {
-        dispatch({
-          type: UPDATE_USER_INFO_SUCCESS,
-          payload: response.data,
-        });
+        if (response.data.success === true) {
+          dispatch({
+            type: UPDATE_USER_INFO_SUCCESS,
+            payload: response.data,
+          });
 
         dispatch({
           type: SET_TOAST_STATE,

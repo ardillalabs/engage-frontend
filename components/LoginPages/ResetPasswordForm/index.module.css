@@ -46,24 +46,13 @@
     color: #201F1F;
     line-height: 24px;
     font-style: normal;
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
 }
 
 .input {
     width: 98%;
     height: 40px;
     margin-top: 10px;
-}
-
-.forgotPassword {
-    display: flex;
-    font-size: 14px;
-    font-weight: 600;
-    color: #B2B2B2;
-    line-height: 17px;
-    font-style: normal;
-    padding-top: 10px;
-    justify-content: flex-end;
 }
 
 .buttonDiv button {
@@ -75,9 +64,10 @@
     line-height: 20px;
     font-style: normal;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     background: #FFFFFF;
     border: 1px solid #324544;
+    cursor: pointer;
 }
 
 .bottomDiv p {
@@ -97,6 +87,31 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.errorMessage {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: red;
+    font-stretch: 100;
+    min-height: 20px;
+    padding-bottom: 10px;
+}
+
+.successMessage {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: rgb(84, 167, 17);
+    font-stretch: 100;
+    min-height: 20px;
+    padding-bottom: 10px;
+}
+
 @media (max-width: 1024px) {
     .componentDiv {
         width: 500px;

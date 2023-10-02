@@ -207,10 +207,8 @@ const EditProfileForm = ({
         </div>
 
         <div
-          className={styles.buttonDiv}
-          onClick={() => UpdateProfileDetailsSubmit()}
-        >
-          <button>Update</button>
+          className={styles.buttonDiv}>
+          <button onClick={() => UpdateProfileDetailsSubmit()}>Update</button>
         </div>
       </div>
     </div>

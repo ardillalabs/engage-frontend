@@ -285,7 +285,7 @@ const Barchart = ({ auth }: Props) => {
     }
   };
 
-  const dayCount = (+new Date(date1) - +new Date(date2))/(24 * 60 * 60 * 1000)
+  const dayCount = Math.round((+new Date(date1) - +new Date(date2))/(24 * 60 * 60 * 1000))
   const weekCount = Math.round((+new Date(date1) - +new Date(date3))/(24 * 60 * 60 * 1000 * 7))
   console.log(dayCount, weekCount)
 

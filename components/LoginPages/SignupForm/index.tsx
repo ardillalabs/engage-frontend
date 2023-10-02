@@ -321,8 +321,8 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
         </div>
         <div className={styles.errorMessage}>{errors.Password}</div>
         <div className={styles.buttonDiv}>
-          <div onClick={() => FunctionLoginSubmit()}>
-            <button>Continue</button>
+          <div>
+            <button onClick={() => FunctionLoginSubmit()}>Continue</button>
           </div>
         </div>
         {/* <div className={styles.CommonErrorMessage}>
