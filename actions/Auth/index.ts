@@ -685,7 +685,7 @@ export const createNewPassword =
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
       },
-      withCredentials: true,
+      // withCredentials: true,
     };
 
       console.log('received', createNewPasswordDetails, access_token)
