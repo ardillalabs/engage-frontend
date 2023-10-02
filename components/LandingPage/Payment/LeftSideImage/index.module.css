@@ -9,8 +9,8 @@
   }
   
   .responsiveImage {
-    width: 100%; /* Make the image responsive */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%;
+    height: auto;
   }
   
   /* Media query for screen minimization */
@@ -42,7 +42,7 @@
   @media (min-width: 992px) and (max-width: 1024px) {
     .imageContainer {
       left: -30%;
-      top: 22%;
+      top: 24%;
     }
     .responsiveImage {
       width: 650px;
@@ -69,17 +69,17 @@
       height: auto; 
     }
   }
-  @media (min-width: 1349px)and (max-width: 1550px){
+  @media (min-width: 1349px) and (max-width: 1550px){
     .imageContainer {
       left: -12%;
-      top: 20%;
+      top: 22%;
     }
     .responsiveImage {
       width: 650px; 
       height: auto; 
     }
   }
-  @media (min-width: 1551px)and (max-width: 1812px){
+  @media (min-width: 1551px) and (max-width: 1812px){
     .imageContainer {
       left: -5%;
       top: 20%;

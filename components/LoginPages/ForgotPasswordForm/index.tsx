@@ -1,9 +1,96 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.css';
+import { RootState } from '@/store';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { forgotPassword } from '@/actions/Auth';
 
-const ForgotPasswordFrom = () => {
+interface Props {
+  forgotPassword: (...args: any[]) => any;
+  auth: any;
+}
+
+const ForgotPasswordFrom = ({ forgotPassword, auth }: Props) => {
+
+  const myRef = useRef<any>({});
+
+  const [isClick, setClick] = useState({
+    isEmailClick: false,
+  });
+  
+  const [isData, setData] = useState({ Email: '',});
+  const [errors, setErrors] = useState({
+    Email: '',
+  });
+
+  const handleChange = (values: any) => {
+    setData({
+      ...isData,
+      ...values,
+    });
+  };
+  
+  useEffect(() => {
+    if (isData.Email.length === 0) {
+      setErrors({ ...errors, Email: '' });
+    }
+  }, [isData.Email]);
+
+  
+  const ForgotPasswordSubmit = () => {
+    const errors = {
+      Email: '',
+    };
+
+    if (!isData.Email) {
+      errors.Email = 'The field is required';
+    } else if (
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
+    ) {
+      errors.Email = 'Email is invalid.';
+    }
+    if (!(errors.Email)) {
+      forgotPassword(isData.Email );
+    }
+    setErrors(errors);
+  };
+
+  useEffect(() => {
+    console.log(auth.isSentForgotPasswordEmail, auth.forgotPasswordMessage)
+    if (
+      auth.isSentForgotPasswordEmail === false &&
+      auth.forgotPasswordMessage ===
+      'Invalid email address. The email you provided does not match any user in our system.'
+    ) {
+      setErrors({
+        ...errors,
+        Email: 'Invalid email address. The email you provided does not match any user in our system.',
+      });
+    }
+    if (
+      auth.isSentForgotPasswordEmail === false &&
+      auth.forgotPasswordMessage ===
+      'Your account has been deactivated. Please contact our support team for further assistance.'
+    ) {
+      setErrors({
+        ...errors,
+        Email: 'Your account has been deactivated. Please contact our support team for further assistance.',
+      });
+    }
+    if (
+      auth.isSentForgotPasswordEmail === false &&
+      auth.forgotPasswordMessage ===
+      'Your account has been banned. Please contact our support team for further assistance.'
+    ) {
+      setErrors({
+        ...errors,
+        Email: 'Your account has been banned. Please contact our support team for further assistance.',
+      });
+    }
+  }, [auth.isLoadingForgotPassword, auth.isSentForgotPasswordEmail, auth.forgotPasswordMessage]);
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
@@ -14,11 +101,38 @@ const ForgotPasswordFrom = () => {
         </p>
         <div className={styles.inputDiv}>
           <div>Enter email</div>
-          <input type='text' className={styles.input} />
+          <input
+            onClick={() =>
+              setClick({
+                ...isClick,
+                isEmailClick: true,
+              })
+            }
+            type="text"
+            className={styles.input}
+            id="email"
+            value={isData.Email}
+            autoFocus
+            ref={(input) => (myRef.current.email = input)}
+            onChange={(e) => handleChange({ Email: e.target.value })}
+          />
+          <div className={styles.errorMessage}>{errors.Email}</div>
         </div>
-        <div className={styles.buttonDiv}>
-          <button>Send Now</button>
-        </div>
+        {auth.isLoadingForgotPassword ? (
+          <div className={styles.buttonSignInSectionLoading}>Loading ...</div>
+        ) : (
+          <>
+            <div
+              className={styles.buttonDiv}>
+              <button onClick={() => ForgotPasswordSubmit()}>Send Now</button>
+            </div>
+            <div className={styles.successMessage}>
+              {(auth.isSentForgotPasswordEmail && auth.forgotPasswordMessage === 'An email has been sent to your mailbox. Please check your inbox to reset your password.')
+                ? auth.forgotPasswordMessage
+                : ""}
+            </div>
+          </>
+        )}
         <div className={styles.bottomDiv}>
           <p>
             Did you remember your password?{' '}
@@ -41,4 +155,13 @@ const ForgotPasswordFrom = () => {
   );
 };
 
-export default ForgotPasswordFrom;
+// export default ForgotPasswordFrom;
+ForgotPasswordFrom.propTypes = { 
+  forgotPassword: PropTypes.func.isRequired 
+};
+
+const mapStateToProps = (state: RootState) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { forgotPassword })(ForgotPasswordFrom);
+

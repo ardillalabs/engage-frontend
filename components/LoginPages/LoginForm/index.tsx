@@ -190,11 +190,8 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
           <div className={styles.buttonSignInSectionLoading}>Loading ...</div>
         ) : (
           <>
-            <div
-              className={styles.buttonDiv}
-              onClick={() => FunctionLoginSubmit()}
-            >
-              <button>Login</button>
+            <div className={styles.buttonDiv}>
+              <button onClick={() => FunctionLoginSubmit()}>Login</button>
             </div>
             <div className={styles.CommonErrorMessage}>
               {(auth.loggedInMessage &&

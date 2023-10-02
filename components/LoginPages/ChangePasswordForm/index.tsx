@@ -203,11 +203,8 @@ const ChangePasswordForm = ({
           <div className={styles.errorMessage}>{errors.confirmPassword}</div>
         </div>
 
-        <div
-          className={styles.buttonDiv}
-          onClick={() => changePasswordSubmit()}
-        >
-          <button>Update New Password </button>
+        <div className={styles.buttonDiv}>
+          <button onClick={() => changePasswordSubmit()}>Update New Password </button>
         </div>
       </div>
     </div>

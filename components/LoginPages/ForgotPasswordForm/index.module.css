@@ -34,7 +34,6 @@
     color: #201F1F;
     line-height: 24px;
     font-style: normal;
-    padding-bottom: 25px;
 }
 
 .input {
@@ -52,9 +51,10 @@
     line-height: 20px;
     font-style: normal;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     background: #FFFFFF;
     border: 1px solid #324544;
+    cursor: pointer;
 }
 
 .bottomDiv p {
@@ -76,6 +76,29 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+
+.successMessage {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: rgb(7, 192, 63);
+    font-stretch: 100;
+    min-height: 20px;
+    padding-bottom: 10px;
+}
+
+.errorMessage {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: red;
+    font-stretch: 100;
+    min-height: 20px;
+    padding-bottom: 10px;
+  }
 @media (max-width: 1024px) {
     .componentDiv {
         width: 500px;

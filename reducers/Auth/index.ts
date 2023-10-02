@@ -225,9 +225,9 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingForgotPassword: false,
         isSentForgotPasswordEmail: false,
-        forgotPasswordMessage: payload.response.data.message,
-        resCode: payload.response.status,
-        statusText: payload.response.statusText,
+        forgotPasswordMessage: payload.data.message,
+        resCode: payload.status,
+        statusText: payload.statusText,
       };
 
     case EMAIL_VERIFICATION_SUCCESS:
