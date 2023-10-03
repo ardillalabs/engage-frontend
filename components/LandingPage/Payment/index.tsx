@@ -39,14 +39,6 @@ const Payment = () => {
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
-      {/* <div className={styles.halfImageTwoDiv}>
-        <Image
-          src="/Frame 5.png"
-          alt=""
-          width={500}
-          height={500}
-        />
-      </div> */}
       <LeftSideImage/>
       <div className={styles.mobileImageDiv}>
         <Image
@@ -75,22 +67,14 @@ const Payment = () => {
         </div>
       </div>
       <RightSideImage/>
-        {/* <div className={styles.halfImageOneDiv}>
-        <Image
-          src="/iPhone Mockup-Recovered.png"
-          alt=""
-          width={500}
-          height={500}
-        />
-      </div> */}
       </div>
       <div className={styles.backgroundImageDiv}>
-        <img
+        {/* <img
           src="/overview-sbs.png"
           alt="screen shot"
           width="70%"
           height="70%"
-        />
+        /> */}
         {/* <Image
           src="/overview-sbs.png"
           alt="background image"
