@@ -7,7 +7,7 @@ const RightSideImage = () => {
   return (
     <div className={styles.imageContainer}>
     <Image
-          src="/right_engage.png"
+          src="/right_image.png"
           alt=""
           width={2069}
           height={2313}

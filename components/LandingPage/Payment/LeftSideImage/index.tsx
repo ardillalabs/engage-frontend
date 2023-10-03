@@ -7,7 +7,7 @@ const LeftSideImage = () => {
   return (
     <div className={styles.imageContainer}>
     <Image
-          src="/left_engage.png"
+          src="/left_image.png"
           alt=""
           width={2069}
           height={2313}

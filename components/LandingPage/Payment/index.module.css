@@ -57,7 +57,7 @@
   display: flex;
   position: relative;
   align-items: center;
-  margin: 40px 0 100px 0;
+  margin: 80px 0 0 0;
   justify-content: center;
 }
 .image {
@@ -116,7 +116,7 @@
     flex-direction: column;
   }
   .author {
-    margin: 60px 0 0 0;
+    /* margin: 60px 0 0 0; */
     position: static;
   }
 }
@@ -159,12 +159,14 @@
   }
   .backgroundImageDiv {
     flex-direction: column;
+    margin-top: 40px;
   }
   .author {
     position: static;
   }
   .mobileImageDiv {
     display: grid;
+    padding-bottom: 40px;
   }
 }
 @media (min-width: 768px) and (max-width: 820px) {

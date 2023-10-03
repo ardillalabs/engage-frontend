@@ -42,7 +42,7 @@ const Payment = () => {
       <LeftSideImage/>
       <div className={styles.mobileImageDiv}>
         <Image
-          src="/left_engage.png"
+          src="/left_image.png"
           alt=""
           width={500}
           height={500}
