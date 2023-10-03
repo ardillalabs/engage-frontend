@@ -11,7 +11,7 @@
   .responsiveImage {
     width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
-    transform: scaleX(-1);
+    /* transform: scaleX(-1); */
   }
   
   /* Media query for screen minimization */
