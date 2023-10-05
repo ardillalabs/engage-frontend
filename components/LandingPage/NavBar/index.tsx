@@ -41,10 +41,10 @@ const NavBar = () => {
           <div className={styles.itemLogoDiv}>
             <Link href="/">
               <Image
-                src="/customcolor_logo_customcolor_background.png"
+                src="/animation_Contrast_tnqz1240.gif"
                 alt="logo"
-                width={75}
-                height={45}
+                width={110}
+                height={94}
               />
             </Link>
           </div>

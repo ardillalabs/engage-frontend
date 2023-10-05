@@ -23,7 +23,12 @@ interface Props {
   removeSupportGroupDetails: (...args: any[]) => any;
 }
 
-const Sidebar = ({ getCurrentUserDetails, auth, signOut, removeSupportGroupDetails }: Props) => {
+const Sidebar = ({
+  getCurrentUserDetails,
+  auth,
+  signOut,
+  removeSupportGroupDetails,
+}: Props) => {
   const router = useRouter();
   const routePath = router.asPath;
   const [pageSelectArrow, setPageSelectArrow] = useState(true);
@@ -47,10 +52,10 @@ const Sidebar = ({ getCurrentUserDetails, auth, signOut, removeSupportGroupDetai
           <div className={styles.itemLogoDiv}>
             <Link href="/">
               <Image
-                src="/white_logo_color1_background.png"
+                src="/animation_Contrast_tnqz1240.gif"
                 alt="logo"
-                width={75}
-                height={45}
+                width={82.5}
+                height={70.5}
               />
             </Link>
           </div>
@@ -120,7 +125,7 @@ const mapStateToProps = (state: RootState) => ({
 export default connect(mapStateToProps, {
   getCurrentUserDetails,
   signOut,
-  removeSupportGroupDetails
+  removeSupportGroupDetails,
 })(Sidebar);
 
 // export default Sidebar;

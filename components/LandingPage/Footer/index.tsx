@@ -13,10 +13,10 @@ const Footer = () => {
           <div className={styles.logoDiv}>
             <Link href="/">
               <Image
-                src="/customcolor_logo_customcolor_background.png"
+                src="/animation_Contrast_tnqz1240.gif"
                 alt="logo"
-                width={150}
-                height={90}
+                width={165}
+                height={141}
                 className={styles.logo}
               />
             </Link>

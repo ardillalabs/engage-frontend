@@ -9,20 +9,20 @@ const HeaderMobile = () => {
   return (
     <div className={styles.mainDiv}>
       <Image
-        src="/white_logo_color1_background.png"
+        src="/animation_Contrast_tnqz1240.gif"
         alt="logo"
-        width={75}
-        height={45}
+        width={82.5}
+        height={70.5}
       />
       <div className={styles.headerIcons}>
         <div className={styles.headerIcon}>
-        <Link href='/edit-profile'>
-          <RiUserSettingsLine />
+          <Link href="/edit-profile">
+            <RiUserSettingsLine />
           </Link>
         </div>
         <div className={styles.headerIcon}>
-        <Link href='/change-password'>
-          <FiKey />
+          <Link href="/change-password">
+            <FiKey />
           </Link>
         </div>
       </div>
