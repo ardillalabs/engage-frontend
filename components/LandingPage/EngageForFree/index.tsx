@@ -25,7 +25,7 @@ const EngageForFree = () => {
           </div>
           <div className={styles.rightDiv}>
             <Image
-              src="/overview-angled-cropped.png"
+              src="/demo image.png"
               alt="free image"
               width={570}
               height={380}
