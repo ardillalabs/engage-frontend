@@ -8,7 +8,7 @@ const OurWhy = () => {
       <div className={styles.componentDiv}>
         <div className={styles.leftDiv}>
           <Image
-            src="/our_why.png"
+            src="/our-why.jpg"
             alt="our why"
             width={570}
             height={380}
