@@ -159,6 +159,6 @@
 }
 @media (max-width: 576px) {
   .upperDiv {
-    padding: 20px;
+    padding: 30px 20px;
   }
 }
