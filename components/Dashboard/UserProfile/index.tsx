@@ -49,6 +49,7 @@ const UserProfile = ({
   const submitImage = (event: any) => {
     console.log(event.target.files[0]);
     setProfilePicture(event.target.files[0]);
+    updateUserInfoSubmit(event.target.files[0], cookie);
   };
 
   console.log(auth);
