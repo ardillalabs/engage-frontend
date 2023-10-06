@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import type { Page } from '../../tsc-types/next';
 import Header from '@/components/LoginPages/Header';
 import PaymentForm from '@/components/LoginPages/Payment';
+import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 // Props type
 type Props = {
@@ -10,7 +14,26 @@ type Props = {
 };
 
 export default function Payment() {
-  return (
+  const [shouldRender, setShouldRender] = useState(false);
+    const router = useRouter();
+
+    const cookie = getCookie('access_token');
+    const auth = useSelector((state: RootState) => state.auth);
+    
+  useEffect(() => {
+
+    if (cookie && auth.subscription === null) {
+      setShouldRender(true);
+    } 
+    else if (cookie && auth.subscription === '1') {
+      router.push('/dashboard');
+    }
+    else {
+       router.push('/login');
+    }
+  }, [router]);
+
+  return shouldRender ? (
     <>
       <Head>
         <title>Engage Payment Method</title>
@@ -23,7 +46,7 @@ export default function Payment() {
         <PaymentForm />
       </main>
     </>
-  );
+  ): null
 }
 
 Payment.getLayout = function pageLayout(page: Props) {
