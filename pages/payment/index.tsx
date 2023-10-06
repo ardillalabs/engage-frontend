@@ -20,6 +20,7 @@ export default function Payment() {
     const cookie = getCookie('access_token');
     const auth = useSelector((state: RootState) => state.auth);
     
+    console.log(auth)
   useEffect(() => {
 
     if (cookie && auth.subscription === null) {
