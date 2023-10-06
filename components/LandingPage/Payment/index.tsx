@@ -38,8 +38,63 @@ const Payment = () => {
 
   return (
     <div className={styles.mainDiv}>
-      <div className={styles.componentDiv}>
-      <LeftSideImage/>
+      {/* <div className={styles.componentDiv}> */}
+      {/* <LeftSideImage/> */}
+      <div className={styles.row}>
+      <div className={styles.leftImage}>        
+      <Image
+          src="/left_image.png"
+          alt=""
+          width={680}
+          height={680}
+          className={styles.responsiveImage} 
+        />
+      </div>
+      <div className={styles.mobileImageDiv}>
+        <Image
+          src="/left_image.png"
+          alt=""
+          width={500}
+          height={500}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+        </div>
+      <div className={styles.centerDiv}>
+      <div className={styles.headerDiv}>
+          Be kind to your mind
+        </div>
+        <p className={styles.paragraph}>Select a plan:</p>
+        <div className={styles.cardsDiv}>
+        <PaymentCard/>
+        </div>
+        <div className={styles.signUpButtonDiv}>
+        <Link href="/sign-up">
+        <button>Sign Up</button>
+            </Link>
+        </div>
+      </div>
+      <div className={styles.rightImage}>        
+      <Image
+          src="/right_image.png"
+          alt=""
+          width={680}
+          height={680}
+          className={styles.responsiveImage} 
+        />
+      </div>
+      </div>
+      {/* <div className={styles.leftImage}>        
+      <Image
+          src="/left_image.png"
+          alt=""
+          width={600}
+          height={600}
+          className={styles.responsiveImage} 
+        />
+      </div>
       <div className={styles.mobileImageDiv}>
         <Image
           src="/left_image.png"
@@ -67,7 +122,7 @@ const Payment = () => {
         </div>
       </div>
       <RightSideImage/>
-      </div>
+      </div> */}
       <div className={styles.backgroundImageDiv}>
         {/* <img
           src="/overview-sbs.png"

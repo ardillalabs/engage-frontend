@@ -9,8 +9,8 @@ const LeftSideImage = () => {
     <Image
           src="/left_image.png"
           alt=""
-          width={2069}
-          height={2313}
+          width={600}
+          height={600}
           className={styles.responsiveImage} 
         />
   </div>
