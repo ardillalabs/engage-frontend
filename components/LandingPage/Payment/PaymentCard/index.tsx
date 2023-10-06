@@ -7,10 +7,6 @@ const PaymentCard = () => {
   const [isSelectedYearly, setSelectedYearly] = useState(true);
   const [isSelectedMonthly, setSelectedMonthly] = useState(false);
 
-  
-  const cardColor = isSelectedYearly ? '#324544' : 'initial';
-  const cardColorMonthly = isSelectedMonthly ? '#324544' : 'initial';
-
   const onClickYearlyCard = () => {
     console.log(isSelectedYearly, isSelectedMonthly)
     setSelectedYearly(true)
@@ -25,19 +21,19 @@ const PaymentCard = () => {
     console.log(isSelectedYearly, isSelectedMonthly)
   }
 
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
       <div className={styles.cardDiv}>
-      <div className={styles.cardBody}
-        onClick={onClickYearlyCard}
-        style={{ backgroundColor: cardColor }}>
+      <div className={isSelectedYearly ? styles.cardBodySelectd: styles.cardBody}
+        onClick={onClickYearlyCard}>
         <div className={styles.flexContainer}>
           <div className={styles.leftDiv}>
-            <div className={styles.cardHeader}>
+            <div className={isSelectedYearly ? styles.selectedCardHeader : styles.cardHeader}>
               Yearly
             </div>
-            <div className={styles.priceDiv}>$59.99/yr</div>
+            <div className={isSelectedYearly ? styles.priceDivSelected : styles.priceDiv}>$59.99/yr</div>
           </div>
             <input type="checkbox" checked= {isSelectedYearly} onChange={onClickYearlyCard}
                 className={isSelectedYearly? styles.selectionCheckBoxChecked: styles.selectionCheckBox}/>
@@ -45,15 +41,14 @@ const PaymentCard = () => {
       </div>
     </div>
     <div className={styles.cardDiv}>
-      <div className={styles.cardBody}
-        onClick={onClickMonthlyCard}
-        style={{ backgroundColor: cardColorMonthly }}>
+      <div onClick={onClickMonthlyCard}
+        className={isSelectedMonthly ? styles.cardBodySelectd: styles.cardBody}>
         <div className={styles.flexContainer}>
           <div className={styles.leftDiv}>
-            <div className={styles.cardHeader}>
+            <div className={isSelectedMonthly ? styles.selectedCardHeader : styles.cardHeader}>
               Monthly
             </div>
-            <div className={styles.priceDiv}>$9.99/mo</div>
+            <div className={isSelectedMonthly ? styles.priceDivSelected : styles.priceDiv}>$9.99/mo</div>
           </div>
             <input type="checkbox" checked= {isSelectedMonthly} onChange={onClickMonthlyCard} className={isSelectedMonthly? styles.selectionCheckBoxChecked: styles.selectionCheckBox}/>
         </div>
