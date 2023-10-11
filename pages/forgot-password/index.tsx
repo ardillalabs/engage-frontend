@@ -1,16 +1,35 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import ForgotPasswordFrom from '@/components/LoginPages/ForgotPasswordForm';
+import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
+import { useSelector } from 'react-redux';
   // Props type
   type Props = {
     Component: Page;
   };
 
   export default function ForgotPassword() {
-    return (
+    
+    const [shouldRender, setShouldRender] = useState(false);
+    const router = useRouter();
+
+    const cookie = getCookie('access_token');
+  
+  useEffect(() => {
+
+    if (!cookie) {
+      setShouldRender(true);
+    } 
+    else {
+       router.push('/login');
+    }
+  }, [router]);
+
+  return shouldRender ? (
       <>
         <Head>
           <title>Engage Forgot Password</title>
@@ -23,7 +42,7 @@ import ForgotPasswordFrom from '@/components/LoginPages/ForgotPasswordForm';
           <ForgotPasswordFrom />
         </main>
       </>
-    );
+    ) : null
   }
 
   ForgotPassword.getLayout = function pageLayout(page: Props) {

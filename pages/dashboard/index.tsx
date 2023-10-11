@@ -1,14 +1,22 @@
 import DashboardBody from '@/components/Dashboard/Body';
 import Header from '@/components/Dashboard/Header';
-import React from 'react';
+import SignInProtector from '@/components/RouteProtectors/SignInProtector';
+import React, { useEffect, useState } from 'react';
 
 const Dashboard = () => {
-  return (
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    setShouldRender(true);
+  }, []);
+
+  return shouldRender ? (
     <>
       <Header />
       <DashboardBody />
     </>
-  )
+  ): null
 }
 
-export default Dashboard;
+
+export default SignInProtector(Dashboard);
