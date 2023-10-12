@@ -1,41 +1,16 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/Quizes/Header';
 import Head from 'next/head';
 import DailyQuizQuestions from '@/components/Quizes/DailyQuiz/DailyQuizQuestions';
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
-
   // Props type
   type Props = {
     Component: Page;
   };
 
   export default function DailyQuiz() {
-    const [shouldRender, setShouldRender] = useState(false);
-    const router = useRouter();
-
-    const cookie = getCookie('access_token');
-    const auth = useSelector((state: RootState) => state.auth);
-  
-  useEffect(() => {
-
-    console.log('auth', auth);
-    if (cookie && auth.subscription === '1') {
-      setShouldRender(true);
-    } 
-    else if (cookie && auth.subscription !== '1') {
-      router.push('/payment');
-    }
-    else {
-       router.push('/login');
-    }
-  }, [router]);
-
-  return shouldRender ? (
+    return (
       <>
         <Head>
           <title>Engage Daily Quiz</title>
@@ -48,7 +23,7 @@ import { useSelector } from 'react-redux';
           <DailyQuizQuestions/>
         </main>
       </>
-    ): null
+    );
   }
 
   DailyQuiz.getLayout = function pageLayout(page: Props) {

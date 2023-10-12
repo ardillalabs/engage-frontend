@@ -1,40 +1,16 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import ChangePasswordForm from '@/components/LoginPages/ChangePasswordForm';
-import { useRouter } from 'next/router';
-import { getCookie } from 'cookies-next';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
   // Props type
   type Props = {
     Component: Page;
   };
 
   export default function ChangePassword() {
-    const [shouldRender, setShouldRender] = useState(false);
-    const router = useRouter();
-
-    const cookie = getCookie('access_token');
-    const auth = useSelector((state: RootState) => state.auth);
-  
-  useEffect(() => {
-
-    console.log('auth', auth);
-    if (cookie && auth.membership === null) {
-      setShouldRender(true);
-    } 
-    else if (cookie && auth.membership !== null) {
-      router.push('/payment');
-    }
-    else {
-       router.push('/login');
-    }
-  }, [router]);
-
-  return shouldRender ? (
+    return (
       <>
         <Head>
           <title>Engage Change Password</title>
@@ -47,7 +23,7 @@ import { useSelector } from 'react-redux';
           <ChangePasswordForm/>
         </main>
       </>
-    ): null
+    );
   }
 
   ChangePassword.getLayout = function pageLayout(page: Props) {

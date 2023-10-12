@@ -1,37 +1,16 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import SupportGroupForm from '@/components/LoginPages/SupportGroupForm';
-import { useRouter } from 'next/router';
-import { getCookie } from 'cookies-next';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
   // Props type
   type Props = {
     Component: Page;
   };
 
   export default function SupportGroup() {
-    const [shouldRender, setShouldRender] = useState(false);
-    const router = useRouter();
-
-    const cookie = getCookie('access_token');
-    const auth = useSelector((state: RootState) => state.auth);
-  
-  useEffect(() => {
-
-    console.log('auth', auth);
-    if (cookie) {
-      setShouldRender(true);
-    } 
-    else {
-       router.push('/login');
-    }
-  }, [router]);
-
-  return shouldRender ? (
+    return (
       <>
         <Head>
           <title>Engage Support Group</title>
@@ -44,7 +23,7 @@ import { useSelector } from 'react-redux';
           <SupportGroupForm />
         </main>
       </>
-    ) : null
+    );
   }
 
   SupportGroup.getLayout = function pageLayout(page: Props) {

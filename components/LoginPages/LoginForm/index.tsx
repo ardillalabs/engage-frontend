@@ -22,7 +22,6 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
   const router = useRouter();
   // Input Fields
   const myRef = useRef<any>({});
-  
   const [isClick, setClick] = useState({
     isEmailClick: false,
     isPasswordClick: false,

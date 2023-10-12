@@ -75,7 +75,6 @@ const initialState: any = {
   is_verified: null,
   paypal_subscription_email: null,
   stripe_default_payment_method: null,
-  subscription: null,
   //---------------------------
   isLoadingForgotPassword: null,
   isSentForgotPasswordEmail: null,
@@ -172,9 +171,7 @@ export default function (state = initialState, action: AnyAction) {
         isLoadingLogin: false,
         isLoggedIn: true,
         isLogedIn: true,
-        is_getuser_loading: false,
         //-----------------
-        subscription: payload.data.subscription,
         email: payload.data.email,
         first_name: payload.data.full_name,
         id: payload.data.id,
@@ -190,7 +187,7 @@ export default function (state = initialState, action: AnyAction) {
         ...state,
         isLoadingSignUp: true,
         isSignedUp: null,
-        isLoadingLogin: false,
+        isLoadingLogin: true,
         isLoggedIn: null,
         //-----------------
         apartment: null,
