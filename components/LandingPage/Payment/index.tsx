@@ -43,7 +43,7 @@ const Payment = () => {
       <div className={styles.row}>
       <div className={styles.leftImage}>        
       <Image
-          src="/left_image.png"
+          src="/leftImage.png"
           alt=""
           width={680}
           height={680}
@@ -52,7 +52,7 @@ const Payment = () => {
       </div>
       <div className={styles.mobileImageDiv}>
         <Image
-          src="/left_image.png"
+          src="/leftImage.png"
           alt=""
           width={500}
           height={500}
@@ -78,7 +78,7 @@ const Payment = () => {
       </div>
       <div className={styles.rightImage}>        
       <Image
-          src="/right_image.png"
+          src="/rightImage.png"
           alt=""
           width={680}
           height={680}
