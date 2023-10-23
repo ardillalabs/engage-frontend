@@ -114,14 +114,22 @@ const Barchart = ({ auth }: Props) => {
   const formattedDate = `${yearStart}-${monthStart}-${dayStart}`;
   const todayDate = `${year}-${monthNum}-${day}`;
 
+  let formattedMonthNum = monthNum;
+  let todayFormattedDate = todayDate;
+  if (monthNum === "010" || monthNum === "011" || monthNum === "012") {
+    formattedMonthNum = monthNum.substring(1); // Remove the first character
+    todayFormattedDate = `${year}-${formattedMonthNum}-${day}`;
+  }
+  console.log(todayDate);
   // const date = new Date();
   console.log(date);
   const dailyLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const DailyDataFetch = async (formattedDate: string, todayDate: string) => {
     try {
+      console.log(`${year}-${monthNum}-${day}`)
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
-        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayDate}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayFormattedDate}`
       );
       (await res).json().then((days: dailyScores[]) => {
         setDailyScores(days);
@@ -184,7 +192,7 @@ const Barchart = ({ auth }: Props) => {
     try {
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
-        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayDate}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayFormattedDate}`
       );
       console.log('last-7-day-summery/WEEK - res ', res);
       (await res).json().then((weeks) => {

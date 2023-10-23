@@ -69,14 +69,14 @@ const DashboardBody = ({
   const [wellnessExcercise, setWellnessExcercise] = useState('Loading...');
 
   let formattedMonthNum = monthNum;
+  console.log(`${year}-${monthNum}-${day}`)
+  if (monthNum === "010" || monthNum === "011" || monthNum === "012") {
+    formattedMonthNum = monthNum.substring(1); // Remove the first character
+  }
+  console.log(formattedMonthNum);
 
   const dailyMessageFetch = async () => {
     try {
-      console.log(`${year}-${monthNum}-${day}`)
-      if (monthNum === "010" || monthNum === "011" || monthNum === "012") {
-        formattedMonthNum = monthNum.substring(1); // Remove the first character
-      }
-      console.log(formattedMonthNum);
       const res = await fetch(
         `https://backend.stayengaged.io/api/daily_message/${year}-${formattedMonthNum}-${day}`
       );
@@ -97,11 +97,6 @@ const DashboardBody = ({
       // const res = await fetch(
       //   `https://engage-backend-production.up.railway.app/api/daily_message/${year}-${monthNum}-${day}`
       // );
-      console.log(`${year}-${monthNum}-${day}`)
-      if (monthNum === "010" || monthNum === "011" || monthNum === "012") {
-        formattedMonthNum = monthNum.substring(1); // Remove the first character
-      }
-      console.log(formattedMonthNum);
       const res = await fetch(
         `https://backend.stayengaged.io/api/wellness_message/${year}-${formattedMonthNum}-${day}`
       );
@@ -128,10 +123,11 @@ const DashboardBody = ({
   };
 
   useEffect(() => {
-    const dateToday = `${year}-${monthNum}-${day}`;
+    console.log(auth.id)
+    const dateToday = `${year}-${formattedMonthNum}-${day}`;
     checkDailyQuizEligibility(auth.id, 2, dateToday);
     checkWeeklyQuizEligibility(auth.id, 1, dateToday);
-  }, [quiz.dailyQuiz, quiz.weeklyQuiz]);
+  }, [quiz.dailyQuiz, quiz.weeklyQuiz, auth]);
 
   const handleLinkClick = () => {
     if (quiz?.dailyQuiz === 'You are eligible to do today quiz') {
