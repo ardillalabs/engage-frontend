@@ -331,7 +331,7 @@ const Barchart = ({ auth }: Props) => {
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
-          <div className={styles.chartHeader}>Daily Quiz Score</div>
+          <div className={styles.chartHeader}>Daily Quiz</div>
 
           <button
             className={styles.downloadButtonDaily}
@@ -344,13 +344,13 @@ const Barchart = ({ auth }: Props) => {
         {/* <div className={styles.rightDiv}>     */}
         {/* </div> */}
         <div className={styles.chartSubHeader}>
-          Productivity of the last {dayCount} days
+          Productivity of the last {dayCount? dayCount: 'few'} days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.leftDiv}>
-          <div className={styles.chartHeader}>Weekly Quiz Score</div>
+          <div className={styles.chartHeader}>Weekly Quiz</div>
           <button
             className={styles.downloadButtonWeekly}
             onClick={onClickWeeklyScore}
@@ -360,7 +360,7 @@ const Barchart = ({ auth }: Props) => {
           </button>
         </div>
         <div className={styles.chartSubHeader}>
-          Productivity of the last {weekCount} weeks
+          Productivity of the last {weekCount? weekCount: 'few'} weeks
         </div>
         <Bar options={options} data={weeklyData} />
       </div>

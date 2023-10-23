@@ -57,7 +57,7 @@ const DashboardBody = ({
           ? supporter.support_user.image_url
           : '/dummy450x450.jpg',
         email: supporter?.email,
-        phoneNumber: supporter.support_user?.phone_number,
+        phoneNumber: supporter.support_user?.phone_number? supporter.support_user?.phone_number: supporter.phone_number,
       };
       return support;
     });
