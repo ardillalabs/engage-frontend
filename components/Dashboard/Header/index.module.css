@@ -1,5 +1,6 @@
 .mainDiv {
   display: none;
+  background-color: #e9fdfb;
 }
 
 @media (min-width: 1000px) {
@@ -9,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--border-grey);
+    /* border-bottom: 2px solid var(--border-grey); */
   }
 }
 
@@ -30,8 +31,8 @@
 }
 
 .headerIcon {
-  background-color: var(--light-grey);
-  color: var(--grey);
+  /* background-color: var(--light-grey); */
+  color: #324544;
   font-size: 18px;
   width: 30px;
   height: 30px;

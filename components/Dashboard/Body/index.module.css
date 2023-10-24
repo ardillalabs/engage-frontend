@@ -7,14 +7,31 @@
   margin: 0 auto;
 }
 
+.chartWrapper {
+  background-color: #fafafa;
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-bottom: 50px;
+}
+
 @media (min-width: 600px) {
   .mainDiv {
     padding: 30px 30px;
+  }
+  .chartWrapper {
+    max-width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 @media (min-width: 992px) {
   .mainDiv {
     padding: 30px 40px;
+  }
+  .chartWrapper {
+    max-width: 70%;
+    margin-left: 100px;
   }
 }
 
@@ -48,6 +65,19 @@
   gap: 15px;
 }
 
+.dashboardTopMenuDaily {
+  max-width: 400px;
+  min-width: 200px;
+  flex: 1;
+  padding: 15px 25px;
+  border-radius: 12px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232142B6FF' stroke-width='5' stroke-dasharray='6%2c 13' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+  /* background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%2351FF96FF' stroke-width='5' stroke-dasharray='6%2c 13' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e"); */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .topMenuText {
   font: 600 14px "Montserrat";
 }
@@ -60,6 +90,16 @@
   background-color: #e2ffee;
 } */
 
+.menuImageDailyDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c9e3f5;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+
 .menuImageDiv {
   display: flex;
   justify-content: center;
@@ -70,7 +110,7 @@
   border-radius: 10px;
 }
 
-.menuImageDiv svg {
+.menuImageDiv .menuImageDailyDiv svg {
   width: 24px;
 }
 
@@ -93,7 +133,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
 }
 
 .rightDiv {
@@ -128,10 +168,14 @@
     justify-content: space-between;
     flex-direction: row;
   }
+  .chartWrapper {
+    max-width: 500px;
+    margin-left: 0px;
+  }
 }
 
 @media (max-width: 576px) {
-  .dashboardTopMenu {
+  .dashboardTopMenu, .dashboardTopMenuDaily {
     max-width: 200px;
     min-width: 100px;
     flex: 1;
@@ -143,6 +187,12 @@
   .rightDiv {
     max-width: 100%;
   }
+
+  .menuImageDiv .menuImageDailyDiv {
+    width: 30px;
+    height: 30px;
+  }
+  
 }
 
 @media (max-width: 420px) {
