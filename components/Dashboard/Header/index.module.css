@@ -3,7 +3,7 @@
   background-color: #e9fdfb;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 992px) {
   .mainDiv {
     max-width: 100%;
     padding: 30px 40px;
