@@ -56,11 +56,15 @@
 .mobileLowerDiv {
   display: none;
 }
+.outSideDiv {
+  flex: 1;
+}
 .leftDiv {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  flex: 5;
 }
 .navItems {
   display: flex;
@@ -90,6 +94,7 @@
 .rightDiv {
   display: flex;
   align-items: center;
+  flex: 1;
 }
 .notificationDiv {
   display: flex;
@@ -113,6 +118,13 @@
   margin-right: 30px;
   border-radius: 20px;
   background: #324544;
+}
+
+@media (max-width: 1440px) { 
+  .calmDiv {
+    font-size: 22px;
+    flex: 2;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -171,5 +183,9 @@
 @media (max-width: 576px) {
   .upperDiv {
     padding: 30px 20px;
+  }
+  .calmDiv {
+    font-size: 12px;
+    text-align: right;
   }
 }

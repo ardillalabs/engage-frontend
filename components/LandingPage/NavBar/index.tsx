@@ -54,6 +54,7 @@ const NavBar = () => {
           <div className={styles.emptyDiv}></div>
         </div>
         <div className={styles.lowerDiv}>
+        <div className={styles.outSideDiv}></div>
           <div className={styles.leftDiv}>
             <div className={styles.navItems}>
               {navItems.map((navItem, index) => (
