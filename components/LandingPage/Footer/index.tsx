@@ -22,19 +22,19 @@ const Footer = () => {
             </Link>
           </div>
           <div className={styles.listDiv}>
-            <div className={styles.list}>Home</div>
-            <div className={styles.list}>About</div>
-            <div className={styles.list}>Service</div>
-            <div className={styles.list}>Contact</div>
-            <div className={styles.list}>Reviews</div>
+            <Link href={'/'}><div className={styles.list}>Home</div></Link>
+            <Link href={'#about'}><div className={styles.list}>About</div></Link>
+            <Link href={'#service'}><div className={styles.list}>Service</div></Link>
+            <Link href={'#solution'}><div className={styles.list}>Solution</div></Link>
+            <Link href={'/'}><div className={styles.list}>Contact</div></Link>
           </div>
-          <div className={styles.listDiv}>
+          {/* <div className={styles.listDiv}>
             <div className={styles.list}>Contact us</div>
             <div className={styles.list}>Privacy policy</div>
             <div className={styles.list}>Terms and conditions</div>
             <div className={styles.list}>License</div>
             <div className={styles.list}>FAQ</div>
-          </div>
+          </div> */}
           <div className={styles.socialDiv}>
             <div className={styles.circleDiv}>
               <AiFillInstagram />
