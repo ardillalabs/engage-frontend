@@ -207,6 +207,10 @@
   visibility: visible;
 }
 
+.imageContainer:hover {
+  z-index: 40;
+}
+
 .bottomChev {
   position: absolute;
   bottom: -10px;
@@ -378,7 +382,7 @@
   font: 500 0.9rem "Montserrat" !important;
 }
 
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
   .searchDiv {
     padding: 10px 20px;
   }
@@ -396,7 +400,7 @@
     max-width: 420px;
     width: 50%;
   }
-  
+
   .phoneNumber {
     padding: 0;
     width: calc(52% + 10px);
@@ -405,7 +409,6 @@
     width: 100%;
     font: 500 0.9rem "Montserrat" !important;
   }
-
 }
 
 .searchBar:focus {
