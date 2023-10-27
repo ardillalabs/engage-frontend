@@ -196,7 +196,7 @@
   flex-direction: column;
   gap: 5px;
   font: 500 12px "Montserrat";
-  z-index: 8;
+  z-index: 20;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s ease;

@@ -52,6 +52,11 @@
   padding-top: 30px;
 }
 
+.dashboardTopMenus a {
+  text-decoration: none;
+  color: #000000;
+}
+
 .dashboardTopMenu {
   max-width: 400px;
   min-width: 200px;
@@ -175,7 +180,8 @@
 }
 
 @media (max-width: 576px) {
-  .dashboardTopMenu, .dashboardTopMenuDaily {
+  .dashboardTopMenu,
+  .dashboardTopMenuDaily {
     max-width: 200px;
     min-width: 100px;
     flex: 1;
@@ -192,7 +198,6 @@
     width: 30px;
     height: 30px;
   }
-  
 }
 
 @media (max-width: 420px) {

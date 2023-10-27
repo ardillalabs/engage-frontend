@@ -10,6 +10,7 @@ import AllMessages from "../AllMessages";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
 import { HiVideoCamera } from "react-icons/hi";
+import { db } from "@/firebase/config";
 // import VideoRoom from "./VideoRoom";
 import dynamic from "next/dynamic";
 import {
@@ -19,8 +20,11 @@ import {
   doc,
   increment,
   setDoc,
+  getDocs,
+  writeBatch,
 } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { CiMenuKebab } from "react-icons/ci";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 interface userDataArray {
   userID: string;
@@ -38,10 +42,41 @@ const ChatBox = ({ auth }: any) => {
   const userID = auth.id;
   const router = useRouter();
   const chatID: any = router.query.chatID;
+  const [showSubMenu, setShowSubMenu] = useState(false);
   const [userData, setUserData] = useState<userDataArray>();
   const [allUserData, setAllUserData] = useState<any>();
   const [joined, setJoined] = useState(false);
   const recUserID: any = userData?.userID;
+
+  async function deleteCollection() {
+    const collectionRef = collection(db, "chatMessages", chatID, "messages");
+    const query = collectionRef;
+
+    return new Promise((resolve, reject) => {
+      deleteQueryBatch(db, query, resolve).catch(reject);
+    });
+  }
+
+  async function deleteQueryBatch(db: any, query: any, resolve: any) {
+    const snapshot = await getDocs(query);
+
+    const batchSize = snapshot.size;
+    if (batchSize === 0) {
+      resolve();
+      return;
+    }
+
+    // Delete documents in a batch
+    const batch = writeBatch(db);
+    snapshot.docs.forEach((doc: any) => {
+      batch.delete(doc.ref);
+    });
+    await batch.commit();
+
+    process.nextTick(() => {
+      deleteQueryBatch(db, query, resolve);
+    });
+  }
 
   useEffect(() => {
     console.log("changed");
@@ -188,8 +223,31 @@ const ChatBox = ({ auth }: any) => {
               {userData?.username}
             </div>
           </div>
-          <div className={styles.videoIcon} onClick={() => handleJoin()}>
-            <HiVideoCamera />
+          <div className={styles.chatTopLeft}>
+            <div className={styles.videoIcon} onClick={() => handleJoin()}>
+              <HiVideoCamera />
+            </div>
+            <div className={styles.chatSubMenu}>
+              <div
+                className={styles.menuIcon}
+                onClick={() => setShowSubMenu(!showSubMenu)}
+              >
+                <CiMenuKebab />
+              </div>
+              <div
+                className={`${styles.chatSubMenuItems} ${
+                  showSubMenu ? "" : styles.hideSubMenu
+                }`}
+              >
+                <div
+                  className={styles.chatSubMenuItem}
+                  onClick={() => deleteCollection()}
+                >
+                  <AiTwotoneDelete />
+                  <span>Clear chat</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className={styles.chatBox}>

@@ -19,8 +19,6 @@ import { connect } from "react-redux";
 import { RootState } from "@/store";
 
 const ChatInput = ({ recUserID, auth }: any) => {
-  // const userID = "jccI1Kzu7VSFhOOsxKVo";  // JohnDoe
-  // const userID = "lWzPWIAbIf0y43c0OdOd"; //JaneMay
   const userID = auth.id;
 
   const router = useRouter();
@@ -65,13 +63,11 @@ const ChatInput = ({ recUserID, auth }: any) => {
   return (
     <div className={styles.messageFormDiv}>
       <form className={styles.messageForm} onSubmit={handleSubmit}>
-        <BiMicrophone />
         <input
           type="text"
           placeholder="Type a message"
           className={styles.messageInput}
         />
-        <ImAttachment />
         <button
           type="submit"
           className={styles.sendBtn}
