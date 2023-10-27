@@ -68,6 +68,7 @@
   color: #4b4b4b;
   margin: 0px 30px;
   cursor: pointer;
+  text-decoration: none;
 }
 .telNumber {
   display: flex;

@@ -180,9 +180,51 @@
   }
 }
 
-/* Test Code */
-.messageBlock {
-  height: 1000px;
+.chatTopLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menuIcon {
+  font-size: 20px;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.chatSubMenu {
+  position: relative;
+}
+
+.chatSubMenuItems {
+  position: absolute;
+  width: max-content;
+  right: 0;
+  top: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 12px 18px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  transition: 0.5s ease;
+}
+
+.hideSubMenu {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.chatSubMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #ff6347;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chatSubMenuItem:hover {
+  color: #da5740;
 }
 
 .videoIcon {
