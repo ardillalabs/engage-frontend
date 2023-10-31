@@ -15,7 +15,7 @@ import {
   getSupportGroup,
 } from '../../../actions/SupportGroup';
 import { BsFillTriangleFill } from 'react-icons/bs';
-import { PhoneInput } from 'react-international-phone';
+import { PhoneInput, usePhoneValidation } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
 interface teamMemberArray {
@@ -63,18 +63,25 @@ const MemberTree = ({
     PhoneNumber: '',
   });
 
-  const [isDataPhoneNumber, setDataPhoneNumber] = useState({
-    userId: auth.id,
-    PhoneNumber: '',
-  });
+  // const [phone, setPhone] = useState("");
+ 
+
+  // const [isDataPhoneNumber, setDataPhoneNumber] = useState({
+  //   userId: auth.id,
+  //   PhoneNumber: '',
+  // });
+
+  const phoneValidation = usePhoneValidation(isData.PhoneNumber); 
 
   const [errors, setErrors] = useState({
     Email: '',
+    PhoneNumber: '',
+    CommonError: ''
   });
 
-  const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
-    PhoneNumber: '',
-  });
+//   const [errorsPhoneNumber, setErrorsPhoneNumber] = useState({
+//     PhoneNumber: '',
+//   });
 
   const supportRef = useRef<any>({});
 
@@ -86,57 +93,64 @@ const MemberTree = ({
     });
   };
 
-  const handlePhoneNumberChange = (values: any) => {
-    supportGroup.failCreateSupporter = null;
-    setDataPhoneNumber({
-      ...isDataPhoneNumber,
-      ...values,
-    });
-  };
+  // const handlePhoneNumberChange = (values: any) => {
+  //   supportGroup.failCreateSupporter = null;
+  //   setDataPhoneNumber({
+  //     ...isDataPhoneNumber,
+  //     ...values,
+  //   });
+  // };
 
   const FunctionSupporterSubmit = async () => {
     const errors = {
       Email: '',
+      PhoneNumber: '',
+      CommonError: ''
     };
+    
+    console.log(isData.PhoneNumber, 'phone number');
 
     if (!isData.Email) {
-      errors.Email = 'The field is required';
-    } else if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email)
-    ) {
+      if(!isData.PhoneNumber) {      
+        errors.CommonError = 'At least one field is required.';
+      } else if (!phoneValidation) {
+        errors.PhoneNumber = ' Phone Number is invalid.'
+      }
+    } else if ((!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email))) {
       errors.Email = 'Email is invalid.';
-    }
+     }
 
-    if (!errors.Email) {
+    if (isData.Email && !errors.Email) {
+        console.log('Email', isData.Email)
       await addSupportPerson({
         userId: auth.id,
         email: isData.Email,
       });
       getSupportGroup(auth.id);
-    }
+    } else if (isData.PhoneNumber && !errors.PhoneNumber) {
+      console.log('Phone Number', isData.PhoneNumber)
+        addSupportPersonByPhoneNumber({
+          userId: auth.id,
+          phoneNumber: isData.PhoneNumber,
+        });
+        getSupportGroup(auth.id);
+      }
 
     setErrors(errors);
-  };
 
-  const FunctionSupporterSubmitPhoneNumber = async () => {
-    console.log(isDataPhoneNumber.PhoneNumber, 'phone number');
-    const errorsPhoneNumber = {
-      PhoneNumber: '',
-    };
+    // if (!isDataPhoneNumber.PhoneNumber) {
+    //   errorsPhoneNumber.PhoneNumber = 'The field is required';
+    // }
 
-    if (!isDataPhoneNumber.PhoneNumber) {
-      errorsPhoneNumber.PhoneNumber = 'The field is required';
-    }
+    // if (!errorsPhoneNumber.PhoneNumber) {
+    //   addSupportPersonByPhoneNumber({
+    //     userId: auth.id,
+    //     phoneNumber: isDataPhoneNumber.PhoneNumber,
+    //   });
+    //   getSupportGroup(auth.id);
+    // }
 
-    if (!errorsPhoneNumber.PhoneNumber) {
-      addSupportPersonByPhoneNumber({
-        userId: auth.id,
-        phoneNumber: isDataPhoneNumber.PhoneNumber,
-      });
-      getSupportGroup(auth.id);
-    }
-
-    setErrorsPhoneNumber(errorsPhoneNumber);
+    // setErrorsPhoneNumber(errorsPhoneNumber);
   };
 
   return (
@@ -236,13 +250,8 @@ const MemberTree = ({
                 onChange={(e) => handleChange({ Email: e.target.value })}
                 className={styles.searchBar}
               />
-              <div onClick={() => FunctionSupporterSubmit()}>
-                <button className={styles.inviteBtn}>Send Invite</button>
-              </div>
               <div className={styles.errorMessage}>
-                {errors.Email
-                  ? errors.Email
-                  : supportGroup?.failCreateSupporter?.response?.data?.message}
+                {errors.Email}
               </div>
             </div>
             <div className={styles.searchDiv}>
@@ -251,18 +260,24 @@ const MemberTree = ({
                 className={`${styles.searchBar1} ${styles.phoneNumber}`}
                 value={isData.PhoneNumber}
                 onChange={(phoneNumber: any) =>
-                  handlePhoneNumberChange({ PhoneNumber: phoneNumber })
+                  handleChange({ PhoneNumber: phoneNumber })
                 }
               />
-              <div onClick={() => FunctionSupporterSubmitPhoneNumber()}>
+              <div className={styles.errorMessage}>
+                {errors.PhoneNumber}
+              </div>
+              <div onClick={() => FunctionSupporterSubmit()}>
                 <button className={styles.inviteBtn}>Send Invite</button>
               </div>
-              <div className={styles.errorMessage}>
-                {errorsPhoneNumber.PhoneNumber
-                  ? errorsPhoneNumber.PhoneNumber
+            </div>
+            <div className={styles.errorMessage}>
+                {errors.CommonError
+                  ? errors.CommonError
                   : supportGroup?.failCreateSupporter?.response?.data?.message}
               </div>
-            </div>
+            {/* <div onClick={() => FunctionSupporterSubmit()}>
+                <button className={styles.inviteBtn}>Send Invite</button>
+              </div> */}
             <div className={styles.memberDiv}>
               {teamMemberData.map(
                 ({ userID, userName, imageURL, email, phoneNumber }, i) => {
