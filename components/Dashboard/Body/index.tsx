@@ -135,7 +135,7 @@ const DashboardBody = ({
     if (quiz?.dailyQuiz === "You are eligible to do today quiz") {
       router.push("/daily-quiz"); // Navigate to "daily-quiz" route
     } else {
-      toast.error("You have already done today quiz. Do again tomorrow!", {
+      toast.error("Great job! You've already completed your daily quiz.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 5000,
         hideProgressBar: false,
@@ -152,7 +152,7 @@ const DashboardBody = ({
     if (quiz?.weeklyQuiz === "You are eligible to do this week quiz") {
       router.push("/weekly-quiz"); // Navigate to "weekly-quiz" route
     } else {
-      toast.error("You have already done this week quiz. Do again next week!", {
+      toast.error("Great job! You've already completed your weekly quiz.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 5000,
         hideProgressBar: false,
