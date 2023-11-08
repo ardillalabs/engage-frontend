@@ -49,7 +49,7 @@ const NavBar = () => {
             </Link>
           </div>
           <div className={styles.calmDiv}>
-            Connect, Support, Thrive Together
+          Proactive Positive Support When You Need It Most.
           </div>
           <div className={styles.emptyDiv}></div>
         </div>
