@@ -344,7 +344,7 @@ const Barchart = ({ auth }: Props) => {
         {/* <div className={styles.rightDiv}>     */}
         {/* </div> */}
         <div className={styles.chartSubHeader}>
-          Productivity of the last {dayCount? dayCount: 'few'} days
+          Scores from the last {dayCount? dayCount: 'few'} days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
@@ -360,7 +360,7 @@ const Barchart = ({ auth }: Props) => {
           </button>
         </div>
         <div className={styles.chartSubHeader}>
-          Productivity of the last {weekCount? weekCount: 'few'} weeks
+          Scores from the last {weekCount? weekCount: 'few'} weeks
         </div>
         <Bar options={options} data={weeklyData} />
       </div>
