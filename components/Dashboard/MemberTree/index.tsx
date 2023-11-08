@@ -107,14 +107,18 @@ const MemberTree = ({
       PhoneNumber: '',
       CommonError: ''
     };
-    
-    console.log(isData.PhoneNumber, 'phone number');
+
+    const phoneValidation = usePhoneValidation(isData.PhoneNumber); 
+
+    console.log(isData.PhoneNumber, 'phone number', phoneValidation.isValid);
 
     if (!isData.Email) {
-      if(!isData.PhoneNumber) {      
+      if(isData.PhoneNumber.length < 4) {      
+        console.log('At least one field is required.');
         errors.CommonError = 'At least one field is required.';
-      } else if (!phoneValidation) {
-        errors.PhoneNumber = ' Phone Number is invalid.'
+      } else if (!phoneValidation.isValid) {
+        console.log('Phone Number is invalid.');
+        errors.PhoneNumber = 'Phone Number is invalid.'
       }
     } else if ((!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(isData.Email))) {
       errors.Email = 'Email is invalid.';
@@ -127,7 +131,7 @@ const MemberTree = ({
         email: isData.Email,
       });
       getSupportGroup(auth.id);
-    } else if (isData.PhoneNumber && !errors.PhoneNumber) {
+    } else if (isData.PhoneNumber && !errors.PhoneNumber && !errors.CommonError) {
       console.log('Phone Number', isData.PhoneNumber)
         addSupportPersonByPhoneNumber({
           userId: auth.id,
@@ -137,20 +141,6 @@ const MemberTree = ({
       }
 
     setErrors(errors);
-
-    // if (!isDataPhoneNumber.PhoneNumber) {
-    //   errorsPhoneNumber.PhoneNumber = 'The field is required';
-    // }
-
-    // if (!errorsPhoneNumber.PhoneNumber) {
-    //   addSupportPersonByPhoneNumber({
-    //     userId: auth.id,
-    //     phoneNumber: isDataPhoneNumber.PhoneNumber,
-    //   });
-    //   getSupportGroup(auth.id);
-    // }
-
-    // setErrorsPhoneNumber(errorsPhoneNumber);
   };
 
   return (
@@ -239,6 +229,7 @@ const MemberTree = ({
                 <IoMdClose />
               </div>
             </div>
+            <div className={styles.formDiv}>
             <div className={styles.searchDiv}>
               <input
                 type='text'
@@ -266,14 +257,18 @@ const MemberTree = ({
               <div className={styles.errorMessage}>
                 {errors.PhoneNumber}
               </div>
-              <div onClick={() => FunctionSupporterSubmit()}>
-                <button className={styles.inviteBtn}>Send Invite</button>
-              </div>
             </div>
+            <div className={styles.searchDiv}>
+
             <div className={styles.errorMessage}>
                 {errors.CommonError
                   ? errors.CommonError
                   : supportGroup?.failCreateSupporter?.response?.data?.message}
+              </div>
+            </div>
+              <div className={styles.searchDiv}>
+                <button className={styles.inviteBtn} onClick={() => FunctionSupporterSubmit()}>Send Invite</button>
+              </div>
               </div>
             {/* <div onClick={() => FunctionSupporterSubmit()}>
                 <button className={styles.inviteBtn}>Send Invite</button>
