@@ -499,7 +499,7 @@
 @media (max-width: 1200px) {
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 576px) {
   .searchDiv {
     flex-direction: column;
   }
@@ -514,4 +514,17 @@
   flex-direction: column;
   align-items: stretch;
   padding-top: 10px;
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .searchBar {
+    max-width: 280px;
+  }
+  
+  .searchBar1 {
+    max-width: 300px;
+  }
+  .errorMessage{
+    font-size: 12px;
+  }
 }
