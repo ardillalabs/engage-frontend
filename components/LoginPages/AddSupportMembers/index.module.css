@@ -39,8 +39,8 @@
   letter-spacing: 0.04em;
   color: red;
   font-stretch: 100;
-  min-height: 20px;
-  padding-bottom: 10px;
+  /* min-height: 20px;
+  padding-bottom: 10px; */
 }
 @media (min-width: 600px) {
   .mainDiv {
@@ -345,7 +345,7 @@
 
 .searchDiv {
   max-width: 100%;
-  padding: 30px 20px;
+  padding: 5px 20px;
   display: flex;
   /* flex-direction: column; */
   gap: 10px;
@@ -353,7 +353,7 @@
 
 @media (min-width: 600px) {
   .searchDiv {
-    padding: 20px 40px;
+    padding: 5px 40px;
     flex-direction: row;
     gap: 10px;
   }
@@ -384,7 +384,8 @@
 
 @media (max-width: 576px) {
   .searchDiv {
-    padding: 10px 20px;
+    padding: 5px 20px;
+    flex-direction: column;
   }
 }
 
@@ -494,4 +495,29 @@
 .iconDiv:hover {
   background-color: #324544;
   border: 1px solid transparent;
+}
+
+.inviteBtnDiv {
+  max-width: 100%;
+  padding: 0px 50px;
+  gap: 10px;
+}
+.formDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 10px;
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .searchBar {
+    max-width: 280px;
+  }
+  
+  .searchBar1 {
+    max-width: 300px;
+  }
+  .errorMessage{
+    font-size: 12px;
+  }
 }
