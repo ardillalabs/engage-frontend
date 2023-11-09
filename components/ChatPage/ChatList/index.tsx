@@ -53,119 +53,150 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
   stateRef.current = chatList;
 
   useEffect(() => {
-    let api_res;
+    // let api_res;
 
     if (userID) {
       const chatListFetch = async () => {
         try {
-          api_res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
+          let res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
+          chatListChange(res);
         } catch (error) {
           console.log(error);
           throw new Error("Failed to fetch chat list");
         }
-
-        await api_res.json().then((users) => {
-          setChatList([]);
-          users.map((user: any) => {
-            const chatID = user.chat_id;
-
-            if (user.support_user && user.chat_id != null) {
-              const support_user = user.support_user;
-              const patient_user = user.patient_user;
-
-              setChatList((prevState) => [
-                ...prevState,
-                {
-                  userID:
-                    support_user.id != auth.id
-                      ? support_user.id
-                      : patient_user.id,
-                  chatID,
-                  username:
-                    support_user.id != auth.id
-                      ? support_user.full_name
-                      : patient_user.full_name,
-                  imageURL:
-                    support_user.id != auth.id
-                      ? support_user.image_url
-                      : patient_user.image_url,
-                  email:
-                    support_user.id != auth.id
-                      ? support_user.email
-                      : patient_user.email,
-                  phoneNumber:
-                    support_user.id != auth.id
-                      ? support_user.phone_number
-                      : patient_user.phone_number,
-                  lastMessage: "",
-                  lastMessageTime: "",
-                },
-              ]);
-
-              // Update last message
-              try {
-                const colRef = query(
-                  collection(db, "chatMessages", chatID, "messages"),
-                  orderBy("messageTime", "desc"),
-                  limit(1)
-                );
-
-                onSnapshot(colRef, (snapshot) => {
-                  const snapData: any = snapshot.docs;
-                  const snapLastMessage = snapData[0]?.data().message;
-                  const snapLastMessageTime = snapData[0]
-                    ?.data()
-                    .messageTime?.toDate()
-                    .toLocaleTimeString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    });
-
-                  const lastMessageUpdated = stateRef.current.map(
-                    (obj: any) => {
-                      if (obj.userID === support_user.id) {
-                        return {
-                          ...obj,
-                          lastMessage: snapLastMessage,
-                          lastMessageTime: snapLastMessageTime,
-                        };
-                      }
-                      return obj;
-                    }
-                  );
-                  setChatList(() => lastMessageUpdated);
-                  stateRef.current = lastMessageUpdated;
-                });
-              } catch (error) {}
-
-              // Update unread message count
-              try {
-                onSnapshot(doc(db, "chatMessages", chatID), (snapshot) => {
-                  const unreadCount = snapshot.data()?.unreadCount?.[userID];
-
-                  const unreadCountUpdated = stateRef.current.map(
-                    (obj: any) => {
-                      if (obj.userID === support_user.id) {
-                        return {
-                          ...obj,
-                          unreadCount,
-                        };
-                      }
-                      return obj;
-                    }
-                  );
-                  setChatList(() => unreadCountUpdated);
-                  stateRef.current = unreadCountUpdated;
-                });
-              } catch (error) {}
-            }
-          });
-        });
       };
 
       chatListFetch();
     }
   }, [auth.id]);
+
+  // Update last message
+  const updateLastMessage = (support_user: any, chatID: string) => {
+    try {
+      const colRef = query(
+        collection(db, "chatMessages", chatID, "messages"),
+        orderBy("messageTime", "desc"),
+        limit(1)
+      );
+
+      onSnapshot(colRef, (snapshot) => {
+        const snapData: any = snapshot.docs;
+        const snapLastMessage = snapData[0]?.data().message;
+        const snapLastMessageTime = snapData[0]
+          ?.data()
+          .messageTime?.toDate()
+          .toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+        const lastMessageUpdated = stateRef.current.map((obj: any) => {
+          if (obj.userID === support_user.id) {
+            return {
+              ...obj,
+              lastMessage: snapLastMessage,
+              lastMessageTime: snapLastMessageTime,
+            };
+          }
+          return obj;
+        });
+        setChatList(() => lastMessageUpdated);
+        stateRef.current = lastMessageUpdated;
+      });
+    } catch (error) {}
+  };
+
+  const updateUnreadCount = (support_user: any, chatID: string) => {
+    try {
+      onSnapshot(doc(db, "chatMessages", chatID), (snapshot) => {
+        const unreadCount = snapshot.data()?.unreadCount?.[userID];
+
+        const unreadCountUpdated = stateRef.current.map((obj: any) => {
+          if (obj.userID === support_user.id) {
+            return {
+              ...obj,
+              unreadCount,
+            };
+          }
+          return obj;
+        });
+        setChatList(() => unreadCountUpdated);
+        stateRef.current = unreadCountUpdated;
+      });
+    } catch (error) {}
+  };
+
+  const chatListChange = async (res: any) => {
+    await res.json().then((users: any) => {
+      setChatList([]);
+      console.log("users", users);
+      users.map((user: any) => {
+        const chatID = user.chat_id;
+
+        if (user.support_user && user.chat_id != null) {
+          const chat_user =
+            user.support_user.id != auth.id
+              ? user.support_user
+              : user.patient_user;
+
+          setChatList((prevState) => [
+            ...prevState,
+            {
+              userID: chat_user.id,
+              chatID,
+              username: chat_user.full_name,
+              imageURL: chat_user.image_url,
+              email: chat_user.email,
+              phoneNumber: chat_user.phone_number,
+              lastMessage: "",
+              lastMessageTime: "",
+            },
+          ]);
+
+          // Update last message
+          updateLastMessage(chat_user, chatID);
+
+          // Update unread message count
+          updateUnreadCount(chat_user, chatID);
+        }
+      });
+    });
+  };
+
+  const handleSearch = async (target: any) => {
+    const searchString = target.value;
+    if (searchString) {
+      try {
+        let res = await fetch(
+          `${BASE_URL}/support_group/chat-search-users/${userID}/${searchString}`
+        );
+        chatListChange(res);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch chat list");
+      }
+    } else {
+      try {
+        let res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
+        chatListChange(res);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch chat list");
+      }
+    }
+  };
+
+  const handleSearchExit = async () => {
+    setDisplaySearch(false);
+
+    try {
+      let res = await fetch(`${BASE_URL}/support_group/for-chat/${userID}`);
+      chatListChange(res);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Failed to fetch chat list");
+    }
+  };
 
   console.log("chatList", chatList);
 
@@ -197,8 +228,9 @@ const ChatList = ({ auth, getCurrentUserDetails }: Props) => {
               type="text"
               placeholder="Search for users"
               className={styles.searchBar}
+              onInput={(e) => handleSearch(e.target)}
             />
-            <GrClose onClick={() => setDisplaySearch(false)} />
+            <GrClose onClick={() => handleSearchExit()} />
           </div>
         </div>
 
