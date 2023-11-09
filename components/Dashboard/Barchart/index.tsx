@@ -177,7 +177,7 @@ const Barchart = ({ auth }: Props) => {
   const [weeklyScores, setWeeklyScores] = useState<weeklyScores[]>();
 
   const sevenWeeksAgo = new Date(date);
-  sevenWeeksAgo.setDate(date.getDate() - 7 * 7); // Subtract 7 weeks
+  sevenWeeksAgo.setDate(date.getDate() - (7 * 6)); // Subtract 7 weeks
 
   const weekObject = new Date(sevenWeeksAgo);
   console.log(weekObject);
@@ -187,6 +187,7 @@ const Barchart = ({ auth }: Props) => {
   const dayStart1 = weekObject.getDate().toString().padStart(2, '0');
 
   const formattedWeek = `${yearStart1}-${monthStart1}-${dayStart1}`;
+  console.log(formattedWeek)
 
   const weeklyDataFetch = async (formattedWeek: string, todayDate: string) => {
     try {
