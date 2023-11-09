@@ -50,3 +50,8 @@ export interface UpdatePasswordDetails {
 export interface UpdateProfilePicture {
   dp: any;
 }
+
+export interface UserProfileAvatarUpdateDetails {
+  isUpdatedUserInfo: boolean;
+  image_url: string;
+}

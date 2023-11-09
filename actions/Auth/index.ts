@@ -51,6 +51,7 @@ import {
   UserSignUpDetails,
   UserProfileUpdateDetails,
   UpdateProfilePicture,
+  UserProfileAvatarUpdateDetails,
 } from "../../tsc-types/Auth";
 
 import { deleteCookie, setCookie } from 'cookies-next';
@@ -1272,3 +1273,101 @@ export const clearIsUpdatedUserInfo = () => async (dispatch: AppDispatch) => {
     console.log(err, "err");
   }
 };
+
+export const updateProfilePictureAvatar =
+  (userProfileAvatarUpdateDetails: UserProfileAvatarUpdateDetails, access_token: string) =>
+    async (dispatch: AppDispatch) => {
+      dispatch({
+        type: SET_LOADING_UPDATE_USER_INFO,
+      });
+      dispatch({
+        type: CLEAR_AUTH_ERROR_MESSAGES,
+      });
+
+    // API Header configarations
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+      // withCredentials: true,
+    };
+
+    console.log(userProfileAvatarUpdateDetails.image_url, access_token);
+      const body = JSON.stringify({
+        image_url: userProfileAvatarUpdateDetails.image_url,
+      });
+
+      console.log(body);
+      try {
+        const response = await axios.put(
+          `https://backend.stayengaged.io/auth/users/update-user-info`,
+          body,
+          config
+        );
+
+        console.log(response);
+
+        if (response.data.success === true) {
+          dispatch({
+            type: UPDATE_USER_INFO_SUCCESS,
+            payload: response.data,
+          });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "success",
+            title: "Success!",
+            description: `${response.data.message}`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: response.data,
+        });
+      }
+    } catch (err: any) {
+      if (err.message === "Network Error") {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: {
+            response: {
+              data: {
+                message: "Network Error",
+                status: err.code,
+                statusText: err.code,
+              },
+            },
+          },
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `Network Error`,
+          },
+        });
+      } else {
+        dispatch({
+          type: UPDATE_USER_INFO_FAIL,
+          payload: err,
+        });
+
+        dispatch({
+          type: SET_TOAST_STATE,
+          payload: {
+            visibility: true,
+            type: "error",
+            title: "Error!",
+            description: `${err.response.data.message}`,
+          },
+        });
+      }
+    }
+  };

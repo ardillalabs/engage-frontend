@@ -5,12 +5,13 @@ import { HiCamera } from 'react-icons/hi';
 import { RootState } from '@/store';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCurrentUserDetails, updateUserInfoSubmit } from '@/actions/Auth';
+import { getCurrentUserDetails, updateProfilePictureAvatar, updateUserInfoSubmit } from '@/actions/Auth';
 import { getCookie } from 'cookies-next';
 
 interface Props {
   updateUserInfoSubmit: (...args: any[]) => any;
   getCurrentUserDetails: (...args: any[]) => any;
+  updateProfilePictureAvatar: (...args: any[]) => any;
   auth: any;
 }
 
@@ -18,6 +19,7 @@ const UserProfile = ({
   auth,
   updateUserInfoSubmit,
   getCurrentUserDetails,
+  updateProfilePictureAvatar,
 }: Props) => {
   const cookie = getCookie('access_token');
 
@@ -30,6 +32,7 @@ const UserProfile = ({
       const handleClickOutside = (event: any) => {
         if (ref.current && !ref.current.contains(event.target)) {
           setPictureUpdate(false);
+          setAvatarList(false);
         }
       };
       // Bind the event listener
@@ -70,6 +73,53 @@ const UserProfile = ({
     }
   }, [auth.isLoadingUpdateUserInfo]);
 
+  const avatarListArray = [
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d1.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d2.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d3.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d4.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d5.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d6.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d7.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d8.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d9.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d10.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d11.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d12.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d13.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d14.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d15.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d16.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d17.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d18.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d19.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d20.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d21.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d22.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d23.png',
+    'https://engage-prod-v1.s3.amazonaws.com/avatar-images/Artboard+1d24.png',
+  ]
+
+  const [avatarList, setAvatarList] = useState(false);
+  const imagesPerRow = 4;
+  const rows = [];
+
+  for (let i = 0; i < avatarListArray.length; i += imagesPerRow) {
+    const rowImages = avatarListArray.slice(i, i + imagesPerRow);
+    rows.push(rowImages);
+  }
+
+  function openAvatarList() {
+    setAvatarList(true)
+  }
+
+  function changeProfilePicture(avatar: any) {
+    console.log(avatar, auth.id);
+    updateProfilePictureAvatar({image_url: avatar}, cookie)
+    setPictureUpdate(false);
+    setAvatarList(false);
+  }
+
   return (
     <div className={styles.profileView}>
       <div
@@ -91,14 +141,14 @@ const UserProfile = ({
       {/* DP click popup */}
       <div
         className={
-          pictureUpdate ? styles.imageChangeDiv : styles.imageChangeDivHidden
+          pictureUpdate && !avatarList? styles.imageChangeDiv : styles.imageChangeDivHidden
         }
         ref={pictureUpdate ? wrapperRef : null}
       >
         <div className={styles.body1}>Profile Photo</div>
         <div className={styles.imageChangeIconsDiv}>
           <div className={styles.imageChangeIcons}>
-            <div className={styles.imageChangeIconDiv}>
+            <div className={styles.imageChangeIconDiv} onClick={openAvatarList}>
               <svg
                 width='31'
                 height='31'
@@ -206,8 +256,7 @@ const UserProfile = ({
             </div>
             <span className='body-4'>Gallery</span>
           </label>
-        </div>
-
+        </div>        
         <div className={styles.buttonDiv}>
           {auth.isLoadingUpdateUserInfo ? (
             <button disabled>Uploading...</button>
@@ -216,7 +265,46 @@ const UserProfile = ({
           )}
         </div>
       </div>
+      <div
+        className={
+          avatarList ? styles.avatarChangeDiv : styles.imageChangeDivHidden
+        }
+        ref={avatarList ? wrapperRef : null}
+      > 
+       {/* {Array.from(Array(15), (e, i) => {
+            return (
+                  <>
+                    <Image
+                      src={avatarListArray[i]}
+                      height={40}
+                      width={40}
+                      alt='Avatar Image'
+                      className={styles.avatarImage}
+                    />
+                  </>
+                )}
+       )} */}
+       <div className={styles.image_container}>
+        {rows.map((row, rowIndex) => (
+          <div key={rowIndex} className="image-row">
+            {row.map((avatar, index) => (
+              <div key={index} className="image-item">
+                <Image
+                      src={avatar}
+                      height={40}
+                      width={40}
+                      alt={`Avatar Image ${index + 1}`}
+                      className={styles.avatarImage}
+                      onClick={() => changeProfilePicture(avatar)}
+                    />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      </div>
       <p className={styles.username}>{auth?.username}</p>
+        {/* <div className={avatarList ? styles.chartWrapper : styles.chartWrapperHidden}></div> */}
     </div>
   );
 };
@@ -224,6 +312,7 @@ const UserProfile = ({
 UserProfile.prototype = {
   updateUserInfoSubmit: PropTypes.func.isRequired,
   getCurrentUserDetails: PropTypes.func.isRequired,
+  updateProfilePictureAvatar: PropTypes.func.isRequired,
 };
 
 // export default UserProfile;
@@ -234,4 +323,5 @@ const mapStateToProps = (state: RootState) => ({
 export default connect(mapStateToProps, {
   updateUserInfoSubmit,
   getCurrentUserDetails,
+  updateProfilePictureAvatar,
 })(UserProfile);

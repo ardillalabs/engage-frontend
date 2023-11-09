@@ -8,6 +8,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "engage-prod-v1.s3.us-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "engage-prod-v1.s3.amazonaws.com",
+      },
     ],
   },
   env: {
