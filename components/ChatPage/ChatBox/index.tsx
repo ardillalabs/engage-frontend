@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
 import ChatInput from "../ChatInput";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AllMessages from "../AllMessages";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
@@ -48,9 +48,29 @@ const ChatBox = ({ auth }: any) => {
   const [joined, setJoined] = useState(false);
   const recUserID: any = userData?.userID;
 
+  const useOutsideAlerter = (ref: any) => {
+    useEffect(() => {
+      const handleClickOutside = (event: any) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setShowSubMenu(false);
+        }
+      };
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
   async function deleteCollection() {
     const collectionRef = collection(db, "chatMessages", chatID, "messages");
     const query = collectionRef;
+    setShowSubMenu(false);
 
     return new Promise((resolve, reject) => {
       deleteQueryBatch(db, query, resolve).catch(reject);
@@ -238,6 +258,7 @@ const ChatBox = ({ auth }: any) => {
                 className={`${styles.chatSubMenuItems} ${
                   showSubMenu ? "" : styles.hideSubMenu
                 }`}
+                ref={showSubMenu ? wrapperRef : null}
               >
                 <div
                   className={styles.chatSubMenuItem}
