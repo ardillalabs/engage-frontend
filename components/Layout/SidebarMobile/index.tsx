@@ -94,7 +94,7 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
           <span className={styles.profileName}>Denneal Perera</span> */}
           <UserProfile/>
         </div>
-
+        <div className={styles.linkWrapper}>
         <Link href='/dashboard' className={styles.link}>
           <MdSpaceDashboard className={styles.icon} />
           <span>Dashboard</span>
@@ -114,6 +114,7 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
           <IoLogOut className={styles.icon} />
           <span>Logout</span>
         </button>
+        </div>
       </div>
 
       <div className='toast-container'>

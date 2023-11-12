@@ -124,7 +124,7 @@ const Barchart = ({ auth }: Props) => {
   // const date = new Date();
   console.log(date);
   const dailyLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const DailyDataFetch = async (formattedDate: string, todayDate: string) => {
+  const DailyDataFetch = async (formattedDate: string, todayFormattedDate: string) => {
     try {
       console.log(`${year}-${monthNum}-${day}`)
       const res = fetch(
@@ -189,7 +189,7 @@ const Barchart = ({ auth }: Props) => {
   const formattedWeek = `${yearStart1}-${monthStart1}-${dayStart1}`;
   console.log(formattedWeek)
 
-  const weeklyDataFetch = async (formattedWeek: string, todayDate: string) => {
+  const weeklyDataFetch = async (formattedWeek: string, todayFormattedDate: string) => {
     try {
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
@@ -361,7 +361,7 @@ const Barchart = ({ auth }: Props) => {
           </button>
         </div>
         <div className={styles.chartSubHeader}>
-          Scores from the last {weekCount? weekCount: 'few'} weeks
+          Scores from the last {weekCount? weekCount + 1: 'few'} weeks
         </div>
         <Bar options={options} data={weeklyData} />
       </div>

@@ -50,17 +50,22 @@
   position: fixed;
   left: 0;
   height: calc(100vh - 140px);
-  padding: 40px 20px;
-  width: 180px;
+  padding: 40px 0px;
   display: flex;
   flex-direction: column;
   gap: 40px;
   box-shadow: 0px 22px 40px rgba(50, 69, 68, 0.29);
   transition: 0.5s ease;
+  align-items: center;
+}
+
+.sidebarDiv{
+  width: 100%;
 }
 
 .sidebarDivHidden {
   transform: translateX(-240px);
+  width: 180px;
 }
 
 .profilePreview {
@@ -87,6 +92,7 @@
   font: 500 18px "Montserrat";
   color: var(--black);
   cursor: pointer;
+  padding-bottom: 20px;
 }
 .icon {
   font-size: 28px;
@@ -98,4 +104,7 @@
   background-color: transparent;
   border: none;
   padding: 0;
+}
+.linkWrapper{
+  gap: 10px;
 }

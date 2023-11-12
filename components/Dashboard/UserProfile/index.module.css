@@ -112,15 +112,15 @@
 }
 
 @media (max-width: 992px) {
-  .imageChangeDiv {
+  /* .imageChangeDiv {
     width: 100%;
     margin-left: 10px;
     gap: 10px;
     padding: 20px 20px;
-  }
+  } */
   .imageChangeIconsDiv {
     /* display: block; */
-    gap: 12px;
+    /* gap: 12px; */
     margin: 10px 0;
   }
   .body1 {
@@ -140,7 +140,7 @@
   z-index: 20;
   position: absolute;
   top: 130px;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   border-radius: 20px;
   background-color: #ffffff;
   display: flex;
@@ -159,14 +159,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow:rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 @media (max-width: 576px) {
   .image_container{
     flex-wrap: nowrap;
   }
   .avatarImage{
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
   }
 }
 
@@ -177,7 +180,7 @@
     flex-wrap: nowrap;
   }
   .avatarImage{
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
   }
 }
