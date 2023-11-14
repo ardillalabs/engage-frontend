@@ -310,14 +310,16 @@
     }
 
     .finishDiv {
-        padding: 20px;
+        padding: 25px;
         border-radius: 12px;
+        width: 200px;
         max-width: max-content;
-        height: 246px;
+        height: 200px;
     }
 
     .title {
         font-size: 18px;
+        margin-top: 40px;
     }
 
     .finishButton button {
@@ -332,8 +334,8 @@
     }
 
     .circleDiv {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     .innerCircleDiv {
@@ -348,6 +350,12 @@
         height: 300px;
         border-radius: 20px;
         margin-top: 120px;
+    }
+    .bodyText {
+        font-size: 18px;
+    }
+    .wrapperDiv{
+        margin-bottom: -12%;
     }
 }
 
