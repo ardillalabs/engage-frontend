@@ -56,7 +56,7 @@ const DashboardBody = ({
         imageURL: supporter.support_user?.image_url
           ? supporter.support_user.image_url
           : "/dummy450x450.jpg",
-        email: supporter.support_user?.email,
+        email: supporter.support_user?.email? supporter.support_user?.email : supporter.email,
         phoneNumber: supporter.support_user?.phone_number
           ? supporter.support_user?.phone_number
           : supporter.phone_number,
