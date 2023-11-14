@@ -44,6 +44,7 @@ const MemberTree = ({
   addSupportPerson: (...args: any[]) => any;
   addSupportPersonByPhoneNumber: (...args: any[]) => any;
 }) => {
+  console.log(teamMemberData);
   const handleRemove = async (email: string, id: number, i: number) => {
     console.log(email, 'email');
     const filtered = teamMemberData
@@ -133,7 +134,7 @@ const MemberTree = ({
       getSupportGroup(auth.id);
     } else if (isData.PhoneNumber && !errors.PhoneNumber && !errors.CommonError) {
       console.log('Phone Number', isData.PhoneNumber)
-        addSupportPersonByPhoneNumber({
+        await addSupportPersonByPhoneNumber({
           userId: auth.id,
           phoneNumber: isData.PhoneNumber,
         });
