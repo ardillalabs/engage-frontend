@@ -23,7 +23,9 @@ interface teamMemberArray {
   userName: string;
   imageURL: string;
   email: string;
+  supporterEmail: string;
   phoneNumber: string;
+  supporterPhoneNumber: string;
 }
 const MemberTree = ({
   changeTeamMemberData,
@@ -189,8 +191,8 @@ const MemberTree = ({
                     />
                     <div className={styles.infoPopup}>
                       <span>{teamMemberData[i].userName}</span>
-                      <span>{teamMemberData[i].email}</span>
-                      <span>{teamMemberData[i].phoneNumber}</span>
+                      <span>{teamMemberData[i].email? teamMemberData[i].email: teamMemberData[i].supporterEmail}</span>
+                      <span>{teamMemberData[i].phoneNumber? teamMemberData[i].phoneNumber: teamMemberData[i].supporterPhoneNumber}</span>
                       <BsFillTriangleFill className={styles.bottomChev} />
                     </div>
                   </>
@@ -276,7 +278,7 @@ const MemberTree = ({
               </div> */}
             <div className={styles.memberDiv}>
               {teamMemberData.map(
-                ({ userID, userName, imageURL, email, phoneNumber }, i) => {
+                ({ userID, userName, imageURL, supporterEmail, supporterPhoneNumber }, i) => {
                   return (
                     <div className={styles.member} key={userID}>
                       <div className={styles.memberDetailsDiv}>
@@ -290,13 +292,13 @@ const MemberTree = ({
                         <div className={styles.memberDetails}>
                           <span className='body-3'>{userName}</span>
                           <span className={styles.memberEmail}>
-                            {email ? email : phoneNumber}
+                            {supporterEmail ? supporterEmail : supporterPhoneNumber}
                           </span>
                         </div>
                       </div>
                       <div
                         className={styles.iconDiv}
-                        onClick={() => handleRemove(email ? email : phoneNumber, auth.id, i)}
+                        onClick={() => handleRemove(supporterEmail ? supporterEmail : supporterPhoneNumber, auth.id, i)}
                       >
                         <RiDeleteBin6Fill />
                       </div>
