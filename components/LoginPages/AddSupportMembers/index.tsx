@@ -134,7 +134,7 @@ const AddSupportMembers = ({
       getSupportGroup(auth.id);
     } else if (isData.PhoneNumber && !errors.PhoneNumber && !errors.CommonError) {
       console.log('Phone Number', isData.PhoneNumber)
-        addSupportPersonByPhoneNumber({
+      await addSupportPersonByPhoneNumber({
           userId: auth.id,
           phoneNumber: isData.PhoneNumber,
         });
