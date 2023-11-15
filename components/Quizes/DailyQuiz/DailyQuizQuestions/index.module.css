@@ -124,7 +124,7 @@
     border-radius: 20px;
 }
 
-.title {
+.title, .titleLoading {
     font-weight: 600;
     font-size: 30px;
     text-align: center;
@@ -224,7 +224,7 @@
     cursor: pointer;
 }
 
-.initialDiv{
+.initialDiv, .initialDivLoading{
     background-color: #324544;
     padding: 60px;
     width: 500px;
@@ -322,6 +322,11 @@
         margin-top: 40px;
     }
 
+    .titleLoading {
+        font-size: 18px;
+        margin-top: 0px;
+    }
+
     .finishButton button {
         margin-top: 24px;
         width: 135px;
@@ -348,6 +353,14 @@
         padding: 40px;
         max-width: max-content;
         height: 300px;
+        border-radius: 20px;
+        margin-top: 120px;
+    }
+    .initialDivLoading{
+        background-color: #324544;
+        padding: 40px;
+        max-width: max-content;
+        height: max-content;
         border-radius: 20px;
         margin-top: 120px;
     }
