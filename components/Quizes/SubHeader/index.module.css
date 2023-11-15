@@ -1,0 +1,26 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100px;
+    background: #F5FFFE;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+    padding: 35px;
+    max-width: 1440px;
+}
+.centerDiv{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #003F5E;
+}
+@media (max-width: 576px) {
+    .centerDiv{
+        font-size: 16px;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+}

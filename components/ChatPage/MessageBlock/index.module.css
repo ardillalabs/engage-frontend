@@ -1,0 +1,48 @@
+.mainDiv {
+  position: relative;
+}
+
+.profileInfo,
+.profileInfoReversed {
+  display: flex;
+  gap: 20px;
+}
+
+.profileInfoReversed {
+  flex-direction: row-reverse;
+}
+
+.profilePicture {
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.profileInfoText {
+  margin-top: -25px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.time,
+.timeReversed {
+  font: 400 14px "Montserrat";
+  color: #8f8f8f;
+  width: max-content;
+  position: absolute;
+}
+.time {
+  right: 0;
+}
+.timeReversed {
+  left: 0;
+}
+
+@media (min-width: 600px) {
+  .timeReversed,
+  .time {
+    position: static;
+  }
+  .timeReversed {
+    padding-right: 100px;
+  }
+}

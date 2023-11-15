@@ -1,0 +1,49 @@
+import { AnyAction } from "redux";
+import {
+  CREATE_SUPPORT_GROUP,
+  FAIL_CREATE_SUPPORT_GROUP,
+  SUPPORT_GROUP_LOADING,
+  GET_SUPPORT_GROUP,
+  FAIL_GET_SUPPORT_GROUP,
+  SUPPORTER_DELETE,
+  FAIL_SUPPORTER_DELETE,
+  CLEAR_SUPPORT_GROUP
+} from "../../actions/types";
+
+const initialState: any = {
+  loading: false,
+  supportGroup: [],
+  failCreateSupporter: null,
+  isSupporterDeleted: false,
+};
+
+export default function (state = initialState, action: AnyAction) {
+  const { type, payload } = action;
+
+  switch (type) {
+    case FAIL_CREATE_SUPPORT_GROUP:
+      return {
+        ...state,
+        loading: false,
+        failCreateSupporter: payload,
+      };
+    case GET_SUPPORT_GROUP:
+      return {
+        ...state,
+        loading: false,
+        supportGroup: payload,
+      };
+    case SUPPORTER_DELETE:
+      return {
+        ...state,
+        isSupporterDeleted: true,
+      };
+    case CLEAR_SUPPORT_GROUP:
+      return {
+        ...state,
+        supportGroup: []
+      }
+    default:
+      return state;
+  }
+}

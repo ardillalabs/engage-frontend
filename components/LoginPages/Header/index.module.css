@@ -1,0 +1,40 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 340px;
+    background: #324544;
+    justify-content: center;
+}
+.componentDiv {
+    width: 100%;
+    padding: 50px;
+    max-width: 1440px;
+}
+.upperDiv {
+    display: flex;
+    padding-bottom: 20px;
+    justify-content: center;
+}
+.lowerDiv {
+    display: flex;
+    font-size: 30px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 37px;
+    font-style: normal;
+    justify-content: center;
+}
+@media (max-width: 576px) {
+    .componentDiv {
+        padding: 20px;
+    }
+
+    .upperDiv {
+        padding-bottom: 10px;
+    }
+
+    .lowerDiv {
+        font-size: 20px;
+    }
+}

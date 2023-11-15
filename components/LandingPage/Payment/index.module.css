@@ -1,0 +1,156 @@
+/* YourComponent.css */
+
+.row {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+  .leftImage {
+    flex: 0 0 auto;
+    max-width: 30%; /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    justify-content: flex-end;
+  }
+
+  .rightImage {
+    flex: 0 0 auto;
+    max-width: 30%; /* Adjust as needed */
+    overflow: hidden;
+  }
+  
+  .responsiveImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  .centerDiv {
+    flex: 1 1 auto;
+    /* padding: 20px;  */
+    box-sizing: border-box;
+    min-width: 350px; /* Set a minimum width for the center card */
+    max-width: 600px; /* Adjust as needed */
+    overflow: hidden;
+    text-align: center; /* Center the content horizontally */
+    /* height: 50vh; */
+  }
+  
+  .headerDiv {
+    font-size: 50px;
+    color: #324544;
+    text-align: center;
+    padding-bottom: 80px;
+    max-width: auto;
+    font-weight: bold;
+    letter-spacing: -0.03em;
+  }
+  .paragraph {
+    font-size: 24px;
+    font-weight: 500;
+    color: #324544;
+    line-height: 29px;
+    text-align: center;
+    font-style: normal;
+    margin-bottom: 2rem;
+    margin-top: -30px;
+  }
+  .signUpButtonDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 20px;
+  }
+  
+  .signUpButtonDiv button {
+    border: 0;
+    width: 115px;
+    height: 42px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fcfcfc;
+    line-height: 20px;
+    font-style: normal;
+    margin-right: 30px;
+    border-radius: 20px;
+    background: #324544;
+  }
+.mobileImageDiv {
+    display: none;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .centerDiv {
+        padding: 50px 0px;
+        max-width: 380px;
+        min-width: 350px;
+    }
+    .headerDiv {
+        font-size: 40px;
+        padding-bottom: 80px;
+        max-width: auto;
+        font-weight: bold;
+        letter-spacing: -0.03em;
+      }
+}
+@media (min-width: 1025px) and (max-width: 1680px) {
+    .centerDiv {
+        padding: 50px 0px;
+        max-width: 500px;
+        min-width: 350px;
+    }
+}
+  @media (min-width: 768px) and (max-width: 1680px) {
+    .responsiveImage {
+        width: 600px;
+        height: auto;
+      }
+    .rightImage {
+        flex: 0 0 auto;
+        max-width: 30%; /* Adjust as needed */
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+      }
+      .leftImage {
+        max-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        transition: left 0.5s ease;
+        right: 70%;
+      }
+  }
+
+  @media (max-width: 767px) {   
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+    }
+    .leftImage{
+        display: none;
+    }
+    .rightImage{
+        display: none;
+    }
+    .mobileImageDiv {
+        display: block;
+    }
+    .centerDiv {
+        width: 100%;
+        min-width: 300px;
+        max-width: 750px;
+    }
+    .headerDiv {
+        font-size: 36px;
+        padding: 50px 0 30px 0;
+    }
+    .paragraph {
+        margin-top: 0px;
+    }
+  }

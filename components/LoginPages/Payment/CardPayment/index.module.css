@@ -1,0 +1,700 @@
+.main {
+  background-color: var(--color-right-main-authentication-background);
+  width: 100%;
+  
+}
+.welcomeHeading {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  height: 50px;
+
+  color: var(--color-primary);
+  font-stretch: 100;
+  margin: 10px 0 24px 0;
+}
+.buttonSignInSectionLoading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 32px;
+  gap: 12px;
+  cursor: not-allowed;
+
+  width: 60%;
+  height: 40px;
+
+  background-color: #324544;
+  border-radius: 40px;
+
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.04em;
+
+  color: #ffffff;
+  font-stretch: 100;
+  margin-left: 70px;
+  margin-top: 10px;
+  opacity: 25%;
+}
+.bottomFields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.bottomFieldsLeft {
+  width: 47%;
+}
+.bottomFieldsRight {
+  width: 47%;
+}
+.backSection {
+  display: flex;
+  align-items: center;
+  margin: 0 0 30px 0;
+  cursor: pointer;
+}
+.backIcon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin: 0 8px 0 0;
+}
+.backText {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: var(--color-primary);
+  font-stretch: 100;
+}
+
+/* email */
+.EmailDiv {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 10px;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: var(--input-box-color);
+  border-radius: 4px;
+}
+.EmailDivClick {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px !important;
+  gap: 10px;
+
+  /* width: 100%; */
+  height: 80px;
+
+  /* background-color: #ffffff;
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+  border-bottom: 2px solid #324544; */
+}
+.EmailDivClickError {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 10px;
+
+  /* width: 100%; */
+  height: 80px;
+
+  background-color: #ffffff;
+  border-radius: 4px;
+  /* border-bottom: 2px solid var(--Error-Message-authentication); */
+}
+.EmailmainClick {
+  position: relative;
+  width: 100%;
+}
+.EmailErrorIcon {
+  position: absolute;
+  top: 13px;
+  right: 5px;
+}
+.Email {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: var(--input-authentication);
+  font-stretch: 100;
+
+  animation: Email 0.2s ease-in-out;
+}
+@keyframes Email {
+  0% {
+    color: #324544;
+    transform: translateY(-60%);
+    font-size: 14px;
+  }
+  50% {
+    color: #324544;
+  }
+  100% {
+    font-size: 16px;
+  }
+}
+
+@keyframes EmailClick {
+  0% {
+    transform: translateY(63%);
+    color: var(--input-authentication);
+    font-size: 16px;
+  }
+  50% {
+    color: var(--input-authentication);
+  }
+  100% {
+    font-size: 14px;
+  }
+}
+
+.EmailClick {
+  font-size: 18px;
+  font-weight: 500;
+  color: #201f1f;
+  line-height: 24px;
+  font-style: normal;
+}
+
+.EmailTextError {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: var(--Error-Message-authentication);
+}
+@keyframes EmailClickError {
+  0% {
+    transform: translateY(0%);
+    color: var(--input-authentication);
+    font-size: 16px;
+  }
+  50% {
+    color: var(--input-authentication);
+  }
+  100% {
+    font-size: 14px;
+  }
+}
+.saveCardErrorMsg {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 50%;
+  letter-spacing: 0.04em;
+
+  color: var(--Error-Message-authentication);
+  font-stretch: 100;
+  height: 20px;
+  margin: 6px 0 6px 0;
+}
+.EmailClickInputField {
+  background-color: #ffffff;
+  width: 85%;
+  color: var(--input-field-text-color);
+  /* padding: 12px 0 0 0; */
+  border: none;
+  outline: none;
+
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.04em;
+  font-stretch: 100;
+  height: 30px;
+}
+
+.EmailClickInputField::placeholder {
+  display: flex;
+  align-items: center;
+}
+
+.EmailClickInput {
+  /* margin-top: 28px; */
+  animation: fadeClickInput 1s;
+}
+.EmailClickInput:focus {
+  border: 1px solid black;
+}
+@keyframes fadeClickInput {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.EmailErrorMessage {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+
+  color: red;
+  font-stretch: 100;
+  /* height: 20px; */
+  margin: 0px 0 6px 15px;
+}
+
+.EmailMainDiv {
+  margin: 0 0 8px 0;
+}
+
+/* email */
+
+/* Password */
+.PasswordDiv {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 10px;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: var(--input-box-color);
+  border-radius: 4px;
+}
+.PasswordDivClick {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 10px;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+  border-bottom: 2px solid #324544;
+}
+.PasswordDivClickError {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 10px;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-bottom: 2px solid var(--Error-Message-authentication);
+}
+.PasswordmainClick {
+  position: relative;
+  width: 100%;
+}
+.Password {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: var(--input-authentication);
+  font-stretch: 100;
+
+  animation: Password 0.2s ease-in-out;
+}
+@keyframes Password {
+  0% {
+    color: #324544;
+    transform: translateY(-60%);
+    font-size: 14px;
+  }
+  50% {
+    color: #324544;
+  }
+  100% {
+    font-size: 16px;
+  }
+}
+
+@keyframes PasswordClick {
+  0% {
+    transform: translateY(63%);
+    color: var(--input-authentication);
+    font-size: 16px;
+  }
+  50% {
+    color: var(--input-authentication);
+  }
+  100% {
+    font-size: 14px;
+  }
+}
+
+.PasswordClick {
+  position: absolute;
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #324544;
+  font-stretch: 100;
+  width: 95%;
+
+  animation: PasswordClick 0.2s ease-in-out;
+}
+
+.PasswordTextError {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: var(--Error-Message-authentication);
+}
+@keyframes PasswordClickError {
+  0% {
+    transform: translateY(0%);
+    color: var(--input-authentication);
+    font-size: 16px;
+  }
+  50% {
+    color: var(--input-authentication);
+  }
+  100% {
+    font-size: 14px;
+  }
+}
+
+.PasswordClickInputField {
+  background-color: #ffffff;
+  width: 85%;
+  color: var(--input-field-text-color);
+  padding: 12px 0 0 0;
+  border: none;
+  outline: none;
+
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.04em;
+  font-stretch: 100;
+  height: 30px;
+}
+.PasswordClickInputField::placeholder {
+  display: flex;
+  align-items: center;
+}
+
+.PasswordClickInput {
+  margin-top: 18px;
+  animation: fadeClickInput 1s;
+}
+@keyframes fadeClickInput {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.PasswordErrorMessage {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+
+  color: var(--Error-Message-authentication);
+  font-stretch: 100;
+  height: 20px;
+  margin: 6px 0 6px 0;
+}
+
+.PasswordMainDiv {
+  margin: 0 0 8px 0;
+}
+
+.eyeOpen {
+  position: absolute;
+  top: 14px;
+  right: -15px;
+  font-size: 22px;
+  color: var(--input-field-text-color);
+}
+/* Password */
+
+.buttonSignInSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 32px;
+  gap: 12px;
+  cursor: pointer;
+
+  width: 60%;
+  height: 40px;
+
+  background-color: #324544;
+  border-radius: 40px;
+
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: 0.04em;
+
+  color: #ffffff;
+  font-stretch: 100;
+  margin-left: 70px;
+  margin-top: 10px;
+}
+
+.buttonORSection {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  /* or 24px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+
+  color: var(--or-section);
+  font-stretch: 100;
+  padding: 0 30px 0 30px;
+  margin: 24px 0 24px 0;
+}
+
+.cardSaveSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin: 15px 0 25px 0;
+}
+.tickBoxIcon {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #324544;
+  border-radius: 5px;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+}
+
+.untickBoxIcon {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid var(--payment-tick-box);
+  border-radius: 5px;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+}
+.untickBoxIcon_wrong {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid var(--payment-tick-box);
+  border-radius: 5px;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+  border-color: red;
+}
+.cardSaveSectionText {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: var(--color-primary);
+  font-stretch: 100;
+}
+
+@media (max-width: 1036px) {
+  .main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+  }
+  .bottomFields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .bottomFieldsLeft {
+    width: 100%;
+  }
+  .bottomFieldsRight {
+    width: 100%;
+  }
+  .buttonSignInSection {
+    /* width: 80%; */
+    height: 40px;
+  
+    background-color: #324544;
+    border-radius: 30px;
+    /* margin-left: 6%; */
+  }
+}
+
+@media (max-width: 576px) {
+  .buttonSignInSection {
+    margin-left: 10%;
+    border-radius: 40px;
+  }
+  .buttonSignInSectionLoading {
+    margin-left: 10%;
+  }
+  
+  .EmailClick {
+    font-size: 16px;
+  }
+
+}
+
+.input {
+  width: 98%;
+  height: 15px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #c3c3c3;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  padding-left: 5px;
+}
+
+.button_wrap {
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.toggledButton {
+  width: 50%;
+  background-color: #324544;
+  border: none;
+  height: 40px;
+  color: #ffffff;
+}
+
+.unSelectedButton {
+  width: 50%;
+  border: none;
+  height: 40px;
+}
+
+.plan {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
+.trialClick {
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: underline;
+}

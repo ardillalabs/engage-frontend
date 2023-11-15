@@ -1,0 +1,99 @@
+.mainDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.mainDiv:hover {
+  background-color: aliceblue;
+}
+
+.active {
+  background-color: aliceblue;
+}
+
+.contactPreview {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.profilePicture {
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.contactPreviewText {
+  /* 350px should be adjusted for mobile navbar change */
+  max-width: calc(100vw - 220px);
+}
+
+.contactPreviewText div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hoverPreview {
+  position: absolute;
+  left: 0px;
+  top: 80px;
+  z-index: 5;
+  font: 500 12px "Montserrat";
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: #324544;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.4s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.profilePicture:hover + .hoverPreview {
+  opacity: 1;
+  visibility: visible;
+}
+
+.leftChev {
+  position: absolute;
+  left: 24px;
+  top: -7px;
+  color: #324544;
+}
+
+.contactRight {
+  width: max-content;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.msgCounter {
+  width: fit-content;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 100%;
+  background-color: #ec2323;
+  color: white;
+}
+
+@media (min-width: 600px) {
+  .contactPreviewText {
+    max-width: calc(100vw - 350px);
+  }
+}
+@media (min-width: 992px) {
+  .contactPreviewText {
+    max-width: 200px;
+  }
+}

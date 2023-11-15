@@ -1,0 +1,261 @@
+.mainDiv {
+  position: relative;
+  flex: 1;
+  height: calc(100dvh - 140px);
+}
+
+@media (min-width: 1000px) {
+  .mainDiv {
+    height: 100dvh;
+  }
+}
+
+.header {
+  height: 100px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--light-grey);
+}
+
+@media (min-width: 400px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+@media (min-width: 1000px) {
+  .header {
+    padding: 0 40px;
+  }
+}
+
+.headerInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.backBtn {
+  font-size: 30px;
+  color: #8f8f8f;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.backBtn:hover {
+  color: #324544;
+}
+
+.profilePicture {
+  display: none;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
+  .profilePicture {
+    display: block;
+  }
+}
+
+.chatBox {
+  overflow-y: auto;
+  height: calc(100vh - 370px);
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 1000px) {
+  .chatBox {
+    height: calc(100vh - 222px);
+  }
+}
+
+.chatBox::-webkit-scrollbar {
+  width: 10px;
+}
+.chatBox::-webkit-scrollbar-track {
+  background-color: rgb(226, 225, 225);
+  border-radius: 10px;
+}
+.chatBox::-webkit-scrollbar-thumb {
+  background-color: var(--grey);
+  border-radius: 10px;
+}
+
+.messageDate {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #324544;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.messageBlock {
+  padding: 0 20px;
+}
+
+@media (min-width: 400px) {
+  .messageBlock {
+    padding: 0 30px;
+  }
+}
+@media (min-width: 1000px) {
+  .messageBlock {
+    padding: 0 40px;
+  }
+}
+
+.messageFormDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 60px;
+}
+
+.messageForm {
+  width: 100%;
+  height: 50px;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 64px 0 30px;
+  border-radius: 100px;
+  background-color: var(--light-grey);
+  position: relative;
+  font-size: 20px;
+  color: #8f8f8f;
+}
+
+@media (min-width: 600px) {
+  .messageForm {
+    margin: 0 50px;
+    width: 100%;
+    gap: 20px;
+    padding: 0 80px 0 30px;
+  }
+}
+
+.messageInput {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: auto;
+  flex: 1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.sendBtn {
+  position: absolute;
+  right: 0;
+  outline: none;
+  border: none;
+  background-color: var(--black);
+  color: var(--white);
+  font-size: 22px;
+  height: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sendIcon {
+  margin-left: 4px;
+}
+
+@media (min-width: 1100px) {
+  .backBtn {
+    display: none;
+  }
+}
+
+.chatTopLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menuIcon {
+  font-size: 20px;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.chatSubMenu {
+  position: relative;
+}
+
+.chatSubMenuItems {
+  position: absolute;
+  width: max-content;
+  right: 0;
+  top: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 12px 18px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  transition: 0.5s ease;
+}
+
+.hideSubMenu {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.chatSubMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #ff6347;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chatSubMenuItem:hover {
+  color: #da5740;
+}
+
+.videoIcon {
+  font-size: 34px;
+  color: #8f8f8f;
+  cursor: pointer;
+}
+
+.videoCallSection {
+  z-index: 99;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #8f8f8f;
+  box-shadow: 0px 0px 54px 100px rgba(0, 0, 0, 0.4);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.callScreenOpen {
+  visibility: visible;
+  opacity: 1;
+}
+
+.chatUsername {
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

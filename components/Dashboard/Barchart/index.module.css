@@ -1,0 +1,106 @@
+.mainDiv {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.chartWrapper {
+  background-color: #fafafa;
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.chartHeader {
+  font: var(--body-2);
+  padding-bottom: 10px;
+  width: 68%;
+}
+
+.chartSubHeader {
+  font: var(--body-7);
+  padding-bottom: 20px;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: row;
+}
+.rightDiv {
+  flex: -1;
+}
+.downloadButtonWeekly {
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid #007542;
+  background-color: #bdfc97;
+  color: #007542;
+}
+.downloadButtonDaily{
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px solid #1F2F98;
+  background-color: #9bd2f7;
+  color: #1F2F98;
+}
+.icon {
+  margin-right: 5px;
+}
+
+.filterText {
+  font-size:14px;
+  margin-bottom: 10px;
+}
+
+.datePicker {
+  width: 400px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(148, 132, 132);
+}
+
+@media (max-width: 576px) {
+  .datePicker {
+    max-width: 300px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 430px) {
+  .datePicker {
+    max-width: 200px;
+  }
+  .downloadButtonWeekly {
+    padding: 3px 2px;
+    border-radius: 2px;
+    border: 1px solid #007542;
+    font-size: 10px;
+  }
+  .downloadButtonDaily{
+    padding: 3px 2px;
+    border-radius: 2px;
+    border: 1px solid #1F2F98;
+    font-size: 10px;
+  }
+  .icon {
+    margin-right: 2px;
+  }
+  .chartHeader {
+    font-size: 14px;
+    padding-bottom: 5px;
+    width: 68%;
+  }
+  .chartSubHeader {
+    padding-bottom: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px){
+  .datePicker {
+    width: 320px;
+    min-width: 200px;
+  }
+}

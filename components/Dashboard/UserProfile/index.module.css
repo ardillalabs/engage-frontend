@@ -1,0 +1,186 @@
+.profileView {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profilePictureDiv {
+  padding: 4px;
+  border-radius: 100%;
+  border: 3px solid #84c6ff;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.profilePicture {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.camIconDiv {
+  position: absolute;
+  background-color: #324544;
+  color: white;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  top: 80px;
+  right: 4px;
+}
+
+.imageChangeDiv,
+.imageChangeDivHidden {
+  z-index: 20;
+  position: absolute;
+  top: 130px;
+  padding: 30px 70px;
+  border-radius: 20px;
+  background-color: #324544;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  gap: 20px;
+  transition: 0.5s ease;
+}
+
+.imageChangeDivHidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.imageChangeIconsDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.imageChangeIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.imageChangeInput {
+  display: none;
+}
+
+.imageChangeIconDiv {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  border: 3px solid #1ce9de;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease border;
+}
+
+.imageChangeIcons:hover .imageChangeIconDiv {
+  border: 3px solid #12948e;
+}
+
+.buttonDiv button {
+  padding: 0 20px;
+  height: 40px;
+  font-size: 16px;
+  color: #324544;
+  font-weight: 700;
+  line-height: 20px;
+  font-style: normal;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  background: #ffffff;
+  border: 1px solid #324544;
+}
+
+.username{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  /* .imageChangeDiv {
+    width: 100%;
+    margin-left: 10px;
+    gap: 10px;
+    padding: 20px 20px;
+  } */
+  .imageChangeIconsDiv {
+    /* display: block; */
+    /* gap: 12px; */
+    margin: 10px 0;
+  }
+  .body1 {
+    font-size: 16px;
+  }
+  .buttonDiv button {
+    margin-bottom: 10px;
+  }
+}
+.chartWrapper {
+  background-color: #fafafa;
+  padding: 28px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.avatarChangeDiv{
+  z-index: 20;
+  position: absolute;
+  top: 130px;
+  /* padding: 10px 20px; */
+  border-radius: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  gap: 20px;
+  transition: 0.5s ease;
+}
+.avatarImage{
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+.image_container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow:rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+@media (max-width: 576px) {
+  .image_container{
+    flex-wrap: nowrap;
+  }
+  .avatarImage{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1024px){
+  .image_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .avatarImage{
+    width: 70px;
+    height: 70px;
+  }
+}

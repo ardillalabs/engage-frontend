@@ -1,0 +1,135 @@
+.mainDiv {
+  margin: 0;
+  padding: 0;
+  top: 236px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+}
+.componentDiv {
+  width: 550px;
+  max-width: 1440px;
+  border-radius: 10px;
+  margin-bottom: 125px;
+  background: #ffffff;
+  border: 1px solid #dadada;
+  padding: 45px 90px 100px 90px;
+}
+.headerDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-style: normal;
+}
+.headerDiv h2 {
+  padding-bottom: 25px;
+  color: #324544;
+}
+.headerDiv p {
+  padding-bottom: 20px;
+  color: #000000;
+}
+.inputDiv {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  color: #201f1f;
+  line-height: 24px;
+  font-style: normal;
+}
+.input {
+  width: 98%;
+  height: 36px;
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #c3c3c3;
+}
+.phoneNumber {
+  padding: 0;
+  width: calc(100% + 10px);
+}
+.phoneNumber input {
+  width: 100%;
+  font: 500 0.9rem "Montserrat" !important;
+}
+.errorMessage {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: red;
+  font-stretch: 100;
+  min-height: 20px;
+  padding-bottom: 10px;
+}
+.buttonDiv button {
+  width: 117px;
+  height: 40px;
+  font-size: 16px;
+  color: #324544;
+  font-weight: 700;
+  line-height: 20px;
+  font-style: normal;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  background: #ffffff;
+  border: 1px solid #324544;
+}
+.bottomDiv p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #b2b2b2;
+  line-height: 17px;
+  font-style: normal;
+  margin-bottom: 15px;
+}
+.bottomDiv p span {
+  color: #324544;
+}
+
+@media (max-width: 1024px) {
+  .componentDiv {
+    width: 500px;
+    padding: 45px 50px 100px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .componentDiv {
+    width: 60%;
+  }
+}
+
+@media (max-width: 576px) {
+  .mainDiv {
+    top: 160px;
+  }
+
+  .componentDiv {
+    width: 100%;
+    border-radius: 0;
+    padding: 35px 50px;
+  }
+
+  .headerDiv {
+    text-align: left;
+  }
+
+  .inputDiv {
+    font-size: 16px;
+  }
+
+  .input {
+    height: 36px;
+    margin-top: 6px;
+  }
+
+  .buttonDiv button {
+    margin-bottom: 50px;
+  }
+}

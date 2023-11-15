@@ -1,0 +1,23 @@
+.messageDate {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #324544;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.messageBlock {
+    padding: 0 20px;
+}
+
+@media (min-width: 400px) {
+    .messageBlock {
+        padding: 0 30px;
+    }
+}
+@media (min-width: 1000px) {
+    .messageBlock {
+        padding: 0 40px;
+    }
+}
