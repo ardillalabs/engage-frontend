@@ -95,13 +95,13 @@ const SidebarMobile = ({ auth, signOut, removeSupportGroupDetails }: Props) => {
           <UserProfile/>
         </div>
         <div className={styles.linkWrapper}>
-        <Link href='/dashboard' className={styles.link}>
+        <Link href='/dashboard' className={styles.link} onClick={() => setSidebarActive(false)}>
           <MdSpaceDashboard className={styles.icon} />
           <span>Dashboard</span>
         </Link>
 
-        <Link href='/chat' className={styles.link}>
-          <AiFillMessage className={styles.icon} />
+        <Link href='/chat' className={styles.link} onClick={() => setSidebarActive(false)}>
+          <AiFillMessage className={styles.icon}/>
           <span>Chat</span>
         </Link>
 

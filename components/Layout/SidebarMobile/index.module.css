@@ -57,6 +57,7 @@
   box-shadow: 0px 22px 40px rgba(50, 69, 68, 0.29);
   transition: 0.5s ease;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .sidebarDiv{

@@ -131,8 +131,8 @@ const DailyQuizQuestions = ({
         {!isData ? (
           <div>
             <div className={styles.componentDiv}>
-              <div className={styles.initialDiv}>
-                <div className={styles.title}>Loading....</div>
+              <div className={styles.initialDivLoading}>
+                <div className={styles.titleLoading}>Loading....</div>
                 <div className={styles.bodyText}>Thanks for waiting!</div>
               </div>
             </div>
