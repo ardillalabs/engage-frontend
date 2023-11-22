@@ -152,9 +152,14 @@ const Barchart = ({ auth }: Props) => {
     DailyDataFetch(formattedDate, todayDate);
   }, [auth.id]);
 
+  
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log('timeZone', timeZone)
+
   const dailyData = {
     labels: dailyScores?.map((day) =>
-      new Date(day.day).toLocaleDateString('en-US', {
+      new Date(new Date(day.day).setDate(new Date(day.day).getDate() + 1)).toLocaleDateString('en-US', {
+        timeZone: timeZone,
         month: 'short',
         day: 'numeric',
       })
