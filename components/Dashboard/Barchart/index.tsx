@@ -127,13 +127,9 @@ const Barchart = ({ auth }: Props) => {
   const DailyDataFetch = async (formattedDate: string, todayFormattedDate: string) => {
     try {
       console.log(`${year}-${monthNum}-${day}`)
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      let timeZoneReplace = timeZone.replace('/', '-');
-      console.log('timeZoneReplace', timeZoneReplace)
-
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/DAY/2/${auth.id}`
-        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayFormattedDate}/${timeZoneReplace}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/DAY/2/${auth.id}/${formattedDate}/${todayFormattedDate}`
       );
       (await res).json().then((days: dailyScores[]) => {
         setDailyScores(days);
@@ -156,7 +152,7 @@ const Barchart = ({ auth }: Props) => {
     DailyDataFetch(formattedDate, todayDate);
   }, [auth.id]);
 
-
+  
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   console.log('timeZone', timeZone)
 
@@ -200,13 +196,9 @@ const Barchart = ({ auth }: Props) => {
 
   const weeklyDataFetch = async (formattedWeek: string, todayFormattedDate: string) => {
     try {
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      let timeZoneReplace = timeZone.replace('/', '-');
-      console.log('timeZoneReplace', timeZoneReplace)
-
       const res = fetch(
         // `${BASE_URL}/quiz_mark/last-7-day-summery/WEEK/1/${auth.id}`
-        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayFormattedDate}/${timeZoneReplace}`
+        `https://backend.stayengaged.io/api/quiz_mark/get-marks-date-range/WEEK/1/${auth.id}/${formattedWeek}/${todayFormattedDate}`
       );
       console.log('last-7-day-summery/WEEK - res ', res);
       (await res).json().then((weeks) => {
@@ -307,8 +299,8 @@ const Barchart = ({ auth }: Props) => {
     }
   };
 
-  const dayCount = Math.round((+new Date(date1) - +new Date(date2)) / (24 * 60 * 60 * 1000))
-  const weekCount = Math.round((+new Date(date1) - +new Date(date3)) / (24 * 60 * 60 * 1000 * 7))
+  const dayCount = Math.round((+new Date(date1) - +new Date(date2))/(24 * 60 * 60 * 1000))
+  const weekCount = Math.round((+new Date(date1) - +new Date(date3))/(24 * 60 * 60 * 1000 * 7))
   console.log(dayCount, weekCount)
 
   const onClickWeeklyScore = () => {
@@ -358,7 +350,7 @@ const Barchart = ({ auth }: Props) => {
         {/* <div className={styles.rightDiv}>     */}
         {/* </div> */}
         <div className={styles.chartSubHeader}>
-          Scores from the last {dayCount ? dayCount : 'few'} days
+          Scores from the last {dayCount? dayCount: 'few'} days
         </div>
         <Bar options={options} data={dailyData} />
       </div>
@@ -374,7 +366,7 @@ const Barchart = ({ auth }: Props) => {
           </button>
         </div>
         <div className={styles.chartSubHeader}>
-          Scores from the last {weekCount ? weekCount + 1 : 'few'} weeks
+          Scores from the last {weekCount? weekCount + 1: 'few'} weeks
         </div>
         <Bar options={options} data={weeklyData} />
       </div>
