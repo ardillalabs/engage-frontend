@@ -5,16 +5,24 @@ import styles from './index.module.css';
 import { RootState } from '@/store';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { forgotPassword } from '@/actions/Auth';
+import { forgotPassword, getCurrentUserDetails } from '@/actions/Auth';
+import { getCookie } from 'cookies-next';
+import Header from '@/components/LoginPages/Header';
 
 interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
   forgotPassword: (...args: any[]) => any;
   auth: any;
 }
 
-const ForgotPasswordFrom = ({ forgotPassword, auth }: Props) => {
+const ForgotPasswordFrom = ({ getCurrentUserDetails, forgotPassword, auth }: Props) => {
 
   const myRef = useRef<any>({});
+  const cookie = getCookie('access_token');
+
+  useEffect(() => {
+    getCurrentUserDetails(cookie)
+  }, [cookie]);
 
   const [isClick, setClick] = useState({
     isEmailClick: false,
@@ -92,6 +100,9 @@ const ForgotPasswordFrom = ({ forgotPassword, auth }: Props) => {
   }, [auth.isLoadingForgotPassword, auth.isSentForgotPasswordEmail, auth.forgotPasswordMessage]);
 
   return (
+    auth.is_getuser_loading === false ?
+    <div>
+      <Header subTopic="Welcome to Engage" />
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <h2 className={styles.heading}>Did you forgot password?</h2>
@@ -151,17 +162,20 @@ const ForgotPasswordFrom = ({ forgotPassword, auth }: Props) => {
           />
         </div>
       </div>
-    </div>
+    </div>    
+    </div>: 
+    <div>Loading....</div>
   );
 };
 
 // export default ForgotPasswordFrom;
 ForgotPasswordFrom.propTypes = { 
-  forgotPassword: PropTypes.func.isRequired 
+  forgotPassword: PropTypes.func.isRequired, 
+  getCurrentUserDetails: PropTypes.func.isRequired ,
 };
 
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { forgotPassword })(ForgotPasswordFrom);
+export default connect(mapStateToProps, { getCurrentUserDetails, forgotPassword })(ForgotPasswordFrom);
 

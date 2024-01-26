@@ -1154,6 +1154,7 @@ export const getProfileDetails =
     try {
       const response = await axios.get(`${AUTH_BASE_URL}/get-user`, config);
 
+      console.log('response profile details', response);
       dispatch({
         type: GET_USER_PROFILE_DETAILS_SUCCESS,
         payload: response,

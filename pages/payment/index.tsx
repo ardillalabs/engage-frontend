@@ -3,6 +3,7 @@ import Head from 'next/head';
 import type { Page } from '../../tsc-types/next';
 import Header from '@/components/LoginPages/Header';
 import PaymentForm from '@/components/LoginPages/Payment';
+import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
 
 // Props type
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 export default function Payment() {
   return (
     <>
+    <CommonFunctionality></CommonFunctionality>
       <Head>
         <title>Engage Payment Method</title>
         <meta name='description' content='' />

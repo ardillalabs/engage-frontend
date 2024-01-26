@@ -12,25 +12,33 @@ import { useCookies } from "react-cookie";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { RootState } from "../../../store";
-import { signUpSubmit } from "../../../actions/Auth";
+import { getCurrentUserDetails, signUpSubmit } from "../../../actions/Auth";
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
 
 interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
   signUpSubmit: (...args: any[]) => any;
   auth: any;
 }
 
-const SignupForm = ({ signUpSubmit, auth }: Props) => {
+const SignupForm = ({ getCurrentUserDetails, signUpSubmit, auth }: Props) => {
   const router = useRouter();
 
   //Get cookies
-  const [cookies, setCookie] = useCookies(["access_token"]);
 
   // Input Fields
   const myRef = useRef<any>({});
+  const cookie = getCookie('access_token');
+  
+  useEffect(() => {
+    getCurrentUserDetails(cookie)
+  }, [cookie]);
+  
+
   const [isClick, setClick] = useState({
     Name: false,
     UserName: false,
@@ -346,8 +354,11 @@ const SignupForm = ({ signUpSubmit, auth }: Props) => {
   );
 };
 
-SignupForm.propTypes = { signUpSubmit: PropTypes.func.isRequired };
+SignupForm.propTypes = { 
+  getCurrentUserDetails: PropTypes.func.isRequired,
+  signUpSubmit: PropTypes.func.isRequired 
+};
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { signUpSubmit })(SignupForm);
+export default connect(mapStateToProps, { getCurrentUserDetails, signUpSubmit })(SignupForm);

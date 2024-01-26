@@ -4,6 +4,7 @@ import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import ChangePasswordForm from '@/components/LoginPages/ChangePasswordForm';
+import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   // Props type
   type Props = {
     Component: Page;
@@ -12,6 +13,7 @@ import ChangePasswordForm from '@/components/LoginPages/ChangePasswordForm';
   export default function ChangePassword() {
     return (
       <>
+        <CommonFunctionality/>
         <Head>
           <title>Engage Change Password</title>
           <meta name="description" content="" />
