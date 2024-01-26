@@ -22,6 +22,7 @@ import {
 import { useRouter } from "next/router";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../Header";
 
 interface teamMemberArray {
   userID: string;
@@ -165,6 +166,9 @@ const DashboardBody = ({
   };
 
   return (
+    auth.is_getuser_loading? <div>Loading...</div>:
+    <div>
+    <Header />
     <div className={styles.mainDiv}>
       <div className={styles.leftDiv}>
         {/* Dashboard Top */}
@@ -272,6 +276,7 @@ const DashboardBody = ({
         </div>
         <Barchart />
       </div>
+    </div>
     </div>
   );
 };

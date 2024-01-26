@@ -4,6 +4,7 @@ import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import SupportGroupForm from '@/components/LoginPages/SupportGroupForm';
+import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   // Props type
   type Props = {
     Component: Page;
@@ -12,6 +13,7 @@ import SupportGroupForm from '@/components/LoginPages/SupportGroupForm';
   export default function SupportGroup() {
     return (
       <>
+      <CommonFunctionality/>
         <Head>
           <title>Engage Support Group</title>
           <meta name="description" content="" />

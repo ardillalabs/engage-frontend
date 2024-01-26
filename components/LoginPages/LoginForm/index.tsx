@@ -7,21 +7,30 @@ import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store';
-import { signInSubmit } from '../../../actions/Auth';
+import { getCurrentUserDetails, signInSubmit } from '../../../actions/Auth';
 import { useRouter } from 'next/router';
+import { getCookie } from 'cookies-next';
 
 // Import environment variables
 const AUTH_BASE_URL = process.env.AUTH_BASE_URL;
 
 interface Props {
+  getCurrentUserDetails: (...args: any[]) => any;
   signInSubmit: (...args: any[]) => any;
   auth: any;
 }
 
-const LoginForm = ({ signInSubmit, auth }: Props) => {
+const LoginForm = ({ getCurrentUserDetails, signInSubmit, auth }: Props) => {
+  console.log('login auth', auth);
   const router = useRouter();
   // Input Fields
   const myRef = useRef<any>({});
+  const cookie = getCookie('access_token');
+  
+  useEffect(() => {
+    getCurrentUserDetails(cookie)
+  }, [cookie]);
+  
   const [isClick, setClick] = useState({
     isEmailClick: false,
     isPasswordClick: false,
@@ -138,6 +147,7 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
   }, [auth]);
 
   return (
+    auth.is_getuser_loading? <div>Loading...</div>:
     <div className={styles.mainDiv}>
       <div className={styles.componentDiv}>
         <h2>Login</h2>
@@ -230,8 +240,11 @@ const LoginForm = ({ signInSubmit, auth }: Props) => {
   );
 };
 
-LoginForm.propTypes = { signInSubmit: PropTypes.func.isRequired };
+LoginForm.propTypes = { 
+  getCurrentUserDetails: PropTypes.func.isRequired,
+  signInSubmit: PropTypes.func.isRequired, 
+};
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { signInSubmit })(LoginForm);
+export default connect(mapStateToProps, { getCurrentUserDetails, signInSubmit })(LoginForm);

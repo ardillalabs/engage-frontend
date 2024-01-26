@@ -153,6 +153,7 @@ const PaymentForm = ({
 };
 
 PaymentForm.prototype = {
+  getCurrentUserDetails: PropTypes.func.isRequired,
   setChooseYourPlanModal: PropTypes.func.isRequired,
   setToastState: PropTypes.func.isRequired,
 };
@@ -163,6 +164,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 export default connect(mapStateToProps, {
-  setChooseYourPlanModal,
   getCurrentUserDetails,
+  setChooseYourPlanModal,
 })(PaymentForm);
