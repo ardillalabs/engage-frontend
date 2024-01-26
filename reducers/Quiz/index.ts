@@ -53,13 +53,11 @@ export default function (state = initialState, action: AnyAction) {
     case DAILY_QUIZ_ELIGIBILITY_CHECK_SUCCESS:
       return {
         ...state,
-        eligibilityLoading: false,
         dailyQuiz: payload
       }
     case WEEKLY_QUIZ_ELIGIBILITY_CHECK_SUCCESS:
       return {
         ...state,
-        eligibilityLoading: false,
         weeklyQuiz: payload
       }
     default: 

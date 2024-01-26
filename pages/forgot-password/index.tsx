@@ -4,7 +4,6 @@ import Head from 'next/head';
 import type { Page } from "../../tsc-types/next";
 import Header from '@/components/LoginPages/Header';
 import ForgotPasswordFrom from '@/components/LoginPages/ForgotPasswordForm';
-import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   // Props type
   type Props = {
     Component: Page;
@@ -13,7 +12,6 @@ import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   export default function ForgotPassword() {
     return (
       <>
-      <CommonFunctionality/>
         <Head>
           <title>Engage Forgot Password</title>
           <meta name="description" content="" />
@@ -21,7 +19,7 @@ import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className="bg-color min-h-screen">
-          {/* <Header subTopic="Welcome to Engage" /> */}
+          <Header subTopic="Welcome to Engage" />
           <ForgotPasswordFrom />
         </main>
       </>

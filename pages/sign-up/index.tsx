@@ -3,7 +3,6 @@ import Head from "next/head";
 import type { Page } from "../../tsc-types/next";
 import Header from "@/components/LoginPages/Header";
 import SignupForm from "@/components/LoginPages/SignupForm";
-import CommonFunctionality from "@/components/Protectors/CommonFunctionality";
 // Props type
 type Props = {
   Component: Page;
@@ -12,7 +11,6 @@ type Props = {
 export default function SignUp() {
   return (
     <>
-    <CommonFunctionality/>
       <Head>
         <title>Engage SignUp</title>
         <meta name="description" content="" />

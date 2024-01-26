@@ -54,7 +54,6 @@ const initialState: any = {
   resCode: null,
   statusText: null,
   isSentVerificationEmail: null,
-  subscriptionId: null,
   //-----------------------------
   apartment: null,
   city: null,
@@ -172,7 +171,6 @@ export default function (state = initialState, action: AnyAction) {
         isLoadingLogin: false,
         isLoggedIn: true,
         isLogedIn: true,
-        is_getuser_loading: false,
         //-----------------
         email: payload.data.email,
         first_name: payload.data.full_name,
@@ -182,17 +180,15 @@ export default function (state = initialState, action: AnyAction) {
         role: payload.data.role,
         status: payload.data.status,
         username: payload.data.username,
-        subscriptionId: payload.data.subscription,
       };
 
     case GET_CURRENT_USER_DETAILS_FAIL:
       return {
         ...state,
-        isLoadingSignUp: false,
+        isLoadingSignUp: true,
         isSignedUp: null,
-        isLoadingLogin: false,
+        isLoadingLogin: true,
         isLoggedIn: null,
-        is_getuser_loading: false,
         //-----------------
         apartment: null,
         city: null,
@@ -645,12 +641,10 @@ export default function (state = initialState, action: AnyAction) {
     case GET_USER_PROFILE_DETAILS_SUCCESS:
       return {
         ...state,
-        is_getuser_loading: false,
         email: payload.data.email,
         full_name: payload.data.full_name,
         phone_number: payload.data.phone_number,
         username: payload.data.username,
-        subscriptionId: payload.data.subscription,
       };
 
     case GET_CURRENT_USER_PROFILE_DETAILS_FAIL:

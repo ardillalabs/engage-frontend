@@ -3,7 +3,6 @@ import type { Page } from "../../tsc-types/next";
 import Header from '@/components/Quizes/Header';
 import Head from 'next/head';
 import WeeklyQuizQuestions from '@/components/Quizes/WeeklyQuiz/WeeklyQuizQuestions';
-import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   // Props type
   type Props = {
     Component: Page;
@@ -12,7 +11,6 @@ import CommonFunctionality from '@/components/Protectors/CommonFunctionality';
   export default function WeeklyQuiz() {
     return (
       <>
-        <CommonFunctionality/>
         <Head>
           <title>Engage Weekly Quiz</title>
           <meta name="description" content="" />
