@@ -11,13 +11,13 @@ import { getCookie } from "cookies-next";
 import { getCurrentUserDetails, getProfileDetails } from "@/actions/Auth";
 // import { useRouter } from "next/navigation";
 // import { useRouter } from "next/router";
-import { useRouter as useRouterNavigation } from "next/navigation";
-import { useRouter as useRouterRouter } from "next/router";
+import { useRouter as useRouterNavigation } from 'next/navigation';
+import { useRouter as useRouterRouter } from 'next/router';
 
 interface Props {
-  getCurrentUserDetails: (...args: any[]) => any;
-  getProfileDetails: (...args: any[]) => any;
-  auth: any;
+    getCurrentUserDetails: (...args: any[]) => any;
+    getProfileDetails: (...args: any[]) => any;
+    auth: any;
 }
 
 const CommonFunctionalityComp = ({ auth }: Props) => {
@@ -26,40 +26,40 @@ const CommonFunctionalityComp = ({ auth }: Props) => {
   const cookie = getCookie("access_token");
   const routerAuth = useRouterRouter();
 
+  console.log('user common11', auth)
+
   useEffect(() => {
-    console.log('auth', auth)
+    console.log('user common', auth)
+    // if (auth.is_getuser_loading) {
+    //   if(auth.id === null) {
+    //     return router.push("/login");
+    //   }
+    // }
     if (!auth.isLoadingLogin && !auth.is_getuser_loading) {
-      if (routerAuth.pathname != "/sign-up" && auth.id == null) {
+      if(auth.id === null) {
         return router.push("/login");
       }
-      console.log("auth.is_getuser_loading", auth);
-      if (auth.id != null && auth.subscriptionId == null) {
-        return router.push("/payment");
-      }
-      if (
-        auth.id != null &&
-        (routerAuth.pathname === "/forgot-password" ||
-          routerAuth.pathname === "/login" ||
-          routerAuth.pathname === "/sign-up" ||
-          routerAuth.pathname === "/support-group" ||
-          routerAuth.pathname === "/payment")
-      ) {
-        return router.push("/dashboard");
-      }
+        console.log('auth.is_getuser_loading', auth);
+        if(auth.subscriptionId === null){  
+            console.log('auth.subscriptionId',auth.subscriptionId)         
+            return router.push("/payment");
+        } 
+        if(routerAuth.pathname === '/forgot-password' || routerAuth.pathname === '/login' || routerAuth.pathname === '/sign-up' || routerAuth.pathname === '/support-group' || routerAuth.pathname === '/payment'){
+          return router.push("/dashboard");
+        }
     }
-  }, [auth])
+  }, [auth]);
 
   return <></>;
 };
 
 CommonFunctionalityComp.propTypes = {
-  getCurrentUserDetails: PropTypes.func.isRequired,
-  getProfileDetails: PropTypes.func.isRequired,
+    getCurrentUserDetails: PropTypes.func.isRequired,
+    getProfileDetails: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
 export default connect(mapStateToProps, {
-  getCurrentUserDetails,
-  getProfileDetails,
+    getCurrentUserDetails, getProfileDetails,
 })(CommonFunctionalityComp);
